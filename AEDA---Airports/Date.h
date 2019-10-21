@@ -38,6 +38,7 @@ public:
 
 	friend ostream& operator<<(ostream& out, const Date & date); // overload of operator << (display the formatted date on a ostream)
 	bool operator<(const Date &date);
+	bool operator==(const Date &date);
 	bool isValid();
 
 };

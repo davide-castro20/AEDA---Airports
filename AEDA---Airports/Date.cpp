@@ -90,6 +90,12 @@ bool Date::operator<(const Date &date){
 	return false;
 }
 
+bool Date::operator==(const Date &date)
+{
+	if ((this->year == date.year) && (this->month == date.month) && (this->day == date.day))
+		return true;
+	else return false;
+}
 
 bool Date::isValid(){
 	int maxDays;
