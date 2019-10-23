@@ -7,37 +7,31 @@
 class Schedule
 {
 private:
-	Time start;
-	Time end;
+	Time startHour;
+	Time endHour;
 
 public:
 	Schedule();
 	Schedule(Time &start, Time &end);
-	Time getStart() const;
-	Time getEnd() const;
-	Time getDuration() const;
-	void setStart(Time &start);
-	void setEnd(Time &end);
+	Time getStartHour() const;
+	Time getEndHour() const;
+	virtual Time getDuration() const;
+	void setStartHour(Time &start);
+	void setEndHour(Time &end);
 };
 
-class FlightSched
+class FlightSched : public Schedule
 {
 private:
 	Date departureDate;
 	Date arrivalDate;
-	Time departureHour;
-	Time arrivalHour;
 public:
 	FlightSched();
-	FlightSched(Date departureD, Time departureH, Date arrivalD, Time arrivalH);
+	FlightSched(Date &departureD, Time &startHour, Date &arrivalD, Time &endHour);
 	Date getDepartureDate() const;
 	Date getArrivalDate() const;
-	Time getDepartureHour() const;
-	Time getArrivalHour() const;
 	void setDepartureDate(Date &date);
 	void setArrivalDate(Date &date);
-	void setDepartureHour(Time &time);
-	void setArrivalHour(Time &time);
 
 	bool isValid() const;
 };

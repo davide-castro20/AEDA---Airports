@@ -9,30 +9,30 @@ Schedule::Schedule() {}
 
 Schedule::Schedule(Time &start, Time &end)
 {
-	this->start = start;
-	this->end = end;
+	this->startHour = start;
+	this->endHour = end;
 }
 
-Time Schedule::getStart() const { return start; }
+Time Schedule::getStartHour() const { return startHour; }
 
-Time Schedule::getEnd() const { return end; }
+Time Schedule::getEndHour() const { return endHour; }
 
 Time Schedule::getDuration() const
 {
 	Time duration;
-	duration.setHours(end.getHours() - start.getHours());
-	duration.setMinutes(end.getMinutes() - start.getMinutes());
+	duration.setHours(endHour.getHours() - startHour.getHours());
+	duration.setMinutes(endHour.getMinutes() - startHour.getMinutes());
 	return duration;
 }
 
-void Schedule::setStart(Time &start)
+void Schedule::setStartHour(Time &start)
 {
-	this->start = start;
+	this->startHour = start;
 }
 
-void Schedule::setEnd(Time &end)
+void Schedule::setEndHour(Time &end)
 {
-	this->end = end;
+	this->endHour = end;
 }
 
 
@@ -41,32 +41,20 @@ void Schedule::setEnd(Time &end)
 
 FlightSched::FlightSched() {}
 
-FlightSched::FlightSched(Date departureD, Time departureH, Date arrivalD, Time arrivalH)
+FlightSched::FlightSched(Date &departureD, Time &startHour, Date &arrivalD, Time &endHour) : Schedule(startHour, endHour)
 {
 	departureDate = departureD;
-	departureHour = departureH;
 	arrivalDate = arrivalD;
-	arrivalHour = arrivalH;
 }
 
 Date FlightSched::getDepartureDate() const
 {
-	return Date();
+	return departureDate;
 }
 
 Date FlightSched::getArrivalDate() const
 {
-	return Date();
-}
-
-Time FlightSched::getDepartureHour() const
-{
-	return Time();
-}
-
-Time FlightSched::getArrivalHour() const
-{
-	return Time();
+	return arrivalDate;
 }
 
 void FlightSched::setDepartureDate(Date & date)
@@ -79,22 +67,13 @@ void FlightSched::setArrivalDate(Date & date)
 	arrivalDate = date;
 }
 
-void FlightSched::setDepartureHour(Time & time)
-{
-	departureHour = time;
-}
-
-void FlightSched::setArrivalHour(Time & time)
-{
-	arrivalHour = time;
-}
 
 bool FlightSched::isValid() const
 {
 	Date departureD = departureDate;
 	Date arrivalD = arrivalDate;
-	Time departureH = departureHour;
-	Time arrivalH = arrivalHour;
+	Time departureH = this->getStartHour();
+	Time arrivalH = this->getEndHour();
 	if (departureD.isValid() && arrivalD.isValid() && departureH.isValid() && arrivalH.isValid())
 	{
 		if (departureD == arrivalD) //por alguma razao nao me deixa igualar departureDate e arrivalDate
