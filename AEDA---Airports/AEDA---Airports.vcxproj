@@ -116,12 +116,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
+    <ClInclude Include="Employee.h" />
     <ClInclude Include="Schedule.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Schedule.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Utils.cpp" />
