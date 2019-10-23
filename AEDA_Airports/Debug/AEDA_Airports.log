@@ -1,0 +1,29 @@
+﻿  Date.cpp
+  Employee.cpp
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\employee.cpp(23): error C3867: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::length': non-standard syntax; use '&' to create a pointer to member
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\employee.cpp(23): error C2446: '<': no conversion from 'unsigned int (__thiscall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::* )(void) noexcept const' to 'size_t'
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\employee.cpp(23): note: There is no context in which this conversion is possible
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\employee.cpp(25): error C2059: syntax error: '}'
+  Flight.cpp
+  Plane.cpp
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(22): error C2065: 'Flight': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(22): error C2059: syntax error: '>'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(25): error C2065: 'Flight': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(25): error C2059: syntax error: '>'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(26): error C2065: 'Flight': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(26): error C2059: syntax error: '>'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(29): error C2065: 'Flight': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(29): error C2059: syntax error: '>'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(3): error C2065: 'Flight': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(3): error C2059: syntax error: '>'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(4): error C2511: 'float Plane::calcExp(std::string,int,unknown-type &) const': overloaded member function not found in 'Plane'
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.h(17): note: see declaration of 'Plane'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(7): error C2143: syntax error: missing ';' before '}'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(9): error C2065: 'Flight': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(9): error C2059: syntax error: '>'
+  Schedule.cpp
+  Time.cpp
+  Utils.cpp
+  Generating Code...
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\time.cpp(47): warning C4715: 'Time::operator<': not all control paths return a value
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\schedule.cpp(89): warning C4715: 'FlightSched::isValid': not all control paths return a value
