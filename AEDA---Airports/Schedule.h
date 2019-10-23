@@ -16,8 +16,8 @@ public:
 	Time getStart() const;
 	Time getEnd() const;
 	Time getDuration() const;
-	Time setStart(Time &start);
-	Time setEnd(Time &end);
+	void setStart(Time &start);
+	void setEnd(Time &end);
 };
 
 class FlightSched
@@ -34,6 +34,10 @@ public:
 	Date getArrivalDate() const;
 	Time getDepartureHour() const;
 	Time getArrivalHour() const;
+	void setDepartureDate(Date &date);
+	void setArrivalDate(Date &date);
+	void setDepartureHour(Time &time);
+	void setArrivalHour(Time &time);
 
 	bool isValid() const;
 };

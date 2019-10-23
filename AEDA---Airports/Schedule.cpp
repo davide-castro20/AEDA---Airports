@@ -25,13 +25,12 @@ Time Schedule::getDuration() const
 	return duration;
 }
 
-Time Schedule::setStart(Time &start)
+void Schedule::setStart(Time &start)
 {
 	this->start = start;
-	return start;
 }
 
-Time Schedule::setEnd(Time &end)
+void Schedule::setEnd(Time &end)
 {
 	this->end = end;
 }
@@ -68,6 +67,26 @@ Time FlightSched::getDepartureHour() const
 Time FlightSched::getArrivalHour() const
 {
 	return Time();
+}
+
+void FlightSched::setDepartureDate(Date & date)
+{
+	departureDate = date;
+}
+
+void FlightSched::setArrivalDate(Date & date)
+{
+	arrivalDate = date;
+}
+
+void FlightSched::setDepartureHour(Time & time)
+{
+	departureHour = time;
+}
+
+void FlightSched::setArrivalHour(Time & time)
+{
+	arrivalHour = time;
 }
 
 bool FlightSched::isValid() const

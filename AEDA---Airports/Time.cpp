@@ -15,16 +15,14 @@ unsigned int Time::getHours() const { return hours; }
 
 unsigned int Time::getMinutes() const { return minutes; }
 
-unsigned int Time::setHours(unsigned int hours) 
+void Time::setHours(unsigned int hours) 
 { 
 	this->hours = hours; 
-	return hours; 
 }
 
-unsigned int Time::setMinutes(unsigned int minutes)
+void Time::setMinutes(unsigned int minutes)
 {
 	this->minutes = minutes;
-	return minutes;
 }
 
 bool Time::isValid() const 

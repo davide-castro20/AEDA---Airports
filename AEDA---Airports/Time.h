@@ -2,6 +2,10 @@
 
 #include "Utils.h"
 
+#include <iostream>
+#include <string>
+#include <vector>
+
 
 class Time
 {
@@ -13,8 +17,8 @@ public:
 	Time(unsigned int hours, unsigned int minutes);
 	unsigned int getHours() const;
 	unsigned int getMinutes() const;
-	unsigned int setHours(unsigned int hours);
-	unsigned int setMinutes(unsigned int hours);
+	void setHours(unsigned int hours);
+	void setMinutes(unsigned int hours);
 	bool isValid() const;
 	bool operator<(Time &time) const;
 };
