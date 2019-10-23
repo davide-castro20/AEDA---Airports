@@ -19,10 +19,16 @@ float Employee::getSalary() const{
 	return this->salary;
 }
 
-void Employee::setName(string name) {
-	for(size_t i = 0; i < name.length ; i++)
-
+bool Employee::setName(string name) {
+	if (!isupper(name.at(0)))
+		return false;
+	for (size_t i = 0; i < name.length(); i++) {
+		if(isdigit(name.at(i)))
+			return false;
+	}
+	this->name=name;
+	return true;
 }
 
-void setDate();
+bool setDate();
 void setSalary();

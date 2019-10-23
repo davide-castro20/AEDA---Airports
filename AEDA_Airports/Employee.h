@@ -15,8 +15,8 @@ public:
 	Date getDate() const;
 	float getSalary() const;
 
-	void setName(string name);
-	void setDate(Date birthDate);
+	bool setName(string name);
+	bool setDate(Date birthDate);
 	void setSalary();
 	
 

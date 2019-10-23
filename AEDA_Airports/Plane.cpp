@@ -1,9 +1,32 @@
 #include "Plane.h"
 
-float Plane::calcExp(string type, int capacity, vector<Flight*> &flights) const
+float Plane::calcExp(string type, vector<Flight*> &flights) const
 {
-	if(type == "A")
-		return 100 + flights.size()
+	float total = 0;
+	if (type == "A")
+		total = 100 + flights.size() * 100;
+	if (type == "B")
+		total = 150 + flights.size() * 100;
+	if (type == "C")
+		total = 200 + flights.size() * 100;
+	for (size_t i = 0; i < flights.size(); ++i)
+		total += flights.at(i).getFlightDuration().getTotalMinutes()*5;
+	return total;
+}
+
+string Plane::getType() const
+{
+	return type;
+}
+
+int Plane::getCapacity() const
+{
+	return capacity;
+}
+
+vector<Flight*> Plane::getFlights() const
+{
+	return flights;
 }
 
 Plane::Plane(string type, int capacity, vector<Flight*> &flights)

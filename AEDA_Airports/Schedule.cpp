@@ -85,6 +85,6 @@ bool FlightSched::isValid() const
 			return true;
 		else return false;
 	}
-	else return false;
+	return false;
 }
 
