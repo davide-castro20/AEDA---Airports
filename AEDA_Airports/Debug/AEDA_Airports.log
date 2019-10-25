@@ -1,15 +1,19 @@
-﻿  Employee.cpp
+﻿  Date.cpp
+  Employee.cpp
   Flight.cpp
   Plane.cpp
-d:\aulas\2 ano\1 semestre\aeda\trabalho aeroporto\aeda---airports\aeda_airports\plane.cpp(7): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-d:\aulas\2 ano\1 semestre\aeda\trabalho aeroporto\aeda---airports\aeda_airports\plane.cpp(9): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-d:\aulas\2 ano\1 semestre\aeda\trabalho aeroporto\aeda---airports\aeda_airports\plane.cpp(11): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-d:\aulas\2 ano\1 semestre\aeda\trabalho aeroporto\aeda---airports\aeda_airports\plane.cpp(13): error C2228: left of '.getFlightDuration' must have class/struct/union
-  d:\aulas\2 ano\1 semestre\aeda\trabalho aeroporto\aeda---airports\aeda_airports\plane.cpp(13): note: type is '_Ty'
+c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(7): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(9): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(11): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(13): error C2228: left of '.getFlightDuration' must have class/struct/union
+  c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(13): note: type is '_Ty'
           with
           [
               _Ty=Flight *
           ]
-  d:\aulas\2 ano\1 semestre\aeda\trabalho aeroporto\aeda---airports\aeda_airports\plane.cpp(13): note: did you intend to use '->' instead?
+  c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(13): note: did you intend to use '->' instead?
   Schedule.cpp
+  Time.cpp
+  Utils.cpp
   Generating Code...
+c:\users\user\desktop\aeda---airports\aeda_airports\time.cpp(47): warning C4715: 'Time::operator<': not all control paths return a value

@@ -17,7 +17,7 @@ public:
 
 	bool setName(string name);
 	bool setDate(Date birthDate);
-	void setSalary();
+	bool setSalary(float salary);
 	
 
 	virtual float calcSalary();
