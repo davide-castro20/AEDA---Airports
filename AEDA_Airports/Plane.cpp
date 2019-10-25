@@ -36,3 +36,15 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 	this->flights = flights;
 	this->expenses = calcExp(type, flights);
 }
+
+void Plane::setCapacity(int cap)
+{
+	if (cap < 0)
+		throw capacityError(cap);
+	capacity = cap;
+}
+
+bool Plane::setFlights(vector<Flight*> fly)
+{
+	flights = fly;
+}

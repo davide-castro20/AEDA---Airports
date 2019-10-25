@@ -27,4 +27,6 @@ public:
 	string getType() const;
 	int getCapacity() const;
 	vector<Flight*> getFlights() const;
+	void setCapacity(int cap);
+	bool setFlights(vector<Flight*> fly);
 };
