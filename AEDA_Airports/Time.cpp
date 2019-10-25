@@ -15,6 +15,11 @@ unsigned int Time::getHours() const { return hours; }
 
 unsigned int Time::getMinutes() const { return minutes; }
 
+unsigned int Time::getTotalMinutes() const
+{
+	return hours * 60 + minutes;
+}
+
 void Time::setHours(unsigned int hours) 
 { 
 	this->hours = hours; 
@@ -42,11 +47,21 @@ bool Time::operator<(Time &time) const
 	}
 	else if (this->hours < time.hours)
 		return true;
-	else
-		return false;
+	return false;
 }
 
-bool Time::operator-(Time & time) const
+Time Time::operator-(Time & time) const
 {
+	unsigned int hours = this->hours;
+	unsigned int minutes = this->minutes;
+	if (time.getMinutes() > this->minutes)
+	{
+		hours = this->hours - 1;
+		minutes += 60;
+	}
+	minutes = minutes - time.getMinutes();
+	hours = hours - time.getHours();
+
+	return Time(hours, minutes);
 
 }

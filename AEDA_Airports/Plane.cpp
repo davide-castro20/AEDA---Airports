@@ -10,7 +10,7 @@ float Plane::calcExp(string type, vector<Flight*> &flights) const
 	if (type == "C")
 		total = 200 + flights.size() * 100;
 	for (size_t i = 0; i < flights.size(); ++i)
-		total += flights.at(i).getFlightDuration().getTotalMinutes()*5;
+		total += flights.at(i)->getFlightDuration().getTotalMinutes()*5;
 	return total;
 }
 

@@ -1,10 +1,13 @@
 #include "Flight.h"
+#include "Utils.h"
+#include "Airport.h"
 
 using namespace std;
 
-Flight::Flight() {}
+Flight::Flight() 
+{}
 
-Flight::Flight(FlightSched &predictedSched, Airport & depart, Airport & destin, vector<Employee*> &crew)
+Flight::Flight(FlightSched &predictedSched, Airport *depart, Airport *destin, vector<Employee*> &crew)
 {
 	predictedSchedule = predictedSched;
 	departure = depart;
@@ -22,12 +25,12 @@ bool Flight::isCompleted() const
 	return completed;
 }
 
-Airport * Flight::getDeparture() const
+Airport* Flight::getDeparture() const
 {
 	return departure;
 }
 
-Airport * Flight::getDestination() const
+Airport* Flight::getDestination() const
 {
 	return destination;
 }
@@ -45,6 +48,11 @@ FlightSched Flight::getRealSchedule() const
 FlightSched Flight::getPredictedSchedule() const
 {
 	return predictedSchedule;
+}
+
+Time Flight::getFlightDuration() const
+{
+	return realSchedule.getDuration();
 }
 
 void Flight::setPredictedSchedule(FlightSched &predicted)
