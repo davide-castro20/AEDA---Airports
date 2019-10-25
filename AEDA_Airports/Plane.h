@@ -6,17 +6,13 @@ using namespace std;
 
 class Flight;
 
-//class capacityError
-//{
-//public:
-//	int inputCapacity;
-//	capacityError(int inputCapacity) { this->inputCapacity = inputCapacity;}
-//};
-//
-//ostream & operator <<(ostream &out, const capacityError &error) 
-//{
-//	out << "Exeption was thrown trying to set the plane's capacity. Capacity received :" << error.inputCapacity; return out;
-//}
+class capacityError
+{
+public:
+	int inputCapacity;
+	capacityError(int inputCapacity) { this->inputCapacity = inputCapacity;}
+	friend ostream & operator <<(ostream &out, const capacityError &error);
+};
 
 class Plane
 {
