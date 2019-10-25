@@ -30,5 +30,18 @@ bool Employee::setName(string name) {
 	return true;
 }
 
-bool setDate();
-void setSalary();
+bool Employee::setDate(Date birthDate) {
+	if (birthDate.isValid()) {
+		this->birthDate = birthDate;
+		return true;
+	}
+	return false;
+}
+
+bool Employee::setSalary(float salary) {
+	if (salary < 0)
+		return false;
+	this->salary = salary;
+	return true;
+}
+	
