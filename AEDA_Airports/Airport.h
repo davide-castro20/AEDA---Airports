@@ -3,7 +3,8 @@
 #include "Plane.h"
 #include "Flight.h"
 
-
+class Plane;
+class Flight;
 
 class Local
 {
@@ -24,10 +25,10 @@ public:
 class Airport
 {
 public:
-	vector<Plane*> planes;
-	vector<Flight*> flights;
+	vector<Plane*> planes; //não esquecer de usar new
+	vector<Flight*> flights; //não esquecer de usar new
 	Local local;
-	Airport();
+	Airport() { planes = {}; flights = {}; };
 	Airport(vector<Plane*> &planes, vector<Flight*> &flights, Local local);
 	Local getLocal() const;
 };

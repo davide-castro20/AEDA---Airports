@@ -1,5 +1,6 @@
 #include "Plane.h"
 
+
 float Plane::calcExp(string type, vector<Flight*> &flights) const
 {
 	float total = 0;
@@ -39,12 +40,13 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 
 void Plane::setCapacity(int cap)
 {
-	if (cap < 0)
-		throw capacityError(cap);
+	/*if (cap < 0)
+		throw capacityError(cap);*/
 	capacity = cap;
 }
 
 bool Plane::setFlights(vector<Flight*> fly)
 {
 	flights = fly;
+	return true;
 }

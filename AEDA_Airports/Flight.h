@@ -5,6 +5,9 @@
 #include "Employee.h"
 #include "Airport.h"
 
+class Airport;
+class Employee;
+
 class Flight
 {
 private:
@@ -34,6 +37,4 @@ public:
 	void setDeparture(Airport *depart);
 	void setDestination(Airport *destin);
 	void setCrew(vector<Employee*> &crew);
-
-	
 };

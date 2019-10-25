@@ -20,6 +20,6 @@ public:
 	bool setSalary(float salary);
 	
 
-	virtual float calcSalary();
+	//virtual float calcSalary();
 
 };
