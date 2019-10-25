@@ -3,7 +3,6 @@
 #include "Time.h"
 #include "Date.h"
 
-
 class Schedule
 {
 private:
@@ -30,6 +29,7 @@ public:
 	FlightSched(Date &departureD, Time &startHour, Date &arrivalD, Time &endHour);
 	Date getDepartureDate() const;
 	Date getArrivalDate() const;
+	Time getDuration() const;
 	void setDepartureDate(Date &date);
 	void setArrivalDate(Date &date);
 

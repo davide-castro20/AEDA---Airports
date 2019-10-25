@@ -57,6 +57,16 @@ Date FlightSched::getArrivalDate() const
 	return arrivalDate;
 }
 
+Time FlightSched::getDuration() const
+{
+	Date departureD = departureDate;
+	Date arrivalD = arrivalDate;
+	if (departureD == arrivalD)
+		return (this->getEndHour() - this->getStartHour());
+
+}
+
+
 void FlightSched::setDepartureDate(Date & date)
 {
 	departureDate = date;

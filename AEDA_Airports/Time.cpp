@@ -45,3 +45,8 @@ bool Time::operator<(Time &time) const
 	else
 		return false;
 }
+
+bool Time::operator-(Time & time) const
+{
+
+}

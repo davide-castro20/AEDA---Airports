@@ -1,19 +1,86 @@
 ﻿  Date.cpp
   Employee.cpp
   Flight.cpp
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(14): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(14): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(15): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(15): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(20): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(23): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(23): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(24): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(24): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(32): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(33): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(7): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(8): error C2511: 'Flight::Flight(FlightSched &)': overloaded member function not found in 'Flight'
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(7): note: see declaration of 'Flight'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(9): error C2597: illegal reference to non-static member 'Flight::predictedSchedule'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(10): error C2065: 'departure': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(10): error C2065: 'depart': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(11): error C2065: 'destination': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(11): error C2065: 'destin': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(12): error C2065: 'crew': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(25): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(25): error C2039: 'getDeparture': is not a member of 'Flight'
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(7): note: see declaration of 'Flight'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(26): error C2270: 'getDeparture': modifiers not allowed on nonmember functions
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(26): error C2059: syntax error: '{'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(26): error C2143: syntax error: missing ';' before '{'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(26): error C2447: '{': missing function header (old-style formal list?)
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(30): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(30): error C2086: 'int Airport': redefinition
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(25): note: see declaration of 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(30): error C2039: 'getDestination': is not a member of 'Flight'
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(7): note: see declaration of 'Flight'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(31): error C2270: 'getDestination': modifiers not allowed on nonmember functions
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(31): error C2059: syntax error: '{'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(31): error C2143: syntax error: missing ';' before '{'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(31): error C2447: '{': missing function header (old-style formal list?)
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(70): error C2065: 'depart': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(70): error C2761: 'void Flight::setDeparture(void)': redeclaration of member is not allowed
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(71): error C2448: 'Flight::setDeparture': function-style initializer appears to be a function definition
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(75): error C2065: 'destin': undeclared identifier
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(75): error C2761: 'void Flight::setDestination(void)': redeclaration of member is not allowed
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.cpp(76): error C2448: 'Flight::setDestination': function-style initializer appears to be a function definition
   Plane.cpp
-c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(7): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(9): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(11): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
-c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(13): error C2228: left of '.getFlightDuration' must have class/struct/union
-  c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(13): note: type is '_Ty'
-          with
-          [
-              _Ty=Flight *
-          ]
-  c:\users\user\desktop\aeda---airports\aeda_airports\plane.cpp(13): note: did you intend to use '->' instead?
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(14): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(14): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(15): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(15): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(20): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(23): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(23): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(24): error C2143: syntax error: missing ';' before '*'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(24): error C2238: unexpected token(s) preceding ';'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(32): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\flight.h(33): error C2061: syntax error: identifier 'Airport'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(7): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(9): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\plane.cpp(11): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
   Schedule.cpp
-  Time.cpp
-  Utils.cpp
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\schedule.cpp(62): error C2678: binary '==': no operator found which takes a left-hand operand of type 'const Date' (or there is no acceptable conversion)
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\date.h(37): note: could be 'bool Date::operator ==(const Date &)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\system_error(284): note: or       'bool std::operator ==(const std::error_condition &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\system_error(278): note: or       'bool std::operator ==(const std::error_condition &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\system_error(272): note: or       'bool std::operator ==(const std::error_code &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\system_error(266): note: or       'bool std::operator ==(const std::error_code &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\exception(331): note: or       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\exception(326): note: or       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\exception(321): note: or       'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &) noexcept'
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\schedule.cpp(62): note: while trying to match the argument list '(const Date, const Date)'
+c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\schedule.cpp(63): error C2561: 'FlightSched::getDuration': function must return a value
+  c:\users\vidin\onedrive\documentos\2ano\1s\aeda\aeda_airports\aeda_airports\schedule.cpp(60): note: see declaration of 'FlightSched::getDuration'
   Generating Code...
-c:\users\user\desktop\aeda---airports\aeda_airports\time.cpp(47): warning C4715: 'Time::operator<': not all control paths return a value

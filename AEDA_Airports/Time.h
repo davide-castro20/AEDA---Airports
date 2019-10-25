@@ -21,4 +21,5 @@ public:
 	void setMinutes(unsigned int hours);
 	bool isValid() const;
 	bool operator<(Time &time) const;
+	bool operator-(Time &time) const;
 };
