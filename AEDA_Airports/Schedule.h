@@ -1,11 +1,11 @@
 
-#include "Utils.h"
+
 #include "Time.h"
 #include "Date.h"
 
 class Schedule
 {
-private:
+protected:
 	Time startHour;
 	Time endHour;
 

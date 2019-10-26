@@ -1,11 +1,6 @@
 ﻿  Airport.cpp
-  Date.cpp
   Employee.cpp
   Flight.cpp
-  main.cpp
   Plane.cpp
-  Schedule.cpp
-  Time.cpp
-  Utils.cpp
   Generating Code...
-  AEDA_Airports.vcxproj -> D:\Aulas\2 ano\1 Semestre\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe
+  AEDA_Airports.vcxproj -> C:\Users\USER\Desktop\AEDA---Airports\Debug\AEDA_Airports.exe

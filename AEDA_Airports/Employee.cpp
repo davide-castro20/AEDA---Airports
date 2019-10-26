@@ -15,7 +15,7 @@ Date Employee::getDate() const{
 	return this->birthDate;
 }
 
-float Employee::getSalary() const{
+double Employee::getSalary() const{
 	return this->salary;
 }
 
@@ -45,3 +45,94 @@ bool Employee::setSalary(float salary) {
 	return true;
 }
 	
+Pilot::Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> flights) :Employee(name, birthDate) {
+	this->category = category;
+	this->planes = planes;
+	this->flights = flights;
+}
+
+string Pilot::getCategory() {
+	return category;
+}
+
+vector <Plane*> Pilot::getPlane() {
+	return planes; 
+}
+
+vector <Flight*> Pilot::getFlights(){
+	return flights;
+}
+
+double Pilot::calcSalary() {
+	double total;
+	if (category == "A")
+		total = 100 * flights.size();
+	if (category == "B")
+		total = 150 * flights.size();
+	if (category == "C")
+		total = 200 * flights.size();
+	for (size_t i = 0; i < flights.size(); i++)
+		total += (5/60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
+	return total;
+}
+
+FlightCrew::FlightCrew(string name, Date birthDate, string category, vector <Flight*> flights):Employee(name, birthDate) {
+	this->category = category;
+	this->flights = flights;
+}
+
+string FlightCrew::getCategory() {
+	return category;
+}
+
+
+vector <Flight*> FlightCrew::getFlights() {
+	return flights;
+}
+
+double FlightCrew::calcSalary() {
+	double total;
+	if (category == "A")
+		total = 50 * flights.size();
+	if (category == "B")
+		total = 75 * flights.size();
+	if (category == "C")
+		total = 100 * flights.size();
+	for (size_t i = 0; i < flights.size(); i++)
+		total += (3 / 60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
+	return total;
+}
+
+Admin::Admin(string name, Date birthDate, string department, string function) :Employee(name, birthDate) {
+	this->department = department;
+	this->function = function;
+}
+
+string Admin::getDepartment() {
+	return department;
+}
+
+string Admin::getFunction() {
+	return function;
+}
+
+double Admin::calcSalary() {
+	return 3000;
+}
+
+BaseCrew::BaseCrew(string name, Date birthDate, string category, Schedule schedule) :Employee(name, birthDate){
+	this->category = category;
+	this->schedule = schedule;
+}
+
+string BaseCrew::getCategory() {
+	return category;
+}
+
+Schedule BaseCrew::getSchedule() {
+	return schedule;
+}
+
+double BaseCrew::calcSalary() {
+	return 1500;
+}

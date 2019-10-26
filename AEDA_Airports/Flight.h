@@ -7,6 +7,8 @@
 
 class Airport;
 class Employee;
+class Schedule;
+
 
 class Flight
 {
