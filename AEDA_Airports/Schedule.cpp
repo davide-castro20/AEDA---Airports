@@ -59,8 +59,8 @@ Time FlightSched::getDuration() const
 {
 	Date departureD = departureDate;
 	Date arrivalD = arrivalDate;
-	Time start = this->getStartHour();
-	Time end = this->getEndHour();
+	Time start = startHour;
+	Time end = endHour;
 	unsigned int hours, minutes;
 	if (departureD == arrivalD)
 		return (end - start);

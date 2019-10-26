@@ -6,13 +6,7 @@ using namespace std;
 
 class Flight;
 
-class capacityError
-{
-public:
-	int inputCapacity;
-	capacityError(int inputCapacity) { this->inputCapacity = inputCapacity;}
-	friend ostream & operator <<(ostream &out, const capacityError &error);
-};
+
 
 class Plane
 {
@@ -29,4 +23,12 @@ public:
 	vector<Flight*> getFlights() const;
 	void setCapacity(int cap);
 	bool setFlights(vector<Flight*> fly);
+
+	class capacityError
+    {
+	public:
+		int inputCapacity;
+		capacityError(int inputCapacity) { this->inputCapacity = inputCapacity;}
+		friend ostream & operator <<(ostream &out, const capacityError &error);
+	};
 };

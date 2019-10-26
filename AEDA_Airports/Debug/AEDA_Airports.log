@@ -1,6 +1,12 @@
 ﻿  Airport.cpp
+  Date.cpp
   Employee.cpp
   Flight.cpp
+  main.cpp
   Plane.cpp
+  Schedule.cpp
+  Time.cpp
+  Utils.cpp
   Generating Code...
-  AEDA_Airports.vcxproj -> C:\Users\USER\Desktop\AEDA---Airports\Debug\AEDA_Airports.exe
+  LINK : C:\Users\Vidinho\Documents\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe not found or not built by the last incremental link; performing full link
+  AEDA_Airports.vcxproj -> C:\Users\Vidinho\Documents\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe
