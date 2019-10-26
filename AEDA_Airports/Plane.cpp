@@ -1,15 +1,15 @@
 #include "Plane.h"
 
 
-float Plane::calcExp(string type, vector<Flight*> &flights) const
+double Plane::calcExp(string type, vector<Flight*> &flights) const
 {
-	float total = 0;
+	double total = 0;
 	if (type == "A")
-		total = 100 + flights.size() * 100;
+		total = 100.0 + flights.size() * 100.0;
 	if (type == "B")
-		total = 150 + flights.size() * 100;
+		total = 150.0 + flights.size() * 100.0;
 	if (type == "C")
-		total = 200 + flights.size() * 100;
+		total = 200.0 + flights.size() * 100.0;
 	for (size_t i = 0; i < flights.size(); ++i)
 		total += flights.at(i)->getFlightDuration().getTotalMinutes()*5;
 	return total;

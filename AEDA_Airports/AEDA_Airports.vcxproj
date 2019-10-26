@@ -129,6 +129,7 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Flight.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Schedule.cpp" />
     <ClCompile Include="Time.cpp" />
