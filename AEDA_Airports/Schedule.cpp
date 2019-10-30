@@ -33,6 +33,16 @@ void Schedule::setEndHour(Time &end)
 	this->endHour = end;
 }
 
+bool Schedule::isValid() const
+{
+	Time start = startHour;
+	Time end = endHour;
+	if (start < end)
+		return true;
+	else
+		return false;
+}
+
 
 
 /*---------------FLIGHT SCHEDULE-------------*/
@@ -81,11 +91,15 @@ Time FlightSched::getDuration() const
 void FlightSched::setDepartureDate(Date & date)
 {
 	departureDate = date;
+	if (!isValid())
+		throw InvalidFlightSched(departureDate, startHour, arrivalDate, endHour);
 }
 
 void FlightSched::setArrivalDate(Date & date)
 {
 	arrivalDate = date;
+	if (!isValid())
+		throw InvalidFlightSched(departureDate, startHour, arrivalDate, endHour);
 }
 
 
@@ -109,3 +123,17 @@ bool FlightSched::isValid() const
 	return false;
 }
 
+
+InvalidFlightSched::InvalidFlightSched(Date & departureD, Time & startH, Date & arrivalD, Time & endH)
+{
+	startHour = startH;
+	endHour = endH;
+	departureDate = departureD;
+	arrivalDate = arrivalD;
+}
+
+InvalidSchedule::InvalidSchedule(Time & start, Time & end)
+{
+	startHour = start;
+	endHour = end;
+}
