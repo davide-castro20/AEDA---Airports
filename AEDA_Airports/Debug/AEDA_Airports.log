@@ -1,16 +1,23 @@
-<<<<<<< Updated upstream
-﻿  Airport.cpp
-  Date.cpp
-  Employee.cpp
-  Flight.cpp
-  main.cpp
-  Plane.cpp
-  Schedule.cpp
-  Time.cpp
-  Utils.cpp
+﻿  main.cpp
+  Menus.cpp
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(34): error C3861: 'showPersonData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(37): error C3861: 'showFlightData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(40): error C3861: 'showPlaneData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(43): error C3861: 'showAirpotData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(75): error C3861: 'creatPersonData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(78): error C3861: 'createFlightsData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(81): error C3861: 'createPlaneData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(84): error C3861: 'createAirportData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(112): error C3861: 'changeClientsData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(115): error C3861: 'changeFlightData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(118): error C3861: 'changeFlightData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(121): error C3861: 'changeAirportData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(150): error C3861: 'deleteClientData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(153): error C3861: 'deleteFlightData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(156): error C3861: 'deletePlaneData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(159): error C3861: 'deleteAirportData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(186): error C3861: 'savePersonData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(187): error C3861: 'saveFlightData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(188): error C3861: 'savePlaneData': identifier not found
+d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(189): error C3861: 'saveAirportData': identifier not found
   Generating Code...
-  LINK : C:\Users\Vidinho\Documents\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe not found or not built by the last incremental link; performing full link
-  AEDA_Airports.vcxproj -> C:\Users\Vidinho\Documents\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe
-=======
-﻿  AEDA_Airports.vcxproj -> D:\Aulas\2 ano\1 Semestre\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe
->>>>>>> Stashed changes
