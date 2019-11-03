@@ -3,6 +3,25 @@
 #include "Time.h"
 #include "Date.h"
 
+
+class InvalidSchedule
+{
+	Time startHour;
+	Time endHour;
+public:
+	InvalidSchedule(Time &start, Time &end);
+};
+
+class InvalidFlightSched
+{
+	Time startHour;
+	Time endHour;
+	Date departureDate;
+	Date arrivalDate;
+public:
+	InvalidFlightSched(Date &departureD, Time &startH, Date &arrivalD, Time &endH);
+};
+
 class Schedule
 {
 protected:
@@ -17,6 +36,7 @@ public:
 	virtual Time getDuration() const;
 	void setStartHour(Time &start);
 	void setEndHour(Time &end);
+	virtual bool isValid() const;
 };
 
 class FlightSched : public Schedule

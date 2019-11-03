@@ -63,6 +63,21 @@ vector <Flight*> Pilot::getFlights(){
 	return flights;
 }
 
+void Pilot::setCategory(string categ)
+{
+	category = categ;
+}
+
+void Pilot::setFlights(vector<Flight*>& flights)
+{
+	this->flights = flights;
+}
+
+void Pilot::setPlanes(vector<Plane*>& planes)
+{
+	this->planes = planes;
+}
+
 double Pilot::calcSalary() {
 	double total;
 	if (category == "A")
@@ -88,6 +103,16 @@ string FlightCrew::getCategory() {
 
 vector <Flight*> FlightCrew::getFlights() {
 	return flights;
+}
+
+void FlightCrew::setCategory(string categ)
+{
+	category = categ;
+}
+
+void FlightCrew::setFlights(vector<Flight*>& flights)
+{
+	this->flights = flights;
 }
 
 double FlightCrew::calcSalary() {
@@ -131,6 +156,16 @@ string BaseCrew::getCategory() {
 
 Schedule BaseCrew::getSchedule() {
 	return schedule;
+}
+
+void BaseCrew::setCategory(string categ)
+{
+	category = categ;
+}
+
+void BaseCrew::setSchedule(Schedule & sched)
+{
+	schedule = sched;
 }
 
 double BaseCrew::calcSalary() {

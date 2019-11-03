@@ -38,7 +38,7 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 	this->expenses = calcExp(type, flights);
 }
 
-ostream & operator <<(ostream &out, const Plane::capacityError &error)
+ostream & operator <<(ostream &out, const capacityError &error)
 {
 	out << "Exeption was thrown trying to set the plane's capacity. Capacity received :" << error.inputCapacity; return out;
 }

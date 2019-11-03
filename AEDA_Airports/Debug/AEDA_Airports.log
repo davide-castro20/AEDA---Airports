@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  main.cpp
   Menus.cpp
 d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(34): error C3861: 'showPersonData': identifier not found
@@ -21,3 +22,7 @@ d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(187): err
 d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(188): error C3861: 'savePlaneData': identifier not found
 d:\aulas\2 ano\1 semestre\aeda\aeda---airports\aeda_airports\menus.cpp(189): error C3861: 'saveAirportData': identifier not found
   Generating Code...
+=======
+﻿  Schedule.cpp
+  AEDA_Airports.vcxproj -> C:\Users\Vidinho\Documents\AEDA\AEDA---Airports\Debug\AEDA_Airports.exe
+>>>>>>> master

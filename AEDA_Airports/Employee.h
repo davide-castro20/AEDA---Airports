@@ -46,6 +46,9 @@ public:
 	string getCategory();
 	vector <Plane*> getPlane();
 	vector <Flight*> getFlights();
+	void setCategory(string categ);
+	void setFlights(vector<Flight*> &flights);
+	void setPlanes(vector<Plane*> &planes);
 
 	double calcSalary();
 };
@@ -59,6 +62,8 @@ public:
 
 	string getCategory();
 	vector <Flight*> getFlights();
+	void setCategory(string categ);
+	void setFlights(vector<Flight*> &flights);
 
 	double calcSalary();
 };
@@ -85,6 +90,8 @@ public:
 
 	string getCategory();
 	Schedule getSchedule();
+	void setCategory(string categ);
+	void setSchedule(Schedule &sched);
 
 	double calcSalary();
 };
