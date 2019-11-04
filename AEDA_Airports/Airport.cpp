@@ -39,10 +39,11 @@ float Local::getLatit() const
 
 //Class Airport
 
-Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, Local local)
+Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, vector <Employee*> employees, Local local)
 {
 	this->planes = planes;
 	this->flights = flights;
+	this->employees = employees;
 	this->local = local;
 }
 

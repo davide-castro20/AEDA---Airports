@@ -121,6 +121,7 @@
     <ClInclude Include="Flight.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="ReadFiles.h" />
     <ClInclude Include="Schedule.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Utils.h" />
@@ -133,6 +134,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="ReadFiles.cpp" />
     <ClCompile Include="Schedule.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Utils.cpp" />
