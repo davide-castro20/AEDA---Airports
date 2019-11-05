@@ -3,8 +3,6 @@
 #include "Plane.h"
 #include "Flight.h"
 
-class Plane;
-class Flight;
 
 class Local
 {

@@ -1,6 +1,8 @@
 #include "Utils.h"
 #include "Menus.h"
+#include "Airport.h"
 
+Airport* currentAirport;
 
 using namespace std;
 
@@ -72,7 +74,7 @@ void createDataMenu()
 	case 0:
 		break;
 	case 1:
-		creatPersonData();
+		createPersonData();
 		break;
 	case 2:
 		createFlightsData();

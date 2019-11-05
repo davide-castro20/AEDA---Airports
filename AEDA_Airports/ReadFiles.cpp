@@ -1,9 +1,9 @@
 #include "ReadFiles.h"
-
+#include "Company.h"
 
 using namespace std;
 
-Company readAirports(string airports_file)
+/*Company readAirports(string airports_file)
 {
 	Airport *airport;
 	Company company;
@@ -47,7 +47,7 @@ Company readAirports(string airports_file)
 				employees = readEmployees(linha);
 				Local local(country, city, longit, latit);
 				airport = new Airport(planes, flights, employees, local);
-				company->airports.push_back(airport);
+				company.addAirport(airport);
 				counter = -1;
 				break;
 			}
@@ -59,6 +59,7 @@ Company readAirports(string airports_file)
 	airport_data.close();
 	return company;
 }
+*/
 
 vector<Plane*> readPlanes(string planes_file)
 {

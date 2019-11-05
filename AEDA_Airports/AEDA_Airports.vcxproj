@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Airport.h" />
+    <ClInclude Include="Company.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Flight.h" />
@@ -123,11 +124,13 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="ReadFiles.h" />
     <ClInclude Include="Schedule.h" />
+    <ClInclude Include="ShowFunctions.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Airport.cpp" />
+    <ClCompile Include="Company.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Flight.cpp" />
@@ -136,6 +139,7 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="ReadFiles.cpp" />
     <ClCompile Include="Schedule.cpp" />
+    <ClCompile Include="ShowFunctions.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
