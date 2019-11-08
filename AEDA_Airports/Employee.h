@@ -29,10 +29,12 @@ public:
 	
 
 	virtual double calcSalary() {return 0;}; //returns 0 but has no effect since all derivated classes will have this method
+	virtual void showEmp() const;
 protected:
 	string name;
 	double salary = calcSalary();
 	Date birthDate;
+	string type;
 };
 
 class Pilot : public Employee {
@@ -41,15 +43,16 @@ private:
 	vector <Plane*> planes;
 	vector <Flight*> flights;
 public: 
-	Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> flights);
+	Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> &flights);
 
 	string getCategory();
-	vector <Plane*> getPlane();
-	vector <Flight*> getFlights();
+	vector <Plane*> getPlanes() const;
+	vector<Flight*> getFlights() const;
 	void setCategory(string categ);
 	void setFlights(vector<Flight*> &flights);
 	void setPlanes(vector<Plane*> &planes);
 
+	void showEmp() const;
 	double calcSalary();
 };
 
@@ -58,12 +61,13 @@ private:
 	string category;//para simplificar apenas existem categorias A, B, C
 	vector <Flight*> flights;
 public:
-	FlightCrew(string name, Date birthDate, string category,vector <Flight*> flights);
+	FlightCrew(string name, Date birthDate, string category,vector <Flight*> &flights);
 
 	string getCategory();
 	vector <Flight*> getFlights();
 	void setCategory(string categ);
 	void setFlights(vector<Flight*> &flights);
+	void showEmp() const;
 
 	double calcSalary();
 };

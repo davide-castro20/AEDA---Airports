@@ -1,0 +1,9 @@
+ID
+Dia/mes/anoPartida
+Dia/mes/anoChegada
+HoraPartida
+MinutoPartida
+HoraChegada
+MinutosChegada
+Destino
+::::::::::

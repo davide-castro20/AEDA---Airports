@@ -1,0 +1,10 @@
+
+.vs/AEDA_Airports/v15/
+
+*.ipch
+
+.vs/
+
+AEDA_Airports/Debug/
+
+AEDA_Airports/x64/

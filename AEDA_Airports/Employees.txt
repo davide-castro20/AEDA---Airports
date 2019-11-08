@@ -1,0 +1,28 @@
+Pilot
+Name
+Dia/Mes/Ano
+Category
+PlaneTypes
+FlightIds
+::::::::::
+Flight Crew
+Name
+Dia/Mes/Ano
+Category
+FlightIds
+::::::::::
+Admin
+Name
+Date
+Department
+Function
+::::::::::
+Base Crew
+Name
+Date
+Category
+StartHour
+StartMinute
+EndHour
+EndMinute
+
