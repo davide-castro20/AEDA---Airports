@@ -6,38 +6,38 @@ using namespace std;
 
 Schedule::Schedule() {}
 
-Schedule::Schedule(Time &start, Time &end)
+Schedule::Schedule(Time *start, Time *end)
 {
-	this->startHour = start;
-	this->endHour = end;
+	startHour = start;
+	endHour = end;
 }
 
-Time Schedule::getStartHour() const { return startHour; }
+Time Schedule::getStartHour() const { return *startHour; }
 
-Time Schedule::getEndHour() const { return endHour; }
+Time Schedule::getEndHour() const { return *endHour; }
 
 Time Schedule::getDuration() const
 {
 	Time duration;
-	duration.setHours(endHour.getHours() - startHour.getHours());
-	duration.setMinutes(endHour.getMinutes() - startHour.getMinutes());
+	duration.setHours(endHour->getHours() - startHour->getHours());
+	duration.setMinutes(endHour->getMinutes() - startHour->getMinutes());
 	return duration;
 }
 
-void Schedule::setStartHour(Time &start)
+void Schedule::setStartHour(Time *start)
 {
 	this->startHour = start;
 }
 
-void Schedule::setEndHour(Time &end)
+void Schedule::setEndHour(Time *end)
 {
 	this->endHour = end;
 }
 
 bool Schedule::isValid() const
 {
-	Time start = startHour;
-	Time end = endHour;
+	Time start = *startHour;
+	Time end = *endHour;
 	if (start < end)
 		return true;
 	else
@@ -50,7 +50,7 @@ bool Schedule::isValid() const
 
 FlightSched::FlightSched() {}
 
-FlightSched::FlightSched(Date &departureD, Time &startHour, Date &arrivalD, Time &endHour) : Schedule(startHour, endHour)
+FlightSched::FlightSched(Date *departureD, Time *startHour, Date *arrivalD, Time *endHour) : Schedule(startHour, endHour)
 {
 	departureDate = departureD;
 	arrivalDate = arrivalD;
@@ -58,20 +58,20 @@ FlightSched::FlightSched(Date &departureD, Time &startHour, Date &arrivalD, Time
 
 Date FlightSched::getDepartureDate() const
 {
-	return departureDate;
+	return *departureDate;
 }
 
 Date FlightSched::getArrivalDate() const
 {
-	return arrivalDate;
+	return *arrivalDate;
 }
 
 Time FlightSched::getDuration() const
 {
-	Date departureD = departureDate;
-	Date arrivalD = arrivalDate;
-	Time start = startHour;
-	Time end = endHour;
+	Date departureD = *departureDate;
+	Date arrivalD = *arrivalDate;
+	Time start = *startHour;
+	Time end = *endHour;
 	unsigned int hours, minutes;
 	if (departureD == arrivalD)
 		return (end - start);
@@ -89,25 +89,25 @@ Time FlightSched::getDuration() const
 }
 
 
-void FlightSched::setDepartureDate(Date & date)
+void FlightSched::setDepartureDate(Date *date)
 {
 	departureDate = date;
 	if (!isValid())
 		throw InvalidFlightSched(departureDate, startHour, arrivalDate, endHour);
 }
 
-void FlightSched::setArrivalDate(Date & date)
+void FlightSched::setArrivalDate(Date * date)
 {
 	arrivalDate = date;
 	if (!isValid())
-		throw InvalidFlightSched(this->departureDate, this->startHour, this->arrivalDate, this->endHour);
+		throw InvalidFlightSched(departureDate, startHour, arrivalDate, endHour);
 }
 
 
 bool FlightSched::isValid() const
 {
-	Date departureD = departureDate;
-	Date arrivalD = arrivalDate;
+	Date departureD = *departureDate;
+	Date arrivalD = *arrivalDate;
 	Time departureH = this->getStartHour();
 	Time arrivalH = this->getEndHour();
 	if (departureD.isValid() && arrivalD.isValid() && departureH.isValid() && arrivalH.isValid())
@@ -125,7 +125,7 @@ bool FlightSched::isValid() const
 }
 
 
-InvalidFlightSched::InvalidFlightSched(Date & departureD, Time & startH, Date & arrivalD, Time & endH)
+InvalidFlightSched::InvalidFlightSched(Date * departureD, Time * startH, Date * arrivalD, Time * endH)
 {
 	startHour = startH;
 	endHour = endH;
@@ -133,7 +133,7 @@ InvalidFlightSched::InvalidFlightSched(Date & departureD, Time & startH, Date & 
 	arrivalDate = arrivalD;
 }
 
-InvalidSchedule::InvalidSchedule(Time & start, Time & end)
+InvalidSchedule::InvalidSchedule(Time * start, Time * end)
 {
 	startHour = start;
 	endHour = end;

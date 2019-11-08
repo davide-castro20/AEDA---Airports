@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Employee::Employee(string name, Date birthDate) {
+Employee::Employee(string name, Date *birthDate) {
 	this->name = name;
 	this->birthDate = birthDate;
 }
@@ -13,7 +13,7 @@ string Employee::getName() const{
 
 
 Date Employee::getDate() const{
-	return this->birthDate;
+	return *birthDate;
 }
 
 double Employee::getSalary() const{
@@ -31,8 +31,8 @@ bool Employee::setName(string name) {
 	return true;
 }
 
-bool Employee::setDate(Date birthDate) {
-	if (birthDate.isValid()) {
+bool Employee::setDate(Date *birthDate) {
+	if (birthDate->isValid()) {
 		this->birthDate = birthDate;
 		return true;
 	}
@@ -46,7 +46,7 @@ bool Employee::setSalary(float salary) {
 	return true;
 }
 	
-Pilot::Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> flights) :Employee(name, birthDate) {
+Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights) :Employee(name, birthDate) {
 	this->category = category;
 	this->planes = planes;
 	this->flights = flights;
@@ -92,7 +92,7 @@ double Pilot::calcSalary() {
 	return total;
 }
 
-FlightCrew::FlightCrew(string name, Date birthDate, string category, vector <Flight*> flights):Employee(name, birthDate) {
+FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights):Employee(name, birthDate) {
 	this->category = category;
 	this->flights = flights;
 }
@@ -129,7 +129,7 @@ double FlightCrew::calcSalary() {
 	return total;
 }
 
-Admin::Admin(string name, Date birthDate, string department, string function) :Employee(name, birthDate) {
+Admin::Admin(string name, Date *birthDate, string department, string function) :Employee(name, birthDate) {
 	this->department = department;
 	this->function = function;
 }
@@ -146,7 +146,7 @@ double Admin::calcSalary() {
 	return 3000;
 }
 
-BaseCrew::BaseCrew(string name, Date birthDate, string category, Schedule schedule) :Employee(name, birthDate){
+BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule) :Employee(name, birthDate){
 	this->category = category;
 	this->schedule = schedule;
 }
@@ -156,7 +156,7 @@ string BaseCrew::getCategory() {
 }
 
 Schedule BaseCrew::getSchedule() {
-	return schedule;
+	return *schedule;
 }
 
 void BaseCrew::setCategory(string categ)
@@ -164,7 +164,7 @@ void BaseCrew::setCategory(string categ)
 	category = categ;
 }
 
-void BaseCrew::setSchedule(Schedule & sched)
+void BaseCrew::setSchedule(Schedule * sched)
 {
 	schedule = sched;
 }

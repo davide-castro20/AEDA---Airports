@@ -51,8 +51,8 @@ vector<Flight*> readFlights(string flights_file)
 				Date ArrivalDate(date2);
 				Time DepartureTime(DepartureHour, DepartureMinute);
 				Time ArrivalTime(ArrivalHour, ArrivalMinute);
-				FlightSched flightSched(DepartureDate, DepartureTime, ArrivalDate, ArrivalTime);
-				flight = new Flight(flightSched, destino, employees, id);
+				FlightSched flightSched(&DepartureDate, &DepartureTime, &ArrivalDate, &ArrivalTime);
+				flight = new Flight(&flightSched, destino, employees, id);
 				flights.push_back(flight);
 				counter = -1;
 				break;
@@ -157,7 +157,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				flightsAux = convertIdToFlight(flightIds, flights);
 
 				Date birthDate(date);
-				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
+				employee = new Pilot(name, &birthDate, category, planesAux, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -175,7 +175,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				flightsAux = convertIdToFlight(flightIds, flights);
 
 				Date birthDate(date);
-				employee = new FlightCrew(name, birthDate, category, flightsAux);
+				employee = new FlightCrew(name, &birthDate, category, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -192,7 +192,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				function = linha;
 
 				Date birthDate(date);
-				employee = new Admin(name, birthDate, department, function);
+				employee = new Admin(name, &birthDate, department, function);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -218,8 +218,8 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				Date birthDate(date);
 				Time startTime(startHour, startMinute);
 				Time endTime(endHour, endMinute);
-				Schedule schedule(startTime, endTime);
-				employee = new BaseCrew(name, birthDate, category, schedule);
+				Schedule schedule(&startTime, &endTime);
+				employee = new BaseCrew(name, &birthDate, category, &schedule);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);

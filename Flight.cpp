@@ -7,7 +7,7 @@ using namespace std;
 Flight::Flight()
 {}
 
-Flight::Flight(FlightSched &predictedSched, string destino, vector<Employee*> &crew, int id)
+Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, int id)
 {
 	predictedSchedule = predictedSched;
 	this->id = id;
@@ -32,17 +32,17 @@ vector<Employee*> Flight::getEmployees() const
 
 FlightSched Flight::getRealSchedule() const
 {
-	return realSchedule;
+	return *realSchedule;
 }
 
 FlightSched Flight::getPredictedSchedule() const
 {
-	return predictedSchedule;
+	return *predictedSchedule;
 }
 
 Time Flight::getFlightDuration() const
 {
-	return realSchedule.getDuration();
+	return realSchedule->getDuration();
 }
 
 int Flight::getId() const
@@ -55,12 +55,12 @@ string Flight::getDestination() const
 	return destination;
 }
 
-void Flight::setPredictedSchedule(FlightSched &predicted)
+void Flight::setPredictedSchedule(FlightSched *predicted)
 {
 	predictedSchedule = predicted;
 }
 
-void Flight::setRealSchedue(FlightSched & real)
+void Flight::setRealSchedue(FlightSched * real)
 {
 	realSchedule = real;
 }

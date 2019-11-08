@@ -12,7 +12,7 @@ class Date;
 
 class Employee {
 public:
-	Employee(string name, Date birthDate);
+	Employee(string name, Date *birthDate);
 
 	string getName() const ;
 	Date getDate() const;
@@ -23,10 +23,10 @@ public:
 	virtual vector <Flight*> getFlights() { return {}; }; //returns empty vector if non existant
 	virtual string getDeparment() { return "Non existant for this employee"; }; //returns none if department is non existant
 	virtual string getFunction() { return "Non existant for this employee"; }; //returns none if function is non existant
-	virtual Schedule getSchedule() { Schedule schedule; return schedule; };
+	//virtual Schedule getSchedule() { Schedule *schedule; return *schedule; };
 
 	bool setName(string name);
-	bool setDate(Date birthDate);
+	bool setDate(Date *birthDate);
 	bool setSalary(float salary);
 	
 
@@ -34,7 +34,7 @@ public:
 protected:
 	string name;
 	double salary = calcSalary();
-	Date birthDate;
+	Date *birthDate;
 };
 
 class Pilot : public Employee {
@@ -43,7 +43,7 @@ private:
 	vector <Plane*> planes;
 	vector <Flight*> flights;
 public: 
-	Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> flights);
+	Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights);
 
 	string getCategory();
 	vector <Plane*> getPlane();
@@ -60,7 +60,7 @@ private:
 	string category;//para simplificar apenas existem categorias A, B, C
 	vector <Flight*> flights;
 public:
-	FlightCrew(string name, Date birthDate, string category,vector <Flight*> flights);
+	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights);
 
 	string getCategory();
 	vector <Flight*> getFlights();
@@ -75,7 +75,7 @@ private:
 	string department;
 	string function;
 public:
-	Admin(string name, Date birthDate, string department, string function);
+	Admin(string name, Date *birthDate, string department, string function);
 
 	string getDepartment();
 	string getFunction();
@@ -86,14 +86,14 @@ public:
 class BaseCrew : public Employee {
 private:
 	string category;
-	Schedule schedule;
+	Schedule *schedule;
 public:
-	BaseCrew(string name, Date birthDate, string category, Schedule schedule);
+	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule);
 
 	string getCategory();
 	Schedule getSchedule();
 	void setCategory(string categ);
-	void setSchedule(Schedule &sched);
+	void setSchedule(Schedule *sched);
 
 	double calcSalary();
 };
