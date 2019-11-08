@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 Company::Company()
 {
 	airports = {};
@@ -41,20 +42,17 @@ Company::Company(string airports_file)
 			case 3:
 				latit = stof(linha);
 				break;
-			
 			case 4:
+				planes = readPlanes(linha);
+				break;
+			case 5:
 				flights = readFlights(linha);
 				break;
-            case 5:
-				planes = readPlanes(linha, flights);
-				break;
 			case 6:
-				employees = readEmployees(linha, flights);
-
+				employees = readEmployees(linha);
 				Local local(country, city, longit, latit);
-				airport = new Airport(planes,flights, employees, local);
+				airport = new Airport(planes, flights, employees, local);
 				airports.push_back(airport);
-				
 				counter = -1;
 				break;
 			}

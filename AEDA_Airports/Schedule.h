@@ -4,6 +4,7 @@
 #include "Date.h"
 
 
+
 class InvalidSchedule
 {
 	Time startHour;

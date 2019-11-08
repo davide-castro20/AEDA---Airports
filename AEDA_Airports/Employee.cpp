@@ -11,6 +11,7 @@ string Employee::getName() const{
 	return this->name;
 }
 
+
 Date Employee::getDate() const{
 	return this->birthDate;
 }
@@ -44,25 +45,22 @@ bool Employee::setSalary(float salary) {
 	this->salary = salary;
 	return true;
 }
-
-
 	
-Pilot::Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> &flights) : Employee(name, birthDate) {
+Pilot::Pilot(string name, Date birthDate, string category, vector <Plane*> planes, vector <Flight*> flights) :Employee(name, birthDate) {
 	this->category = category;
 	this->planes = planes;
 	this->flights = flights;
-	this->type = "Pilot";
 }
 
 string Pilot::getCategory() {
 	return category;
 }
 
-vector <Plane*> Pilot::getPlanes() const {
+vector <Plane*> Pilot::getPlane() {
 	return planes; 
 }
 
-vector <Flight*> Pilot::getFlights() const{
+vector <Flight*> Pilot::getFlights(){
 	return flights;
 }
 
@@ -84,18 +82,17 @@ void Pilot::setPlanes(vector<Plane*>& planes)
 double Pilot::calcSalary() {
 	double total;
 	if (category == "A")
-		total = 100 * flights.size();
+		total = 100.0 * flights.size();
 	if (category == "B")
-		total = 150 * flights.size();
+		total = 150.0 * flights.size();
 	if (category == "C")
-		total = 200 * flights.size();
+		total = 200.0 * flights.size();
 	for (size_t i = 0; i < flights.size(); i++)
-		total += (5 / 60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
-
+		total += (5/60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
 	return total;
 }
 
-FlightCrew::FlightCrew(string name, Date birthDate, string category, vector <Flight*> &flights):Employee(name, birthDate) {
+FlightCrew::FlightCrew(string name, Date birthDate, string category, vector <Flight*> flights):Employee(name, birthDate) {
 	this->category = category;
 	this->flights = flights;
 }
@@ -119,20 +116,14 @@ void FlightCrew::setFlights(vector<Flight*>& flights)
 	this->flights = flights;
 }
 
-void FlightCrew::showEmp() const
-{
-	//cout << '|' << right << setw(30) << "Name  " << '|' << left << setw()
-	
-}
-
 double FlightCrew::calcSalary() {
 	double total;
 	if (category == "A")
-		total = 50 * flights.size();
+		total = 50.0 * flights.size();
 	if (category == "B")
-		total = 75 * flights.size();
+		total = 75.0 * flights.size();
 	if (category == "C")
-		total = 100 * flights.size();
+		total = 100.0 * flights.size();
 	for (size_t i = 0; i < flights.size(); i++)
 		total += (3 / 60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
 	return total;

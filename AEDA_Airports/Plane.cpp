@@ -15,6 +15,7 @@ double Plane::calcExp(string type, vector<Flight*> &flights) const
 	return total;
 }
 
+
 string Plane::getType() const
 {
 	return type;
@@ -35,6 +36,7 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 	this->type = type;
 	this->capacity = capacity;
 	this->flights = flights;
+	this->expenses = calcExp(type, flights);
 }
 
 ostream & operator <<(ostream &out, const capacityError &error)

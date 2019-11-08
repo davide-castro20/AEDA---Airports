@@ -3,8 +3,9 @@
 #include "Plane.h"
 #include "Flight.h"
 
-class Plane;
+
 class Flight;
+class Plane;
 class Employee;
 
 class Local
@@ -27,11 +28,11 @@ class Airport
 {
 public:
 	vector<Plane*> planes; //não esquecer de usar new
-	vector<Flight*> flights;
-	vector<Employee*> employees;
+	vector<Flight*> flights; //não esquecer de usar new
+	vector <Employee*> employees;
 	Local local;
-	Airport() { planes = {};};
-	Airport(vector<Plane*> &planes,vector<Flight*> &flights, vector <Employee*> &employees, Local &local);
+	Airport() { planes = {}; flights = {}; };
+	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local);
 	Local getLocal() const;
 };
 

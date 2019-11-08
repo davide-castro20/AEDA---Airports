@@ -1,4 +1,4 @@
 type
 capacity
-flightid1, flightid2 ...
+flights.txt
 ::::::::::

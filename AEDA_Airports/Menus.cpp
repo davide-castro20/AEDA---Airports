@@ -6,6 +6,7 @@ Airport* currentAirport;
 
 using namespace std;
 
+
 void readDataMenu()
 {
 	int ShowSelect;

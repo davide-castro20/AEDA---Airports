@@ -5,6 +5,7 @@ using namespace std;
 
 
 //Class Local
+
 Local::Local() {}
 
 Local::Local(string country, string city, float longit, float latit)
@@ -39,7 +40,7 @@ float Local::getLatit() const
 
 //Class Airport
 
-Airport::Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> &employees, Local &local)
+Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, vector <Employee*> employees, Local local)
 {
 	this->planes = planes;
 	this->flights = flights;

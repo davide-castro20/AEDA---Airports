@@ -7,6 +7,7 @@ Date::Date()
 
 Date::Date(string date) {
 
+
 	istringstream Dat(date);
 	string dayS, monthS, yearS;
 	getline(Dat, yearS, '/');
