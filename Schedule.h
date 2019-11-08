@@ -1,8 +1,10 @@
-
+#pragma once
 
 #include "Time.h"
 #include "Date.h"
 
+class Date;
+class Time;
 
 
 class InvalidSchedule

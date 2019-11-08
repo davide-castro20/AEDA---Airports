@@ -4,14 +4,14 @@
 
 using namespace std;
 
-Flight::Flight() 
+Flight::Flight()
 {}
 
-Flight::Flight(FlightSched &predictedSched, Airport *depart, Airport *destin, vector<Employee*> &crew)
+Flight::Flight(FlightSched &predictedSched, string destino, vector<Employee*> &crew, int id)
 {
 	predictedSchedule = predictedSched;
-	departure = depart;
-	destination = destin;
+	this->id = id;
+	destination = destino;
 	employees = crew;
 }
 
@@ -23,16 +23,6 @@ bool Flight::isCanceled() const
 bool Flight::isCompleted() const
 {
 	return completed;
-}
-
-Airport* Flight::getDeparture() const
-{
-	return departure;
-}
-
-Airport* Flight::getDestination() const
-{
-	return destination;
 }
 
 vector<Employee*> Flight::getEmployees() const
@@ -55,6 +45,16 @@ Time Flight::getFlightDuration() const
 	return realSchedule.getDuration();
 }
 
+int Flight::getId() const
+{
+	return id;
+}
+
+string Flight::getDestination() const
+{
+	return destination;
+}
+
 void Flight::setPredictedSchedule(FlightSched &predicted)
 {
 	predictedSchedule = predicted;
@@ -75,15 +75,20 @@ void Flight::setCompleted(bool complete)
 	completed = complete;
 }
 
-void Flight::setDeparture(Airport * depart)
+void Flight::setDestination(string destination)
 {
-	departure = depart;
+	this->destination = destination;
 }
 
-void Flight::setDestination(Airport * destin)
-{
-	destination = destin;
-}
+//void Flight::setDeparture(Airport * depart)
+//{
+//	departure = depart;
+//}
+//
+//void Flight::setDestination(Airport * destin)
+//{
+//	destination = destin;
+//}
 
 void Flight::setCrew(vector<Employee*>& crew)
 {

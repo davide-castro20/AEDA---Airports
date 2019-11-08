@@ -1,9 +1,8 @@
 #include "Schedule.h"
 
 
-
-
 using namespace std;
+
 
 Schedule::Schedule() {}
 
@@ -101,7 +100,7 @@ void FlightSched::setArrivalDate(Date & date)
 {
 	arrivalDate = date;
 	if (!isValid())
-		throw InvalidFlightSched(departureDate, startHour, arrivalDate, endHour);
+		throw InvalidFlightSched(this->departureDate, this->startHour, this->arrivalDate, this->endHour);
 }
 
 
