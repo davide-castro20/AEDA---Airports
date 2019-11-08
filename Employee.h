@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Plane.h"
+#include "Date.h"
+#include "Schedule.h"
 
-
-
+class Schedule;
 class Flight;
 class Plane;
 class Date;
-class Schedule;
+
 
 class Employee {
 public:

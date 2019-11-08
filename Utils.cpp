@@ -50,6 +50,7 @@ std::vector<Plane*> convertCatToPlane(const std::vector<string>& planeTypes, con
 			}
 		}
 	}
+	return planesConv;
 }
 
 void trimLeft(string &s)

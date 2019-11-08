@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Utils.h"
 #include "Schedule.h"
 #include "Employee.h"
 
-
+class FlightSched;
 class Employee;
 class Schedule;
+class Time;
+
 
 
 class Flight
