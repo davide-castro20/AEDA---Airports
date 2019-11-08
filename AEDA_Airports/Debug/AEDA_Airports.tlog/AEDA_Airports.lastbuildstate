@@ -1,6 +1,2 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.17763.0
-<<<<<<< Updated upstream
-Debug|Win32|C:\Users\USER\Desktop\AEDA---Airports\|
-=======
 Debug|Win32|D:\Aulas\2 ano\1 Semestre\AEDA\AEDA---Airports\|
->>>>>>> Stashed changes
