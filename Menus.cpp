@@ -3,8 +3,11 @@
 #include "Airport.h"
 #include "DeleteFunctions.h"
 #include "CreateFunctions.h"
+#include "Company.h"
 
 Airport *currentAirport;
+
+extern Company* comp;
 
 using namespace std;
 
@@ -218,3 +221,28 @@ void mainMenu() {
 	} while (select != 0);
 	
 }
+
+void selectAirportMenu()
+{
+	bool badInput = true;
+	int select;
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Which airport do you want to see the data off: \n";
+		for (size_t i = 0; i < comp->getAirports().size(); i++)
+			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity();
+		cin >> select;
+		if (cin.fail() || select > comp->getAirports().size() + 1 || select <= 0)
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+		else
+			badInput = false;
+	} while (badInput);
+	currentAirport = comp->getAirports().at(select - 1);
+	mainMenu();
+}
+
+

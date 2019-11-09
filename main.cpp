@@ -7,6 +7,6 @@ Company *comp;
 int main()
 {
 	comp = new Company("Airports.txt");
-	mainMenu();
+	selectAirportMenu();
 	return 0;
 }

@@ -9,10 +9,14 @@ void deletePersonData()
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel=false;
-	cout << "Whose data do you want to delete?(0 to cancel)\n" << endl;
+	
 	do {
+		
 		do
 		{
+			completedDel = false;
+			badInput = true;
+			cout << "Whose data do you want to delete?(0 to cancel)\n" << endl;
 			for (size_t i = 1; i < currentAirport->employees.size() + 1; i++)
 				cout << i << ") " << currentAirport->employees.at(i - 1)-> getType() << ":" << currentAirport->employees.at(i - 1)->getName() << "." << endl;
 			cin >> delSelection;
@@ -31,7 +35,8 @@ void deletePersonData()
 				return;
 		} while (badInput);
 
-		cin.clear(100, '\n');
+		cin.clear();
+		cin.ignore(100, '\n');
 
 		if (delSelection == 0)
 			return;
@@ -42,7 +47,7 @@ void deletePersonData()
 			cout << "Are you sure you want to delete the following employee?(y/n)\n";
 			//currentAirport->employees.at(delSelection)->showEmp();
 			cin >> confirm;
-			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N" || confirm == "0"))
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
@@ -69,7 +74,6 @@ void deletePersonData()
 				badInput = false;
 				completedDel = false;
 			}
-
 		} while (badInput);
 	} while (!completedDel);
 }
@@ -101,7 +105,8 @@ void deletePlaneData()
 			if (cin.eof())
 				return;
 		} while (badInput);
-		cin.clear(100, '\n');
+		cin.clear();
+		cin.ignore(100, '\n');
 		if (delSelection == 0)
 			return;
 		delSelection--;
@@ -153,7 +158,7 @@ void deleteFlightData()
 		do
 		{
 			for (size_t i = 1; i < currentAirport->flights.size() + 1; i++)
-				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << "which departs at: " << currentAirport->flights.at(i-1)->getPredictedSchedule().getDepartureDate() << endl;
+				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << " which departs at: " << currentAirport->flights.at(i-1)->getPredictedSchedule().getDepartureDate() << endl;
 			cin >> delSelection;
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->flights.size() + 1)
 			{
@@ -169,7 +174,8 @@ void deleteFlightData()
 			if (cin.eof())
 				return;
 		} while (badInput);
-		cin.clear(100, '\n');
+		cin.clear();
+		cin.ignore(100, '\n');
 		if (delSelection == 0)
 			return;
 		delSelection--;
