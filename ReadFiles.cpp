@@ -166,7 +166,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				flightsAux = convertIdToFlight(flightIds, flights);
 
 				birthDate = new Date(date);
-				//employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
+				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -184,7 +184,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				flightsAux = convertIdToFlight(flightIds, flights);
 
 				birthDate = new Date(date);
-				employee = new FlightCrew(name, birthDate, category, flightsAux,type);
+				employee = new FlightCrew(name, birthDate, category, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -201,7 +201,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				function = linha;
 
 				birthDate = new Date(date);
-				employee = new Admin(name, birthDate, department, function,type);
+				employee = new Admin(name, birthDate, department, function);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -228,7 +228,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				startTime = new Time(startHour, startMinute);
 				endTime = new Time(endHour, endMinute);
 				schedule = new Schedule(startTime, endTime);
-				employee = new BaseCrew(name, birthDate, category, schedule,type);
+				employee = new BaseCrew(name, birthDate, category, schedule);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);

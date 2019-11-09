@@ -50,7 +50,7 @@ private:
 	vector <Plane*> planes;
 	vector <Flight*> flights;
 public: 
-	Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights,string type);
+	Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights);
 
 	string getCategory() const ;
 	vector <Plane*> getPlane() const;
@@ -68,7 +68,7 @@ private:
 	string category;//para simplificar apenas existem categorias A, B, C
 	vector <Flight*> flights;
 public:
-	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights,string type);
+	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights);
 
 	string getCategory();
 	vector <Flight*> getFlights();
@@ -84,7 +84,7 @@ private:
 	string department;
 	string function;
 public:
-	Admin(string name, Date *birthDate, string department, string function,string type);
+	Admin(string name, Date *birthDate, string department, string function);
 
 	string getDepartment();
 	string getFunction();
@@ -100,7 +100,7 @@ private:
 	string category;
 	Schedule *schedule;
 public:
-	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule,string type);
+	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule);
 
 	string getCategory();
 	Schedule getSchedule();

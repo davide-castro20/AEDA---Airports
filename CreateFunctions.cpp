@@ -8,7 +8,7 @@ using namespace std;
 
 void createPerson()
 {
-	unsigned int createSel;
+	 int createSel;
 	bool badInput;
 	do {
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -16,6 +16,8 @@ void createPerson()
 		{
 			cout << "Which data to create?\n" << "1)A Pilot.\n" << "2)A Flight Crew member.\n" << "3)An Administration member.\n" << "4)A Base Crew member\n" << "0)Return to the last menu.\n";
 			cin >> createSel;
+			if (cin.eof())
+				return;
 			if (cin.fail() || createSel < 0 || createSel > 4)
 			{
 				cin.clear();
@@ -27,8 +29,7 @@ void createPerson()
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
+			
 
 		} while (badInput);
 		cin.ignore(1000, '\n');

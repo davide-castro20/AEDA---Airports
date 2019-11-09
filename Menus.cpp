@@ -2,6 +2,7 @@
 #include "Menus.h"
 #include "Airport.h"
 #include "DeleteFunctions.h"
+#include "CreateFunctions.h"
 
 Airport *currentAirport;
 
@@ -54,37 +55,39 @@ void createDataMenu()
 {
 	bool badInput = true;
 	int Selection;
-	do
-	{
-		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n0)Return to main menu.\n";
-		cin >> Selection;
-		if (cin.fail() || Selection < 0 || Selection > 3)
+	do {
+		do
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			badInput = true;
-		}
-		else
+			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n0)Return to main menu.\n";
+			cin >> Selection;
+			if (cin.fail() || Selection < 0 || Selection > 3)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		switch (Selection)
 		{
-			badInput = false;
+		case 0:
+			break;
+		case 1:
+			createPerson();
+			break;
+		case 2:
+			//createFlight();
+			break;
+		case 3:
+			//createPlane();
+			break;
 		}
-	} while (badInput);
-	switch (Selection)
-	{
-	case 0:
-		break;
-	case 1:
-		//createPerson();
-		break;
-	case 2:
-		//createFlight();
-		break;
-	case 3:
-		//createPlane();
-		break;
-	}
+	} while (Selection != 0);
 }
 
 void changeDataMenu()

@@ -51,7 +51,7 @@ bool Employee::setSalary(float salary) {
 	return true;
 }
 	
-Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights,string type) :Employee(name, birthDate, type) {
+Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights) : Employee(name, birthDate, "Pilot") {
 	this->category = category;
 	this->planes = planes;
 	this->flights = flights;
@@ -103,7 +103,7 @@ double Pilot::calcSalary() {
 	return total;
 }
 
-FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights,string type):Employee(name, birthDate,type) {
+FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights):Employee(name, birthDate,"Flight Crew") {
 	this->category = category;
 	this->flights = flights;
 }
@@ -145,7 +145,7 @@ double FlightCrew::calcSalary() {
 	return total;
 }
 
-Admin::Admin(string name, Date *birthDate, string department, string function,string type) :Employee(name, birthDate,type) {
+Admin::Admin(string name, Date *birthDate, string department, string function) :Employee(name, birthDate,"Admin") {
 	this->department = department;
 	this->function = function;
 }
@@ -181,7 +181,7 @@ double Admin::calcSalary() {
 	return 3000;
 }
 
-BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule,string type) :Employee(name, birthDate,type){
+BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule) :Employee(name, birthDate,"Base Crew"){
 	this->category = category;
 	this->schedule = schedule;
 }
