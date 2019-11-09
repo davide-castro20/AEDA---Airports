@@ -11,6 +11,7 @@ using namespace std;
 
 class Flight;
 class Plane;
+class Date;
 
 
 bool badInput=true;
@@ -32,3 +33,15 @@ void trimLeft(string &s); // removes extra spaces from the beginning of a string
 void decompose(string line, std::vector<std::string> &vect, char sep);
 
 void decomposeInt(string line, std::vector<int> &vect, char sep);
+
+bool existingDate(string &dt);
+
+bool endLaterThenBeg(string &endD, string &begD); // returns "true" if the string "begD" is a date later then the date on the "endD" string
+
+bool checkBetweenDates(std::string date1, std::string date2, Date date); // returns "true" if the object "date" is a date between "date1" and "date2"
+
+bool checkInt2(std::string s); // returns "true" if a string "sentence" can be converted to an integer
+
+int checkInt(string sentence); // asks for an integer input until the user gives a valid integer and then returns it
+
+bool checkCats(const string &cats); // checks the string with plane types

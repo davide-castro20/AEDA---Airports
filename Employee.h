@@ -12,6 +12,7 @@ class Date;
 
 class Employee {
 public:
+	Employee();
 	Employee(string name, Date *birthDate);
 
 	string getName() const ;
@@ -39,16 +40,17 @@ protected:
 
 class Pilot : public Employee {
 private:
-	string category;//para simplificar apenas existem categorias A, B, C
+	char category;//para simplificar apenas existem categorias A, B, C
 	vector <Plane*> planes;
 	vector <Flight*> flights;
 public: 
-	Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights);
+	Pilot();
+	Pilot(string name, Date *birthDate, char category, vector <Plane*> &planes, vector <Flight*> &flights);
 
-	string getCategory();
-	vector <Plane*> getPlane();
-	vector <Flight*> getFlights();
-	void setCategory(string categ);
+	char getCategory() const;
+	vector <Plane*> getPlane() const;
+	vector <Flight*> getFlights() const;
+	void setCategory(char categ);
 	void setFlights(vector<Flight*> &flights);
 	void setPlanes(vector<Plane*> &planes);
 
@@ -60,6 +62,7 @@ private:
 	string category;//para simplificar apenas existem categorias A, B, C
 	vector <Flight*> flights;
 public:
+	FlightCrew();
 	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights);
 
 	string getCategory();

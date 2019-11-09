@@ -6,7 +6,7 @@
 
 void showDataMenu();
 
-void readDataMenu();
+//void readDataMenu(); 
 
 void changeDataMenu();
 

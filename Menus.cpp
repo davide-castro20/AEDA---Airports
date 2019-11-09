@@ -8,7 +8,7 @@ Airport* currentAirport;
 using namespace std;
 
 
-void readDataMenu()
+void showDataMenu()
 {
 	int ShowSelect;
 	int cont = 0;
@@ -35,16 +35,16 @@ void readDataMenu()
 	switch (ShowSelect)
 	{
 	case 1:
-		showPersonData();
+		//showPersonData();
 		break;
 	case 2:
-		showFlightData();
+		//showFlightData();
 		break;
 	case 3:
-		showPlaneData();
+		//showPlaneData();
 		break;
 	case 4:
-		showAirpotData();
+		//showAirpotData();
 		break;
 	case 0:
 		break;
@@ -76,13 +76,13 @@ void createDataMenu()
 	case 0:
 		break;
 	case 1:
-		createPersonData();
+		//createPerson();
 		break;
 	case 2:
-		createFlightsData();
+		//createFlight();
 		break;
 	case 3:
-		createPlaneData();
+		//createPlane();
 		break;
 	}
 }
@@ -93,37 +93,40 @@ void changeDataMenu()
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	do
 	{
-		cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)A Airport.\n0)Return to main menu.\n";
-		cin >> selection;
-		if (cin.fail() || selection < 0 || selection > 3)
+		do
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
-			badInput = true;
-		}
-		else
+			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)A Airport.\n0)Return to main menu.\n";
+			cin >> selection;
+			if (cin.fail() || selection < 0 || selection > 3)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		switch (selection)
 		{
-			badInput = false;
+		case 1:
+			//changeClientsData();
+			break;
+		case 2:
+			//changeFlightData();
+			break;
+		case 3:
+			//changeFlightData();
+			break;
+		case 4:
+			//changeAirportData();
+			break;
+		case 0:
+			break;
 		}
-	} while (badInput);
-	switch (selection)
-	{
-	case 1:
-		changeClientsData();
-		break;
-	case 2:
-		changeFlightData();
-		break;
-	case 3:
-		changeFlightData();
-		break;
-	case 4:
-		changeAirportData();
-		break;
-	case 0:
-		break;
-	}
+	} while (selection != 0);
 }
 
 void DeleteDataMenu()
@@ -131,40 +134,42 @@ void DeleteDataMenu()
 	int toDelSelection = 0;
 	do
 	{
-		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "What do you want to delete?\n1)A Person.\n2)A Flight.\n3)A Plane\n0)Return to main menu.\n";
-		cin >> toDelSelection;
-		if (cin.fail() || toDelSelection < 0 || toDelSelection>3)
+		do
 		{
-			toDelSelection = true;
-			cin.clear();
-			cin.ignore(1000, '\n');
-		}
-		else
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "What do you want to delete?\n1)A Person.\n2)A Flight.\n3)A Plane\n0)Return to main menu.\n";
+			cin >> toDelSelection;
+			if (cin.fail() || toDelSelection < 0 || toDelSelection>3)
+			{
+				toDelSelection = true;
+				cin.clear();
+				cin.ignore(1000, '\n');
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		switch (toDelSelection)
 		{
-			badInput = false;
+		case 1:
+			deletePersonData();
+			break;
+		case 2:
+			deleteFlightData();
+			break;
+		case 3:
+			deletePlaneData();
+			break;
+		case 0:
+			break;
 		}
-	} while (badInput);
-	switch (toDelSelection)
-	{
-	case 1:
-		deletePersonData();
-		break;
-	case 2:
-		deleteFlightData();
-		break;
-	case 3:
-		deletePlaneData();
-		break;
-	case 0:
-		break;
-	}
+	} while (toDelSelection != 0);
 }
 
 void mainMenu() {
-	int test = 0;
 	int select;
-	while (test==0)
+	do
 	{
 		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "0)Close Program\n";
@@ -181,15 +186,15 @@ void mainMenu() {
 			{
 			case 0:
 				cout << "Saving changed data...\n";
-				savePersonData();
-				saveFlightData();
-				savePlaneData();
-				saveAirportData();
-				test = 1;
+				//savePersonData();
+				//saveFlightData();
+				//savePlaneData();
+				//saveAirportData();
+				select = 0;
 				cout << "Completed saving data.\n";
 				break;
 			case 1:
-				readDataMenu();
+				showDataMenu();
 				break;
 			case 2:
 				createDataMenu();
@@ -204,6 +209,6 @@ void mainMenu() {
 				break;
 			}
 		}
-	}
+	} while (select != 0);
 	
 }

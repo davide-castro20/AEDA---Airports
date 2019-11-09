@@ -1,11 +1,11 @@
 #include "DeleteFunctions.h"
 #include "Menus.h"
 
-Airport* currentAirport;
+extern Airport* currentAirport;
 
 void deletePersonData()
 {
-	int delSelection;
+	unsigned int delSelection;
 	string confirm;
 	bool completedDel=false;
 	cout << "Whose data do you want to delete?(0 to cancel)\n" << endl;
@@ -26,10 +26,15 @@ void deletePersonData()
 			{
 				badInput = false;
 			}
+			if (cin.eof())
+				return;
 		} while (badInput);
-		cin.clear(100, 'n');
+
+		cin.clear(100, '\n');
+
 		if (delSelection == 0)
 			return;
+
 		delSelection--;
 		do
 		{
@@ -45,7 +50,12 @@ void deletePersonData()
 			}
 			else
 			{
-				badInput = false;
+				if (cin.eof())
+					return;
+				else
+				{
+					badInput = false;
+				}
 			}
 			if (confirm == "y" || confirm == "Y")
 			{
@@ -65,7 +75,7 @@ void deletePersonData()
 
 void deletePlaneData()
 {
-	int delSelection;
+	unsigned int delSelection;
 	string confirm;
 	bool completedDel = false;
 	cout << "Which plane data do you want to delete?(0 to cancel)\n" << endl;
@@ -86,8 +96,10 @@ void deletePlaneData()
 			{
 				badInput = false;
 			}
+			if (cin.eof())
+				return;
 		} while (badInput);
-		cin.clear(100, 'n');
+		cin.clear(100, '\n');
 		if (delSelection == 0)
 			return;
 		delSelection--;
@@ -105,7 +117,12 @@ void deletePlaneData()
 			}
 			else
 			{
-				badInput = false;
+				if (cin.eof())
+					return;
+				else
+				{
+					badInput = false;
+				}
 			}
 			if (confirm == "y" || confirm == "Y")
 			{
@@ -125,7 +142,7 @@ void deletePlaneData()
 
 void deleteFlightData()
 {
-	int delSelection;
+	unsigned int delSelection;
 	string confirm;
 	bool completedDel = false;
 	cout << "Which flight data do you want to delete?(0 to cancel)\n" << endl;
@@ -146,8 +163,10 @@ void deleteFlightData()
 			{
 				badInput = false;
 			}
+			if (cin.eof())
+				return;
 		} while (badInput);
-		cin.clear(100, 'n');
+		cin.clear(100, '\n');
 		if (delSelection == 0)
 			return;
 		delSelection--;
@@ -165,7 +184,12 @@ void deleteFlightData()
 			}
 			else
 			{
-				badInput = false;
+				if (cin.eof())
+					return;
+				else
+				{
+					badInput = false;
+				}
 			}
 			if (confirm == "y" || confirm == "Y")
 			{

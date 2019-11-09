@@ -2,6 +2,10 @@
 
 using namespace std;
 
+Employee::Employee()
+{
+}
+
 Employee::Employee(string name, Date *birthDate) {
 	this->name = name;
 	this->birthDate = birthDate;
@@ -46,25 +50,33 @@ bool Employee::setSalary(float salary) {
 	return true;
 }
 	
-Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights) :Employee(name, birthDate) {
+Pilot::Pilot()
+{
+}
+
+//Pilot::Pilot(string name, Date * birthDate, char category, vector<Plane*>& planes, vector<Flight*>& flights)
+//{
+//}
+
+Pilot::Pilot(string name, Date *birthDate, char category, vector <Plane*> &planes, vector <Flight*> &flights) : Employee(name, birthDate) {
 	this->category = category;
 	this->planes = planes;
 	this->flights = flights;
 }
 
-string Pilot::getCategory() {
+char Pilot::getCategory() const {
 	return category;
 }
 
-vector <Plane*> Pilot::getPlane() {
+vector <Plane*> Pilot::getPlane() const {
 	return planes; 
 }
 
-vector <Flight*> Pilot::getFlights(){
+vector <Flight*> Pilot::getFlights() const {
 	return flights;
 }
 
-void Pilot::setCategory(string categ)
+void Pilot::setCategory(char categ)
 {
 	category = categ;
 }
@@ -81,15 +93,19 @@ void Pilot::setPlanes(vector<Plane*>& planes)
 
 double Pilot::calcSalary() {
 	double total;
-	if (category == "A")
+	if (category == 'A')
 		total = 100.0 * flights.size();
-	if (category == "B")
+	if (category == 'B')
 		total = 150.0 * flights.size();
-	if (category == "C")
+	if (category == 'C')
 		total = 200.0 * flights.size();
 	for (size_t i = 0; i < flights.size(); i++)
 		total += (5/60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
 	return total;
+}
+
+FlightCrew::FlightCrew()
+{
 }
 
 FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights):Employee(name, birthDate) {
