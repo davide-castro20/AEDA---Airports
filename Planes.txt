@@ -1,4 +1,7 @@
 type
-capacity
-flights.txt
+120
+1
 ::::::::::
+type
+200
+2
