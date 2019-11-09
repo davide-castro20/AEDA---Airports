@@ -226,12 +226,18 @@ void selectAirportMenu()
 {
 	bool badInput = true;
 	int select;
+	cout << '.' << string(98, '_') << '.' << endl
+		<< '|' << string(98, ' ') << '|' << endl
+		<< '|' << string(39, '-') << "WELCOME to our company" << string(37, '-') << '|' << endl
+		<< '|' << string(98, ' ') << '|' << endl
+		<< '|' << string(98, '_') << '|' << endl << endl;
 	do
 	{
-		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "Which airport do you want to see the data off: \n";
+		//cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Which airport do you want to see the data of: \n";
 		for (size_t i = 0; i < comp->getAirports().size(); i++)
 			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity();
+		cout << endl;
 		cin >> select;
 		if (cin.fail() || select > comp->getAirports().size() + 1 || select <= 0)
 		{

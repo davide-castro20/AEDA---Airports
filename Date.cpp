@@ -9,9 +9,10 @@ Date::Date(string date) {
 
 	istringstream Dat(date);
 	string dayS, monthS, yearS;
-	getline(Dat, yearS, '/');
-	getline(Dat, monthS, '/');
 	getline(Dat, dayS, '/');
+	getline(Dat, monthS, '/');
+	getline(Dat, yearS, '/');
+	
 	day = (unsigned short)stoi(dayS);
 	month = (unsigned short)stoi(monthS);
 	year = (unsigned short)stoi(yearS);
@@ -71,7 +72,7 @@ void Date::setYear(unsigned year) {
 
 ostream& operator<<(ostream& out, const Date & date) {
 
-	out << date.year << "/" << date.month << "/" << date.day;
+	out << date.day << "/" << date.month << "/" << date.year;
 	return out;
 }
 

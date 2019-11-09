@@ -3,10 +3,11 @@
 #include "Company.h"
 
 Company *comp;
+extern Airport* currentAirport;
 
 int main()
 {
 	comp = new Company("Airports.txt");
-	selectAirportMenu();
+    selectAirportMenu();
 	return 0;
 }

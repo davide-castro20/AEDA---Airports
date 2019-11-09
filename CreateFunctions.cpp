@@ -80,7 +80,7 @@ void createPilot()
 	string name;
 	string read;
 	string category;
-	vector<int> planeIds;
+	vector<string> planeTypes;
 	vector<int> flightIds;
 	vector<Plane*> planes;
 	vector<Flight*> flights;
@@ -95,7 +95,7 @@ void createPilot()
 		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
 		{
 			cin.clear();
-			cin.ignore(100, '\n');
+			//cin.ignore(100, '\n');
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 			badInput = true;
 			cout << "Invalid name! Please insert name again \n";
@@ -108,7 +108,7 @@ void createPilot()
 			return;
 	} while (badInput);
 
-
+	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
@@ -116,7 +116,7 @@ void createPilot()
   		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
-			cin.ignore(100, '\n');
+			//cin.ignore(100, '\n');
 			//cout << "-----------------------------------------------------------------------------------------------------\n";
 			badInput = true;
 			cout << "Invalid date! Please insert birth date again \n";
@@ -158,10 +158,47 @@ void createPilot()
 	cout << "Plane Types: \n";
 	do
 	{
+		cin.ignore();
 		getline(cin, read);
+		if (cin.fail() || read.empty())
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
 
-		//if(cin.fail() || read.empty())
-	} while (1);
+			if (cin.eof())
+				return;
+			if (!(read.find_first_of(",") == string::npos))
+				decompose(read, planeTypes, ',');
+			else
+			{
+				trim(read);
+				planeTypes.push_back(read);
+			}
+			for (size_t i = 0; i < planeTypes.size(); i++)
+			{
+				if ((planeTypes.at(i) != "A") && (planeTypes.at(i) != "B") && (planeTypes.at(i) != "C"))
+					badInput = true;
+			}
+		}
+		if(badInput)
+			cout << "Invalid plane types! Please insert again \n";
+		else
+		{
+			planes = convertCatToPlane(planeTypes, currentAirport->planes);
+		}
+	} while (badInput);
 
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Flights: \n";
+	do {
+		//getline()
+
+	} while (badInput);
 
 }

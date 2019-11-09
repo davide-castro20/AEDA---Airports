@@ -19,7 +19,7 @@ int days(int year, int month)
 		return d[month - 1];
 }
 
-std::vector<Flight*> convertIdToFlight(const std::vector<int> flightIds, const std::vector<Flight*> flights)
+std::vector<Flight*> convertIdToFlight(const std::vector<int> &flightIds, const std::vector<Flight*> &flights)
 {
 	std::vector<Flight*> flightsConv;
 	for (size_t i = 0; i < flightIds.size(); i++)
@@ -36,7 +36,7 @@ std::vector<Flight*> convertIdToFlight(const std::vector<int> flightIds, const s
 	return flightsConv;
 }
 
-std::vector<Plane*> convertCatToPlane(const std::vector<string> planeTypes, const std::vector<Plane*> planes)
+std::vector<Plane*> convertCatToPlane(const std::vector<string> &planeTypes, const std::vector<Plane*> &planes)
 {
 	std::vector<Plane*> planesConv;
 	for (size_t i = 0; i < planeTypes.size(); i++)
@@ -104,22 +104,22 @@ bool existingDate(string &dt)
 	istringstream iS(dt);
 	int year, month, day, maxDays;
 	char delimiter; // Slash
-	iS >> year;
+	iS >> day;
 	iS >> delimiter;
 	if (delimiter != '/')
-		return true;
+		return false;
 	iS >> month;
 	iS >> delimiter;
 	if (delimiter != '/')
-		return true;
-	iS >> day;
+		return false;
+	iS >> year;
 	if (year >= 0 && (month >= 1 && month <= 12))
 	{
 		maxDays = days(year, month);
 		if (day >= 1 && day <= maxDays)
-			return false;
+			return true;
 	}
-	return true;
+	return false;
 }
 
 bool endLaterThenBeg(string &endD, string &begD)
