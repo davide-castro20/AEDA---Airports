@@ -2,9 +2,10 @@
 
 using namespace std;
 
-Employee::Employee(string name, Date *birthDate) {
+Employee::Employee(string name, Date *birthDate,string type) {
 	this->name = name;
 	this->birthDate = birthDate;
+	this->type = type;
 }
 
 string Employee::getName() const{
@@ -18,6 +19,10 @@ Date Employee::getDate() const{
 
 double Employee::getSalary() const{
 	return this->salary;
+}
+
+string Employee::getType() const {
+	return this->type;
 }
 
 bool Employee::setName(string name) {
@@ -46,7 +51,7 @@ bool Employee::setSalary(float salary) {
 	return true;
 }
 	
-Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights) :Employee(name, birthDate) {
+Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights,string type) :Employee(name, birthDate, type) {
 	this->category = category;
 	this->planes = planes;
 	this->flights = flights;
@@ -64,19 +69,25 @@ vector <Flight*> Pilot::getFlights(){
 	return flights;
 }
 
-void Pilot::setCategory(string categ)
+bool Pilot::setCategory(string categ)
 {
-	category = categ;
+	if (categ == "A" || categ == "B" || categ == "C") {
+		category = categ;
+		return true;
+	}
+	return false;
 }
 
-void Pilot::setFlights(vector<Flight*>& flights)
+bool Pilot::setFlights(vector<Flight*>& flights)
 {
 	this->flights = flights;
+	return true;
 }
 
-void Pilot::setPlanes(vector<Plane*>& planes)
+bool Pilot::setPlanes(vector<Plane*>& planes)
 {
 	this->planes = planes;
+	return true;
 }
 
 double Pilot::calcSalary() {
@@ -92,7 +103,7 @@ double Pilot::calcSalary() {
 	return total;
 }
 
-FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights):Employee(name, birthDate) {
+FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights,string type):Employee(name, birthDate,type) {
 	this->category = category;
 	this->flights = flights;
 }
@@ -106,14 +117,19 @@ vector <Flight*> FlightCrew::getFlights() {
 	return flights;
 }
 
-void FlightCrew::setCategory(string categ)
+bool FlightCrew::setCategory(string categ)
 {
-	category = categ;
+	if (categ == "A" || categ == "B" || categ == "C") {
+		category = categ;
+		return true;
+	}
+	return false;
 }
 
-void FlightCrew::setFlights(vector<Flight*>& flights)
+bool FlightCrew::setFlights(vector<Flight*>& flights)
 {
 	this->flights = flights;
+	return true;
 }
 
 double FlightCrew::calcSalary() {
@@ -129,7 +145,7 @@ double FlightCrew::calcSalary() {
 	return total;
 }
 
-Admin::Admin(string name, Date *birthDate, string department, string function) :Employee(name, birthDate) {
+Admin::Admin(string name, Date *birthDate, string department, string function,string type) :Employee(name, birthDate,type) {
 	this->department = department;
 	this->function = function;
 }
@@ -142,11 +158,30 @@ string Admin::getFunction() {
 	return function;
 }
 
+bool Admin::setDepartment(string depart) {
+	for (size_t i = 0; i < depart.length(); i++) {
+		if (isdigit(depart.at(i)))
+			return false;
+	}
+	department= depart;
+	return true;
+}
+
+bool Admin::setFunction(string func) {
+	for (size_t i = 0; i < func.length(); i++) {
+		if (isdigit(func.at(i)))
+			return false;
+	}
+	function = func;
+	return true;
+}
+
+
 double Admin::calcSalary() {
 	return 3000;
 }
 
-BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule) :Employee(name, birthDate){
+BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule,string type) :Employee(name, birthDate,type){
 	this->category = category;
 	this->schedule = schedule;
 }
@@ -159,14 +194,22 @@ Schedule BaseCrew::getSchedule() {
 	return *schedule;
 }
 
-void BaseCrew::setCategory(string categ)
+bool BaseCrew::setCategory(string categ)
 {
-	category = categ;
+	if (categ == "A" || categ == "B" || categ == "C") {
+		category = categ;
+		return true;
+	}
+	return false;
 }
 
-void BaseCrew::setSchedule(Schedule * sched)
+bool BaseCrew::setSchedule(Schedule *sched)
 {
-	schedule = sched;
+	if (sched->isValid()) {
+		schedule = sched;
+		return true;
+	}
+	return false;
 }
 
 double BaseCrew::calcSalary() {
