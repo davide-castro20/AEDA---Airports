@@ -109,6 +109,10 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 				decomposeInt(linha, flightIds, ',');
 				flightsAux = convertIdToFlight(flightIds, flights);
 				plane = new Plane(type, capacity, flightsAux);
+				for (size_t i = 0; i < flightsAux.size(); i++)
+				{
+					flightsAux.at(i)->setPlane(plane);
+				}
 				planes.push_back(plane);
 				counter = -1;
 				getline(planes_data, linha);

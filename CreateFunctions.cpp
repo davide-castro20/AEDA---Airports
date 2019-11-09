@@ -78,12 +78,14 @@ void createPilot()
 {
 	bool badInput = true;
 	string name;
+	Date *birthDate = NULL;
 	string read;
 	string category;
 	vector<string> planeTypes;
 	vector<int> flightIds;
 	vector<Plane*> planes;
 	vector<Flight*> flights;
+	
 	badInput = false;
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -124,7 +126,7 @@ void createPilot()
 		else
 		{
 			badInput = false;
-			Date *birthDate = new Date(read);
+			birthDate = new Date(read);
 		}
 		if (cin.eof())
 			return;
@@ -197,7 +199,84 @@ void createPilot()
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Flights: \n";
 	do {
-		//getline()
+		getline(cin, read);
+		if (cin.fail() || read.empty())
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+			if (cin.eof())
+				return;
+			if (!(read.find_first_of(",") == string::npos))
+				decomposeInt(read, flightIds, ',');
+			else {
+				trim(read);
+				flightIds.push_back(stoi(read));
+			}
+			bool full = false;
+			for (size_t i = 0; i < flightIds.size(); i++)
+			{
+				int count = 0;
+				
+				for (size_t j = 0; j < currentAirport->flights.size(); j++)
+				{
+					if (flightIds.at(i) == currentAirport->flights.at(j)->getId())
+					{
+						count++;
+						int pilotCount = 0;
+						for (size_t k = 0; k < currentAirport->flights.at(j)->getEmployees().size(); k++)
+						{
+							if (currentAirport->flights.at(j)->getEmployees().at(k)->getType() == "Pilot")
+								pilotCount++;
+						}
+						if (pilotCount == 2)
+							full = true;
+					}
+				}
+				if (count == 0)
+				{
+					cout << "One of more of those flights ID's don't exist!" << endl;
+					badInput = true;
+					break;
+				}
+				if (full)
+				{
+					cout << "One of more of those flights have a full Pilot crew!" << endl;
+					badInput = true;
+					break;
+				}
+			}
+			
+			if (!badInput)
+			{
+				flights = convertIdToFlight(flightIds, currentAirport->flights);
+				for (size_t i = 0; i < flights.size(); i++)
+				{
+					int catCount = 0;
+					for (size_t j = 0; j < planeTypes.size(); j++)
+					{
+						if(planeTypes.at(j) == flights.at(i)->getPlane()->getType())
+							catCount++;
+					}
+					if (catCount == 0)
+					{
+						cout << "This Pilot does not have the required plane types for one or more flights!" << endl;
+						badInput = true;
+						break;
+					}
+				}
+			}
+			else
+			{
+				Employee *newPilot = new Pilot(name, birthDate, category, planes, flights);
+				currentAirport->employees.push_back(newPilot);
+			}
+		}
 
 	} while (badInput);
 

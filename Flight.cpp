@@ -55,6 +55,11 @@ string Flight::getDestination() const
 	return destination;
 }
 
+Plane * Flight::getPlane() const
+{
+	return plane;
+}
+
 bool Flight::setPredictedSchedule(FlightSched *predicted)
 {
 	if (predicted->isValid()) {
@@ -99,4 +104,9 @@ bool Flight::setCrew(vector<Employee*>crew)
 {
 	employees = crew;
 	return true;
+}
+
+void Flight::setPlane(Plane * plane)
+{
+	this->plane = plane;
 }
