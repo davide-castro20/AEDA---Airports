@@ -34,7 +34,7 @@ public:
 	Time getFlightDuration() const;
 	int getId() const;
 	string getDestination() const;
-	void setPredictedSchedule(FlightSched *predicted);
+	bool setPredictedSchedule(FlightSched *predicted);
 	void setRealSchedue(FlightSched *real);
 	void setCanceled(bool cancel);
 	void setCompleted(bool complete);
@@ -42,5 +42,5 @@ public:
 	/*
 	void setDeparture(Airport *depart);
 	void setDestination(Airport *destin);*/
-	void setCrew(vector<Employee*> &crew);
+	bool setCrew(vector<Employee*> crew);
 };

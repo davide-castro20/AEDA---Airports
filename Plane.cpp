@@ -44,11 +44,18 @@ ostream & operator <<(ostream &out, const capacityError &error)
 	out << "Exeption was thrown trying to set the plane's capacity. Capacity received :" << error.inputCapacity; return out;
 }
 
-void Plane::setCapacity(int cap)
+bool Plane::setCapacity(int cap)
 {
 	if (cap < 0)
-		throw capacityError(cap);
+		return false;
 	capacity = cap;
+	return true;
+}
+
+bool Plane::setType(string type) {
+	if (type == "A" || type == "B" || type == "C")
+		return true;
+	return false;
 }
 
 bool Plane::setFlights(vector<Flight*> fly)
