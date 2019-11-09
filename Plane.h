@@ -28,7 +28,8 @@ public:
 	string getType() const;
 	int getCapacity() const;
 	vector<Flight*> getFlights() const;
-	void setCapacity(int cap);
+	bool setCapacity(int cap);
+	bool setType(string type);
 	bool setFlights(vector<Flight*> fly);
 
 	
