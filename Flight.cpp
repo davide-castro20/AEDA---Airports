@@ -106,7 +106,8 @@ bool Flight::setCrew(vector<Employee*>crew)
 	return true;
 }
 
-void Flight::setPlane(Plane * plane)
+bool Flight::setPlane(Plane * plane)
 {
 	this->plane = plane;
+	return true;
 }

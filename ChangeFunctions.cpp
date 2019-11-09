@@ -333,7 +333,7 @@ void changeFlightData()
 	string confirm;
 	bool completedChange = false;
 	bool changed = false;
-	cout << "Which flight data do you want to changee?(0 to cancel)\n" << endl;
+	cout << "Which flight data do you want to change?(0 to cancel)\n" << endl;
 	do {
 		do
 		{
