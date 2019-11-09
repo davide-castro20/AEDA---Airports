@@ -13,7 +13,7 @@ void deletePersonData()
 		do
 		{
 			for (size_t i = 1; i < currentAirport->employees.size() + 1; i++)
-				cout << i << ") " << currentAirport->employees.at(i - 1)-> getCategory() << ":" << currentAirport->employees.at(i - 1)->getName() << "." << endl;
+				cout << i << ") " << currentAirport->employees.at(i - 1)-> getType() << ":" << currentAirport->employees.at(i - 1)->getName() << "." << endl;
 			cin >> delSelection;
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->employees.size() + 1)
 			{

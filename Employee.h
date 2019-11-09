@@ -12,12 +12,12 @@ class Date;
 
 class Employee {
 public:
-	Employee();
-	Employee(string name, Date *birthDate);
+	Employee(string name, Date *birthDate,string type);
 
 	string getName() const ;
 	Date getDate() const;
 	double getSalary() const;
+	string getType() const;
 
 	virtual string getCategory() { return "Non existant for this employee"; }; //returns none if category is non existant
 	virtual vector <Plane*> getPlanes() { return {}; }; //returns empty vector if non existant
@@ -25,6 +25,11 @@ public:
 	virtual string getDeparment() { return "Non existant for this employee"; }; //returns none if department is non existant
 	virtual string getFunction() { return "Non existant for this employee"; }; //returns none if function is non existant
 	//virtual Schedule getSchedule() { Schedule *schedule; return *schedule; };
+
+	virtual bool setCategory(string category) { return true; };
+	virtual bool setSchedule(Schedule *schedule) { return true; };
+	virtual bool setDepartment(string department) { return true; };
+	virtual bool setFunction(string function) { return true; };
 
 	bool setName(string name);
 	bool setDate(Date *birthDate);
@@ -34,6 +39,7 @@ public:
 	virtual double calcSalary() {return 0;}; //returns 0 but has no effect since all derivated classes will have this method
 protected:
 	string name;
+	string type;
 	double salary = calcSalary();
 	Date *birthDate;
 };
@@ -44,16 +50,16 @@ private:
 	vector <Plane*> planes;
 	vector <Flight*> flights;
 public: 
-	Pilot();
-	Pilot(string name, Date *birthDate, char category, vector <Plane*> &planes, vector <Flight*> &flights);
+	Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights,string type);
 
-	char getCategory() const;
-	vector <Plane*> getPlane() const;
-	vector <Flight*> getFlights() const;
-	void setCategory(char categ);
-	void setFlights(vector<Flight*> &flights);
-	void setPlanes(vector<Plane*> &planes);
+	string getCategory();
+	vector <Plane*> getPlane();
+	vector <Flight*> getFlights();
+	bool setCategory(string categ);
+	bool setFlights(vector<Flight*> &flights);
+	bool setPlanes(vector<Plane*> &planes);
 
+	
 	double calcSalary();
 };
 
@@ -62,13 +68,13 @@ private:
 	string category;//para simplificar apenas existem categorias A, B, C
 	vector <Flight*> flights;
 public:
-	FlightCrew();
-	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights);
+	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights,string type);
 
 	string getCategory();
 	vector <Flight*> getFlights();
-	void setCategory(string categ);
-	void setFlights(vector<Flight*> &flights);
+	bool setCategory(string categ);
+	bool setFlights(vector<Flight*> &flights);
+
 
 	double calcSalary();
 };
@@ -78,10 +84,13 @@ private:
 	string department;
 	string function;
 public:
-	Admin(string name, Date *birthDate, string department, string function);
+	Admin(string name, Date *birthDate, string department, string function,string type);
 
 	string getDepartment();
 	string getFunction();
+
+	bool setDepartment(string depart);
+	bool setFunction(string func);
 
 	double calcSalary();
 };
@@ -91,12 +100,14 @@ private:
 	string category;
 	Schedule *schedule;
 public:
-	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule);
+	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule,string type);
 
 	string getCategory();
 	Schedule getSchedule();
-	void setCategory(string categ);
-	void setSchedule(Schedule *sched);
+	bool setCategory(string categ);
+	bool setSchedule(Schedule *sched);
+
+
 
 	double calcSalary();
 };
