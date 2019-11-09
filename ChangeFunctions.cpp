@@ -43,7 +43,8 @@ void changePersonData()
 			return;
 		changeSelection--;
 		cout << string(100, '\n');
-		
+		cin.clear();
+		cin.ignore(100, '\n');
 		do
 		{
 			if (currentAirport->employees.at(changeSelection)->getType() == "Pilot") {
@@ -64,15 +65,19 @@ void changePersonData()
 						do
 						{
 							cout << "What is the name you want to change to?\n";
+							cin.clear();
+							cin.ignore(100, '\n');
 							getline(cin, name);
-						} while (currentAirport->employees.at(changeSelection)->setName(name));
+						} while (!currentAirport->employees.at(changeSelection)->setName(name));
 					}
 					if (selectionToChange == 2) {
 						do
 						{
 							cout << "What is the category you want to change to?\n";
+							cin.clear();
+							cin.ignore(100, '\n');
 							getline(cin, category);
-						} while (currentAirport->employees.at(changeSelection)->setCategory(category));
+						} while (!currentAirport->employees.at(changeSelection)->setCategory(category));
 					}
 				}
 			}
@@ -89,20 +94,22 @@ void changePersonData()
 				}
 				else
 				{
+					cin.clear();
+					cin.ignore(100, '\n');
 					badInput = false;
 					if (selectionToChange == 1) {
 						do
 						{
 							cout << "What is the name you want to change to?\n";
 							getline(cin, name);
-						} while (currentAirport->employees.at(changeSelection)->setName(name));
+						} while (!currentAirport->employees.at(changeSelection)->setName(name));
 					}
 					if (selectionToChange == 2) {
 						do
 						{
 							cout << "What is the category you want to change to?\n";
 							getline(cin, category);
-						} while (currentAirport->employees.at(changeSelection)->setCategory(category));
+						} while (!currentAirport->employees.at(changeSelection)->setCategory(category));
 					}
 				}
 			}
@@ -119,27 +126,29 @@ void changePersonData()
 				}
 				else
 				{
+					cin.clear();
+					cin.ignore(100, '\n');
 					badInput = false;
 					if (selectionToChange == 1) {
 						do
 						{
 							cout << "What is the name you want to change to?\n";
 							getline(cin, name);
-						} while (currentAirport->employees.at(changeSelection)->setName(name));
+						} while (!currentAirport->employees.at(changeSelection)->setName(name));
 					}
 					if (selectionToChange == 2) {
 						do
 						{
 							cout << "What is the department you want to change to?\n";
 							getline(cin, department);
-						} while (currentAirport->employees.at(changeSelection)->setDepartment(department));
+						} while (!currentAirport->employees.at(changeSelection)->setDepartment(department));
 					}
 					if (selectionToChange == 3) {
 						do
 						{
 							cout << "What is the function you want to change to?\n";
 							getline(cin, function);
-						} while (currentAirport->employees.at(changeSelection)->setDepartment(function));
+						} while (!currentAirport->employees.at(changeSelection)->setDepartment(function));
 					}
 
 				}
@@ -157,20 +166,22 @@ void changePersonData()
 				}
 				else
 				{
+					cin.clear();
+					cin.ignore(100, '\n');
 					badInput = false;
 					if (selectionToChange == 1) {
 						do
 						{
 							cout << "What is the name you want to change to?\n";
 							getline(cin, name);
-						} while (currentAirport->employees.at(changeSelection)->setName(name));
+						} while (!currentAirport->employees.at(changeSelection)->setName(name));
 					}
 					if (selectionToChange == 2) {
 						do
 						{
 							cout << "What is the category you want to change to?\n";
 							getline(cin, category);
-						} while (currentAirport->employees.at(changeSelection)->setCategory(category));
+						} while (!currentAirport->employees.at(changeSelection)->setCategory(category));
 					}
 					if (selectionToChange == 3) {
 						do
@@ -184,7 +195,7 @@ void changePersonData()
 							endSchedule = new Time(endTime[0], endTime[1]);
 							schedule = new Schedule(startSchedule, endSchedule);
 							
-						} while (currentAirport->employees.at(changeSelection)->setSchedule(schedule));
+						} while (!currentAirport->employees.at(changeSelection)->setSchedule(schedule));
 					}
 				}
 			}

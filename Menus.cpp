@@ -3,6 +3,7 @@
 #include "Airport.h"
 #include "DeleteFunctions.h"
 #include "CreateFunctions.h"
+#include "ChangeFunctions.h"
 #include "Company.h"
 
 Airport *currentAirport;
@@ -119,16 +120,13 @@ void changeDataMenu()
 		switch (selection)
 		{
 		case 1:
-			//changeClientsData();
+			changePersonData();
 			break;
 		case 2:
-			//changeFlightData();
+			changeFlightData();
 			break;
 		case 3:
-			//changeFlightData();
-			break;
-		case 4:
-			//changeAirportData();
+			changePlaneData();
 			break;
 		case 0:
 			break;
