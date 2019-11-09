@@ -13,6 +13,11 @@ vector<Flight*> readFlights(string flights_file)
 	string linha;
 	string date, date2;
 	Flight *flight;
+	Date *DepartureDate;
+	Date *ArrivalDate;
+	Time *DepartureTime;
+	Time *ArrivalTime;
+	FlightSched *flightSched;
 	string destino;
 	vector <Flight*> flights;
 	int id;
@@ -47,12 +52,12 @@ vector<Flight*> readFlights(string flights_file)
 				break;
 			case 7:
 				destino = linha;
-				Date DepartureDate(date);
-				Date ArrivalDate(date2);
-				Time DepartureTime(DepartureHour, DepartureMinute);
-				Time ArrivalTime(ArrivalHour, ArrivalMinute);
-				FlightSched flightSched(&DepartureDate, &DepartureTime, &ArrivalDate, &ArrivalTime);
-				flight = new Flight(&flightSched, destino, employees, id);
+				DepartureDate = new Date(date);
+				ArrivalDate = new Date(date2);
+				DepartureTime = new Time(DepartureHour, DepartureMinute);
+				ArrivalTime = new Time(ArrivalHour, ArrivalMinute);
+				flightSched = new FlightSched(DepartureDate, DepartureTime, ArrivalDate, ArrivalTime);
+				flight = new Flight(flightSched, destino, employees, id);
 				flights.push_back(flight);
 				counter = -1;
 				break;
@@ -127,12 +132,16 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 	string category;
 	string department;
 	string function;
+	Time *startTime;
+	Time *endTime;
+	Schedule *schedule;
 	Employee *employee;
 	vector<Employee*> employees;
 	unsigned int startHour, startMinute, endHour, endMinute;
 	vector<string> planeTypes;
 	vector<Plane*> planesAux;
 	vector<int> flightIds;
+	Date *birthDate;
 	vector<Flight*> flightsAux;
 	int counter = 0;
 	employees_data.open(employees_file);
@@ -156,8 +165,8 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				decomposeInt(linha, flightIds, ',');
 				flightsAux = convertIdToFlight(flightIds, flights);
 
-				Date birthDate(date);
-				employee = new Pilot(name, &birthDate, category, planesAux, flightsAux);
+				birthDate = new Date(date);
+				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -174,8 +183,8 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				decomposeInt(linha, flightIds, ',');
 				flightsAux = convertIdToFlight(flightIds, flights);
 
-				Date birthDate(date);
-				employee = new FlightCrew(name, &birthDate, category, flightsAux);
+				birthDate = new Date(date);
+				employee = new FlightCrew(name, birthDate, category, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -191,8 +200,8 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				getline(employees_data, linha);
 				function = linha;
 
-				Date birthDate(date);
-				employee = new Admin(name, &birthDate, department, function);
+				birthDate = new Date(date);
+				employee = new Admin(name, birthDate, department, function);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
@@ -215,11 +224,11 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				getline(employees_data, linha);
 				endMinute = stoi(linha);
 
-				Date birthDate(date);
-				Time startTime(startHour, startMinute);
-				Time endTime(endHour, endMinute);
-				Schedule schedule(&startTime, &endTime);
-				employee = new BaseCrew(name, &birthDate, category, &schedule);
+				birthDate = new Date(date);
+				startTime = new Time(startHour, startMinute);
+				endTime = new Time(endHour, endMinute);
+				schedule = new Schedule(startTime, endTime);
+				employee = new BaseCrew(name, birthDate, category, schedule);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
