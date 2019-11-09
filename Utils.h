@@ -7,6 +7,7 @@
 #include <iomanip>
 #include "Flight.h"
 
+
 using namespace std;
 
 class Flight;
@@ -20,9 +21,9 @@ bool leapYear(int year);
 
 int days(int year, int month);
 
-vector<Flight*> convertIdToFlight(const vector<int> &flightIds, const vector<Flight*> &flights);
+vector<Flight*> convertIdToFlight(const vector<int> flightIds, const vector<Flight*> flights);
 
-vector<Plane*> convertCatToPlane(const vector<string> &planeTypes, const vector<Plane*> &planes);
+vector<Plane*> convertCatToPlane(const vector<string> planeTypes, const vector<Plane*> planes);
 
 void trim(string &s); // Removes extra spaces from the begining and end of a string
 

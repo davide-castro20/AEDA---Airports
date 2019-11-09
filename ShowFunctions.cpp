@@ -3,8 +3,7 @@
 #include <iomanip>
 #include "ShowFunctions.h"
 
-
-extern Airport* currentAirport;
+extern Airport *currentAirport;
 
 using namespace std;
 

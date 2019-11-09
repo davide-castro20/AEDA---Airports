@@ -57,7 +57,7 @@ Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> plan
 	this->flights = flights;
 }
 
-char Pilot::getCategory() const {
+string Pilot::getCategory() const {
 	return category;
 }
 
@@ -92,11 +92,11 @@ bool Pilot::setPlanes(vector<Plane*>& planes)
 
 double Pilot::calcSalary() {
 	double total;
-	if (category == 'A')
+	if (category == "A")
 		total = 100.0 * flights.size();
-	if (category == 'B')
+	if (category == "B")
 		total = 150.0 * flights.size();
-	if (category == 'C')
+	if (category == "C")
 		total = 200.0 * flights.size();
 	for (size_t i = 0; i < flights.size(); i++)
 		total += (5/60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
@@ -196,7 +196,7 @@ Schedule BaseCrew::getSchedule() {
 
 bool BaseCrew::setCategory(string categ)
 {
-	if (categ == "A" || categ == "B" || categ == "C") {
+	if (categ == "A"|| categ == "B" || categ == "C") {
 		category = categ;
 		return true;
 	}

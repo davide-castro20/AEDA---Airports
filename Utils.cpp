@@ -19,7 +19,7 @@ int days(int year, int month)
 		return d[month - 1];
 }
 
-std::vector<Flight*> convertIdToFlight(std::vector<int> &flightIds, const std::vector<Flight*> &flights)
+std::vector<Flight*> convertIdToFlight(const std::vector<int> flightIds, const std::vector<Flight*> flights)
 {
 	std::vector<Flight*> flightsConv;
 	for (size_t i = 0; i < flightIds.size(); i++)
@@ -36,7 +36,7 @@ std::vector<Flight*> convertIdToFlight(std::vector<int> &flightIds, const std::v
 	return flightsConv;
 }
 
-std::vector<Plane*> convertCatToPlane(const std::vector<string>& planeTypes, const std::vector<Plane*>& planes)
+std::vector<Plane*> convertCatToPlane(const std::vector<string> planeTypes, const std::vector<Plane*> planes)
 {
 	std::vector<Plane*> planesConv;
 	for (size_t i = 0; i < planeTypes.size(); i++)

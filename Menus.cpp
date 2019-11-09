@@ -3,10 +3,9 @@
 #include "Airport.h"
 #include "DeleteFunctions.h"
 
-Airport* currentAirport;
+Airport *currentAirport;
 
 using namespace std;
-
 
 void showDataMenu()
 {
@@ -129,7 +128,7 @@ void changeDataMenu()
 	} while (selection != 0);
 }
 
-void DeleteDataMenu()
+void deleteDataMenu()
 {
 	int toDelSelection = 0;
 	do

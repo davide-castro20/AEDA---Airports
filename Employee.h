@@ -46,15 +46,15 @@ protected:
 
 class Pilot : public Employee {
 private:
-	char category;//para simplificar apenas existem categorias A, B, C
+	string category;//para simplificar apenas existem categorias A, B, C
 	vector <Plane*> planes;
 	vector <Flight*> flights;
 public: 
 	Pilot(string name, Date *birthDate, string category, vector <Plane*> planes, vector <Flight*> flights,string type);
 
-	string getCategory();
-	vector <Plane*> getPlane();
-	vector <Flight*> getFlights();
+	string getCategory() const ;
+	vector <Plane*> getPlane() const;
+	vector <Flight*> getFlights() const;
 	bool setCategory(string categ);
 	bool setFlights(vector<Flight*> &flights);
 	bool setPlanes(vector<Plane*> &planes);

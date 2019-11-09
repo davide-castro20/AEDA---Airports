@@ -8,7 +8,6 @@
 
 class Company;
 
-Company readAirports(string airports_file);
-vector<Plane*> readPlanes(string planes_file);
+vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights);
 vector<Flight*> readFlights(string flights_file);
-vector<Employee*> readEmployees(string employees_file);
+vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &flights, const vector<Plane*> &planes);

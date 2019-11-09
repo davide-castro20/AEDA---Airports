@@ -1,7 +1,7 @@
 #include "DeleteFunctions.h"
 #include "Menus.h"
 
-extern Airport* currentAirport;
+extern Airport *currentAirport;
 
 void deletePersonData()
 {

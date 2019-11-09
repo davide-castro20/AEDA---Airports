@@ -43,13 +43,13 @@ Company::Company(string airports_file)
 				latit = stof(linha);
 				break;
 			case 4:
-				planes = readPlanes(linha);
-				break;
-			case 5:
 				flights = readFlights(linha);
 				break;
+			case 5:
+				planes = readPlanes(linha,flights);
+				break;
 			case 6:
-				employees = readEmployees(linha);
+				employees = readEmployees(linha,flights,planes);
 				Local local(country, city, longit, latit);
 				airport = new Airport(planes, flights, employees, local);
 				airports.push_back(airport);

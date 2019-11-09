@@ -1,7 +1,8 @@
 #include "CreateFunctions.h"
 #include "Utils.h"
+#include "Menus.h"
 
-
+extern Airport *currentAirport;
 
 using namespace std;
 
@@ -76,7 +77,7 @@ void createPilot()
 {
 	string name;
 	string read;
-	char category;
+	string category;
 	vector<int> planeIds;
 	vector<int> flightIds;
 	vector<Plane*> planes;
@@ -134,7 +135,7 @@ void createPilot()
 	do
 	{
 		cin >> category;
-		if (cin.fail() || ((category != 'A') && (category != 'B') && (category != category != 'C')))
+		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
 			cin.ignore(100, '\n');
