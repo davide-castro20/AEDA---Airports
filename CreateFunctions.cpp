@@ -47,7 +47,7 @@ void createPerson()
 			createAdmin();
 			break;
 		case 4:
-			//createBaseCrew();
+			createBaseCrew();
 			break;
 		case 0:
 			break;
@@ -536,4 +536,163 @@ void createAdmin()
 		currentAirport->employees.push_back(newAdmin);
 		cout << string(100, '-') << endl << "New Administration member successfuly created!" << endl;
 	}
+}
+
+void createBaseCrew()
+{
+	bool badInput = false;
+	string name;
+	Date *birthDate = NULL;
+	string read;
+	string category;
+	Time *start = NULL;
+	Time *end = NULL;
+	unsigned int hour;
+	unsigned int minute;
+	Schedule *sched = NULL;
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Name: \n";
+	do
+	{
+
+		getline(cin, name);
+		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid name! Please insert name again \n";
+		}
+		else
+		{
+			badInput = false;
+		}
+		if (cin.eof())
+			return;
+	} while (badInput);
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "BirthDate (dd/mm/yyyy): \n";
+	do
+	{
+		getline(cin, read);
+		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid date! Please insert birth date again \n";
+		}
+		else
+		{
+			badInput = false;
+			birthDate = new Date(read);
+		}
+		if (cin.eof())
+			return;
+
+	} while (badInput);
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Category: \n";
+	do
+	{
+		cin >> category;
+		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid category! Please insert pilot's category again (A, B or C)\n";
+		}
+		else
+		{
+			badInput = false;
+		}
+		if (cin.eof())
+			return;
+
+	} while (badInput);
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Schedule: \n";
+	do
+	{
+		do
+		{
+			cout << "Starting time (hh:mm):\n";
+			cin.ignore();
+			getline(cin, read);
+			if (cin.fail() || (read.find_first_of(':') == string::npos))
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				//cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+				cout << "Invalid time! Please insert again\n";
+			}
+			else
+			{
+				char sep;
+				istringstream startTime(read);
+				startTime >> hour;
+				startTime >> sep;
+				startTime >> minute;
+				start = new Time(hour, minute);
+				if (!start->isValid())
+				{
+					badInput = true;
+					cout << "Invalid time! Please insert again\n";
+				}
+			}
+
+			if (cin.eof())
+				return;
+		} while (badInput);
+
+		do
+		{
+			cout << "Ending time (hh:mm):\n";
+			cin.ignore();
+			getline(cin, read);
+			if (cin.fail() || (read.find_first_of(':') == string::npos))
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				//cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+				cout << "Invalid time! Please insert again\n";
+			}
+			else
+			{
+				char sep;
+				istringstream endTime(read);
+				endTime >> hour;
+				endTime >> sep;
+				endTime >> minute;
+				end = new Time(hour, minute);
+				if (!end->isValid())
+				{
+					badInput = true;
+					cout << "Invalid time! Please insert again\n";
+				}
+			}
+
+			if (cin.eof())
+				return;
+		} while (badInput);
+
+		if (!badInput)
+		{
+			sched = new Schedule(start, end);
+			Employee* newBaseCrew = new BaseCrew(name, birthDate, category, sched);
+			currentAirport->employees.push_back(newBaseCrew);
+		}
+
+	} while (badInput);
+	
 }
