@@ -20,6 +20,7 @@ private:
 	bool completed = false;
 	string destination;
 	vector<Employee*> employees;
+	Plane* plane;
 
 public:
 	Flight();
@@ -34,6 +35,7 @@ public:
 	Time getFlightDuration() const;
 	int getId() const;
 	string getDestination() const;
+	Plane* getPlane() const;
 	void setPredictedSchedule(FlightSched *predicted);
 	void setRealSchedue(FlightSched *real);
 	void setCanceled(bool cancel);
@@ -43,4 +45,5 @@ public:
 	void setDeparture(Airport *depart);
 	void setDestination(Airport *destin);*/
 	void setCrew(vector<Employee*> &crew);
+	void setPlane(Plane* plane);
 };
