@@ -53,6 +53,7 @@ vector<Flight*> readFlights(string flights_file)
 			case 7:
 				destino = linha;
 				DepartureDate = new Date(date);
+				
 				ArrivalDate = new Date(date2);
 				DepartureTime = new Time(DepartureHour, DepartureMinute);
 				ArrivalTime = new Time(ArrivalHour, ArrivalMinute);
@@ -60,6 +61,7 @@ vector<Flight*> readFlights(string flights_file)
 				flight = new Flight(flightSched, destino, employees, id);
 				flights.push_back(flight);
 				counter = -1;
+				getline(flights_data, linha);
 				break;
 			}
 			counter++;
@@ -109,6 +111,7 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 				plane = new Plane(type, capacity, flightsAux);
 				planes.push_back(plane);
 				counter = -1;
+				getline(planes_data, linha);
 				break;
 			}
 			counter++;
