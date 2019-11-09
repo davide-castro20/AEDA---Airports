@@ -5,6 +5,7 @@ extern Airport *currentAirport;
 
 void deletePersonData()
 {
+	bool badInput = true;
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel=false;
@@ -75,6 +76,7 @@ void deletePersonData()
 
 void deletePlaneData()
 {
+	bool badInput = true;
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel = false;
@@ -142,6 +144,7 @@ void deletePlaneData()
 
 void deleteFlightData()
 {
+	bool badInput = true;
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel = false;

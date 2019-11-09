@@ -75,6 +75,7 @@ void createPerson()
 
 void createPilot()
 {
+	bool badInput = true;
 	string name;
 	string read;
 	string category;

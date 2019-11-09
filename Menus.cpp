@@ -9,9 +9,9 @@ using namespace std;
 
 void showDataMenu()
 {
+	bool badInput = true;
 	int ShowSelect;
 	int cont = 0;
-	bool badInput;
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	do
 	{
@@ -52,6 +52,7 @@ void showDataMenu()
 
 void createDataMenu()
 {
+	bool badInput = true;
 	int Selection;
 	do
 	{
@@ -88,6 +89,7 @@ void createDataMenu()
 
 void changeDataMenu()
 {
+	bool badInput = true;
 	int selection;
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	do
@@ -130,6 +132,7 @@ void changeDataMenu()
 
 void deleteDataMenu()
 {
+	bool badInput = true;
 	int toDelSelection = 0;
 	do
 	{
@@ -167,6 +170,7 @@ void deleteDataMenu()
 }
 
 void mainMenu() {
+	bool badInput = true;
 	int select;
 	do
 	{

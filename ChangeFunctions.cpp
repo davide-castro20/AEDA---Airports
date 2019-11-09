@@ -5,6 +5,7 @@ extern Airport *currentAirport;
 
 void changePersonData()
 {
+	bool badInput = true;
 	unsigned int changeSelection,selectionToChange;
 	string confirm;
 	string name;
@@ -222,6 +223,7 @@ void changePersonData()
 /*
 void deletePlaneData()
 {
+	bool badInput=true;
 	int delSelection;
 	string confirm;
 	bool completedDel = false;

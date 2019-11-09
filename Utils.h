@@ -15,8 +15,6 @@ class Plane;
 class Date;
 
 
-bool badInput=true;
-
 bool leapYear(int year);
 
 int days(int year, int month);
