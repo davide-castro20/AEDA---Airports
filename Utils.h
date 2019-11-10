@@ -12,6 +12,7 @@ using namespace std;
 
 class Flight;
 class Plane;
+class Employee;
 class Date;
 
 
@@ -44,3 +45,5 @@ bool checkInt2(std::string s); // returns "true" if a string "sentence" can be c
 int checkInt(string sentence); // asks for an integer input until the user gives a valid integer and then returns it
 
 bool checkCats(const string &cats); // checks the string with plane types
+
+vector <Flight*> addEmployeeToFlight(vector<Flight*>flights, vector<Employee*> employees);

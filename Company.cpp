@@ -19,6 +19,7 @@ Company::Company(string airports_file)
 	float longit, latit;
 	vector<Plane*> planes;
 	vector<Flight*> flights;
+	vector<Flight*> auxFlight;
 	vector<Employee*> employees;
 
 	ifstream airport_data;
@@ -51,8 +52,8 @@ Company::Company(string airports_file)
 			case 6:
 				employees = readEmployees(linha,flights,planes);
 				Local local(country, city, longit, latit);
-				//add emplyees->flight here;
-				airport = new Airport(planes, flights, employees, local);
+				auxFlight = addEmployeeToFlight(flights, employees);
+				airport = new Airport(planes, auxFlight, employees, local);
 				airports.push_back(airport);
 				counter = -1;
 				break;

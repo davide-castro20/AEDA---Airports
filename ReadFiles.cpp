@@ -172,7 +172,6 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				getline(employees_data, linha);
 				decomposeInt(linha, flightIds, ',');
 				flightsAux = convertIdToFlight(flightIds, flights);
-
 				birthDate = new Date(date);
 				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
 				employees.push_back(employee);

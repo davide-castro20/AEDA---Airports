@@ -75,7 +75,7 @@ void decompose(std::string line, std::vector<std::string>& vect, char sep)
 	istringstream iS(line);
 	vector<string> elems;
 	string elem;
-	while (getline(iS, elem, ','))
+	while (getline(iS, elem, sep))
 	{
 		trim(elem);
 		if (elem != "" && elem.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ") == string::npos)
@@ -90,7 +90,7 @@ void decomposeInt(std::string line, std::vector<int>& vect, char sep)
 	istringstream iS(line);
 	vector<int> elems;
 	string elem;
-	while (getline(iS, elem, ','))
+	while (getline(iS, elem, sep))
 	{
 		trim(elem);
 		if (elem != "" && elem.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ") == string::npos)
@@ -98,6 +98,7 @@ void decomposeInt(std::string line, std::vector<int>& vect, char sep)
 	}
 	vect = elems;
 }
+
 
 bool existingDate(string &dt)
 {
@@ -224,3 +225,21 @@ int checkInt(string sentence)
 //	}
 //	return true;
 //}
+
+vector <Flight*> addEmployeeToFlight(vector<Flight*>flights,vector<Employee*> employees){
+	vector <Flight*> FlightsConv;
+	vector<Employee*> aux;
+	for (size_t i = 0; i < flights.size(); i++) {
+		for (size_t j = 0; j < employees.size(); j++) {
+			for (size_t k = 0; k < employees.at(j)->getFlights().size(); k++) {
+				if (flights.at(i)->getId() == employees.at(j)->getFlights().at(k)->getId()) {
+					aux.push_back(employees.at(j));
+					break;
+				}
+			}
+		}
+		flights.at(i)->setCrew(aux);
+		FlightsConv.push_back(flights.at(i));
+	}
+	return FlightsConv;
+}
