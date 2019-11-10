@@ -24,6 +24,7 @@ vector<Flight*> readFlights(string flights_file)
 	vector <Employee*> employees = {};
 	unsigned int DepartureHour, DepartureMinute, ArrivalHour, ArrivalMinute;
 	int counter = 0;
+
 	if (flights_data.is_open())
 	{
 		while (getline(flights_data, linha))

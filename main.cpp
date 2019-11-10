@@ -8,7 +8,7 @@ extern Airport* currentAirport;
 int main()
 {
 	comp = new Company("Airports.txt");
-	currentAirport = comp->getAirports().at(0);
+	cout << comp->getAirports().at(0)->flights.at(0)->getEmployees().size() << endl;
     selectAirportMenu();
 	return 0;
 }

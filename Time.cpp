@@ -38,7 +38,7 @@ bool Time::isValid() const
 		return false;
 }
 
-bool Time::operator<(Time &time) const
+bool Time::operator<(const Time &time) const
 {
 	if (this->hours == time.hours)
 	{

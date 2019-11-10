@@ -5,6 +5,7 @@
 #include "Schedule.h"
 
 class Schedule;
+class FlightSched;
 class Flight;
 class Plane;
 class Date;
@@ -30,6 +31,7 @@ public:
 	virtual bool setSchedule(Schedule *schedule) { return true; };
 	virtual bool setDepartment(string department) { return true; };
 	virtual bool setFunction(string function) { return true; };
+	virtual bool isFree(FlightSched *check) { return false; };
 
 	bool setName(string name);
 	bool setDate(Date *birthDate);
@@ -58,7 +60,7 @@ public:
 	bool setCategory(string categ);
 	bool setFlights(vector<Flight*> &flights);
 	bool setPlanes(vector<Plane*> &planes);
-
+	bool isFree(FlightSched *check);
 	
 	double calcSalary();
 };
@@ -74,7 +76,7 @@ public:
 	vector <Flight*> getFlights();
 	bool setCategory(string categ);
 	bool setFlights(vector<Flight*> &flights);
-
+	bool isFree(FlightSched *check);
 
 	double calcSalary();
 };

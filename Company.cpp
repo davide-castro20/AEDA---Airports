@@ -51,6 +51,7 @@ Company::Company(string airports_file)
 			case 6:
 				employees = readEmployees(linha,flights,planes);
 				Local local(country, city, longit, latit);
+				//add emplyees->flight here;
 				airport = new Airport(planes, flights, employees, local);
 				airports.push_back(airport);
 				counter = -1;

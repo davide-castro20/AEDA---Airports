@@ -50,7 +50,7 @@ void changePersonData()
 			if (currentAirport->employees.at(changeSelection)->getType() == "Pilot") {
 				cout << "What do you want to change?\n1) Name\n2) Category\n0) Back\n";
 				cin >> selectionToChange;
-				if (cin.fail() || selectionToChange < 0 || selectionToChange > 3)
+				if (cin.fail() || selectionToChange < 0 || selectionToChange > 2)
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
@@ -116,7 +116,7 @@ void changePersonData()
 			else if (currentAirport->employees.at(changeSelection)->getType() == "Admin") {
 				cout << "What do you want to change?\n1) Name\n2) Department\n3) Function\n0) Back\n";
 				cin >> selectionToChange;
-				if (cin.fail() || selectionToChange < 0 || selectionToChange > 4)
+				if (cin.fail() || selectionToChange < 0 || selectionToChange > 3)
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
@@ -156,7 +156,7 @@ void changePersonData()
 			else if (currentAirport->employees.at(changeSelection)->getType() == "Base Crew") {
 				cout << "What do you want to change?\n1) Name\n2) Category\n3) Schedule\n0) Back\n";
 				cin >> selectionToChange;
-				if (cin.fail() || selectionToChange < 0 || selectionToChange > 4)
+				if (cin.fail() || selectionToChange < 0 || selectionToChange > 3)
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
@@ -349,7 +349,7 @@ void changeFlightData()
 		do
 		{
 			for (size_t i = 1; i < currentAirport->flights.size() + 1; i++)
-				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << "which departs at: " << currentAirport->flights.at(i - 1)->getPredictedSchedule().getDepartureDate() << endl;
+				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << " which departs at: " << currentAirport->flights.at(i - 1)->getPredictedSchedule().getDepartureDate() << endl;
 			cin >> changeSelection;
 			if (cin.fail() || changeSelection < 0 || changeSelection > currentAirport->flights.size() + 1)
 			{
@@ -379,6 +379,7 @@ void changeFlightData()
 				cout << string(100, '\n');
 				cout << "There was a problem with your selection, please try again." << string(2, '\n');
 				badInput = true;
+
 			}
 			else
 			{
@@ -387,13 +388,21 @@ void changeFlightData()
 					do
 					{
 						cout << "What is the date you want to change to?(Ex: 10/8/2000 (enter) 10/8/2000)\n";
+						cin.clear();
+						cin.ignore(100, '\n');
 						getline(cin, aux);
 						startDate = new Date(aux);
+						cin.clear();
+						cin.ignore(100, '\n');
 						getline(cin, aux);
 						endDate = new Date(aux);
 						cout << "What is the time schedule you want to change to?(Ex: 10:30 (enter) 18:30)\n";
+						cin.clear();
+						cin.ignore(100, '\n');
 						getline(cin, aux);
 						decomposeInt(aux, startTime, ':');
+						cin.clear();
+						cin.ignore(100, '\n');
 						getline(cin, aux);
 						decomposeInt(aux, endTime, ':');
 						startSchedule = new Time(startTime[0], startTime[1]);
@@ -424,7 +433,7 @@ void changeFlightData()
 								if (currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getType() == "Pilot") {
 									cout << "Select new pilot \n";
 									for (unsigned int j = 1; j <= currentAirport->employees.size(); j++) {
-										if (currentAirport->employees.at(j - 1)->getType() == "Pilot")
+										if (currentAirport->employees.at(j - 1)->getType() == "Pilot" && currentAirport->employees.at(j-1)->isFree(&currentAirport->flights.at(changeSelection)->getPredictedSchedule()))
 											cout << j << ") " << currentAirport->employees.at(j - 1)->getType() << ":" << currentAirport->employees.at(j - 1)->getName() << "." << endl;
 									}
 									cin >> newEmployeeSelection;
@@ -446,7 +455,7 @@ void changeFlightData()
 								else if (currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getType() == "Flight Crew") {
 									cout << "Select new flight crew member \n";
 									for (unsigned int j = 1; j <= currentAirport->employees.size(); j++) {
-										if (currentAirport->employees.at(j - 1)->getType() == "Flight Crew")
+										if (currentAirport->employees.at(j - 1)->getType() == "Flight Crew" && currentAirport->employees.at(j - 1)->isFree(&currentAirport->flights.at(changeSelection)->getPredictedSchedule()))
 											cout << j << ") " << currentAirport->employees.at(j - 1)->getType() << ":" << currentAirport->employees.at(j - 1)->getName() << "." << endl;
 									}
 									cin >> newEmployeeSelection;
