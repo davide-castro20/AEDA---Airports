@@ -66,7 +66,6 @@ vector<Flight*> readFlights(string flights_file)
 				break;
 			}
 			counter++;
-
 		}
 	}
 	else
@@ -91,6 +90,7 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 	int capacity;
 	Plane *plane;
 	vector<int> flightIds;
+	vector<string> flightIdsString;
 	vector<Flight*> flightsAux;
 	int counter = 0;
 	planes_data.open(planes_file);
@@ -107,7 +107,9 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 				capacity = stoi(linha);
 				break;
 			case 2:
-				decomposeInt(linha, flightIds, ',');
+				decompose(linha, flightIdsString, ',');
+				for (size_t i = 0; i < flightIdsString.size(); i++)
+					flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
 				plane = new Plane(type, capacity, flightsAux);
 				for (size_t i = 0; i < flightsAux.size(); i++)
@@ -120,6 +122,8 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 				break;
 			}
 			counter++;
+			flightIds.clear();
+			flightIdsString.clear();
 		}
 	}
 	else
@@ -149,6 +153,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 	vector<string> planeTypes;
 	vector<Plane*> planesAux;
 	vector<int> flightIds;
+	vector<string> flightIdsString;
 	Date *birthDate;
 	vector<Flight*> flightsAux;
 	int counter = 0;
@@ -170,13 +175,17 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				decompose(linha, planeTypes, ',');
 				planesAux = convertCatToPlane(planeTypes, planes);
 				getline(employees_data, linha);
-				decomposeInt(linha, flightIds, ',');
+				decompose(linha, flightIdsString, ',');
+				for (size_t i = 0; i < flightIdsString.size(); i++)
+					flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
 				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
+				flightIds.clear();
+				flightIdsString.clear();
 			}
 			else if (type == "Flight Crew")
 			{
@@ -187,7 +196,9 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				getline(employees_data, linha);
 				category = linha;
 				getline(employees_data, linha);
-				decomposeInt(linha, flightIds, ',');
+				decompose(linha, flightIdsString, ',');
+				for (size_t i = 0; i < flightIdsString.size(); i++)
+					flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
 
 				birthDate = new Date(date);
@@ -195,6 +206,8 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
+				flightIds.clear();
+				flightIdsString.clear();
 			}
 			else if (type == "Admin")
 			{

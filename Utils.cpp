@@ -33,6 +33,7 @@ std::vector<Flight*> convertIdToFlight(const std::vector<int> &flightIds, const 
 			}
 		}
 	}
+	cout << flightsConv.size();
 	return flightsConv;
 }
 
@@ -70,18 +71,19 @@ void trim(string &s)
 	trimRight(s);
 }
 
-void decompose(std::string line, std::vector<std::string>& vect, char sep)
+void decompose(string s, vector<string> &elements, char sep)
 {
-	istringstream iS(line);
-	vector<string> elems;
-	string elem;
-	while (getline(iS, elem, sep))
+	size_t pos = s.find(sep);
+	while (pos != string::npos)
 	{
+		string elem = s.substr(0, pos);
 		trim(elem);
-		if (elem != "" && elem.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ") == string::npos)
-			elems.push_back(elem);
+		elements.push_back(elem);
+		s.erase(0, pos + 1);
+		pos = s.find(sep);
 	}
-	vect = elems;
+	trim(s);
+	elements.push_back(s);
 }
 
 
@@ -240,6 +242,7 @@ vector <Flight*> addEmployeeToFlight(vector<Flight*>flights,vector<Employee*> em
 		}
 		flights.at(i)->setCrew(aux);
 		FlightsConv.push_back(flights.at(i));
+		aux.clear();
 	}
 	return FlightsConv;
 }

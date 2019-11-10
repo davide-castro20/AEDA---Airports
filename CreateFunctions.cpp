@@ -84,6 +84,7 @@ void createPilot()
 	string category;
 	vector<string> planeTypes;
 	vector<int> flightIds;
+	vector<string> flightIdsString;
 	vector<Plane*> planes;
 	vector<Flight*> flights;
 	
@@ -213,8 +214,11 @@ void createPilot()
 			badInput = false;
 			if (cin.eof())
 				return;
-			if (!(read.find_first_of(",") == string::npos))
-				decomposeInt(read, flightIds, ',');
+			if (!(read.find_first_of(",") == string::npos)) {
+				decompose(read, flightIdsString, ',');
+				for (size_t i = 0; i < flightIdsString.size(); i++)
+					flightIds.push_back(stoi(flightIdsString.at(i)));
+			}
 			else {
 				trim(read);
 				flightIds.push_back(stoi(read));
@@ -301,6 +305,7 @@ void createFlightCrew()
 	string category;
 	vector<int> flightIds;
 	vector<Flight*> flights;
+	vector<string> flightIdsString;
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Name: \n";
@@ -387,8 +392,11 @@ void createFlightCrew()
 			badInput = false;
 			if (cin.eof())
 				return;
-			if (!(read.find_first_of(",") == string::npos))
-				decomposeInt(read, flightIds, ',');
+			if (!(read.find_first_of(",") == string::npos)) {
+				decompose(read, flightIdsString, ',');
+				for (size_t i = 0; i < flightIdsString.size(); i++)
+					flightIds.push_back(stoi(flightIdsString.at(i)));
+			}
 			else {
 				trim(read);
 				flightIds.push_back(stoi(read));

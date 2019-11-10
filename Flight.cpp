@@ -54,7 +54,7 @@ FlightSched Flight::getPredictedSchedule() const
 
 Time Flight::getFlightDuration() const
 {
-	return realSchedule->getDuration();
+	return predictedSchedule->getDuration();
 }
 
 int Flight::getId() const
