@@ -8,14 +8,19 @@ Date::Date(string date) {
 
 
 	istringstream Dat(date);
-	string dayS, monthS, yearS;
-	getline(Dat, dayS, '/');
-	getline(Dat, monthS, '/');
-	getline(Dat, yearS, '/');
-	
-	day = (unsigned short)stoi(dayS);
+	//string dayS, monthS, yearS;
+	//getline(Dat, dayS, '/');
+	//getline(Dat, monthS, '/');
+	//getline(Dat, yearS, '/');
+	char sep;
+	Dat >> day;
+	Dat >> sep;
+	Dat >> month;
+	Dat >> sep;
+	Dat >> year;
+	/*day = (unsigned short)stoi(dayS);
 	month = (unsigned short)stoi(monthS);
-	year = (unsigned short)stoi(yearS);
+	year = (unsigned short)stoi(yearS);*/
 }
 
 

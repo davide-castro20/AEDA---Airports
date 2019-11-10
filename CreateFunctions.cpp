@@ -852,10 +852,15 @@ void createFlight()
 			else
 			{
 				endD = new Date(read);
-				if ((startD->getDay() - endD->getDay()) > 1)
+				if (*startD < *endD)
 				{
-					badInput = true;
-					cout << "A flight cannot be longer than a day! Please insert a new date \n";
+					if ((endD->getDay() - startD->getDay() > 1) || (endD->getMonth() != startD->getMonth()) || (endD->getYear() != startD->getYear()))
+					{
+						badInput = true;
+						cout << "A flight cannot be longer than a day! Please insert a new date \n";
+					}
+					else
+						badInput = false;
 				}
 				else
 					badInput = false;
@@ -868,7 +873,6 @@ void createFlight()
 		do
 		{
 			cout << "| Ending time (hh:mm):\n";
-			cin.ignore();
 			getline(cin, read);
 			if (cin.fail() || (read.find_first_of(':') == string::npos))
 			{
@@ -988,14 +992,14 @@ void createFlight()
 					{
 						if (currentAirport->employees.at(i)->getPlanes().at(k) == plane)
 						{
+							cout << "FREE" << endl;
 							freeEmp.push_back(currentAirport->employees.at(i));
 							break;
 						}
 					}				
 				}
 			}
-			for (size_t j = 1; j < freeEmp.size() + 1; j++)
-				cout << j << ") Name: " << freeEmp.at(j)->getName() << "; Category: " << freeEmp.at(j)->getCategory() << endl;
+			
 
 			if (freeEmp.size() < 2)
 			{
@@ -1033,71 +1037,72 @@ void createFlight()
 					return;
 				}
 			}
-			cout << endl << "Choose 2 of the free pilots above (first, second)" << endl;
-			cin.ignore();
-			getline(cin, read);
-			if (cin.eof())
-				return;
-			if (cin.fail() || read.empty() || read.find_first_of(',') == string::npos)
+			for (size_t j = 1; j < freeEmp.size() + 1; j++)
+				cout << j << ") Name: " << freeEmp.at(j - 1)->getName() << "; Category: " << freeEmp.at(j - 1)->getCategory() << endl;
+			do
 			{
-				cin.clear();
-				cin.ignore(100, '\n');
-				cout << "Invalid pilots! Please choose two of the free pilots shown\n";
-				badInput = true;
-			}
-			else
-			{
-				badInput = false;
-				if (read.find_first_not_of("123456789") == string::npos)
+				cout << endl << "Choose 2 of the free pilots above (first, second)" << endl;
+				cin.ignore();
+				getline(cin, read);
+				if (cin.eof())
+					return;
+				if (cin.fail() || read.empty() || read.find_first_of(',') == string::npos)
 				{
-					istringstream pil(read);
-					char sep;
-					pil >> number;
-					pil >> sep;
-					pil >> number2;
-					if (pil.rdbuf()->in_avail() == 0) {
-						if (number > 0 && number < freeEmp.size() + 1 && number2 > 0 && number2 < freeEmp.size() + 1 && number != number2)
-						{
-							crew.push_back(freeEmp.at(number));
-							crew.push_back(freeEmp.at(number2));
-							cout << "Pilots added successfuly to the flight crew." << endl << endl;
+					cin.clear();
+					cin.ignore(100, '\n');
+					cout << "Invalid pilots! Please choose two of the free pilots shown\n";
+					badInput = true;
+				}
+				else
+				{
+					badInput = false;
+					if (read.find_first_not_of("123456789,") == string::npos)
+					{
+						istringstream pil(read);
+						char sep;
+						pil >> number;
+						pil >> sep;
+						pil >> number2;
+						if (pil.rdbuf()->in_avail() == 0) {
+							if (number > 0 && number < freeEmp.size() + 1 && number2 > 0 && number2 < freeEmp.size() + 1 && number != number2)
+							{
+								crew.push_back(freeEmp.at(number - 1));
+								crew.push_back(freeEmp.at(number2 - 1));
+								cout << "Pilots added successfuly to the flight crew." << endl << endl;
+							}
+							else
+							{
+								badInput = true;
+								cout << "Invalid pilots! Please choose two of the free pilots shown\n";
+							}
 						}
 						else
 						{
 							badInput = true;
-							cout << "Invalid pilots! Please choose two of the free pilots shown\n";
+							cout << "Invalid piots! Please choose two of the free pilots shown\n";
 						}
 					}
 					else
 					{
 						badInput = true;
-						cout << "Invalid piots! Please choose two of the free pilots shown\n";
+						cout << "Invalid pilots! Please choose two of the free pilots shown\n";
 					}
 				}
-				else
-				{
-					badInput = true;
-					cout << "Invalid pilots! Please choose two of the free pilots shown\n";
-				}
-			}
+			} while (badInput);
 			
 		} while (badInput);
+
+		freeEmp.clear();
 
 		do {
 
 			cout << "| Flight Crew:\n";
-			for (auto i = currentAirport->employees.begin(); i != currentAirport->employees.end(); i++)
+			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
-				if ((*i)->getType() == "Flight Crew" && (*i)->isFree(predictedSchedule))
+				if (currentAirport->employees.at(i)->getType() == "Flight Crew" && currentAirport->employees.at(i)->isFree(predictedSchedule))
 				{
-					for (auto k = (*i)->getPlanes().begin(); k != (*i)->getPlanes().end(); k++)
-					{
-						if ((*k) == plane)
-						{
-							freeEmp.push_back(*i);
-							break;
-						}
-					}
+					freeEmp.push_back(currentAirport->employees.at(i));
+					break;
 				}
 			}
 			if (freeEmp.size() < 2)
@@ -1138,7 +1143,7 @@ void createFlight()
 				
 			}
 			for (size_t j = 1; j < freeEmp.size() + 1; j++)
-				cout << j << ") Name: " << freeEmp.at(j)->getName() << "; Category: " << freeEmp.at(j)->getCategory() << endl;
+				cout << j << ") Name: " << freeEmp.at(j-1)->getName() << "; Category: " << freeEmp.at(j - 1)->getCategory() << endl;
 
 			cout << endl << "Choose 2 of the free employees above (first, second)" << endl;
 			cin.ignore();

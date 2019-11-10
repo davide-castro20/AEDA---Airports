@@ -20,11 +20,11 @@ public:
 	double getSalary() const;
 	string getType() const;
 
-	virtual string getCategory() { return "Non existant for this employee"; }; //returns none if category is non existant
-	virtual vector <Plane*> getPlanes() { return {}; }; //returns empty vector if non existant
-	virtual vector <Flight*> getFlights() { return {}; }; //returns empty vector if non existant
-	virtual string getDeparment() { return "Non existant for this employee"; }; //returns none if department is non existant
-	virtual string getFunction() { return "Non existant for this employee"; }; //returns none if function is non existant
+	virtual string getCategory() const { return "Non existant for this employee"; }; //returns none if category is non existant
+	virtual vector <Plane*> getPlanes() const { return {}; }; //returns empty vector if non existant
+	virtual vector <Flight*> getFlights() const { return {}; }; //returns empty vector if non existant
+	virtual string getDeparment() const { return "Non existant for this employee"; }; //returns none if department is non existant
+	virtual string getFunction() const { return "Non existant for this employee"; }; //returns none if function is non existant
 	//virtual Schedule getSchedule() { Schedule *schedule; return *schedule; };
 
 	virtual bool setCategory(string category) { return true; };
@@ -58,7 +58,7 @@ public:
 	Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights);
 
 	string getCategory() const ;
-	vector <Plane*> getPlane() const;
+	vector <Plane*> getPlanes() const;
 	vector <Flight*> getFlights() const;
 	bool setCategory(string categ);
 	bool setFlights(vector<Flight*> &flights);
@@ -76,8 +76,8 @@ private:
 public:
 	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights);
 
-	string getCategory();
-	vector <Flight*> getFlights();
+	string getCategory() const;
+	vector <Flight*> getFlights() const;
 	bool setCategory(string categ);
 	bool setFlights(vector<Flight*> &flights);
 	bool isFree(FlightSched *check);

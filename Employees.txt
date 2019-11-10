@@ -5,20 +5,27 @@ A
 A, B
 1, 2
 ::::::::::
-Flight Crew
+Pilot
 Ting
+25/03/1978
+A
+A, B
+1, 2
+::::::::::
+Flight Crew
+Wong
 31/12/1969
 B
 2
 ::::::::::
 Admin
-Wong
+Wi
 30/08/1972
 Coco
 Cleaning Lady
 ::::::::::
 Base Crew
-Wow
+Too
 14/09/1981
 A
 08

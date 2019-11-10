@@ -66,7 +66,7 @@ string Pilot::getCategory() const {
 	return category;
 }
 
-vector <Plane*> Pilot::getPlane() const {
+vector <Plane*> Pilot::getPlanes() const {
 	return planes; 
 }
 
@@ -113,12 +113,12 @@ FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Fl
 	this->flights = flights;
 }
 
-string FlightCrew::getCategory() {
+string FlightCrew::getCategory() const {
 	return category;
 }
 
 
-vector <Flight*> FlightCrew::getFlights() {
+vector <Flight*> FlightCrew::getFlights() const {
 	return flights;
 }
 
@@ -226,13 +226,21 @@ bool Pilot::isFree(FlightSched *check)
 	for (size_t i = 0; i < flights.size(); i++)
 	{
 		if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getDepartureDate() && flights.at(i)->getPredictedSchedule().getDepartureDate() < check->getArrivalDate())
+		{
 			return false;
+		}
 		else if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getArrivalDate() && flights.at(i)->getPredictedSchedule().getArrivalDate() < check->getArrivalDate())
+		{
 			return false;
+		}
 		else if (!(check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && check->getEndHour() < flights.at(i)->getPredictedSchedule().getStartHour()))
+		{
 			return false;
+		}
 		else if (!(check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && flights.at(i)->getPredictedSchedule().getEndHour() < check->getStartHour()))
+		{
 			return false;
+		}
 	}
 	return true;
 }
