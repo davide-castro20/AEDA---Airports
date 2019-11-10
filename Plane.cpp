@@ -4,16 +4,14 @@
 double Plane::calcExp(string type, vector<Flight*> &flights) const
 {
 	double total = 0;
-	if (type == "A") {
+	if (type == "A") 
 		total = 100.0 + flights.size() * 100.0;
-	}
 	if (type == "B")
 		total = 150.0 + flights.size() * 100.0;
 	if (type == "C")
 		total = 200.0 + flights.size() * 100.0;
 	for (size_t i = 0; i < flights.size(); i++)
 		total += (flights.at(i)->getFlightDuration().getTotalMinutes())*5.0;
-	cout << "ola";
 	return total;
 }
 
@@ -39,7 +37,6 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 	this->capacity = capacity;
 	this->flights = flights;
 	this->expenses = calcExp(type, flights);
-	cout << "cheguei";
 }
 
 ostream & operator <<(ostream &out, const capacityError &error)

@@ -33,7 +33,6 @@ std::vector<Flight*> convertIdToFlight(const std::vector<int> &flightIds, const 
 			}
 		}
 	}
-	cout << flightsConv.size();
 	return flightsConv;
 }
 
