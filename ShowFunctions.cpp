@@ -7,11 +7,6 @@ extern Airport *currentAirport;
 
 using namespace std;
 
-void showPersonData()
-{
-	cout << "-----------------------------------------------------------------------------------------------------\n";
-
-}
 
 void showAirportData()
 {
@@ -32,3 +27,8 @@ void showAirportData()
 	cout << '|' << string(98, '-') << '|' << endl;
 }
 
+
+void showPersonData(Employee* emp)
+{
+
+}

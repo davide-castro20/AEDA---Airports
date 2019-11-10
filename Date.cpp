@@ -82,17 +82,19 @@ ostream& operator<<(ostream& out, const Date & date) {
 }
 
 bool Date::operator<(const Date &date){
-	if (this->year < date.getYear())
-		return true;
-	else if (this->year == date.getYear()) {
-		if (this->month < date.getMonth())
-			return true;
-		else if (this->month == date.getMonth()) {
-			if (this->day < date.getDay())
-				return true;
-		}
-	}
-	return false;
+	
+	int num1, num2;
+	num1 = this->year * 10000 + this->month * 100 +this->day;
+	num2 = date.year * 10000 + date.month * 100 + date.day;
+	return num1 < num2;
+}
+
+bool Date::operator<=(const Date &date) {
+
+	int num1, num2;
+	num1 = this->year * 10000 + this->month * 100 + this->day;
+	num2 = date.year * 10000 + date.month * 100 + date.day;
+	return num1 <= num2;
 }
 
 bool Date::operator==(const Date &date)

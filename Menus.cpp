@@ -69,7 +69,6 @@ void createDataMenu()
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
@@ -178,6 +177,7 @@ void mainMenu() {
 	int select;
 	do
 	{
+		badInput = false;
 		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "0)Return to company Menu\n";
 		cin >> select;
@@ -185,6 +185,7 @@ void mainMenu() {
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
+			badInput = true;
 		}
 		else
 		{
@@ -214,7 +215,7 @@ void mainMenu() {
 				break;
 			}
 		}
-	} while (select != 0);
+	} while (badInput || (select != 0));
 	
 }
 

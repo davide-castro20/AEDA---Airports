@@ -233,11 +233,11 @@ bool Pilot::isFree(FlightSched *check)
 		{
 			return false;
 		}
-		else if (!(check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && check->getEndHour() < flights.at(i)->getPredictedSchedule().getStartHour()))
+		else if (check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && !(check->getEndHour() < flights.at(i)->getPredictedSchedule().getStartHour()))
 		{
 			return false;
 		}
-		else if (!(check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && flights.at(i)->getPredictedSchedule().getEndHour() < check->getStartHour()))
+		else if (check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && !(flights.at(i)->getPredictedSchedule().getEndHour() < check->getStartHour()))
 		{
 			return false;
 		}
@@ -252,15 +252,16 @@ void Pilot::addFlight(Flight * flight)
 
 bool FlightCrew::isFree(FlightSched *check)
 {
+	cout << name << endl;
 	for (size_t i = 0; i < flights.size(); i++)
 	{
 		if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getDepartureDate() && flights.at(i)->getPredictedSchedule().getDepartureDate() < check->getArrivalDate())
 			return false;
 		else if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getArrivalDate() && flights.at(i)->getPredictedSchedule().getArrivalDate() < check->getArrivalDate())
 			return false;
-		else if (!(check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && check->getEndHour() < flights.at(i)->getPredictedSchedule().getStartHour()))
+		else if (check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && !(check->getEndHour() < flights.at(i)->getPredictedSchedule().getStartHour()))
 			return false;
-		else if (!(check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && flights.at(i)->getPredictedSchedule().getEndHour() < check->getStartHour()))
+		else if (check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && !(flights.at(i)->getPredictedSchedule().getEndHour() < check->getStartHour()))
 			return false;
 	}
 	return true;

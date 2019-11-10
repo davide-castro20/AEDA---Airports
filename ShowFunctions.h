@@ -2,4 +2,4 @@
 
 void showAirportData();
 
-void showPersonData();
+void showPersonData(Employee* emp);

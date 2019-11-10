@@ -2,6 +2,7 @@
 
 #include "Utils.h"
 
+using namespace std;
 
 class Time
 {
@@ -19,4 +20,5 @@ public:
 	bool isValid() const;
 	bool operator<(const Time &time) const;
 	Time operator-(Time &time) const;
+	friend ostream& operator<<(ostream& out, const Time& time);
 };

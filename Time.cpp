@@ -65,3 +65,9 @@ Time Time::operator-(Time & time) const
 	return Time(hours, minutes);
 
 }
+
+ostream& operator<<(ostream& out, const Time& time)
+{
+	out << time.hours << ':' << time.minutes;
+	return out;
+}

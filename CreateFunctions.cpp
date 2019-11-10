@@ -8,7 +8,7 @@ using namespace std;
 
 void createPerson()
 {
-	 int createSel;
+	int createSel;
 	bool badInput;
 	do {
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -94,8 +94,10 @@ void createPilot()
 	cout << "Name: \n";
 	do 
 	{
-		
+		cin.ignore(100, '\n');
 		getline(cin, name);
+		if (cin.eof())
+			return;
 		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
 		{
 			cin.clear();
@@ -108,15 +110,17 @@ void createPilot()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
+		
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
+		cin.ignore(100, '\n');
 		getline(cin, read);
+		if (cin.eof())
+			return;
   		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
@@ -130,8 +134,6 @@ void createPilot()
 			badInput = false;
 			birthDate = new Date(read);
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 
@@ -141,6 +143,8 @@ void createPilot()
 	do
 	{
 		cin >> category;
+		if (cin.eof())
+			return;
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
@@ -153,17 +157,16 @@ void createPilot()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
-
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Plane Types: \n";
 	do
 	{
-		cin.ignore();
+		cin.ignore(100, '\n');
 		getline(cin, read);
+		if (cin.eof())
+			return;
 		if (cin.fail() || read.empty())
 		{
 			cin.clear();
@@ -174,9 +177,6 @@ void createPilot()
 		else
 		{
 			badInput = false;
-
-			if (cin.eof())
-				return;
 			if (!(read.find_first_of(",") == string::npos))
 				decompose(read, planeTypes, ',');
 			else
@@ -201,7 +201,10 @@ void createPilot()
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Flights: \n";
 	do {
+		cin.ignore(100, '\n');
 		getline(cin, read);
+		if (cin.eof())
+			return;
 		if (cin.fail() || read.empty())
 		{
 			cin.clear();
@@ -212,8 +215,6 @@ void createPilot()
 		else
 		{
 			badInput = false;
-			if (cin.eof())
-				return;
 			if (!(read.find_first_of(",") == string::npos)) {
 				decompose(read, flightIdsString, ',');
 				for (size_t i = 0; i < flightIdsString.size(); i++)
@@ -245,13 +246,13 @@ void createPilot()
 				}
 				if (count == 0)
 				{
-					cout << "One of more of those flights ID's don't exist!" << endl;
+					cout << "One or more of those flights ID's don't exist!" << endl;
 					badInput = true;
 					break;
 				}
 				if (full)
 				{
-					cout << "One of more of those flights have a full Pilot crew!" << endl;
+					cout << "One or more of those flights have a full Pilot crew!" << endl;
 					badInput = true;
 					break;
 				}
@@ -275,9 +276,6 @@ void createPilot()
 						break;
 					}
 				}
-			}
-			else
-			{
 				Employee *newPilot = new Pilot(name, birthDate, category, planes, flights);
 				for (size_t i = 0; i < currentAirport->employees.size(); i++)
 				{
@@ -421,7 +419,7 @@ void createFlightCrew()
 							full = true;
 					}
 				}
-				if (count == 0)
+				if (count != flightIds.size())
 				{
 					cout << "One of more of those flights ID's don't exist!" << endl;
 					badInput = true;
@@ -447,6 +445,13 @@ void createFlightCrew()
 						return;
 					}
 				}
+				for (size_t j = 0; j < flights.size(); j++)
+				{
+					vector<Employee*> crew = flights.at(j)->getEmployees();
+					crew.push_back(newFlightCrew);
+					flights.at(j)->setCrew(crew);
+				}
+
 				currentAirport->employees.push_back(newFlightCrew);
 				cout << string(100, '-') << endl << "New Flight Crew member successfuly created!" << endl;
 			}
@@ -768,6 +773,7 @@ void createFlight()
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Destination: \n";
 	do {
+		cin.ignore();
 		getline(cin, destination);
 		if (cin.eof())
 			return;
@@ -793,7 +799,9 @@ void createFlight()
 		do
 		{
 			getline(cin, read);
-			if ((cin.fail() || !existingDate(read)) && !cin.eof())
+			if (cin.eof())
+				return;
+			if (cin.fail() || !existingDate(read))
 			{
 				cin.clear();
 				//cin.ignore(100, '\n');
@@ -806,21 +814,19 @@ void createFlight()
 				badInput = false;
 				startD = new Date(read);
 			}
-			if (cin.eof())
-				return;
+			
 
 		} while (badInput);
 
 		cout << "| Starting time (hh:mm):\n";
 		do
 		{
-			
-			cin.ignore();
 			getline(cin, read);
+			if (cin.eof())
+				return;
 			if (cin.fail() || (read.find_first_of(':') == string::npos))
 			{
 				cin.clear();
-				cin.ignore(100, '\n');
 				//cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 				cout << "Invalid time! Please insert again\n";
@@ -838,10 +844,11 @@ void createFlight()
 					badInput = true;
 					cout << "Invalid time! Please insert again\n";
 				}
+				else
+					badInput = false;
 			}
 
-			if (cin.eof())
-				return;
+			
 		} while (badInput);
 
 		cout << "|----------------------------------------------------------------------------------------------------\n";
@@ -860,7 +867,7 @@ void createFlight()
 			else
 			{
 				endD = new Date(read);
-				if (*startD < *endD)
+				if (*startD <= *endD)
 				{
 					if ((endD->getDay() - startD->getDay() > 1) || (endD->getMonth() != startD->getMonth()) || (endD->getYear() != startD->getYear()))
 					{
@@ -871,7 +878,7 @@ void createFlight()
 						badInput = false;
 				}
 				else
-					badInput = false;
+					badInput = true;
 			}
 			if (cin.eof())
 				return;
@@ -882,10 +889,11 @@ void createFlight()
 		{
 			cout << "| Ending time (hh:mm):\n";
 			getline(cin, read);
+			if (cin.eof())
+				return;
 			if (cin.fail() || (read.find_first_of(':') == string::npos))
 			{
 				cin.clear();
-				cin.ignore(100, '\n');
 				//cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 				cout << "Invalid time! Please insert again\n";
@@ -906,18 +914,19 @@ void createFlight()
 				}
 				if (startD->getDay() == endD->getDay())
 				{
-					if (end < start)
+					if (*end < *start)
 					{
+						
 						badInput = true;
 						cout << "End time cannot be earlier than start! \n";
 						continue;
 					}
 				}
+				badInput = false;
 				predictedSchedule = new FlightSched(startD, start, endD, end);
 			}
 
-			if (cin.eof())
-				return;
+			
 		} while (badInput);
 
 		cout << "----------------------------------------------------------------------------------------------------\n";
@@ -927,7 +936,7 @@ void createFlight()
 			if (currentAirport->planes.at(i)->isFree(predictedSchedule))
 				freePlanes.push_back(currentAirport->planes.at(i));
 		}
-		if (freePlanes.size() < 2)
+		if (freePlanes.size() < 1)
 		{
 			string confirm;
 			cout << "Not enough free planes at the moment!" << endl;
@@ -970,10 +979,10 @@ void createFlight()
 
 			cout << endl << "Choose one of the free planes above." << endl;
 			cin >> planeSel;
+			cin.ignore(100, '\n');
 			if (cin.fail() || planeSel <= 0 || planeSel > currentAirport->planes.size() + 1)
 			{
 				cin.clear();
-				cin.ignore(100, '\n');
 				cout << "Invalid plane! Please choose one the free planes shown\n";
 				badInput = true;
 			}
@@ -1000,7 +1009,6 @@ void createFlight()
 					{
 						if (currentAirport->employees.at(i)->getPlanes().at(k) == plane)
 						{
-							cout << "FREE" << endl;
 							freeEmp.push_back(currentAirport->employees.at(i));
 							break;
 						}
@@ -1019,7 +1027,6 @@ void createFlight()
 					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 					{
 						cin.clear();
-						cin.ignore(100, '\n');
 						cout << "-----------------------------------------------------------------------------------------------------\n";
 						badInput = true;
 					}
@@ -1050,14 +1057,12 @@ void createFlight()
 			do
 			{
 				cout << endl << "Choose 2 of the free pilots above (first, second)" << endl;
-				cin.ignore();
 				getline(cin, read);
 				if (cin.eof())
 					return;
 				if (cin.fail() || read.empty() || read.find_first_of(',') == string::npos)
 				{
 					cin.clear();
-					cin.ignore(100, '\n');
 					cout << "Invalid pilots! Please choose two of the free pilots shown\n";
 					badInput = true;
 				}
@@ -1100,17 +1105,15 @@ void createFlight()
 			
 		} while (badInput);
 
-		freeEmp.clear();
 
 		do {
-
+			freeEmp.clear();
 			cout << "| Flight Crew:\n";
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Flight Crew" && currentAirport->employees.at(i)->isFree(predictedSchedule))
 				{
 					freeEmp.push_back(currentAirport->employees.at(i));
-					break;
 				}
 			}
 			if (freeEmp.size() < 2)
@@ -1133,6 +1136,7 @@ void createFlight()
 							return;
 						else
 						{
+							cin.ignore(100, '\n');
 							badInput = false;
 						}
 					}
@@ -1154,14 +1158,12 @@ void createFlight()
 				cout << j << ") Name: " << freeEmp.at(j-1)->getName() << "; Category: " << freeEmp.at(j - 1)->getCategory() << endl;
 
 			cout << endl << "Choose 2 of the free employees above (first, second)" << endl;
-			cin.ignore();
 			getline(cin, read);
 			if (cin.eof())
 				return;
 			if (cin.fail() || read.empty() || read.find_first_of(',') == string::npos)
 			{
 				cin.clear();
-				cin.ignore(100, '\n');
 				cout << "Invalid employees! Please choose two of the free employees shown\n";
 				badInput = true;
 			}
