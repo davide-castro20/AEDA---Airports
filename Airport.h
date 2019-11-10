@@ -26,12 +26,13 @@ public:
 class Airport
 {
 public:
+	string flightTxt, employeeTxt, planesTxt;
 	vector<Plane*> planes; //não esquecer de usar new
 	vector<Flight*> flights; //não esquecer de usar new
 	vector <Employee*> employees;
 	Local local;
 	Airport() { planes = {}; flights = {}; };
-	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local);
+	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local, string planestxt, string employeetxt, string flightstxt);
 	Local getLocal() const;
 };
 

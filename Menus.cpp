@@ -179,7 +179,7 @@ void mainMenu() {
 	do
 	{
 		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "0)Close Program\n";
+		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "0)Return to company Menu\n";
 		cin >> select;
 		if (cin.fail() || select > 4 || select < 0)
 		{
@@ -192,13 +192,11 @@ void mainMenu() {
 			switch (select)
 			{
 			case 0:
-				cout << "Saving changed data...\n";
 				//savePersonData();
 				//saveFlightData();
 				//savePlaneData();
 				//saveAirportData();
-				select = 0;
-				cout << "Completed saving data.\n";
+				return;
 				break;
 			case 1:
 				showDataMenu();
