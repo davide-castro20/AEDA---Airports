@@ -24,7 +24,7 @@ private:
 
 public:
 	Flight();
-	Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, int id);
+	Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, Plane* plane, int id);
 	bool isCanceled() const;
 	bool isCompleted() const;
 	/*Airport* getDeparture() const;

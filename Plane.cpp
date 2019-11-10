@@ -79,3 +79,8 @@ bool Plane::isFree(FlightSched *check)
 	}
 	return true;
 }
+
+void Plane::addFlight(Flight * flight)
+{
+	this->flights.push_back(flight);
+}

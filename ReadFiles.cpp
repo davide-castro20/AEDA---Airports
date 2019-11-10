@@ -59,7 +59,7 @@ vector<Flight*> readFlights(string flights_file)
 				DepartureTime = new Time(DepartureHour, DepartureMinute);
 				ArrivalTime = new Time(ArrivalHour, ArrivalMinute);
 				flightSched = new FlightSched(DepartureDate, DepartureTime, ArrivalDate, ArrivalTime);
-				flight = new Flight(flightSched, destino, employees, id);
+				flight = new Flight(flightSched, destino, employees, NULL, id);
 				flights.push_back(flight);
 				counter = -1;
 				getline(flights_data, linha);

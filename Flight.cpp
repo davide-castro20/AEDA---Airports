@@ -7,7 +7,7 @@ using namespace std;
 Flight::Flight()
 {}
 
-Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, int id)
+Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, Plane* plane, int id)
 {
 	static int flightIds = -1;
 	if (id != -2)
@@ -21,7 +21,7 @@ Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &c
 		this->id = flightIds;
 		flightIds++;
 	}
-
+	this->plane = plane;
 	predictedSchedule = predictedSched;
 	destination = destino;
 	employees = crew;

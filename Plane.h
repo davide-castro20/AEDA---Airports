@@ -6,6 +6,7 @@ using namespace std;
 
 
 class Flight;
+class FlightSched;
 
 class capacityError
 {
@@ -33,4 +34,5 @@ public:
 	bool setType(string type);
 	bool setFlights(vector<Flight*> fly);
 	bool isFree(FlightSched *check);
+	void addFlight(Flight* flight);
 };

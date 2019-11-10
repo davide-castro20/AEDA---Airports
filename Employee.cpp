@@ -237,6 +237,11 @@ bool Pilot::isFree(FlightSched *check)
 	return true;
 }
 
+void Pilot::addFlight(Flight * flight)
+{
+	this->flights.push_back(flight);
+}
+
 bool FlightCrew::isFree(FlightSched *check)
 {
 	for (size_t i = 0; i < flights.size(); i++)
@@ -251,5 +256,10 @@ bool FlightCrew::isFree(FlightSched *check)
 			return false;
 	}
 	return true;
+}
+
+void FlightCrew::addFlight(Flight * flight)
+{
+	this->flights.push_back(flight);
 }
 

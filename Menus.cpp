@@ -85,7 +85,7 @@ void createDataMenu()
 			createPerson();
 			break;
 		case 2:
-			//createFlight();
+			createFlight();
 			break;
 		case 3:
 			//createPlane();

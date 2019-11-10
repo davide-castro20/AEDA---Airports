@@ -741,11 +741,12 @@ void createFlight()
 {
 	bool badInput = false;
 	int id;
-	FlightSched *predictedSchedule;
+	int number, number2;
+	FlightSched *predictedSchedule = NULL;
 	string destination;
 	string read;
 	vector<Employee*> crew;
-	Plane* plane;
+	Plane* plane = NULL;
 	Time *start = NULL;
 	Time *end = NULL;
 	unsigned int hour;
@@ -753,6 +754,8 @@ void createFlight()
 	Date* startD = NULL;
 	Date* endD = NULL;
 	vector<Plane*> freePlanes;
+	vector<Employee*> freeEmp;
+	
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Destination: \n";
@@ -912,10 +915,48 @@ void createFlight()
 			if (currentAirport->planes.at(i)->isFree(predictedSchedule))
 				freePlanes.push_back(currentAirport->planes.at(i));
 		}
+		if (freePlanes.size() < 2)
+		{
+			string confirm;
+			cout << "Not enough free planes at the moment!" << endl;
+			cout << "Do you want to create this flight with an empty crew and plane for now?" << endl;
+			do {
+				cin >> confirm;
+				if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+				{
+					cin.clear();
+					cin.ignore(100, '\n');
+					cout << "-----------------------------------------------------------------------------------------------------\n";
+					badInput = true;
+				}
+				else
+				{
+					if (cin.eof())
+						return;
+					else
+					{
+						badInput = false;
+					}
+				}
+			} while (badInput);
+			if (confirm == "y" || confirm == "Y")
+			{
+				crew.clear();
+				Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
+				plane->addFlight(newFlight);
+				return;
+			}
+			if (confirm == "n" || confirm == "N")
+			{
+				return;
+			}
+		}
 		int planeSel;
 		do {
 			for (size_t i = 1; i < freePlanes.size() + 1; i++)
 				cout << i << ") Type: " << freePlanes.at(i - 1)->getType() << "; Capacity: "<< freePlanes.at(i-1)->getCapacity() << endl;
+
+			cout << endl << "Choose one of the free planes above." << endl;
 			cin >> planeSel;
 			if (cin.fail() || planeSel <= 0 || planeSel > currentAirport->planes.size() + 1)
 			{
@@ -927,10 +968,235 @@ void createFlight()
 			else
 			{
 				badInput = false;
+				plane = freePlanes.at(planeSel - 1);
 			}
 			if (cin.eof())
 				return;
 		} while (badInput);
+
+		cout << "----------------------------------------------------------------------------------------------------\n";
+		cout << "Crew: \n";
+
+		do {
+			
+			cout << "| Pilots:\n";
+			for(size_t i = 0; i < currentAirport->employees.size(); i++)
+			{
+				if (currentAirport->employees.at(i)->getType() == "Pilot" && currentAirport->employees.at(i)->isFree(predictedSchedule))
+				{
+					for (size_t k = 0; k < currentAirport->employees.at(i)->getPlanes().size(); k++)
+					{
+						if (currentAirport->employees.at(i)->getPlanes().at(k) == plane)
+						{
+							freeEmp.push_back(currentAirport->employees.at(i));
+							break;
+						}
+					}				
+				}
+			}
+			for (size_t j = 1; j < freeEmp.size() + 1; j++)
+				cout << j << ") Name: " << freeEmp.at(j)->getName() << "; Category: " << freeEmp.at(j)->getCategory() << endl;
+
+			if (freeEmp.size() < 2)
+			{
+				string confirm;
+				cout << "Not enough free pilots at the moment!" << endl;
+				cout << "Do you want to create this flight with an empty crew for now?" << endl;
+				do {
+					cin >> confirm;
+					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+					{
+						cin.clear();
+						cin.ignore(100, '\n');
+						cout << "-----------------------------------------------------------------------------------------------------\n";
+						badInput = true;
+					}
+					else
+					{
+						if (cin.eof())
+							return;
+						else
+						{
+							badInput = false;
+						}
+					}
+				} while (badInput);
+				if (confirm == "y" || confirm == "Y")
+				{
+					crew.clear();
+					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
+					plane->addFlight(newFlight);
+					return;
+				}
+				if (confirm == "n" || confirm == "N")
+				{
+					return;
+				}
+			}
+			cout << endl << "Choose 2 of the free pilots above (first, second)" << endl;
+			cin.ignore();
+			getline(cin, read);
+			if (cin.eof())
+				return;
+			if (cin.fail() || read.empty() || read.find_first_of(',') == string::npos)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "Invalid pilots! Please choose two of the free pilots shown\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+				if (read.find_first_not_of("123456789") == string::npos)
+				{
+					istringstream pil(read);
+					char sep;
+					pil >> number;
+					pil >> sep;
+					pil >> number2;
+					if (pil.rdbuf()->in_avail() == 0) {
+						if (number > 0 && number < freeEmp.size() + 1 && number2 > 0 && number2 < freeEmp.size() + 1 && number != number2)
+						{
+							crew.push_back(freeEmp.at(number));
+							crew.push_back(freeEmp.at(number2));
+							cout << "Pilots added successfuly to the flight crew." << endl << endl;
+						}
+						else
+						{
+							badInput = true;
+							cout << "Invalid pilots! Please choose two of the free pilots shown\n";
+						}
+					}
+					else
+					{
+						badInput = true;
+						cout << "Invalid piots! Please choose two of the free pilots shown\n";
+					}
+				}
+				else
+				{
+					badInput = true;
+					cout << "Invalid pilots! Please choose two of the free pilots shown\n";
+				}
+			}
+			
+		} while (badInput);
+
+		do {
+
+			cout << "| Flight Crew:\n";
+			for (auto i = currentAirport->employees.begin(); i != currentAirport->employees.end(); i++)
+			{
+				if ((*i)->getType() == "Flight Crew" && (*i)->isFree(predictedSchedule))
+				{
+					for (auto k = (*i)->getPlanes().begin(); k != (*i)->getPlanes().end(); k++)
+					{
+						if ((*k) == plane)
+						{
+							freeEmp.push_back(*i);
+							break;
+						}
+					}
+				}
+			}
+			if (freeEmp.size() < 2)
+			{
+				string confirm;
+				cout << "Not enough free employees at the moment!" << endl;
+				cout << "Do you want to create this flight with an empty crew for now?" << endl;
+				do {
+					cin >> confirm;
+					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+					{
+						cin.clear();
+						cin.ignore(100, '\n');
+						cout << "-----------------------------------------------------------------------------------------------------\n";
+						badInput = true;
+					}
+					else
+					{
+						if (cin.eof())
+							return;
+						else
+						{
+							badInput = false;
+						}
+					}
+				} while (badInput);
+				if (confirm == "y" || confirm == "Y")
+				{
+					crew.clear();
+					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
+					plane->addFlight(newFlight);
+					return;
+				}
+				if (confirm == "n" || confirm == "N")
+				{
+					return;
+				}
+				
+			}
+			for (size_t j = 1; j < freeEmp.size() + 1; j++)
+				cout << j << ") Name: " << freeEmp.at(j)->getName() << "; Category: " << freeEmp.at(j)->getCategory() << endl;
+
+			cout << endl << "Choose 2 of the free employees above (first, second)" << endl;
+			cin.ignore();
+			getline(cin, read);
+			if (cin.eof())
+				return;
+			if (cin.fail() || read.empty() || read.find_first_of(',') == string::npos)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "Invalid employees! Please choose two of the free employees shown\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+				if (read.find_first_not_of("123456789") == string::npos)
+				{
+					istringstream fli(read);
+					char sep;
+					fli >> number;
+					fli >> sep;
+					fli >> number2;
+					if (fli.rdbuf()->in_avail() == 0) {
+						if (number > 0 && number < freeEmp.size() + 1 && number2 > 0 && number2 < freeEmp.size() + 1 && number != number2)
+						{
+							crew.push_back(freeEmp.at(number));
+							crew.push_back(freeEmp.at(number2));
+							cout << "Employees added successfuly to the flight crew." << endl << endl;
+						}
+						else
+						{
+							badInput = true;
+							cout << "Invalid employees! Please choose two of the free employees shown\n";
+						}
+					}
+					else
+					{
+						badInput = true;
+						cout << "Invalid employes! Please choose two of the free employees shown\n";
+					}
+				}
+				else
+				{
+					badInput = true;
+					cout << "Invalid employes! Please choose two of the free employees shown\n";
+				}
+			}
+
+		} while (badInput);
+
+		Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
+		plane->addFlight(newFlight);
+		for (size_t i = 0; i < crew.size(); i++)
+		{
+			crew.at(i)->addFlight(newFlight);
+		}
+		cout << endl << "Flight successfuly created!" << endl;
 		
 }
 
