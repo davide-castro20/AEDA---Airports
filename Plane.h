@@ -18,6 +18,7 @@ public:
 class Plane
 {
 private:
+
 	string type; //para simplificar apenas existem modelos A, B, C.
 	int capacity;
 	vector<Flight*> flights; //não esquecer de usar new
@@ -31,6 +32,5 @@ public:
 	bool setCapacity(int cap);
 	bool setType(string type);
 	bool setFlights(vector<Flight*> fly);
-
-	
+	bool isFree(FlightSched *check);
 };

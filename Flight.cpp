@@ -9,8 +9,20 @@ Flight::Flight()
 
 Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, int id)
 {
+	static int flightIds = -1;
+	if (id != -2)
+	{
+		if (id > flightIds)
+			flightIds = id;
+		this->id = id;
+	}
+	else
+	{
+		this->id = flightIds;
+		flightIds++;
+	}
+
 	predictedSchedule = predictedSched;
-	this->id = id;
 	destination = destino;
 	employees = crew;
 }

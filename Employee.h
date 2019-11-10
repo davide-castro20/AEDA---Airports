@@ -39,6 +39,8 @@ public:
 	
 
 	virtual double calcSalary() {return 0;}; //returns 0 but has no effect since all derivated classes will have this method
+
+	bool operator==(Employee &emp2);
 protected:
 	string name;
 	string type;

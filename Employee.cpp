@@ -50,6 +50,11 @@ bool Employee::setSalary(float salary) {
 	this->salary = salary;
 	return true;
 }
+
+bool Employee::operator==(Employee &emp2)
+{
+	return ((this->name == emp2.name) && (this->birthDate == emp2.birthDate));
+}
 	
 Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights) : Employee(name, birthDate, "Pilot") {
 	this->category = category;

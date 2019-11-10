@@ -5,3 +5,5 @@ void createPilot();
 void createFlightCrew();
 void createAdmin();
 void createBaseCrew();
+
+void createFlight();
