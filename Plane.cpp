@@ -68,7 +68,9 @@ bool Plane::isFree(FlightSched *check)
 {
 	for (size_t i = 0; i < flights.size(); i++)
 	{
-		if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getDepartureDate() && flights.at(i)->getPredictedSchedule().getDepartureDate() < check->getArrivalDate())
+		if ((check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getDepartureDate()) && (flights.at(i)->getPredictedSchedule().getArrivalDate() == check->getArrivalDate()) && (check->getEndHour() == flights.at(i)->getPredictedSchedule().getEndHour()) && (check->getStartHour() == flights.at(i)->getPredictedSchedule().getStartHour()))
+			return false;
+		else if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getDepartureDate() && flights.at(i)->getPredictedSchedule().getDepartureDate() < check->getArrivalDate())
 		{
 			return false;
 		}
@@ -91,4 +93,14 @@ bool Plane::isFree(FlightSched *check)
 void Plane::addFlight(Flight * flight)
 {
 	this->flights.push_back(flight);
+}
+
+void Plane::deleteFlight(int id)
+{
+	for (size_t i = 0; i < flights.size(); i++)
+		if (flights.at(i)->getId() == id)
+		{
+			flights.erase(flights.begin() + i);
+			return;
+		}
 }

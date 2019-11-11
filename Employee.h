@@ -33,6 +33,7 @@ public:
 	virtual bool setFunction(string function) { return true; };
 	virtual bool isFree(FlightSched *check) { return false; };
 	virtual void addFlight(Flight* flight) { return; };
+	virtual void deleteFlight(int id) { return; };
 
 	bool setName(string name);
 	bool setDate(Date *birthDate);
@@ -65,6 +66,7 @@ public:
 	bool setPlanes(vector<Plane*> &planes);
 	bool isFree(FlightSched *check);
 	void addFlight(Flight* flight);
+	void deleteFlight(int id);
 	
 	double calcSalary();
 };
@@ -82,6 +84,7 @@ public:
 	bool setFlights(vector<Flight*> &flights);
 	bool isFree(FlightSched *check);
 	void addFlight(Flight* flight);
+	void deleteFlight(int id);
 
 	double calcSalary();
 };

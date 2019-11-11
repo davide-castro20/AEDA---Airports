@@ -35,4 +35,5 @@ public:
 	bool setFlights(vector<Flight*> fly);
 	bool isFree(FlightSched *check);
 	void addFlight(Flight* flight);
+	void deleteFlight(int id);
 };

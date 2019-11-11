@@ -272,3 +272,22 @@ void FlightCrew::addFlight(Flight * flight)
 	this->flights.push_back(flight);
 }
 
+void Pilot::deleteFlight(int id)
+{
+	for (size_t i = 0; i < flights.size(); i++)
+		if (flights.at(i)->getId() == id)
+		{
+			flights.erase(flights.begin() + i);
+			return;
+		}
+}
+
+void FlightCrew::deleteFlight(int id)
+{
+	for (size_t i = 0; i < flights.size(); i++)
+		if (flights.at(i)->getId() == id)
+		{
+			flights.erase(flights.begin() + i);
+			return;
+		}
+}
