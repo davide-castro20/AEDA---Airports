@@ -877,8 +877,10 @@ void createFlight()
 					else
 						badInput = false;
 				}
-				else
+				else {
 					badInput = true;
+					cout << "The arrival date cannot be earlier than the departure date. \n";
+				}
 			}
 			if (cin.eof())
 				return;
@@ -1069,7 +1071,7 @@ void createFlight()
 				else
 				{
 					badInput = false;
-					if (read.find_first_not_of("123456789,") == string::npos)
+					if (read.find_first_not_of("123456789, ") == string::npos)
 					{
 						istringstream pil(read);
 						char sep;
@@ -1170,7 +1172,7 @@ void createFlight()
 			else
 			{
 				badInput = false;
-				if (read.find_first_not_of("123456789") == string::npos)
+				if (read.find_first_not_of("123456789, ") == string::npos)
 				{
 					istringstream fli(read);
 					char sep;
@@ -1180,8 +1182,8 @@ void createFlight()
 					if (fli.rdbuf()->in_avail() == 0) {
 						if (number > 0 && number < freeEmp.size() + 1 && number2 > 0 && number2 < freeEmp.size() + 1 && number != number2)
 						{
-							crew.push_back(freeEmp.at(number));
-							crew.push_back(freeEmp.at(number2));
+							crew.push_back(freeEmp.at(number-1));
+							crew.push_back(freeEmp.at(number2-1));
 							cout << "Employees added successfuly to the flight crew." << endl << endl;
 						}
 						else
@@ -1207,6 +1209,7 @@ void createFlight()
 
 		Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
 		plane->addFlight(newFlight);
+		currentAirport->flights.push_back(newFlight);
 		for (size_t i = 0; i < crew.size(); i++)
 		{
 			crew.at(i)->addFlight(newFlight);

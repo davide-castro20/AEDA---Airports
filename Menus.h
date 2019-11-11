@@ -7,6 +7,8 @@ void selectAirportMenu();
 
 void showDataMenu();
 
+void companyMenu();
+
 //void readDataMenu(); 
 
 void changeDataMenu();

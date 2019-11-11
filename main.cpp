@@ -10,6 +10,6 @@ int main()
 	comp = new Company("Airports.txt");
 	//for(int i = 0;i< comp->getAirports().at(0)->employees.size();i++)
 	//cout << comp->getAirports().at(0)->employees.at(i)->getFlights().size() << endl;
-    selectAirportMenu();
+    companyMenu();
 	return 0;
 }

@@ -46,6 +46,9 @@ Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, vector <Emplo
 	this->flights = flights;
 	this->employees = employees;
 	this->local = local;
+	this->planesTxt = planestxt;
+	this->employeeTxt = employeetxt;
+	this->flightTxt = flightstxt;
 }
 
 Local Airport::getLocal() const

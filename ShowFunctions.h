@@ -1,5 +1,5 @@
 #pragma once
 
-void showAirportData();
+void showAirportData(Airport * airport);
 
 void showPersonData(Employee* emp);

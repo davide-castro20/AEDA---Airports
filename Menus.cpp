@@ -5,6 +5,7 @@
 #include "CreateFunctions.h"
 #include "ChangeFunctions.h"
 #include "Company.h"
+#include "ShowFunctions.h"
 
 Airport *currentAirport;
 
@@ -223,11 +224,6 @@ void selectAirportMenu()
 {
 	bool badInput = true;
 	int select;
-	cout << '.' << string(98, '_') << '.' << endl
-		<< '|' << string(98, ' ') << '|' << endl
-		<< '|' << string(39, '-') << "WELCOME to our company" << string(37, '-') << '|' << endl
-		<< '|' << string(98, ' ') << '|' << endl
-		<< '|' << string(98, '_') << '|' << endl << endl;
 	do
 	{
 		//cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -248,4 +244,38 @@ void selectAirportMenu()
 	mainMenu();
 }
 
+void companyMenu()
+{
+	int sel;
+	bool badInput = false;
+	cout << '.' << string(98, '_') << '.' << endl
+		<< '|' << string(98, ' ') << '|' << endl
+		<< '|' << string(39, '-') << "WELCOME to our company" << string(37, '-') << '|' << endl
+		<< '|' << string(98, ' ') << '|' << endl
+		<< '|' << string(98, '_') << '|' << endl << endl;
+	do {
+		do
+		{
+			cout << "What would you like to do? \n";
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n0)Close Program.";
+			cin >> sel;
+			if (cin.fail() || sel < 0 || sel>2)
+			{
+				cin.clear();
+				cin.ignore(1000, '\n');
+				badInput = true;
+			}
+		} while (badInput);
+		switch (sel) {
+		case 0:
+			return;
+		case 1:
+			selectAirportMenu();
+			break;
+		case 2:
+			for (size_t i = 0; i < comp->getAirports().size(); i++)
+				showAirportData(comp->getAirports().at(i));
+		}
+	} while (sel != 0);
+}
 
