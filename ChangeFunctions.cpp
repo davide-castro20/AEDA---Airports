@@ -38,7 +38,7 @@ void changePersonData()
 				badInput = false;
 			}
 		} while (badInput);
-		cin.clear(100, '\n');
+		cin.clear();
 		if (changeSelection == 0)
 			return;
 		changeSelection--;
@@ -260,7 +260,7 @@ void changePlaneData()
 				badInput = false;
 			}
 		} while (badInput);
-		cin.clear(100, '\n');
+		cin.clear();
 		if (changeSelection == 0)
 			return;
 		changeSelection--;
@@ -363,7 +363,7 @@ void changeFlightData()
 				badInput = false;
 			}
 		} while (badInput);
-		cin.clear(100, '\n');
+		cin.clear();
 		if (changeSelection == 0)
 			return;
 		changeSelection--;

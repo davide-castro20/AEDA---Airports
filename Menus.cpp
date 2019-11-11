@@ -223,7 +223,7 @@ void mainMenu() {
 void selectAirportMenu()
 {
 	bool badInput = true;
-	int select;
+	unsigned int select;
 	do
 	{
 		//cout << "-----------------------------------------------------------------------------------------------------\n";

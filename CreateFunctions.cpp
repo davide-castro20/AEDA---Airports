@@ -753,8 +753,7 @@ void createBaseCrew()
 void createFlight()
 {
 	bool badInput = false;
-	int id;
-	int number, number2;
+	unsigned int number, number2;
 	FlightSched *predictedSchedule = NULL;
 	string destination;
 	string read;
@@ -974,7 +973,7 @@ void createFlight()
 				return;
 			}
 		}
-		int planeSel;
+		unsigned int planeSel;
 		do {
 			for (size_t i = 1; i < freePlanes.size() + 1; i++)
 				cout << i << ") Type: " << freePlanes.at(i - 1)->getType() << "; Capacity: "<< freePlanes.at(i-1)->getCapacity() << endl;
