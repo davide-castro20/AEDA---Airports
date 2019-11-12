@@ -90,6 +90,8 @@ bool Plane::isFree(FlightSched *check)
 		{
 			return false;
 		}
+		else if (check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && check->getStartHour() == flights.at(i)->getPredictedSchedule().getStartHour() && check->getEndHour() == flights.at(i)->getPredictedSchedule().getEndHour())
+			return false;
 	}
 	return true;
 }
