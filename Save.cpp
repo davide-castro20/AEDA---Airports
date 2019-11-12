@@ -8,6 +8,7 @@ void saveAirports() {
 	ofstream newAirportsFile;
 	string s = "Airports.txt";
 	newAirportsFile.open("newAirports.txt");
+	if (comp->getAirports().size() != 0) {
 	for (size_t i = 0; i < comp->getAirports().size() - 1; i++) {
 		newAirportsFile << comp->getAirports().at(i)->getLocal().getCountry() << endl;
 		newAirportsFile << comp->getAirports().at(i)->getLocal().getCity() << endl;
@@ -16,9 +17,8 @@ void saveAirports() {
 		newAirportsFile << comp->getAirports().at(i)->flightTxt << endl;
 		newAirportsFile << comp->getAirports().at(i)->planesTxt << endl;
 		newAirportsFile << comp->getAirports().at(i)->employeeTxt << endl;
-		newAirportsFile << "::::::::::";
+		newAirportsFile << "::::::::::\n";
 	}
-	if (comp->getAirports().size() != 0) {
 		size_t size = comp->getAirports().size()- 1;
 		newAirportsFile << comp->getAirports().at(size)->getLocal().getCountry() << endl;
 		newAirportsFile << comp->getAirports().at(size)->getLocal().getCity() << endl;
@@ -41,6 +41,7 @@ void SaveFlights() {
 	ofstream newFlightsFile;
 	for (size_t i = 0; i < comp->getAirports().size(); i++) {
 		newFlightsFile.open("newFlights.txt");
+		if (comp->getAirports().at(i)->flights.size() != 0){
 		for (size_t j = 0; j < comp->getAirports().at(i)->flights.size()-1; j++) {
 			newFlightsFile << comp->getAirports().at(i)->flights.at(j)->getId() << endl;
 			newFlightsFile << comp->getAirports().at(i)->flights.at(j)->getPredictedSchedule().getDepartureDate() << endl;
@@ -52,8 +53,6 @@ void SaveFlights() {
 			newFlightsFile << comp->getAirports().at(i)->flights.at(j)->getDestination() << endl;
 			newFlightsFile << ":::::::::::\n";
 		}
-		if (comp->getAirports().at(i)->flights.size() != 0) {
-
 			size_t size = comp->getAirports().at(i)->flights.size() - 1;
 			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getId() << endl;
 			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getDepartureDate() << endl;
@@ -75,6 +74,7 @@ void SaveEmployees() {
 	ofstream newEmployeesFile;
 	for (size_t i = 0; i < comp->getAirports().size(); i++) {
 		newEmployeesFile.open("newEmployees.txt");
+		if(comp->getAirports().at(i)->employees.size() != 0) {
 		for (size_t j = 0; j < comp->getAirports().at(i)->employees.size() - 1; j++) {
 			if (comp->getAirports().at(i)->employees.at(j)->getType() == "Pilot") {
 				string flights = "";
@@ -137,7 +137,6 @@ void SaveEmployees() {
 				newEmployeesFile << "::::::::::\n";
 			}
 		}
-		if (comp->getAirports().at(i)->employees.size() != 0) {
 			size_t EmpSize = comp->getAirports().at(i)->employees.size() - 1;
 			if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Pilot") {
 				string flights = "";
@@ -207,6 +206,7 @@ void SavePlanes() {
 	ofstream newPlanesFile;
 	for (size_t i = 0; i < comp->getAirports().size(); i++) {
 		newPlanesFile.open("newPlanes.txt");
+		if (comp->getAirports().at(i)->planes.size() != 0) {
 		for (size_t j = 0; j < comp->getAirports().at(i)->planes.size() - 1; j++) {
 			string flights = "";
 			size_t size = comp->getAirports().at(i)->planes.at(j)->getFlights().size();
@@ -225,7 +225,6 @@ void SavePlanes() {
 			newPlanesFile << flights << endl;
 			newPlanesFile << ":::::::::::\n";
 		}
-		if (comp->getAirports().at(i)->planes.size() != 0) {
 			size_t PlaneSize = comp->getAirports().at(i)->planes.size() - 1;
 			string flights = "";
 			size_t size = comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().size();

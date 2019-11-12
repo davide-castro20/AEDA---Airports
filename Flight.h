@@ -47,5 +47,7 @@ public:
 	void setDeparture(Airport *depart);
 	void setDestination(Airport *destin);*/
 	bool setCrew(vector<Employee*> crew);
+	bool setCrewMemb(Employee* memb);
 	bool setPlane(Plane * plane);
+	bool deleteCrew(Employee * emp);
 };

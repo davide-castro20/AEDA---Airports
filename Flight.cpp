@@ -140,8 +140,25 @@ bool Flight::setCrew(vector<Employee*>crew)
 	return true;
 }
 
+bool Flight::setCrewMemb(Employee * memb)
+{
+	employees.push_back(memb);
+	return true;
+}
+
 bool Flight::setPlane(Plane * plane)
 {
 	this->plane = plane;
 	return true;
+}
+
+bool Flight::deleteCrew(Employee * emp)
+{
+	for(size_t i=0;i<employees.size();i++)
+		if (emp == employees.at(i))
+		{
+			employees.erase(employees.begin() + i);
+			return true;
+		}
+	return false;
 }

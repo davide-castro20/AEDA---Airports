@@ -9,3 +9,5 @@ void createBaseCrew();
 void createFlight();
 
 void createPlane();
+
+void createAirport();

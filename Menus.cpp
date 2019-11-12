@@ -225,7 +225,7 @@ void selectAirportMenu()
 		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "Which airport do you want to see the data of: \n";
 		for (size_t i = 0; i < comp->getAirports().size(); i++)
-			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity();
+			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity() << endl;
 		cout << endl;
 		cin >> select;
 		if (cin.fail() || select > comp->getAirports().size() + 1 || select <= 0)
@@ -254,9 +254,9 @@ void companyMenu()
 		{
 			cout << string(100, '-') << endl;
 			cout << "What would you like to do? \n";
-			cout << "1)Select a airport to inspect.\n2)See airports specification.\n0)Close Program." << endl;
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n0)Close Program." << endl;
 			cin >> sel;
-			if (cin.fail() || sel < 0 || sel>2)
+			if (cin.fail() || sel < 0 || sel>3)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
@@ -276,6 +276,8 @@ void companyMenu()
 		case 2:
 			for (size_t i = 0; i < comp->getAirports().size(); i++)
 				showAirportData(comp->getAirports().at(i));
+		case 3:
+			createAirport();
 		}
 	} while (sel != 0);
 }

@@ -290,7 +290,6 @@ void Pilot::addFlight(Flight * flight)
 
 bool FlightCrew::isFree(FlightSched *check)
 {
-	cout << name << endl;
 	for (size_t i = 0; i < flights.size(); i++)
 	{
 		if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getDepartureDate() && flights.at(i)->getPredictedSchedule().getDepartureDate() < check->getArrivalDate())
@@ -300,6 +299,8 @@ bool FlightCrew::isFree(FlightSched *check)
 		else if (check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && !(check->getEndHour() < flights.at(i)->getPredictedSchedule().getStartHour()))
 			return false;
 		else if (check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && !(flights.at(i)->getPredictedSchedule().getEndHour() < check->getStartHour()))
+			return false;
+		else if (check->getDepartureDate() == flights.at(i)->getPredictedSchedule().getDepartureDate() && check->getArrivalDate() == flights.at(i)->getPredictedSchedule().getArrivalDate() && check->getStartHour() == flights.at(i)->getPredictedSchedule().getStartHour() && check->getEndHour() == flights.at(i)->getPredictedSchedule().getEndHour())
 			return false;
 	}
 	return true;
