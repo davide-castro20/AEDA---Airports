@@ -1,5 +1,6 @@
 #include "DeleteFunctions.h"
 #include "Menus.h"
+#include "ShowFunctions.h"
 
 extern Airport *currentAirport;
 
@@ -45,7 +46,7 @@ void deletePersonData()
 		do
 		{
 			cout << "Are you sure you want to delete the following employee?(y/n)\n";
-			//currentAirport->employees.at(delSelection)->showEmp();
+			showPerson(currentAirport->employees.at(delSelection));
 			cin >> confirm;
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N" || confirm == "0"))
 			{
@@ -68,6 +69,7 @@ void deletePersonData()
 				currentAirport->employees.erase(currentAirport->employees.begin() + delSelection);
 				badInput = false;
 				completedDel = true;
+
 			}
 			if (confirm == "n" || confirm == "N")
 			{
@@ -113,7 +115,7 @@ void deletePlaneData()
 		do
 		{
 			cout << "Are you sure you want to delete the following plane?(y/n)\n";
-			//currentAirport->planes.at(delSelection)->showPlane();
+			//showPlane(currentAirport->planes.at(delSelection));
 			cin >> confirm;
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 			{
@@ -134,8 +136,9 @@ void deletePlaneData()
 			if (confirm == "y" || confirm == "Y")
 			{
 				vector<Plane*> freePlanes;
-				int planeToSwap;
+				unsigned int planeToSwap;
 				for (size_t i = 0; i < currentAirport->planes.at(delSelection)->getFlights().size(); i++) {
+					freePlanes.clear();
 					for (size_t j = 0; j < currentAirport->planes.size(); j++)
 					{
 						if (currentAirport->planes.at(j)->isFree(&currentAirport->planes.at(delSelection)->getFlights().at(i)->getPredictedSchedule()) && j!=delSelection)
@@ -161,7 +164,6 @@ void deletePlaneData()
 					}
 					else {
 						cout << "There are no free planes for this flight.\n";
-						currentAirport->planes.at(delSelection)->getFlights().at(i)->setPlane(NULL);
 					}
 				}
 				currentAirport->planes.erase(currentAirport->planes.begin() + delSelection);
@@ -212,14 +214,14 @@ void deleteFlightData()
 		delSelection--;
 		do
 		{
+			showFlight(currentAirport->flights.at(delSelection));
+			cout << "---------------------------------------------------------------------------------------------------\n";
 			cout << "Are you sure you want to delete the following flight?(y/n)\n";
-			//currentAirport->flights.at(delSelection).showFlight();
 			cin >> confirm;
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
