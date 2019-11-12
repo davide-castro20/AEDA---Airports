@@ -26,11 +26,22 @@ string Employee::getType() const {
 }
 
 bool Employee::setName(string name) {
-	if (!isupper(name.at(0)))
+	if (name == "")
+	{
+		cout << "|There was an error with the selection of the name, please try again.\n";
 		return false;
+	}
+	if (!isupper(name.at(0)))
+	{
+		cout << "|There was an error with the selection of the name, please try again.\n";
+		return false;
+	}
 	for (size_t i = 0; i < name.length(); i++) {
-		if(isdigit(name.at(i)))
+		if (isdigit(name.at(i)))
+		{
+			cout << "|There was an error with the selection of the name, please try again.\n";
 			return false;
+		}
 	}
 	this->name=name;
 	return true;

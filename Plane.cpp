@@ -46,7 +46,7 @@ ostream & operator <<(ostream &out, const capacityError &error)
 
 bool Plane::setCapacity(int cap)
 {
-	if (cap < 0)
+	if (cap <= 0)
 		return false;
 	capacity = cap;
 	return true;

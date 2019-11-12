@@ -97,7 +97,7 @@ void createPilot()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name=="")
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -312,7 +312,7 @@ void createFlightCrew()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -477,7 +477,7 @@ void createAdmin()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -524,7 +524,7 @@ void createAdmin()
 	{
 
 		getline(cin, department);
-		if (cin.fail() || (department.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (department.find_first_of("0123456789") != std::string::npos) || department == "")
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -546,7 +546,7 @@ void createAdmin()
 	{
 
 		getline(cin, function);
-		if (cin.fail() || (function.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (function.find_first_of("0123456789") != std::string::npos) || function == "")
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -599,7 +599,7 @@ void createBaseCrew()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -777,7 +777,7 @@ void createFlight()
 		getline(cin, destination);
 		if (cin.eof())
 			return;
-		if (cin.fail() || (destination.find_first_of("0123456789") != std::string::npos))
+		if (cin.fail() || (destination.find_first_of("0123456789") != std::string::npos) || destination == "")
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
