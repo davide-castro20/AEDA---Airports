@@ -91,3 +91,8 @@ ostream& operator<<(ostream& out, const Time& time)
 	out << right << setw(2) << setfill('0') << time.hours << ':' << setw(2) << setfill('0') << time.minutes;
 	return out;
 }
+
+bool Time::operator==(const Time &time) const
+{
+	return this->getHours() == time.getHours() && this->getMinutes() == time.getMinutes();
+}

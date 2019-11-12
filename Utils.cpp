@@ -245,3 +245,11 @@ vector <Flight*> addEmployeeToFlight(vector<Flight*>flights,vector<Employee*> em
 	}
 	return FlightsConv;
 }
+
+bool notInFlight(Employee *employee, Flight* flight) {
+	for (size_t i = 0; i < flight->getEmployees().size(); i++) {
+		if (flight->getEmployees().at(i) == employee)
+			return false;
+	}
+	return true;
+}

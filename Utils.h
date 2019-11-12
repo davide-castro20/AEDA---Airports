@@ -47,3 +47,5 @@ int checkInt(string sentence); // asks for an integer input until the user gives
 bool checkCats(const string &cats); // checks the string with plane types
 
 vector <Flight*> addEmployeeToFlight(vector<Flight*>flights, vector<Employee*> employees);
+
+bool notInFlight(Employee *employee, Flight* flight);
