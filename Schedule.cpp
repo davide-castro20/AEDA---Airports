@@ -135,6 +135,11 @@ bool FlightSched::isValid() const
 	return false;
 }
 
+string FlightSched::getSched() const
+{
+	return departureDate->getDate() + ", " + startHour->getTime() + " -- " + arrivalDate->getDate() + ", " + endHour->getTime();
+}
+
 
 InvalidFlightSched::InvalidFlightSched(Date * departureD, Time * startH, Date * arrivalD, Time * endH)
 {

@@ -43,7 +43,7 @@ void showDataMenu()
 		showPersonMenu();
 		break;
 	case 2:
-		//showFlightData();
+		showFlightMenu();
 		break;
 	case 3:
 		//showPlaneData();

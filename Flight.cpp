@@ -42,6 +42,28 @@ vector<Employee*> Flight::getEmployees() const
 	return employees;
 }
 
+vector<Employee*> Flight::getPilots() const
+{
+	vector<Employee*> pilots;
+	for (size_t i = 0; i < employees.size(); i++)
+	{
+		if (employees.at(i)->getType() == "Pilot")
+			pilots.push_back(employees.at(i));
+	}
+	return pilots;
+}
+
+vector<Employee*> Flight::getCrew() const
+{
+	vector<Employee*> crew;
+	for (size_t i = 0; i < employees.size(); i++)
+	{
+		if (employees.at(i)->getType() == "Flight Crew")
+			crew.push_back(employees.at(i));
+	}
+	return crew;
+}
+
 FlightSched Flight::getRealSchedule() const
 {
 	return *realSchedule;

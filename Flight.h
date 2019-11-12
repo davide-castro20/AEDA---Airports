@@ -30,6 +30,8 @@ public:
 	/*Airport* getDeparture() const;
 	Airport* getDestination() const;*/
 	vector<Employee*> getEmployees() const;
+	vector<Employee*> getPilots() const;
+	vector<Employee*> getCrew() const;
 	FlightSched getRealSchedule() const;
 	FlightSched getPredictedSchedule() const;
 	Time getFlightDuration() const;

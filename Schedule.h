@@ -41,7 +41,7 @@ public:
 	void setStartHour(Time *start);
 	void setEndHour(Time *end);
 	virtual bool isValid() const;
-	string getSched() const;
+	virtual string getSched() const;
 	
 };
 
@@ -62,4 +62,5 @@ public:
 	void setArrivalDate(Date *date);
 
 	bool isValid() const;
+	string getSched() const;
 };
