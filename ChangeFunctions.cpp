@@ -150,8 +150,7 @@ void changePersonData()
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
-					cout << string(100, '\n');
-					cout << "|There was a problem with your selection, please try again." << string(2, '\n');
+					cout << "|There was a problem with your selection, please try again.\n" ;
 					badInput = true;
 				}
 				else
@@ -387,7 +386,6 @@ void changeFlightData()
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << string(100, '\n');
 				cout << "|There was a problem with your selection, please try again.\n";
 				badInput = true;
 
