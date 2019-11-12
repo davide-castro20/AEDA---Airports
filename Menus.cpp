@@ -40,7 +40,7 @@ void showDataMenu()
 	switch (ShowSelect)
 	{
 	case 1:
-		//showPersonData();
+		showPersonMenu();
 		break;
 	case 2:
 		//showFlightData();
@@ -88,7 +88,7 @@ void createDataMenu()
 			createFlight();
 			break;
 		case 3:
-			//createPlane();
+			createPlane();
 			break;
 		}
 	} while (Selection != 0);
@@ -226,7 +226,7 @@ void selectAirportMenu()
 	unsigned int select;
 	do
 	{
-		//cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "Which airport do you want to see the data of: \n";
 		for (size_t i = 0; i < comp->getAirports().size(); i++)
 			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity();
@@ -256,8 +256,9 @@ void companyMenu()
 	do {
 		do
 		{
+			cout << string(100, '-') << endl;
 			cout << "What would you like to do? \n";
-			cout << "1)Select a airport to inspect.\n2)See airports specification.\n0)Close Program.";
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n0)Close Program." << endl;
 			cin >> sel;
 			if (cin.fail() || sel < 0 || sel>2)
 			{

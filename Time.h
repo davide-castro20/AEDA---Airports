@@ -21,4 +21,5 @@ public:
 	bool operator<(const Time &time) const;
 	Time operator-(Time &time) const;
 	friend ostream& operator<<(ostream& out, const Time& time);
+	string getTime() const;
 };

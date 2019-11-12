@@ -70,6 +70,30 @@ vector <Plane*> Pilot::getPlanes() const {
 	return planes; 
 }
 
+string Pilot::getPlaneTypes() const
+{
+	vector<string> types;
+	string typesS;
+	bool in = false;
+	for (size_t i = 0; i < planes.size(); i++)
+	{
+		for (size_t j = 0; j < types.size(); j++)
+			if (planes.at(i)->getType() == types.at(j))
+			{
+				in = true;
+			}
+		if (!in)
+			types.push_back(planes.at(i)->getType());
+		in = false;
+	}
+	if (types.size() == 1)
+		return types.at(0);
+	else if (types.size() == 2)
+		return types.at(0) + ", " + types.at(1);
+	else
+		return types.at(0) + ", " + types.at(1) + ", " + types.at(2);
+}
+
 vector <Flight*> Pilot::getFlights() const {
 	return flights;
 }
@@ -155,11 +179,11 @@ Admin::Admin(string name, Date *birthDate, string department, string function) :
 	this->function = function;
 }
 
-string Admin::getDepartment() {
+string Admin::getDepartment() const {
 	return department;
 }
 
-string Admin::getFunction() {
+string Admin::getFunction() const {
 	return function;
 }
 
@@ -191,12 +215,12 @@ BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *sche
 	this->schedule = schedule;
 }
 
-string BaseCrew::getCategory() {
+string BaseCrew::getCategory() const {
 	return category;
 }
 
-Schedule BaseCrew::getSchedule() {
-	return *schedule;
+Schedule* BaseCrew::getSchedule() const{
+	return schedule;
 }
 
 bool BaseCrew::setCategory(string categ)
@@ -216,6 +240,7 @@ bool BaseCrew::setSchedule(Schedule *sched)
 	}
 	return false;
 }
+
 
 double BaseCrew::calcSalary() {
 	return 1500;

@@ -44,6 +44,17 @@ bool Schedule::isValid() const
 		return false;
 }
 
+string Schedule::getSched() const
+{
+	return startHour->getTime() + " - " + endHour->getTime();
+}
+
+ostream& operator<<(ostream &out, const Schedule &sched)
+{
+	out << sched.getStartHour() << " - " << sched.getEndHour();
+	return out;
+}
+
 
 
 /*---------------FLIGHT SCHEDULE-------------*/

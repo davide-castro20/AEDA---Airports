@@ -6,6 +6,7 @@
 class Date;
 class Time;
 
+using namespace std;
 
 class InvalidSchedule
 {
@@ -40,7 +41,11 @@ public:
 	void setStartHour(Time *start);
 	void setEndHour(Time *end);
 	virtual bool isValid() const;
+	string getSched() const;
+	
 };
+
+ostream& operator<<(ostream &out, const Schedule &sched);
 
 class FlightSched : public Schedule
 {

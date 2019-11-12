@@ -7,3 +7,5 @@ void createAdmin();
 void createBaseCrew();
 
 void createFlight();
+
+void createPlane();

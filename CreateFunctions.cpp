@@ -86,18 +86,17 @@ void createPilot()
 	vector<int> flightIds;
 	vector<string> flightIdsString;
 	vector<Plane*> planes;
-	vector<Flight*> flights;
+	vector<Flight*> flights = {};
 	
 	badInput = false;
 
+
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Name: \n";
-	do 
+	do
 	{
-		cin.ignore(100, '\n');
+
 		getline(cin, name);
-		if (cin.eof())
-			return;
 		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos))
 		{
 			cin.clear();
@@ -110,18 +109,16 @@ void createPilot()
 		{
 			badInput = false;
 		}
-		
+		if (cin.eof())
+			return;
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
-		cin.ignore(100, '\n');
 		getline(cin, read);
-		if (cin.eof())
-			return;
-  		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -134,6 +131,8 @@ void createPilot()
 			badInput = false;
 			birthDate = new Date(read);
 		}
+		if (cin.eof())
+			return;
 
 	} while (badInput);
 
@@ -143,8 +142,6 @@ void createPilot()
 	do
 	{
 		cin >> category;
-		if (cin.eof())
-			return;
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
@@ -157,7 +154,11 @@ void createPilot()
 		{
 			badInput = false;
 		}
+		if (cin.eof())
+			return;
+
 	} while (badInput);
+
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Plane Types: \n";
@@ -198,99 +199,99 @@ void createPilot()
 		}
 	} while (badInput);
 
-	cout << "-----------------------------------------------------------------------------------------------------\n";
-	cout << "Flights: \n";
-	do {
-		cin.ignore(100, '\n');
-		getline(cin, read);
-		if (cin.eof())
-			return;
-		if (cin.fail() || read.empty())
-		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
-			badInput = true;
-		}
-		else
-		{
-			badInput = false;
-			if (!(read.find_first_of(",") == string::npos)) {
-				decompose(read, flightIdsString, ',');
-				for (size_t i = 0; i < flightIdsString.size(); i++)
-					flightIds.push_back(stoi(flightIdsString.at(i)));
-			}
-			else {
-				trim(read);
-				flightIds.push_back(stoi(read));
-			}
-			bool full = false;
-			for (size_t i = 0; i < flightIds.size(); i++)
-			{
-				int count = 0;
-				
-				for (size_t j = 0; j < currentAirport->flights.size(); j++)
-				{
-					if (flightIds.at(i) == currentAirport->flights.at(j)->getId())
-					{
-						count++;
-						int pilotCount = 0;
-						for (size_t k = 0; k < currentAirport->flights.at(j)->getEmployees().size(); k++)
-						{
-							if (currentAirport->flights.at(j)->getEmployees().at(k)->getType() == "Pilot")
-								pilotCount++;
-						}
-						if (pilotCount == 2)
-							full = true;
-					}
-				}
-				if (count == 0)
-				{
-					cout << "One or more of those flights ID's don't exist!" << endl;
-					badInput = true;
-					break;
-				}
-				if (full)
-				{
-					cout << "One or more of those flights have a full Pilot crew!" << endl;
-					badInput = true;
-					break;
-				}
-			}
-			
-			if (!badInput)
-			{
-				flights = convertIdToFlight(flightIds, currentAirport->flights);
-				for (size_t i = 0; i < flights.size(); i++)
-				{
-					int catCount = 0;
-					for (size_t j = 0; j < planeTypes.size(); j++)
-					{
-						if(planeTypes.at(j) == flights.at(i)->getPlane()->getType())
-							catCount++;
-					}
-					if (catCount == 0)
-					{
-						cout << "This Pilot does not have the required plane types for one or more flights!" << endl;
-						badInput = true;
-						break;
-					}
-				}
-				Employee *newPilot = new Pilot(name, birthDate, category, planes, flights);
-				for (size_t i = 0; i < currentAirport->employees.size(); i++)
-				{
-					if (currentAirport->employees.at(i) == newPilot)
-					{
-						cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
-						return;
-					}
-				}
-				currentAirport->employees.push_back(newPilot);
-				cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
-			}
-		}
+	//cout << "-----------------------------------------------------------------------------------------------------\n";
+	//cout << "Flights: \n";
+	//do {
+	//	//cin.ignore(100, '\n');
+	//	getline(cin, read);
+	//	if (cin.eof())
+	//		return;
+	//	if (cin.fail() || read.empty())
+	//	{
+	//		cin.clear();
+	//		//cin.ignore(100, '\n');
+	//		//cout << "-----------------------------------------------------------------------------------------------------\n";
+	//		badInput = true;
+	//	}
+	//	else
+	//	{
+	//		badInput = false;
+	//		if (!(read.find_first_of(",") == string::npos)) {
+	//			decompose(read, flightIdsString, ',');
+	//			for (size_t i = 0; i < flightIdsString.size(); i++)
+	//				flightIds.push_back(stoi(flightIdsString.at(i)));
+	//		}
+	//		else {
+	//			trim(read);
+	//			flightIds.push_back(stoi(read));
+	//		}
+	//		bool full = false;
+	//		for (size_t i = 0; i < flightIds.size(); i++)
+	//		{
+	//			int count = 0;
+	//			
+	//			for (size_t j = 0; j < currentAirport->flights.size(); j++)
+	//			{
+	//				if (flightIds.at(i) == currentAirport->flights.at(j)->getId())
+	//				{
+	//					count++;
+	//					int pilotCount = 0;
+	//					for (size_t k = 0; k < currentAirport->flights.at(j)->getEmployees().size(); k++)
+	//					{
+	//						if (currentAirport->flights.at(j)->getEmployees().at(k)->getType() == "Pilot")
+	//							pilotCount++;
+	//					}
+	//					if (pilotCount == 2)
+	//						full = true;
+	//				}
+	//			}
+	//			if (count == 0)
+	//			{
+	//				cout << "One or more of those flights ID's don't exist!" << endl;
+	//				badInput = true;
+	//				break;
+	//			}
+	//			if (full)
+	//			{
+	//				cout << "One or more of those flights have a full Pilot crew!" << endl;
+	//				badInput = true;
+	//				break;
+	//			}
+	//		}
+	//		
+	//		if (!badInput)
+	//		{
+	//			flights = convertIdToFlight(flightIds, currentAirport->flights);
+	//			for (size_t i = 0; i < flights.size(); i++)
+	//			{
+	//				int catCount = 0;
+	//				for (size_t j = 0; j < planeTypes.size(); j++)
+	//				{
+	//					if(planeTypes.at(j) == flights.at(i)->getPlane()->getType())
+	//						catCount++;
+	//				}
+	//				if (catCount == 0)
+	//				{
+	//					cout << "This Pilot does not have the required plane types for one or more flights!" << endl;
+	//					badInput = true;
+	//					break;
+	//				}
+	//			}
+	Employee *newPilot = new Pilot(name, birthDate, category, planes, flights);
+				//for (size_t i = 0; i < currentAirport->employees.size(); i++)
+				//{
+				//	if (currentAirport->employees.at(i) == newPilot)
+				//	{
+				//		cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+				//		return;
+				//	}
+				//}
+	currentAirport->employees.push_back(newPilot);
+		//		cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
+		//	}
+		//}
 
-	} while (badInput);
+	//} while (badInput);
 
 }
 
@@ -1215,6 +1216,63 @@ void createFlight()
 		}
 		cout << endl << "Flight successfuly created!" << endl;
 		
+}
+
+void createPlane()
+{
+	string type;
+	int capacity;
+	bool badInput = false;
+
+	cout << string(100, '-') << endl;
+	cout << "Category: " << endl;
+	do
+	{
+		cin >> type;
+		if (cin.fail() || ((type != "A") && (type != "B") && (type != "C")))
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid category! Please insert plane's category again (A, B or C)\n";
+		}
+		else
+		{
+			badInput = false;
+		}
+		if (cin.eof())
+			return;
+
+	} while (badInput);
+
+	cout << string(100, '-') << endl;
+	cout << "Capacity: " << endl;
+	do
+	{
+		cin >> capacity;
+		if (cin.fail() || capacity < 0 || capacity > 550)
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid capacity! Please insert the plane's capacity again (must be less tha 550)\n";
+		}
+		else
+		{
+			badInput = false;
+		}
+		if (cin.eof())
+			return;
+
+	} while (badInput);
+
+	vector<Flight*> flights = {};
+	Plane* newPlane = new Plane(type, capacity, flights);
+	currentAirport->planes.push_back(newPlane);
+	cout << string(100, '-') << endl;
+	cout << "New plane successfuly created!" << endl;
 }
 
 

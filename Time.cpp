@@ -66,8 +66,28 @@ Time Time::operator-(Time & time) const
 
 }
 
+string Time::getTime() const
+{
+	string time;
+	if (hours <= 9)
+	{
+		if (minutes <= 9)
+			time = '0' + to_string(hours) + ':' + '0' + to_string(minutes);
+		else
+			time = '0' + to_string(hours) + ':' + to_string(minutes);
+	}
+	else
+	{
+		if (minutes <= 9)
+			time = to_string(hours) + ':' + '0' + to_string(minutes);
+		else
+			time = to_string(hours) + ':' + to_string(minutes);
+	}
+	return time;
+}
+
 ostream& operator<<(ostream& out, const Time& time)
 {
-	out << time.hours << ':' << time.minutes;
+	out << right << setw(2) << setfill('0') << time.hours << ':' << setw(2) << setfill('0') << time.minutes;
 	return out;
 }

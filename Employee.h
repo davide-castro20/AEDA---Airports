@@ -23,9 +23,9 @@ public:
 	virtual string getCategory() const { return "Non existant for this employee"; }; //returns none if category is non existant
 	virtual vector <Plane*> getPlanes() const { return {}; }; //returns empty vector if non existant
 	virtual vector <Flight*> getFlights() const { return {}; }; //returns empty vector if non existant
-	virtual string getDeparment() const { return "Non existant for this employee"; }; //returns none if department is non existant
+	virtual string getDepartment() const { return "Non existant for this employee"; }; //returns none if department is non existant
 	virtual string getFunction() const { return "Non existant for this employee"; }; //returns none if function is non existant
-	//virtual Schedule getSchedule() { Schedule *schedule; return *schedule; };
+	virtual Schedule* getSchedule() const { Schedule *schedule = NULL; return schedule; };
 
 	virtual bool setCategory(string category) { return true; };
 	virtual bool setSchedule(Schedule *schedule) { return true; };
@@ -33,6 +33,7 @@ public:
 	virtual bool setFunction(string function) { return true; };
 	virtual bool isFree(FlightSched *check) { return false; };
 	virtual void addFlight(Flight* flight) { return; };
+	virtual string getPlaneTypes() const { return ""; };
 
 	bool setName(string name);
 	bool setDate(Date *birthDate);
@@ -59,13 +60,14 @@ public:
 
 	string getCategory() const ;
 	vector <Plane*> getPlanes() const;
+	string getPlaneTypes() const;
 	vector <Flight*> getFlights() const;
 	bool setCategory(string categ);
 	bool setFlights(vector<Flight*> &flights);
 	bool setPlanes(vector<Plane*> &planes);
 	bool isFree(FlightSched *check);
 	void addFlight(Flight* flight);
-	
+
 	double calcSalary();
 };
 
@@ -93,8 +95,8 @@ private:
 public:
 	Admin(string name, Date *birthDate, string department, string function);
 
-	string getDepartment();
-	string getFunction();
+	string getDepartment() const;
+	string getFunction() const;
 
 	bool setDepartment(string depart);
 	bool setFunction(string func);
@@ -109,8 +111,8 @@ private:
 public:
 	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule);
 
-	string getCategory();
-	Schedule getSchedule();
+	string getCategory() const;
+	Schedule* getSchedule() const;
 	bool setCategory(string categ);
 	bool setSchedule(Schedule *sched);
 
