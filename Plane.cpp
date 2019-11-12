@@ -46,6 +46,7 @@ ostream & operator <<(ostream &out, const capacityError &error)
 
 bool Plane::setCapacity(int cap)
 {
+	cout << cap;
 	if (cap <= 0)
 		return false;
 	capacity = cap;
@@ -53,8 +54,11 @@ bool Plane::setCapacity(int cap)
 }
 
 bool Plane::setType(string type) {
-	if (type == "A" || type == "B" || type == "C")
+	if (type == "A" || type == "B" || type == "C") {
+		
 		return true;
+	}
+	cout << "There was an error with the type selection";
 	return false;
 }
 

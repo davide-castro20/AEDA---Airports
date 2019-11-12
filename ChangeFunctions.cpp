@@ -19,10 +19,11 @@ void changePersonData()
 	Schedule *schedule;
 	Time *endSchedule;
 	bool completedChange = false;
-	cout << "|Whose data do you want to change?(0 to cancel)\n" << endl;
 	do {
 		do
 		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "|Whose data do you want to change?(0 to cancel)\n" << endl;
 			for (size_t i = 1; i < currentAirport->employees.size() + 1; i++)
 				cout << i << ") " << currentAirport->employees.at(i - 1)->getType() << ":" << currentAirport->employees.at(i - 1)->getName() << "." << endl;
 			cin >> changeSelection;
@@ -30,7 +31,6 @@ void changePersonData()
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
@@ -42,20 +42,20 @@ void changePersonData()
 		if (changeSelection == 0)
 			return;
 		changeSelection--;
-		cout << "-----------------------------------------------------------------------------------------------------\n";
+		
 		cin.clear();
 		cin.ignore(100, '\n');
 		do
 		{
 			if (currentAirport->employees.at(changeSelection)->getType() == "Pilot") {
+				cout << "-----------------------------------------------------------------------------------------------------\n";
 				cout << "|What do you want to change?\n1) Name\n2) Category\n0) Back\n";
 				cin >> selectionToChange;
 				if (cin.fail() || selectionToChange < 0 || selectionToChange > 2)
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
-					cout << "-----------------------------------------------------------------------------------------------------\n";
-					cout << "|There was a problem with your selection, please try again." << string(2, '\n');
+					cout << "|There was a problem with your selection, please try again.\n";
 					badInput = true;
 				}
 				else
@@ -65,13 +65,13 @@ void changePersonData()
 					if (selectionToChange == 1) {
 						do
 						{
-							cout << "!What name would you like to change to? \n";
+							cout << "-----------------------------------------------------------------------------------------------------\n";
+							cout << "|What name would you like to change to? \n";
 							getline(cin, name);
-							if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name=="" || islower(name.at(0)))
+							if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name=="" || islower(name.at(0)))
 							{
 								cin.clear();
 								//cin.ignore(100, '\n');
-								cout << "-----------------------------------------------------------------------------------------------------\n";
 								badInput = true;
 								cout << "!Invalid name! Please insert name again \n";
 							}
@@ -96,14 +96,14 @@ void changePersonData()
 				}
 			}
 			else if (currentAirport->employees.at(changeSelection)->getType() == "Flight Crew") {
+				cout << "-----------------------------------------------------------------------------------------------------\n";
 				cout << "|What do you want to change?\n1) Name\n2) Category\n0) Back\n";
 				cin >> selectionToChange;
 				if (cin.fail() || selectionToChange < 0 || selectionToChange > 2)
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
-					cout << string(100, '\n');
-					cout << "|There was a problem with your selection, please try again." << string(2, '\n');
+					cout << "|There was a problem with your selection, please try again.\n";
 					badInput = true;
 				}
 				else
@@ -114,13 +114,14 @@ void changePersonData()
 					if (selectionToChange == 1) {
 						do
 						{
+							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "!What name would you like to change to? \n";
 							getline(cin, name);
-							if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+							if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 							{
 								cin.clear();
 								//cin.ignore(100, '\n');
-								cout << "-----------------------------------------------------------------------------------------------------\n";
+
 								badInput = true;
 								cout << "!Invalid name! Please insert name again \n";
 							}
@@ -161,15 +162,15 @@ void changePersonData()
 					if (selectionToChange == 1) {
 						do
 						{
-							cout << "!What name would you like to change to? \n";
+							cout << "-----------------------------------------------------------------------------------------------------\n";
+							cout << "|What name would you like to change to? \n";
 							getline(cin, name);
-							if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+							if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 							{
 								cin.clear();
 								//cin.ignore(100, '\n');
-								cout << "-----------------------------------------------------------------------------------------------------\n";
 								badInput = true;
-								cout << "!Invalid name! Please insert name again \n";
+								cout << "|Invalid name! Please insert name again \n";
 							}
 							else
 							{
@@ -198,14 +199,14 @@ void changePersonData()
 				}
 			}
 			else if (currentAirport->employees.at(changeSelection)->getType() == "Base Crew") {
+			cout << "-----------------------------------------------------------------------------------------------------\n";
 				cout << "|What do you want to change?\n1) Name\n2) Category\n3) Schedule\n0) Back\n";
 				cin >> selectionToChange;
 				if (cin.fail() || selectionToChange < 0 || selectionToChange > 3)
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
-					cout << string(100, '\n');
-					cout << "|There was a problem with your selection, please try again." << string(2, '\n');
+					cout << "|There was a problem with your selection, please try again.\n";
 					badInput = true;
 				}
 				else
@@ -216,13 +217,12 @@ void changePersonData()
 					if (selectionToChange == 1) {
 						do
 						{
-							cout << "!What name would you like to change to? \n";
+							cout << "-----------------------------------------------------------------------------------------------------\n";
+							cout << "|What name would you like to change to? \n";
 							getline(cin, name);
-							if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+							if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 							{
 								cin.clear();
-								//cin.ignore(100, '\n');
-								cout << "-----------------------------------------------------------------------------------------------------\n";
 								badInput = true;
 								cout << "!Invalid name! Please insert name again \n";
 							}
@@ -259,34 +259,7 @@ void changePersonData()
 				}
 			}
 		} while (badInput);
-		do
-		{
-			cout << "|Are you sure you want to change the following employee?(y/n)\n";
-			//currentAirport->employees.at(changeSelection)->showEmp();
-			cin >> confirm;
-			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
-			{
-				cin.clear();
-				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
-				badInput = true;
-			}
-			else
-			{
-				badInput = false;
-			}
-			if (confirm == "y" || confirm == "Y")
-			{
-				badInput = false;
-				completedChange = true;
-			}
-			if (confirm == "n" || confirm == "N")
-			{
-				badInput = false;
-				completedChange = false;
-			}
-
-		} while (badInput);
+		completedChange = true;
 	} while (!completedChange);
 }
 
@@ -300,11 +273,12 @@ void changePlaneData()
 	int capac;
 	string type;
 	bool completedChange = false;
-	cout << "-----------------------------------------------------------------------------------------------------\n";
-	cout << "|Which plane data do you want to change?(0 to cancel)\n" << endl;
+	
 	do {
 		do
 		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "|Which plane data do you want to change?(0 to cancel)" << endl;
 			for (size_t i = 1; i < currentAirport->planes.size() + 1; i++)
 				cout << i << ") " << currentAirport->planes.at(i - 1)->getType() << "." << endl;
 			cin >> changeSelection;
@@ -312,7 +286,6 @@ void changePlaneData()
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
@@ -334,8 +307,7 @@ void changePlaneData()
 				{
 					cin.clear();
 					cin.ignore(100, '\n');
-					cout << string(100, '\n');
-					cout << "|There was a problem with your selection, please try again." << string(2, '\n');
+					cout << "|There was a problem with your selection, please try again.\n" ;
 					badInput = true;
 				}
 				else
@@ -344,50 +316,25 @@ void changePlaneData()
 					if (selectionToChange == 1) {
 						do
 						{
+							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the type you want to change to?\n";
 							cin.ignore(100, '\n');
 							getline(cin, type);
-						} while (currentAirport->planes.at(changeSelection)->setType(type));
+						} while (!currentAirport->planes.at(changeSelection)->setType(type));
 					}
 					if (selectionToChange == 2) {
 						do
 						{
+							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the capacity you want to change to?\n";
 							cin.ignore(100, '\n');
 							getline(cin, capacity);
 							capac = stoi(capacity);
-						} while (currentAirport->planes.at(changeSelection)->setCapacity(capac));
+						} while (!currentAirport->planes.at(changeSelection)->setCapacity(capac));
 					}
 				}
 			}while (badInput);
-		do
-		{
-			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "|Are you sure you want to change the following plane?(y/n)\n";
-			cin >> confirm;
-			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
-			{
-				cin.clear();
-				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
-				badInput = true;
-			}
-			else
-			{
-				badInput = false;
-			}
-			if (confirm == "y" || confirm == "Y")
-			{
-				badInput = false;
-				completedChange = true;
-			}
-			if (confirm == "n" || confirm == "N")
-			{
-				badInput = false;
-				completedChange = false;
-			}
-
-		} while (badInput);
+			completedChange = true;
 	} while (!completedChange);
 }
 
@@ -442,7 +389,7 @@ void changeFlightData()
 				cin.clear();
 				cin.ignore(100, '\n');
 				cout << string(100, '\n');
-				cout << "|There was a problem with your selection, please try again." << string(2, '\n');
+				cout << "|There was a problem with your selection, please try again.\n";
 				badInput = true;
 
 			}
@@ -572,32 +519,6 @@ void changeFlightData()
 			}
 		} while (badInput);
 
-		do
-		{
-			cout << "|Are you sure you want to change the following flight?(y/n)\n";
-			cin >> confirm;
-			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
-			{
-				cin.clear();
-				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
-				badInput = true;
-			}
-			else
-			{
-				badInput = false;
-			}
-			if (confirm == "y" || confirm == "Y")
-			{
-				badInput = false;
-				completedChange = true;
-			}
-			if (confirm == "n" || confirm == "N")
-			{
-				badInput = false;
-				completedChange = false;
-			}
-
-		} while (badInput);
+		completedChange = true;
 	} while (!completedChange);
 }

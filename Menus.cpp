@@ -18,16 +18,15 @@ void showDataMenu()
 	bool badInput = true;
 	int ShowSelect;
 	int cont = 0;
-	cout << "-----------------------------------------------------------------------------------------------------\n";
 	do
 	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "Which data to read?\n" << "1)A Person.\n" << "2)A Flight.\n" << "3)A Plane.\n" << "4)An Airport\n" << "0)Return to the last menu.\n";
 		cin >> ShowSelect;
 		if (cin.fail() || ShowSelect <= -1 || ShowSelect > 4)
 		{
 			cin.clear();
 			cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
 			badInput = true;
 		}
 		else
@@ -98,18 +97,17 @@ void changeDataMenu()
 {
 	bool badInput = true;
 	int selection;
-	cout << "-----------------------------------------------------------------------------------------------------\n";
 	do
 	{
 		do
 		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)A Airport.\n0)Return to main menu.\n";
 			cin >> selection;
 			if (cin.fail() || selection < 0 || selection > 3)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else

@@ -253,3 +253,11 @@ bool notInFlight(Employee *employee, Flight* flight) {
 	}
 	return true;
 }
+
+
+bool noAccent(string name) {
+	for (size_t i = 0; i < name.size(); i++)
+		if (int(name.at(i)) < -1 || int(name.at(i)) > 255)
+			return false;
+	return true;
+}

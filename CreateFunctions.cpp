@@ -97,7 +97,7 @@ void createPilot()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name=="")
+		if ( !noAccent(name) ||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name=="")
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -312,7 +312,7 @@ void createFlightCrew()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -477,7 +477,7 @@ void createAdmin()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		if ( !noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
@@ -599,7 +599,7 @@ void createBaseCrew()
 	{
 
 		getline(cin, name);
-		if (cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		if (!noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
