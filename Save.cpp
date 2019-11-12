@@ -3,6 +3,40 @@
 
 extern Company *comp;
 
+
+void saveAirports() {
+	ofstream newAirportsFile;
+	string s = "Airports.txt";
+	newAirportsFile.open("newAirports.txt");
+	for (size_t i = 0; i < comp->getAirports().size() - 1; i++) {
+		newAirportsFile << comp->getAirports().at(i)->getLocal().getCountry() << endl;
+		newAirportsFile << comp->getAirports().at(i)->getLocal().getCity() << endl;
+		newAirportsFile << comp->getAirports().at(i)->getLocal().getLatit() << endl;
+		newAirportsFile << comp->getAirports().at(i)->getLocal().getLon() << endl;
+		newAirportsFile << comp->getAirports().at(i)->flightTxt << endl;
+		newAirportsFile << comp->getAirports().at(i)->planesTxt << endl;
+		newAirportsFile << comp->getAirports().at(i)->employeeTxt << endl;
+		newAirportsFile << "::::::::::";
+	}
+	if (comp->getAirports().size() != 0) {
+		size_t size = comp->getAirports().size()- 1;
+		newAirportsFile << comp->getAirports().at(size)->getLocal().getCountry() << endl;
+		newAirportsFile << comp->getAirports().at(size)->getLocal().getCity() << endl;
+		newAirportsFile << comp->getAirports().at(size)->getLocal().getLatit() << endl;
+		newAirportsFile << comp->getAirports().at(size)->getLocal().getLon() << endl;
+		newAirportsFile << comp->getAirports().at(size)->flightTxt << endl;
+		newAirportsFile << comp->getAirports().at(size)->planesTxt << endl;
+		newAirportsFile << comp->getAirports().at(size)->employeeTxt << endl;
+	}
+	const char* fileName = s.c_str();
+	newAirportsFile.close();
+	//remove(fileName);
+	//rename("newAirports.txt", fileName);
+
+
+
+}
+
 void SaveFlights() {
 	ofstream newFlightsFile;
 	for (size_t i = 0; i < comp->getAirports().size(); i++) {
@@ -18,17 +52,18 @@ void SaveFlights() {
 			newFlightsFile << comp->getAirports().at(i)->flights.at(j)->getDestination() << endl;
 			newFlightsFile << ":::::::::::\n";
 		}
-		if (comp->getAirports().at(i)->flights.size() == 0)
-			return;
-		size_t size = comp->getAirports().at(i)->flights.size() - 1;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getId() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getDepartureDate() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getArrivalDate() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getStartHour().getHours() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getStartHour().getMinutes() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getEndHour().getHours() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getEndHour().getMinutes() << endl;
-		newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getDestination() << endl;
+		if (comp->getAirports().at(i)->flights.size() != 0) {
+
+			size_t size = comp->getAirports().at(i)->flights.size() - 1;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getId() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getDepartureDate() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getArrivalDate() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getStartHour().getHours() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getStartHour().getMinutes() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getEndHour().getHours() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getPredictedSchedule().getEndHour().getMinutes() << endl;
+			newFlightsFile << comp->getAirports().at(i)->flights.at(size)->getDestination() << endl;
+		}
 		const char* fileName = comp->getAirports().at(i)->flightTxt.c_str();
 		newFlightsFile.close();
 		//remove(fileName);
@@ -102,64 +137,64 @@ void SaveEmployees() {
 				newEmployeesFile << "::::::::::\n";
 			}
 		}
-		if (comp->getAirports().at(i)->employees.size() == 0)
-			return;
-		size_t EmpSize = comp->getAirports().at(i)->employees.size() - 1;
-		if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Pilot") {
-			string flights = "";
-			size_t size = comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().size();
-			if (size > 0)
-			{
-				for (size_t i = 0; i < size; i++)
+		if (comp->getAirports().at(i)->employees.size() != 0) {
+			size_t EmpSize = comp->getAirports().at(i)->employees.size() - 1;
+			if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Pilot") {
+				string flights = "";
+				size_t size = comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().size();
+				if (size > 0)
 				{
-					if (i < (size - 1))
-						flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId()) + ", ";
-					else
-						flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId());
+					for (size_t i = 0; i < size; i++)
+					{
+						if (i < (size - 1))
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId()) + ", ";
+						else
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId());
+					}
 				}
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getCategory() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getPlaneTypes() << endl;
+				newEmployeesFile << flights << endl;
 			}
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getCategory() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getPlaneTypes() << endl;
-			newEmployeesFile << flights << endl;
-		}
-		else if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Flight Crew") {
-			string flights = "";
-			size_t size = comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().size();
-			if (size > 0)
-			{
-				for (size_t i = 0; i < size; i++)
+			else if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Flight Crew") {
+				string flights = "";
+				size_t size = comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().size();
+				if (size > 0)
 				{
-					if (i < (size - 1))
-						flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId()) + ", ";
-					else
-						flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId());
+					for (size_t i = 0; i < size; i++)
+					{
+						if (i < (size - 1))
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId()) + ", ";
+						else
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId());
+					}
 				}
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getCategory() << endl;
+				newEmployeesFile << flights << endl;
 			}
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getCategory() << endl;
-			newEmployeesFile << flights << endl;
-		}
-		else if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Admin") {
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDepartment() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getFunction() << endl;
-		}
-		else if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Base Crew") {
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getCategory() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getStartHour().getHours() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getStartHour().getMinutes() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getEndHour().getHours() << endl;
-			newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getEndHour().getMinutes() << endl;
+			else if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Admin") {
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDepartment() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getFunction() << endl;
+			}
+			else if (comp->getAirports().at(i)->employees.at(EmpSize)->getType() == "Base Crew") {
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getName() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getDate() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getCategory() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getStartHour().getHours() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getStartHour().getMinutes() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getEndHour().getHours() << endl;
+				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getSchedule()->getEndHour().getMinutes() << endl;
+			}
 		}
 		const char* fileName = comp->getAirports().at(i)->employeeTxt.c_str();
 		newEmployeesFile.close();
@@ -190,24 +225,24 @@ void SavePlanes() {
 			newPlanesFile << flights << endl;
 			newPlanesFile << ":::::::::::\n";
 		}
-		if (comp->getAirports().at(i)->planes.size() == 0)
-			return;
-		size_t PlaneSize = comp->getAirports().at(i)->planes.size() - 1;
-		string flights = "";
-		size_t size = comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().size();
-		if (size > 0)
-		{
-			for (size_t i = 0; i < size; i++)
+		if (comp->getAirports().at(i)->planes.size() != 0) {
+			size_t PlaneSize = comp->getAirports().at(i)->planes.size() - 1;
+			string flights = "";
+			size_t size = comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().size();
+			if (size > 0)
 			{
-				if (i < (size - 1))
-					flights += to_string(comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().at(i)->getId()) + ", ";
-				else
-					flights += to_string(comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().at(i)->getId());
+				for (size_t i = 0; i < size; i++)
+				{
+					if (i < (size - 1))
+						flights += to_string(comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().at(i)->getId()) + ", ";
+					else
+						flights += to_string(comp->getAirports().at(i)->planes.at(PlaneSize)->getFlights().at(i)->getId());
+				}
 			}
+			newPlanesFile << comp->getAirports().at(i)->planes.at(PlaneSize)->getType() << endl;
+			newPlanesFile << comp->getAirports().at(i)->planes.at(PlaneSize)->getCapacity() << endl;
+			newPlanesFile << flights << endl;
 		}
-		newPlanesFile << comp->getAirports().at(i)->planes.at(PlaneSize)->getType() << endl;
-		newPlanesFile << comp->getAirports().at(i)->planes.at(PlaneSize)->getCapacity() << endl;
-		newPlanesFile << flights << endl;
 		const char* fileName = comp->getAirports().at(i)->planesTxt.c_str();
 		newPlanesFile.close();
 		//remove(fileName);

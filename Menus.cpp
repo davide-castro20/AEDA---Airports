@@ -268,6 +268,7 @@ void companyMenu()
 			SaveFlights();
 			SaveEmployees();
 			SavePlanes();
+			saveAirports();
 			return;
 		case 1:
 			selectAirportMenu();
