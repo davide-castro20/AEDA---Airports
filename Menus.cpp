@@ -46,7 +46,7 @@ void showDataMenu()
 		showFlightMenu();
 		break;
 	case 3:
-		//showPlaneData();
+		showPlaneMenu();
 		break;
 	case 0:
 		break;

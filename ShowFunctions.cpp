@@ -195,8 +195,53 @@ void showPerson(Employee* emp)
 
 void showByName()
 {
+	bool badInput = false;
 	string name;
+	Date* birthDate = NULL;
+	vector<Employee*> emps;
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Name: \n";
+	do
+	{
+		cin.ignore(100, '\n');
+		getline(cin, name);
+		if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid name! Please insert name again \n";
+		}
+		else
+		{
+			badInput = false;
+		}
+		if (cin.eof())
+			return;
+	} while (badInput);
 
+	if (currentAirport->employees.size() > 0)
+	{
+		for (size_t i = 0; i < currentAirport->employees.size(); i++)
+		{
+			if (currentAirport->employees.at(i)->getName() == name)
+				emps.push_back(currentAirport->employees.at(i));
+		}
+		if (emps.size() == 1)
+			showPerson(emps.at(0));
+		else if (emps.size() == 0)
+			cout << "There are no employees named " << name << " on this airport!\n";
+		else
+		{
+			cout << "There are " << emps.size() << " employees named " << name << '!' << endl;
+			for (size_t j = 0; j < emps.size(); j++)
+				showPerson(emps.at(j));
+		}
+			
+	}
+	else
+		cout << "There are currently no employees on this airport!\n";
 
 }
 
@@ -231,10 +276,15 @@ void showFlightMenu()
 		case 0:
 			return;
 		case 1:
-			for (size_t i = 0; i < currentAirport->flights.size(); i++)
+			if (currentAirport->flights.size() > 0)
 			{
-				showFlight(currentAirport->flights.at(i));
+				for (size_t i = 0; i < currentAirport->flights.size(); i++)
+				{
+					showFlight(currentAirport->flights.at(i));
+				}
 			}
+			else
+				cout << "No flights scheduled on this airport!\n";
 			break;
 		case 2:
 			showFlightsDates();
@@ -305,5 +355,184 @@ void showFlight(Flight* flight)
 
 void showFlightsDates()
 {
+	bool badInput = false;
+	Date* date1 = NULL;
+	Date* date2 = NULL;
+	string read;
 
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "First Date (dd/mm/yyyy): \n";
+	do
+	{
+		cin.ignore(100, '\n');
+		getline(cin, read);
+		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid date! Please insert birth date again \n";
+		}
+		else
+		{
+			badInput = false;
+			date1 = new Date(read);
+		}
+		if (cin.eof())
+			return;
+
+	} while (badInput);
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Second Date (dd/mm/yyyy): \n";
+	do
+	{
+		getline(cin, read);
+		if (cin.eof())
+			return;
+		if (cin.fail() || !existingDate(read))
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid date! Please insert birth date again \n";
+		}
+		else
+		{
+			badInput = false;
+			date2 = new Date(read);
+			if (*date2 < *date1)
+			{
+				cout << "Invalid date! Second date must be after the first. \n";
+				badInput = true;
+			}
+		}
+		
+
+	} while (badInput);
+
+	int count = 0;
+	for (size_t i = 0; i < currentAirport->flights.size(); i++)
+	{
+		if (checkBetweenDates(*date1, *date2, currentAirport->flights.at(i)->getPredictedSchedule().getArrivalDate())
+			&& checkBetweenDates(*date1, *date2, currentAirport->flights.at(i)->getPredictedSchedule().getDepartureDate()))
+		{
+			showFlight(currentAirport->flights.at(i));
+			count++;
+		}
+	}
+	if (count == 0)
+		cout << "No flights scheduled between the two dates! \n";
+
+}
+
+void showPlaneMenu()
+{
+	bool badInput = false;
+	int showSelect;
+	string type;
+
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		do
+		{
+			cout << "Which planes to show?\n" << "1)All planes.\n" << "2)Planes by category.\n" << "0)Return to the last menu.\n";
+			cin >> showSelect;
+			if (cin.fail() || showSelect <= -1 || showSelect > 2)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+
+		switch (showSelect)
+		{
+		case 0:
+			return;
+		case 1:
+			for (size_t i = 0; i < currentAirport->planes.size(); i++)
+			{
+				showPlane(currentAirport->planes.at(i));
+			}
+			break;
+		case 2:
+			showPlaneByCat();
+			break;
+		}
+	} while (showSelect != 0);
+}
+
+void showPlane(Plane* plane)
+{
+
+	string flights;
+	size_t size = plane->getFlights().size();
+	if (size > 0)
+	{
+		for (size_t i = 0; i < size; i++)
+		{
+			if (i < (size - 1))
+				flights += to_string(plane->getFlights().at(i)->getId()) + ", ";
+			else
+				flights += to_string(plane->getFlights().at(i)->getId());
+		}
+	}
+	else
+		flights = "No flights assined to this plane yet.";
+
+	cout << '|' << string(98, '-') << '|' << endl;
+	cout << '|' << string(98, '-') << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(20) << "Category " << '|' << left << setw(77) << ' ' + plane->getType() << '|' << endl;
+	cout << '|' << string(98, '-') << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(20) << "Capacity " << "| " << left << setw(76) << plane->getCapacity() << '|' << endl;
+	cout << '|' << string(98, '-') << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(20) << "Flights " << "| " << left << setw(76) << flights << '|' << endl;
+}
+
+void showPlaneByCat()
+{
+	string category;
+	bool badInput = false;
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Category: \n";
+	do
+	{
+		cin >> category;
+		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid category! Please insert pilot's category again (A, B or C)\n";
+		}
+		else
+		{
+			badInput = false;
+		}
+		if (cin.eof())
+			return;
+
+	} while (badInput);
+	
+	if (currentAirport->planes.size() > 0)
+	{
+		for (size_t i = 0; i < currentAirport->planes.size(); i++)
+		{
+			if (currentAirport->planes.at(i)->getType() == category)
+				showPlane(currentAirport->planes.at(i));
+		}
+	}
+	else
+		cout << "There are no planes of this category in this airport!\n";
 }

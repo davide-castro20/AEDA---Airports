@@ -38,7 +38,7 @@ bool existingDate(string &dt);
 
 bool endLaterThenBeg(string &endD, string &begD); // returns "true" if the string "begD" is a date later then the date on the "endD" string
 
-bool checkBetweenDates(std::string date1, std::string date2, Date date); // returns "true" if the object "date" is a date between "date1" and "date2"
+bool checkBetweenDates(Date date1, Date date2, Date date); // returns "true" if the object "date" is a date between "date1" and "date2"
 
 bool checkInt2(std::string s); // returns "true" if a string "sentence" can be converted to an integer
 

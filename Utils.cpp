@@ -153,21 +153,17 @@ bool endLaterThenBeg(string &endD, string &begD)
 	return false;
 }
 
-bool checkBetweenDates(string date1, string date2, Date date)
+bool checkBetweenDates(Date date1, Date date2, Date date)
 {
-	int date1day, date1month, date1year, date2day, date2month, date2year;
-	istringstream iSdate1(date1), iSdate2(date2);
-	char s;
-	iSdate1 >> date1year >> s >> date1month >> s >> date1day;
-	iSdate2 >> date2year >> s >> date2month >> s >> date2day;
-	int entryDate = (date.getYear() * 10000) + (date.getMonth() * 100) + date.getDay();
-	int startDate = (date1year * 10000) + (date1month * 100) + date1day;
-	int endDate = (date2year * 10000) + (date2month * 100) + date2year;
-
-	if (entryDate >= startDate && entryDate <= endDate)
-		return true;
+	if (date <= date2)
+	{
+		if (date1 <= date)
+			return true;
+		else
+			return false;
+	}
 	else
-		return false;
+		return false;	
 }
 
 bool checkInt2(string s)

@@ -14,3 +14,9 @@ void showFlight(Flight* flight);
 
 void showFlightsDates();
 
+void showPlaneMenu();
+
+void showPlane(Plane* plane);
+
+void showPlaneByCat();
+
