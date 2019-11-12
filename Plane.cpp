@@ -58,7 +58,7 @@ bool Plane::setType(string type) {
 		
 		return true;
 	}
-	cout << "There was an error with the type selection";
+	cout << "There was an error with the type selection\n";
 	return false;
 }
 

@@ -5,6 +5,7 @@
 #include "CreateFunctions.h"
 #include "ChangeFunctions.h"
 #include "Company.h"
+#include "Save.h"
 #include "ShowFunctions.h"
 
 Airport *currentAirport;
@@ -21,9 +22,9 @@ void showDataMenu()
 	do
 	{
 		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "Which data to read?\n" << "1)A Person.\n" << "2)A Flight.\n" << "3)A Plane.\n" << "4)An Airport\n" << "0)Return to the last menu.\n";
+		cout << "Which data to read?\n" << "1)A Person.\n" << "2)A Flight.\n" << "3)A Plane.\n" << "0)Return to the last menu.\n";
 		cin >> ShowSelect;
-		if (cin.fail() || ShowSelect <= -1 || ShowSelect > 4)
+		if (cin.fail() || ShowSelect <= -1 || ShowSelect > 3)
 		{
 			cin.clear();
 			cin.ignore(100, '\n');
@@ -46,9 +47,6 @@ void showDataMenu()
 		break;
 	case 3:
 		//showPlaneData();
-		break;
-	case 4:
-		//showAirpotData();
 		break;
 	case 0:
 		break;
@@ -102,7 +100,7 @@ void changeDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)A Airport.\n0)Return to main menu.\n";
+			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n0)Return to main menu.\n";
 			cin >> selection;
 			if (cin.fail() || selection < 0 || selection > 3)
 			{
@@ -267,6 +265,9 @@ void companyMenu()
 		} while (badInput);
 		switch (sel) {
 		case 0:
+			SaveFlights();
+			SaveEmployees();
+			SavePlanes();
 			return;
 		case 1:
 			selectAirportMenu();

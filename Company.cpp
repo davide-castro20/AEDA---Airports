@@ -38,10 +38,10 @@ Company::Company(string airports_file)
 				city = linha;
 				break;
 			case 2:
-				longit = stof(linha);
+				latit = stof(linha);
 				break;
 			case 3:
-				latit = stof(linha);
+				longit = stof(linha);
 				break;
 			case 4:
 				flights = readFlights(linha);

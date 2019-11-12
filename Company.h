@@ -8,7 +8,6 @@
 class Company
 {
 	vector<Airport*> airports;
-
 public:
 	Company();
 	Company(string airports_file);

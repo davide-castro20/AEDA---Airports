@@ -280,7 +280,7 @@ void changePlaneData()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "|Which plane data do you want to change?(0 to cancel)" << endl;
 			for (size_t i = 1; i < currentAirport->planes.size() + 1; i++)
-				cout << i << ") " << currentAirport->planes.at(i - 1)->getType() << "." << endl;
+				cout << i << ") " << currentAirport->planes.at(i - 1)->getType() << " with a capacity of "<< currentAirport->planes.at(i - 1)->getCapacity() <<" spots."<< endl;
 			cin >> changeSelection;
 			if (cin.fail() || changeSelection < 0 || changeSelection > currentAirport->planes.size() + 1)
 			{
@@ -313,12 +313,12 @@ void changePlaneData()
 				else
 				{
 					badInput = false;
+					cin.ignore(100, '\n');
 					if (selectionToChange == 1) {
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the type you want to change to?\n";
-							cin.ignore(100, '\n');
 							getline(cin, type);
 						} while (!currentAirport->planes.at(changeSelection)->setType(type));
 					}
@@ -327,7 +327,6 @@ void changePlaneData()
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the capacity you want to change to?\n";
-							cin.ignore(100, '\n');
 							getline(cin, capacity);
 							capac = stoi(capacity);
 						} while (!currentAirport->planes.at(changeSelection)->setCapacity(capac));
@@ -395,26 +394,19 @@ void changeFlightData()
 			}
 			else
 			{
+				cin.ignore(100, '\n');
 				badInput = false;
 				if (selectionToChange == 1) {
 					do
 					{
-						cout << "|What is the date you want to change to?(Ex: 10/8/2000 (enter) 10/8/2000)\n";
-						cin.clear();
-						cin.ignore(100, '\n');
+						cout << "|What is the date you want to change to?(Ex: 10/8/2000 (enter) 11/8/2000)\n";
 						getline(cin, aux);
 						startDate = new Date(aux);
-						cin.clear();
-						cin.ignore(100, '\n');
 						getline(cin, aux);
 						endDate = new Date(aux);
-						cout << "|What is the time schedule you want to change to?(Ex: 10:30 (enter) 18:30)\n";
-						cin.clear();
-						cin.ignore(100, '\n');
+						cout << "|What is the time schedule you want to change to?(Ex: 10:30 (enter) 8:30)\n";
 						getline(cin, aux);
 						decomposeInt(aux, startTime, ':');
-						cin.clear();
-						cin.ignore(100, '\n');
 						getline(cin, aux);
 						decomposeInt(aux, endTime, ':');
 						startSchedule = new Time(startTime[0], startTime[1]);
@@ -474,7 +466,7 @@ void changeFlightData()
 										wrongInput = false;
 										freeEmp.at(newEmployeeSelection)->addFlight(currentAirport->flights.at(changeSelection));
 										auxil.push_back(freeEmp.at(newEmployeeSelection));
-										for (int i = 0; i < currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().size(); i++)
+										for (size_t i = 0; i < currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().size(); i++)
 											if (currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().at(i)->getId() == currentAirport->flights.at(changeSelection)->getId())
 												currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->deleteFlight(currentAirport->flights.at(changeSelection)->getId());
 	
@@ -506,7 +498,7 @@ void changeFlightData()
 										wrongInput = false;
 										freeEmp.at(newEmployeeSelection)->addFlight(currentAirport->flights.at(changeSelection));
 										auxil.push_back(freeEmp.at(newEmployeeSelection));
-										for (int i = 0; i < currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().size(); i++)
+										for (size_t i = 0; i < currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().size(); i++)
 											if (currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().at(i)->getId() == currentAirport->flights.at(changeSelection)->getId())
 												currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->deleteFlight(currentAirport->flights.at(changeSelection)->getId());
 
