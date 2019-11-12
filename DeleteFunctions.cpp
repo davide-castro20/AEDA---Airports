@@ -45,8 +45,9 @@ void deletePersonData()
 		delSelection--;
 		do
 		{
-			cout << "Are you sure you want to delete the following employee?(y/n)\n";
 			showPerson(currentAirport->employees.at(delSelection));
+			cout << "---------------------------------------------------------------------------------------------------\n";
+			cout << "Are you sure you want to delete the following employee?(y/n)\n";
 			cin >> confirm;
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N" || confirm == "0"))
 			{
@@ -66,6 +67,77 @@ void deletePersonData()
 			}
 			if (confirm == "y" || confirm == "Y")
 			{
+				unsigned int pilotToSwap;
+				if (currentAirport->employees.at(delSelection)->getType() == "Pilot")
+				{
+					vector<Employee*> freeEmp;
+					for (size_t i = 0; i < currentAirport->employees.at(delSelection)->getFlights().size(); i++) {
+						freeEmp.clear();
+						for (size_t j = 0; j < currentAirport->employees.size(); j++)
+						{
+							if (currentAirport->employees.at(j)->isFree(&currentAirport->employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && currentAirport->employees.at(j)->getType() == "Pilot") {
+								freeEmp.push_back(currentAirport->employees.at(j));
+							}
+						}
+						if (freeEmp.size() > 0) {
+							do {
+								cout << "Please select another pilot to do the flight: " << currentAirport->employees.at(delSelection)->getFlights().at(i)->getDestination() << " which departs at " << currentAirport->employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
+								for (size_t k = 1; k < freeEmp.size() + 1; k++)
+									cout << k << ") " << freeEmp.at(k-1)->getName() <<  endl;
+								cin >> pilotToSwap;
+								if (cin.fail() || pilotToSwap <= 0 || pilotToSwap > freeEmp.size() + 1)
+								{
+									cin.clear();
+									cout << "Invalid pilot! Please choose one the free pilots shown\n";
+									badInput = true;
+								}
+								else
+									badInput = false;
+							} while (badInput);
+							freeEmp.at(pilotToSwap-1)->addFlight(currentAirport->employees.at(delSelection)->getFlights().at(i));
+							currentAirport->employees.at(delSelection)->getFlights().at(i)->deleteCrew(currentAirport->employees.at(delSelection));
+							currentAirport->employees.at(delSelection)->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap-1));
+						}
+						else {
+							cout << "There are no free pilots for this flight.\n";
+						}
+					}
+				}
+				else if (currentAirport->employees.at(delSelection)->getType() == "Flight Crew")
+				{
+					vector<Employee*> freeEmp;
+					for (size_t i = 0; i < currentAirport->employees.at(delSelection)->getFlights().size(); i++) {
+						freeEmp.clear();
+						for (size_t j = 0; j < currentAirport->employees.size(); j++)
+						{
+							if (currentAirport->employees.at(j)->isFree(&currentAirport->employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && currentAirport->employees.at(j)->getType() == "Flight Crew") {
+								freeEmp.push_back(currentAirport->employees.at(j));
+							}
+						}
+						if (freeEmp.size() > 0) {
+							do {
+								cout << "Please select another flight crew to do the flight: " << currentAirport->employees.at(delSelection)->getFlights().at(i)->getDestination() << " which departs at " << currentAirport->employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
+								for (size_t k = 1; k < freeEmp.size() + 1; k++)
+									cout << k << ") " << freeEmp.at(k - 1)->getName() << endl;
+								cin >> pilotToSwap;
+								if (cin.fail() || pilotToSwap <= 0 || pilotToSwap > freeEmp.size() + 1)
+								{
+									cin.clear();
+									cout << "Invalid flight crew! Please choose one the free flight crew shown\n";
+									badInput = true;
+								}
+								else
+									badInput = false;
+							} while (badInput);
+							freeEmp.at(pilotToSwap - 1)->addFlight(currentAirport->employees.at(delSelection)->getFlights().at(i));
+							currentAirport->employees.at(delSelection)->getFlights().at(i)->deleteCrew(currentAirport->employees.at(delSelection));
+							currentAirport->employees.at(delSelection)->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap - 1));
+						}
+						else {
+							cout << "There are no free flight crew members for this flight.\n";
+						}
+					}
+				}
 				currentAirport->employees.erase(currentAirport->employees.begin() + delSelection);
 				badInput = false;
 				completedDel = true;
@@ -147,8 +219,8 @@ void deletePlaneData()
 					if (freePlanes.size() > 0) {
 						do {
 							cout << "Please select another plane to do the flight: " << currentAirport->planes.at(delSelection)->getFlights().at(i)->getDestination() << " which departs at " << currentAirport->planes.at(delSelection)->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
-							for (size_t i = 1; i < freePlanes.size() + 1; i++)
-								cout << i << ") Type: " << freePlanes.at(i - 1)->getType() << "; Capacity: " << freePlanes.at(i - 1)->getCapacity() << endl;
+							for (size_t k = 1; k < freePlanes.size() + 1; k++)
+								cout << k << ") Type: " << freePlanes.at(k - 1)->getType() << "; Capacity: " << freePlanes.at(k - 1)->getCapacity() << endl;
 							cin >> planeToSwap;
 							if (cin.fail() || planeToSwap <= 0 || planeToSwap > freePlanes.size() + 1)
 							{
