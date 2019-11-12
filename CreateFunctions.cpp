@@ -1,8 +1,10 @@
 #include "CreateFunctions.h"
 #include "Utils.h"
+#include "Company.h"
 #include "Menus.h"
 
 extern Airport *currentAirport;
+extern Company *comp;
 
 using namespace std;
 
@@ -1275,4 +1277,114 @@ void createPlane()
 	cout << "New plane successfuly created!" << endl;
 }
 
+void createAirport() {
+		bool badInput = false;
+		string country;
+		string city;
+		string lat;
+		string lon;
+		Local *local;
+		Airport *airport = NULL;
 
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Country: \n";
+		cin.ignore(100, '\n');
+		do
+		{
+			getline(cin, country);
+			if (!noAccent(country) || cin.fail() || (country.find_first_of("0123456789") != std::string::npos) || country == "" || islower(country.at(0)))
+			{
+				cin.clear();
+				//cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+				cout << "Invalid Country! Please insert country again \n";
+			}
+			else
+			{
+				badInput = false;
+			}
+			if (cin.eof())
+				return;
+		} while (badInput);
+
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "City: \n";
+		do
+		{
+			getline(cin, city);
+			if (!noAccent(city) || cin.fail() || (city.find_first_of("0123456789") != std::string::npos) || city == "" || islower(city.at(0)))
+			{
+				cin.clear();
+				//cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+				cout << "Invalid City! Please insert City again \n";
+			}
+			else
+			{
+				badInput = false;
+			}
+
+			if (cin.eof())
+				return;
+
+		} while (badInput);
+
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Latitude: \n";
+		do
+		{
+
+			getline(cin, lat);
+			if (cin.fail() || (lat.find_first_of("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXWYZ") != std::string::npos) || lat == "")
+			{
+				cin.clear();
+				//cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+				cout << "Invalid latitude! Please insert latitude again \n";
+			}
+			else
+			{
+				badInput = false;
+			}
+			if (cin.eof())
+				return;
+		} while (badInput);
+
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Longitude: \n";
+		do
+		{
+
+			getline(cin, lon);
+			if (cin.fail() || (lon.find_first_of("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXWYZ") != std::string::npos) || lon == "")
+			{
+				cin.clear();
+				//cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+				cout << "Invalid longitude! Please insert longitude again \n";
+			}
+			else
+			{
+				badInput = false;
+			}
+			if (cin.eof())
+				return;
+		} while (badInput);
+
+		if (!badInput) {
+			string plane = country + "_Planes.txt";
+			string flight = country + "_Flights.txt";
+			string employee = country + "_Employees.txt";
+			vector <Flight*> flights = {};
+			vector <Employee*> employees = {};
+			vector <Plane*> planes = {};
+			local = new Local(country, city, stof(lon), stof(lat));
+			airport = new Airport(planes, flights, employees, *local, plane, employee, flight);
+		}
+		comp->addAirport(airport);
+		cout << string(100, '-') << endl << "New Airport successfuly created!" << endl;
+}
