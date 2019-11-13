@@ -26,7 +26,7 @@ private:
 	double expenses;
 public:
 	Plane(string type, int capacity, vector<Flight*> &flights);
-	double calcExp(string type, vector<Flight*> &flights) const;
+	double calcExp() const;
 	string getType() const;
 	int getCapacity() const;
 	vector<Flight*> getFlights() const;

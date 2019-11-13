@@ -133,7 +133,7 @@ bool Pilot::setPlanes(vector<Plane*>& planes)
 }
 
 double Pilot::calcSalary() {
-	double total;
+	double total=1000;
 	if (category == "A")
 		total = 100.0 * flights.size();
 	if (category == "B")
@@ -175,7 +175,7 @@ bool FlightCrew::setFlights(vector<Flight*>& flights)
 }
 
 double FlightCrew::calcSalary() {
-	double total;
+	double total=800;
 	if (category == "A")
 		total = 50.0 * flights.size();
 	if (category == "B")

@@ -9,7 +9,7 @@ void showDataMenu();
 
 void companyMenu();
 
-//void readDataMenu(); 
+void expensesMenu();
 
 void changeDataMenu();
 
