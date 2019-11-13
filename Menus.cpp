@@ -104,9 +104,9 @@ void changeDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n0)Return to main menu.\n";
+			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)Add an employee or plane to a flight.\n0)Return to main menu.\n";
 			cin >> selection;
-			if (cin.fail() || selection < 0 || selection > 3)
+			if (cin.fail() || selection < 0 || selection > 4)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
@@ -128,6 +128,8 @@ void changeDataMenu()
 		case 3:
 			changePlaneData();
 			break;
+		case 4:
+			addToFlight();
 		case 0:
 			break;
 		}
@@ -173,16 +175,48 @@ void deleteDataMenu()
 	} while (toDelSelection != 0);
 }
 
+void expensesMenu()
+{
+	int sel;
+	bool badInput = false;
+	do 
+	{
+		cout << "Would you like to the the flight or employees expenses?\n1)Planes.\n2)Employees.\n0)Exit.\n";
+		cin >> sel;
+		if (cin.fail() || sel > 2 || sel < 0)
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			badInput = true;
+		}
+		else
+		{
+			if (sel == 0)
+				return;
+			else if (sel == 1)
+			{
+				showPlanesExpenses(currentAirport);
+				return;
+			}
+			else if (sel == 2)
+			{
+				showEmployeeExpenses(currentAirport);
+				return;
+			}
+		}
+	} while (badInput);
+}
+
 void mainMenu() {
 	bool badInput = true;
 	int select;
 	do
 	{
 		badInput = false;
-		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "0)Return to company Menu\n";
+		cout << "---------------------------------------------------------------------------------------------------\n";
+		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "5)This company expenses." << endl << "0)Return to company Menu\n";
 		cin >> select;
-		if (cin.fail() || select > 4 || select < 0)
+		if (cin.fail() || select > 5 || select < 0)
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -209,6 +243,9 @@ void mainMenu() {
 				deleteDataMenu();
 				cin.clear();
 				cin.ignore(1000, '\n');
+				break;
+			case 5:
+				expensesMenu();
 				break;
 			}
 		}

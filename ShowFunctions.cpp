@@ -8,9 +8,58 @@ using namespace std;
 
 extern Airport* currentAirport;
 
+void showPlanesExpenses(Airport * airport)
+{
+	double a = 0, b = 0, c = 0;
+	for (size_t i = 0; i < airport->planes.size(); i++)
+	{
+		if (airport->planes.at(i)->getType() == "A")
+			a += airport->planes.at(i)->calcExp();
+		if (airport->planes.at(i)->getType() == "B")
+			b += airport->planes.at(i)->calcExp();
+		if (airport->planes.at(i)->getType() == "C")
+			c += airport->planes.at(i)->calcExp();
+	}
+	cout << '.' << string(98, '-') << '.' << endl;
+	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
+	cout << '|' << setfill('-') << setw(99) << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "Total Plane Expenses :" << '|' << left << setw(48) << ' ' + a+b+c << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "From which :" << '|' << left << setw(48) << " " + to_string(a) + " are from planes of type \"A\"" << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(b) + " are from planes of type \"B\"" << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(c) + " are from planes of type \"C\"" << '|' << endl;
+}
+
+void showEmployeeExpenses(Airport * airport)
+{
+	double  pilots=0, base=0, flight=0, admin=0;
+	for (size_t i = 0; i < airport->employees.size(); i++)
+	{
+		if (airport->employees.at(i)->getType() == "Pilot")
+			pilots += airport->employees.at(i)->calcSalary();
+		else if (airport->employees.at(i)->getType() == "Flight Crew")
+			flight += airport->employees.at(i)->calcSalary();
+		else if (airport->employees.at(i)->getType() == "Base Crew")
+			base += airport->employees.at(i)->calcSalary();
+		else if (airport->employees.at(i)->getType() == "Admin")
+			admin += airport->employees.at(i)->calcSalary();
+	}
+	cout << '.' << string(98, '-') << '.' << endl;
+	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
+	cout << '|' << setfill('-') << setw(99) << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "Total Employee Expenses :" << '|' << left << setw(48) << ' ' + pilots+flight+base+admin << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "From which :" << '|' << left << setw(48) << " " + to_string(pilots) + " are from pilots" << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(flight) + " are from flight crew members" << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(base) + " are from base crew members" << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(admin) + " are from admins" << '|' << endl;
+}
 
 void showAirportData(Airport * airport)
 {
+	double total = 0;
+	for (size_t i = 0; i < airport->employees.size(); i++)
+		total += airport->employees.at(i)->getSalary();
+	for (size_t i = 0; i < airport->planes.size(); i++)
+		total += airport->planes.at(i)->calcExp();
 	cout << '|' << string(98,'-') << '|' << endl;
 	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity()
 		<< left << " Airport" << right << setw(42) << '|' << endl;
@@ -25,9 +74,9 @@ void showAirportData(Airport * airport)
 	cout << '|' << setfill(' ') << right << setw(49) << airport->employees.size() << left << setw(49) << " Employees" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << airport->flights.size() << left << setw(49) << " possible flights" << '|' << endl;
+	cout << '|' << setfill(' ') << right << setw(49) << total << left << setw(49) << " euros in total expenses" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 }
-
 
 void showPersonMenu()
 {
