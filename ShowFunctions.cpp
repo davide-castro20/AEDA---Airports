@@ -11,9 +11,9 @@ extern Airport* currentAirport;
 
 void showAirportData(Airport * airport)
 {
-	cout << '|' << setfill('-') << setw(99) << '|' << endl;
-	cout << '|' << setfill('-') << setw(49) << airport->local.getCity()
-		<< " Airport" << setw(42) << setfill('-') << '|' << endl;
+	cout << '|' << string(98,'-') << '|' << endl;
+	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity()
+		<< left << " Airport" << right << setw(42) << '|' << endl;
 	cout << '|' << setfill('-') << setw(99) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Location " << '|' << left << setw(48) << ' ' + airport->local.getCity()
 		+ ", " + airport->local.getCountry() << '|' << endl;
