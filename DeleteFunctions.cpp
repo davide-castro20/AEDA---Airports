@@ -1,8 +1,10 @@
 #include "DeleteFunctions.h"
 #include "Menus.h"
 #include "ShowFunctions.h"
+#include "Company.h"
 
 extern Airport *currentAirport;
+extern Company* comp;
 
 void deletePersonData()
 {
@@ -265,6 +267,7 @@ void deleteFlightData()
 		{
 			for (size_t i = 1; i < currentAirport->flights.size() + 1; i++)
 				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << " which departs at: " << currentAirport->flights.at(i-1)->getPredictedSchedule().getDepartureDate() << endl;
+			cout << "0) Back\n";
 			cin >> delSelection;
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->flights.size() + 1)
 			{
@@ -338,4 +341,84 @@ void deleteFlightData()
 
 		} while (badInput);
 	} while (!completedDel);
+}
+
+void deleteAirportData() {
+	int delSelection;
+	string confirm;
+	bool completedChange = false;
+	bool badInput = true;
+	const char* fileName;
+	do {
+		do
+		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			if (comp->getAirports().size() == 0) {
+				cout << "No airports.\n";
+				return;
+			}
+			for (size_t i = 1; i <= comp->getAirports().size(); i++)
+				cout << i << ") " << comp->getAirports().at(i - 1)->getLocal().getCity() << ", " << comp->getAirports().at(i - 1)->getLocal().getCountry() << endl;
+			cout << "0) Back\n";
+			cin >> delSelection;
+			if (cin.fail() || delSelection < 0 || comp->getAirports().size() - 1)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+			if (cin.eof())
+				return;
+		} while (badInput);
+		cin.clear();
+		cin.ignore(100, '\n');
+		if (delSelection == 0)
+			return;
+		delSelection--;
+		do
+		{
+			cout << "Are you sure you want to delete the following airport?(y/n)\n";
+			//showPlane(currentAirport->planes.at(delSelection));
+			cin >> confirm;
+			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				if (cin.eof())
+					return;
+				else
+				{
+					badInput = false;
+				}
+			}
+
+			if (confirm == "y" || confirm == "Y")
+			{
+				badInput = false;
+				completedChange = true;
+				fileName = comp->getAirports().at(delSelection)->employeeTxt.c_str();
+				//remove(fileName);
+				fileName = comp->getAirports().at(delSelection)->flightTxt.c_str();
+				//remove(fileName);
+				fileName = comp->getAirports().at(delSelection)->planesTxt.c_str();
+				//remove(filename);
+				comp->deleteAirport(delSelection);
+			}
+			if (confirm == "n" || confirm == "N")
+			{
+				badInput = false;
+				completedChange = false;
+			}
+
+		} while (badInput);
+	} while (!completedChange);
 }

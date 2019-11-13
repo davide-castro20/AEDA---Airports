@@ -8,3 +8,4 @@ void deletePlaneData();
 
 void deleteFlightData();
 
+void deleteAirportData();

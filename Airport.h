@@ -22,7 +22,6 @@ public:
 	float getLatit() const;
 };
 
-
 class Airport
 {
 public:
@@ -31,8 +30,8 @@ public:
 	vector<Flight*> flights; //não esquecer de usar new
 	vector <Employee*> employees;
 	Local local;
+	Local getLocal() const;
 	Airport() { planes = {}; flights = {}; };
 	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local, string planestxt, string employeetxt, string flightstxt);
-	Local getLocal() const;
 };
 
