@@ -53,7 +53,7 @@ unsigned Date::getYear() const {
 
 string Date::getDate() const
 {
-	return to_string(year) + "/" + to_string(month) + "/" + to_string(day);
+	return to_string(day) + "/" + to_string(month) + "/" + to_string(year);
 }
 
 

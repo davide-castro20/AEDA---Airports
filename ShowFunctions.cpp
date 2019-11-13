@@ -303,7 +303,7 @@ void showFlight(Flight* flight)
 	string crew;
 	size_t size1 = flight->getPilots().size();
 	size_t size2 = flight->getCrew().size();
-	string ready = "This flight is ready.";
+	string ready = "This flight is ready";
 	
 	if (flight->getPlane() == NULL)
 		plane = "No plane assigned to this flight yet.";
@@ -350,6 +350,10 @@ void showFlight(Flight* flight)
 	cout << '|' << right << setfill(' ') << setw(20) << "Flight Crew " << "| " << left << setw(76) << crew << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(20) << "Plane " << "| " << left << setw(76) << plane << '|' << endl;
+	cout << '|' << string(98, '-') << '|' << endl;
+	int s1 = 30 - ready.size() / 2;
+	int s2 = 68 - ready.size() / 2;
+	cout << '|' << string(s1, ' ') << ready << string(s2, ' ') << '|' << endl;
 
 }
 

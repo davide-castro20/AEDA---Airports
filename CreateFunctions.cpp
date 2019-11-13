@@ -280,21 +280,21 @@ void createPilot()
 	//				}
 	//			}
 	Employee *newPilot = new Pilot(name, birthDate, category, planes, flights);
-				//for (size_t i = 0; i < currentAirport->employees.size(); i++)
-				//{
-				//	if (currentAirport->employees.at(i) == newPilot)
-				//	{
-				//		cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
-				//		return;
-				//	}
-				//}
+	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	{
+		if (*currentAirport->employees.at(i) == *newPilot)
+		{
+			cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+			return;
+		}
+	}
 	currentAirport->employees.push_back(newPilot);
+	cout << string(100, '-') << endl << "New Administration member successfuly created!" << endl;
 		//		cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
 		//	}
 		//}
 
 	//} while (badInput);
-
 }
 
 void createFlightCrew()

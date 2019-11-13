@@ -19,38 +19,42 @@ void showDataMenu()
 	bool badInput = true;
 	int ShowSelect;
 	int cont = 0;
-	do
-	{
-		cout << "-----------------------------------------------------------------------------------------------------\n";
-		cout << "Which data to read?\n" << "1)A Person.\n" << "2)A Flight.\n" << "3)A Plane.\n" << "0)Return to the last menu.\n";
-		cin >> ShowSelect;
-		if (cin.fail() || ShowSelect <= -1 || ShowSelect > 3)
+	do {
+		do
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			badInput = true;
-		}
-		else
-		{
-			badInput = false;
-		}
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which data to read?\n" << "1)A Person.\n" << "2)A Flight.\n" << "3)A Plane.\n" << "0)Return to the last menu.\n";
+			cin >> ShowSelect;
+			if (cin.eof())
+				return;
+			if (cin.fail() || ShowSelect <= -1 || ShowSelect > 3)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
 
-	} while (badInput);
-	cin.ignore(1000, '\n');
-	switch (ShowSelect)
-	{
-	case 1:
-		showPersonMenu();
-		break;
-	case 2:
-		showFlightMenu();
-		break;
-	case 3:
-		showPlaneMenu();
-		break;
-	case 0:
-		break;
-	}
+		} while (badInput);
+		cin.ignore(1000, '\n');
+		switch (ShowSelect)
+		{
+		case 1:
+			showPersonMenu();
+			break;
+		case 2:
+			showFlightMenu();
+			break;
+		case 3:
+			showPlaneMenu();
+			break;
+		case 0:
+			break;
+		}
+	} while (ShowSelect != 0);
 }
 
 void createDataMenu()

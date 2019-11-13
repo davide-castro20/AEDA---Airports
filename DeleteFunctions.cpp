@@ -95,12 +95,12 @@ void deletePersonData()
 									badInput = false;
 							} while (badInput);
 							freeEmp.at(pilotToSwap-1)->addFlight(currentAirport->employees.at(delSelection)->getFlights().at(i));
-							currentAirport->employees.at(delSelection)->getFlights().at(i)->deleteCrew(currentAirport->employees.at(delSelection));
 							currentAirport->employees.at(delSelection)->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap-1));
 						}
 						else {
 							cout << "There are no free pilots for this flight.\n";
 						}
+						currentAirport->employees.at(delSelection)->getFlights().at(i)->deleteCrew(currentAirport->employees.at(delSelection));
 					}
 				}
 				else if (currentAirport->employees.at(delSelection)->getType() == "Flight Crew")
@@ -163,7 +163,8 @@ void deletePlaneData()
 		do
 		{
 			for (size_t i = 1; i < currentAirport->planes.size() + 1; i++)
-				cout << i << ") " << currentAirport->planes.at(i - 1)->getType() << "." << endl;
+				cout << i << ") Type: " << currentAirport->planes.at(i - 1)->getType() << ", Capacity: "
+				<< currentAirport->planes.at(i-1)->getCapacity() << endl;
 			cin >> delSelection;
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->planes.size() + 1)
 			{
