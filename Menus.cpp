@@ -276,8 +276,10 @@ void companyMenu()
 		case 2:
 			for (size_t i = 0; i < comp->getAirports().size(); i++)
 				showAirportData(comp->getAirports().at(i));
+			break;
 		case 3:
 			createAirport();
+			break;
 		}
 	} while (sel != 0);
 }
