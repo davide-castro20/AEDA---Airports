@@ -270,6 +270,7 @@ void selectAirportMenu()
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
+			badInput = true;
 		}
 		else
 			badInput = false;
