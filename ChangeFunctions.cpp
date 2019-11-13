@@ -1,5 +1,6 @@
 #include "DeleteFunctions.h"
 #include "Menus.h"
+#include "ChangeFunctions.h"
 
 extern Airport *currentAirport;
 
@@ -511,4 +512,159 @@ void changeFlightData()
 
 		completedChange = true;
 	} while (!completedChange);
+}
+
+void addToFlight()
+{
+	int addSel;
+	bool badInput;
+	vector<Flight*> incompleteFlights;
+	for (size_t k = 0; k < currentAirport->flights.size(); k++)
+	{
+		if (currentAirport->flights.at(k)->getEmployees().size() < 4 || currentAirport->flights.at(k)->getPlane() == NULL)
+			incompleteFlights.push_back(currentAirport->flights.at(k));
+	}
+	do {
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		do
+		{
+			cout << "Add to which incomplete flight?\n\n";
+			for (size_t i = 1; i < incompleteFlights.size() + 1; i++)
+				cout << i << ") " << incompleteFlights.at(i - 1)->getDestination() << " which departs at: " << incompleteFlights.at(i - 1)->getPredictedSchedule().getDepartureDate() << endl;
+			cout << endl << "0)Return to last menu.\n\n";
+			cin >> addSel;
+			if (cin.eof())
+				return;
+			if (cin.fail() || addSel < 0 || addSel > currentAirport->flights.size())
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				cout << "Invalid flight, please insert again.\n\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+
+
+		} while (badInput);
+		cin.ignore(100, '\n');
+		if (addSel == 0)
+			return;
+
+		Flight *flight = incompleteFlights.at(addSel - 1);
+
+		do
+		{
+			cout << string(100, '-') << endl;
+			cout << "What data to add?\n\n" << "1)A Pilot.\n" << "2)A flight crew member.\n" << "3)A plane.\n" << "0)Return to last menu\n";
+			cin >> addSel;
+			if (cin.eof())
+				return;
+			if (cin.fail() || addSel < 0 || addSel > 3)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				cout << "Invalid input. Please insert option again.\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+
+
+		} while (badInput);
+
+		switch (addSel)
+		{
+		case 0:
+			addSel = 1;
+		case 1:
+			addPilot(flight);
+			addSel = 0;
+			break;
+		case 2:
+			addFlightCrew(flight);
+			addSel = 0;
+			break;
+		case 3:
+			addPlane(flight);
+			addSel = 0;
+			break;
+		}
+	} while (addSel != 0);
+}
+
+void addPilot(Flight* flight)
+{
+	if (flight->getPilots().size() == 2)
+	{
+		cout << "There are already two pilots on this flight!\n\n";
+		return;
+	}
+
+
+}
+
+void addFlightCrew(Flight* flight)
+{
+	if (flight->getCrew().size() == 2)
+	{
+		cout << "There are already two flight crew members on this flight!\n\n";
+		return;
+	}
+}
+
+void addPlane(Flight* flight)
+{
+	if (flight->getPlane() != NULL)
+	{
+		cout << "There is already a plane to this flight!\n\n";
+		return;
+	}
+
+	bool badInput = false;
+	int addSel;
+
+	vector<Plane*> freePlanes;
+
+	for (size_t i = 0; i < currentAirport->planes.size(); i++)
+	{
+		if (currentAirport->planes.at(i)->isFree(&flight->getPredictedSchedule()))
+			freePlanes.push_back(currentAirport->planes.at(i));
+	}
+	if (freePlanes.size() == 0)
+	{
+		cout << "There are no available planes for this flight.\n\n";
+		return;
+	}
+	do
+	{
+		cout << "Which plane to add?\n\n";
+		for (size_t k = 1; k < freePlanes.size() + 1; k++)
+			cout << k << ") Type: " << freePlanes.at(k - 1)->getType() << "; Capacity: " << freePlanes.at(k - 1)->getCapacity() << endl;
+		cout << endl << "0)Return to last menu.\n\n";
+		cin >> addSel;
+		if (cin.eof())
+			return;
+		if (cin.fail() || addSel < 0 || addSel > freePlanes.size())
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Invalid plane, please insert again.\n\n";
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+			flight->setPlane(freePlanes.at(addSel));
+			cout << "Plane successfuly added to the flight!\n\n";
+		}
+
+	} while (badInput);
 }
