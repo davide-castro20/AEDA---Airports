@@ -194,10 +194,6 @@ void mainMenu() {
 			switch (select)
 			{
 			case 0:
-				//savePersonData();
-				//saveFlightData();
-				//savePlaneData();
-				//saveAirportData();
 				return;
 				break;
 			case 1:
@@ -231,8 +227,9 @@ void selectAirportMenu()
 		for (size_t i = 0; i < comp->getAirports().size(); i++)
 			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity() << endl;
 		cout << endl;
+		cout << "0)Back\n";
 		cin >> select;
-		if (cin.fail() || select > comp->getAirports().size() + 1 || select <= 0)
+		if (cin.fail() || select >= comp->getAirports().size() + 1 || select < 0)
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -240,6 +237,8 @@ void selectAirportMenu()
 		else
 			badInput = false;
 	} while (badInput);
+	if (select == 0)
+		return;
 	currentAirport = comp->getAirports().at(select - 1);
 	mainMenu();
 }
@@ -258,9 +257,9 @@ void companyMenu()
 		{
 			cout << string(100, '-') << endl;
 			cout << "What would you like to do? \n";
-			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n0)Close Program." << endl;
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n4)Delete Airport Data.\n0)Close Program." << endl;
 			cin >> sel;
-			if (cin.fail() || sel < 0 || sel>3)
+			if (cin.fail() || sel < 0 || sel>4)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
@@ -284,6 +283,8 @@ void companyMenu()
 		case 3:
 			createAirport();
 			break;
+		case 4: 
+			deleteAirportData();
 		}
 	} while (sel != 0);
 }

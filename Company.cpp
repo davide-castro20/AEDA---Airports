@@ -78,3 +78,7 @@ vector<Airport*> Company::getAirports() const
 {
 	return airports;
 }
+
+void Company::deleteAirport(int index) {
+	airports.erase(airports.begin()+index);
+}

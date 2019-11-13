@@ -37,6 +37,8 @@ void saveAirports() {
 
 void SaveFlights() {
 	ofstream newFlightsFile;
+	if (comp->getAirports().size() == 0)
+		return;
 	for (size_t i = 0; i < comp->getAirports().size(); i++) {
 		newFlightsFile.open("newFlights.txt");
 		if (comp->getAirports().at(i)->flights.size() != 0){
@@ -70,6 +72,8 @@ void SaveFlights() {
 
 void SaveEmployees() {
 	ofstream newEmployeesFile;
+	if (comp->getAirports().size() == 0)
+		return;
 	for (size_t i = 0; i < comp->getAirports().size(); i++) {
 		newEmployeesFile.open("newEmployees.txt");
 		if(comp->getAirports().at(i)->employees.size() != 0) {
