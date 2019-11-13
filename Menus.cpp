@@ -104,9 +104,9 @@ void changeDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n0)Return to main menu.\n";
+			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)Add an employee or plane to a flight.\n0)Return to main menu.\n";
 			cin >> selection;
-			if (cin.fail() || selection < 0 || selection > 3)
+			if (cin.fail() || selection < 0 || selection > 4)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
@@ -128,6 +128,8 @@ void changeDataMenu()
 		case 3:
 			changePlaneData();
 			break;
+		case 4:
+			addToFlight();
 		case 0:
 			break;
 		}
