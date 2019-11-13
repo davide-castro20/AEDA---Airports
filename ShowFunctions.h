@@ -1,8 +1,10 @@
 #pragma once
 
-void showEmployeeExpenses(Airport * airport);
+void showEmployeeExpenses();
 
-void showPlanesExpenses(Airport * airport);
+void showExpDates();
+
+void showPlanesExpenses();
 
 void showAirportData(Airport * airport);
 

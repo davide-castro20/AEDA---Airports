@@ -181,8 +181,10 @@ void expensesMenu()
 	bool badInput = false;
 	do 
 	{
-		cout << "Would you like to the the flight or employees expenses?\n1)Planes.\n2)Employees.\n0)Exit.\n";
+		cout << "Would you like to see the planes or employees expenses?\n1)Planes.\n2)Employees.\n3)See all in between two months.\n0)Exit.\n";
 		cin >> sel;
+		if (cin.eof())
+			return;
 		if (cin.fail() || sel > 2 || sel < 0)
 		{
 			cin.clear();
@@ -195,12 +197,17 @@ void expensesMenu()
 				return;
 			else if (sel == 1)
 			{
-				showPlanesExpenses(currentAirport);
+				showPlanesExpenses();
 				return;
 			}
 			else if (sel == 2)
 			{
-				showEmployeeExpenses(currentAirport);
+				showEmployeeExpenses();
+				return;
+			}
+			else if (sel == 3)
+			{
+				showExpDates();
 				return;
 			}
 		}
