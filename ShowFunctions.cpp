@@ -23,7 +23,7 @@ void showPlanesExpenses(Airport * airport)
 	cout << '.' << string(98, '-') << '.' << endl;
 	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
 	cout << '|' << setfill('-') << setw(99) << '|' << endl;
-	cout << '|' << right << setfill(' ') << setw(49) << "Total Plane Expenses :" << '|' << left << setw(48) << ' ' + a+b+c << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "Total Plane Expenses :" << '|' << left << setw(48) << ' ' + to_string(a+b+c) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "From which :" << '|' << left << setw(48) << " " + to_string(a) + " are from planes of type \"A\"" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(b) + " are from planes of type \"B\"" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(c) + " are from planes of type \"C\"" << '|' << endl;
@@ -46,8 +46,8 @@ void showEmployeeExpenses(Airport * airport)
 	cout << '.' << string(98, '-') << '.' << endl;
 	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
 	cout << '|' << setfill('-') << setw(99) << '|' << endl;
-	cout << '|' << right << setfill(' ') << setw(49) << "Total Employee Expenses :" << '|' << left << setw(48) << ' ' + pilots+flight+base+admin << '|' << endl;
-	cout << '|' << right << setfill(' ') << setw(49) << "From which :" << '|' << left << setw(48) << " " + to_string(pilots) + " are from pilots" << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "Total Employee Expenses " << '|' << left << setw(48) << ' ' + to_string(pilots+flight+base+admin) << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "From which " << '|' << left << setw(48) << " " + to_string(pilots) + " are from pilots" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(flight) + " are from flight crew members" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(base) + " are from base crew members" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(admin) + " are from admins" << '|' << endl;
@@ -57,16 +57,17 @@ void showAirportData(Airport * airport)
 {
 	double total = 0;
 	for (size_t i = 0; i < airport->employees.size(); i++)
-		total += airport->employees.at(i)->getSalary();
+		total += airport->employees.at(i)->calcSalary();
 	for (size_t i = 0; i < airport->planes.size(); i++)
 		total += airport->planes.at(i)->calcExp();
+
 	cout << '|' << string(98,'-') << '|' << endl;
 	cout << '|' << setfill('-') << right << setw(49) << airport->local.getCity()
 		<< left << " Airport" << right << setw(42) << '|' << endl;
 	cout << '|' << setfill('-') << setw(99) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Location " << '|' << left << setw(48) << ' ' + airport->local.getCity()
 		+ ", " + airport->local.getCountry() << '|' << endl;
-	cout << '|' << string(49, ' ') << '|' << setw(48) << left << to_string(airport->local.getLatit()) + " N "
+	cout << '|' << string(49, ' ') << '|' << setw(48) << left << ' ' + to_string(airport->local.getLatit()) + " N "
 		+ to_string(airport->local.getLon()) + " W " << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << airport->planes.size() << left << setw(49) << " Planes" << '|' << endl;
@@ -74,8 +75,9 @@ void showAirportData(Airport * airport)
 	cout << '|' << setfill(' ') << right << setw(49) << airport->employees.size() << left << setw(49) << " Employees" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << airport->flights.size() << left << setw(49) << " possible flights" << '|' << endl;
-	cout << '|' << setfill(' ') << right << setw(49) << total << left << setw(49) << " euros in total expenses" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
+	cout << '|' << setfill(' ') << right << setw(49) << total << left << setw(49) << " euros in total expenses" << '|' << endl;
+	
 }
 
 void showPersonMenu()

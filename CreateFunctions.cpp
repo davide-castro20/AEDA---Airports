@@ -944,7 +944,7 @@ void createFlight()
 		{
 			string confirm;
 			cout << "Not enough free planes at the moment!" << endl;
-			cout << "Do you want to create this flight with an empty crew and plane for now?" << endl;
+			cout << "Do you want to create this flight with an empty crew for now?" << endl;
 			do {
 				cin >> confirm;
 				if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
@@ -977,27 +977,58 @@ void createFlight()
 			}
 		}
 		unsigned int planeSel;
+		bool doAgain = false;
 		do {
 			for (size_t i = 1; i < freePlanes.size() + 1; i++)
 				cout << i << ") Type: " << freePlanes.at(i - 1)->getType() << "; Capacity: "<< freePlanes.at(i-1)->getCapacity() << endl;
 
-			cout << endl << "Choose one of the free planes above." << endl;
+			cout << endl << "Choose one of the free planes above.\n0)Create flight with empty plane." << endl;
 			cin >> planeSel;
+			if (cin.eof())
+				return;
 			cin.ignore(100, '\n');
-			if (cin.fail() || planeSel <= 0 || planeSel > currentAirport->planes.size() + 1)
+			if (cin.fail() || planeSel < 0 || planeSel > currentAirport->planes.size() + 1)
 			{
 				cin.clear();
 				cout << "Invalid plane! Please choose one the free planes shown\n";
 				badInput = true;
 			}
-			else
+			else if (planeSel >= 1)
 			{
 				badInput = false;
 				plane = freePlanes.at(planeSel - 1);
 			}
-			if (cin.eof())
-				return;
-		} while (badInput);
+			else if (planeSel == 0)
+			{
+				cout << "Do you want to create this flight with an empty plane for now?" << endl;
+				string confirm;
+				do {
+					cin >> confirm;
+					if (cin.eof())
+							return;
+					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+					{
+						cin.clear();
+						cin.ignore(100, '\n');
+						cout << "-----------------------------------------------------------------------------------------------------\n";
+						badInput = true;
+					}
+					else
+					{
+						if (confirm == "y" || confirm == "Y")
+						{
+							doAgain = false;
+							badInput = false;
+						}
+						else if (confirm == "n" || confirm == "N")
+						{
+							doAgain = true;
+							badInput = false;
+						}
+					}
+				} while (badInput);
+			}
+		} while (badInput || doAgain);
 
 		cout << "----------------------------------------------------------------------------------------------------\n";
 		cout << "Crew: \n";
@@ -1048,7 +1079,9 @@ void createFlight()
 				{
 					crew.clear();
 					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
-					plane->addFlight(newFlight);
+					if(plane != NULL)
+						plane->addFlight(newFlight);
+					cout << "Merdou" << endl;
 					currentAirport->flights.push_back(newFlight);
 					return;
 				}
@@ -1150,7 +1183,8 @@ void createFlight()
 				{
 					crew.clear();
 					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
-					plane->addFlight(newFlight);
+					if(plane != NULL)
+						plane->addFlight(newFlight);
 					currentAirport->flights.push_back(newFlight);
 					return;
 				}
@@ -1212,7 +1246,8 @@ void createFlight()
 		} while (badInput);
 
 		Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
-		plane->addFlight(newFlight);
+		if(plane != NULL)
+			plane->addFlight(newFlight);
 		currentAirport->flights.push_back(newFlight);
 		for (size_t i = 0; i < crew.size(); i++)
 		{

@@ -662,7 +662,7 @@ void addPlane(Flight* flight)
 		else
 		{
 			badInput = false;
-			flight->setPlane(freePlanes.at(addSel));
+			flight->setPlane(freePlanes.at(addSel - 1));
 			cout << "Plane successfuly added to the flight!\n\n";
 		}
 
