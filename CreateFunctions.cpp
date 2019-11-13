@@ -144,10 +144,11 @@ void createPilot()
 	do
 	{
 		cin >> category;
+		cin.ignore(100, '\n');
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
-			cin.ignore(100, '\n');
+			//cin.ignore(100, '\n');
 			//cout << "-----------------------------------------------------------------------------------------------------\n";
 			badInput = true;
 			cout << "Invalid category! Please insert pilot's category again (A, B or C)\n";
@@ -166,7 +167,6 @@ void createPilot()
 	cout << "Plane Types: \n";
 	do
 	{
-		cin.ignore(100, '\n');
 		getline(cin, read);
 		if (cin.eof())
 			return;
@@ -289,7 +289,7 @@ void createPilot()
 		}
 	}
 	currentAirport->employees.push_back(newPilot);
-	cout << string(100, '-') << endl << "New Administration member successfuly created!" << endl;
+	cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
 		//		cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
 		//	}
 		//}
@@ -968,7 +968,7 @@ void createFlight()
 			{
 				crew.clear();
 				Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
-				plane->addFlight(newFlight);
+				currentAirport->flights.push_back(newFlight);
 				return;
 			}
 			if (confirm == "n" || confirm == "N")
@@ -1049,6 +1049,7 @@ void createFlight()
 					crew.clear();
 					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
 					plane->addFlight(newFlight);
+					currentAirport->flights.push_back(newFlight);
 					return;
 				}
 				if (confirm == "n" || confirm == "N")
@@ -1150,6 +1151,7 @@ void createFlight()
 					crew.clear();
 					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
 					plane->addFlight(newFlight);
+					currentAirport->flights.push_back(newFlight);
 					return;
 				}
 				if (confirm == "n" || confirm == "N")
