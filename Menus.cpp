@@ -25,8 +25,10 @@ void showDataMenu()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "Which data to read?\n" << "1)A Person.\n" << "2)A Flight.\n" << "3)A Plane.\n" << "0)Return to the last menu.\n";
 			cin >> ShowSelect;
-			if (cin.eof())
+			if (cin.eof()) {
+				cin.clear();
 				return;
+			}
 			if (cin.fail() || ShowSelect <= -1 || ShowSelect > 3)
 			{
 				cin.clear();
@@ -183,8 +185,10 @@ void expensesMenu()
 	{
 		cout << "Would you like to see the planes or employees expenses?\n1)Planes.\n2)Employees.\n3)See all in between two months.\n0)Exit.\n";
 		cin >> sel;
-		if (cin.eof())
+		if (cin.eof()) {
+			cin.clear();
 			return;
+		}
 		if (cin.fail() || sel > 2 || sel < 0)
 		{
 			cin.clear();
@@ -269,7 +273,7 @@ void selectAirportMenu()
 		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "Which airport do you want to see the data of: \n";
 		for (size_t i = 0; i < comp->getAirports().size(); i++)
-			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCountry() << ", " << comp->getAirports().at(i)->getLocal().getCity() << endl;
+			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCity() << ", " << comp->getAirports().at(i)->getLocal().getCountry() << endl;
 		cout << endl;
 		cout << "0)Back\n";
 		cin >> select;
@@ -290,6 +294,7 @@ void selectAirportMenu()
 
 void companyMenu()
 {
+	cin.sync();
 	int sel;
 	bool badInput = false;
 	cout << '.' << string(98, '_') << '.' << endl
@@ -310,6 +315,7 @@ void companyMenu()
 				cin.ignore(1000, '\n');
 				badInput = true;
 			}
+			else { badInput = false; };
 		} while (badInput);
 		switch (sel) {
 		case 0:

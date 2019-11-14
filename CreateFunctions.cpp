@@ -18,8 +18,10 @@ void createPerson()
 		{
 			cout << "Which data to create?\n" << "1)A Pilot.\n" << "2)A Flight Crew member.\n" << "3)An Administration member.\n" << "4)A Base Crew member\n" << "0)Return to the last menu.\n";
 			cin >> createSel;
-			if (cin.eof())
+			if (cin.eof()) {
+				cin.clear();
 				return;
+			}
 			if (cin.fail() || createSel < 0 || createSel > 4)
 			{
 				cin.clear();
@@ -70,8 +72,10 @@ void createPerson()
 			{
 				badInput = false;
 			}
-			if (cin.eof())
+			if (cin.eof()) {
+				cin.clear();
 				return;
+			}
 
 		} while (badInput);
 	} while (createSel != 0);
@@ -99,6 +103,10 @@ void createPilot()
 	{
 
 		getline(cin, name);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ( !noAccent(name) ||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name=="")
 		{
 			cin.clear();
@@ -111,8 +119,6 @@ void createPilot()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -120,6 +126,10 @@ void createPilot()
 	do
 	{
 		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
@@ -133,17 +143,19 @@ void createPilot()
 			badInput = false;
 			birthDate = new Date(read);
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
-	cout << "Category: \n";
+	cout << "Category(A,B,C): \n";
 	do
 	{
 		cin >> category;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		cin.ignore(100, '\n');
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
@@ -157,19 +169,19 @@ void createPilot()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
-
 	} while (badInput);
 
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
-	cout << "Plane Types: \n";
+	cout << "Plane Types this pilot can fly(A,B,C): \n";
 	do
 	{
+		planeTypes.clear();
 		getline(cin, read);
-		if (cin.eof())
+		if (cin.eof()) {
+			cin.clear();
 			return;
+		}
 		if (cin.fail() || read.empty())
 		{
 			cin.clear();
@@ -189,8 +201,10 @@ void createPilot()
 			}
 			for (size_t i = 0; i < planeTypes.size(); i++)
 			{
-				if ((planeTypes.at(i) != "A") && (planeTypes.at(i) != "B") && (planeTypes.at(i) != "C"))
+				if ((planeTypes.at(i) != "A") && (planeTypes.at(i) != "B") && (planeTypes.at(i) != "C")) {
 					badInput = true;
+					break;
+				}
 			}
 		}
 		if(badInput)
@@ -314,6 +328,10 @@ void createFlightCrew()
 	{
 
 		getline(cin, name);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
@@ -326,8 +344,6 @@ void createFlightCrew()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -335,6 +351,10 @@ void createFlightCrew()
 	do
 	{
 		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
@@ -348,8 +368,6 @@ void createFlightCrew()
 			badInput = false;
 			birthDate = new Date(read);
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 
@@ -359,6 +377,10 @@ void createFlightCrew()
 	do
 	{
 		cin >> category;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
@@ -371,8 +393,6 @@ void createFlightCrew()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 
@@ -381,6 +401,10 @@ void createFlightCrew()
 	cout << "Flights: \n";
 	do {
 		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (cin.fail() || read.empty())
 		{
 			cin.clear();
@@ -391,8 +415,10 @@ void createFlightCrew()
 		else
 		{
 			badInput = false;
-			if (cin.eof())
+			if (cin.eof()) {
+				cin.clear();
 				return;
+			}
 			if (!(read.find_first_of(",") == string::npos)) {
 				decompose(read, flightIdsString, ',');
 				for (size_t i = 0; i < flightIdsString.size(); i++)
@@ -479,6 +505,10 @@ void createAdmin()
 	{
 
 		getline(cin, name);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ( !noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
@@ -491,8 +521,6 @@ void createAdmin()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -500,6 +528,10 @@ void createAdmin()
 	do
 	{
 		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
@@ -514,9 +546,6 @@ void createAdmin()
 			birthDate = new Date(read);
 		}
 
-		if (cin.eof())
-			return;
-
 	} while (badInput);
 
 
@@ -526,6 +555,10 @@ void createAdmin()
 	{
 
 		getline(cin, department);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (cin.fail() || (department.find_first_of("0123456789") != std::string::npos) || department == "")
 		{
 			cin.clear();
@@ -538,8 +571,6 @@ void createAdmin()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -548,6 +579,8 @@ void createAdmin()
 	{
 
 		getline(cin, function);
+		if (cin.eof())
+			return;
 		if (cin.fail() || (function.find_first_of("0123456789") != std::string::npos) || function == "")
 		{
 			cin.clear();
@@ -560,8 +593,6 @@ void createAdmin()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 	
 
@@ -601,6 +632,10 @@ void createBaseCrew()
 	{
 
 		getline(cin, name);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (!noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
@@ -613,8 +648,6 @@ void createBaseCrew()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -622,6 +655,10 @@ void createBaseCrew()
 	do
 	{
 		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
@@ -635,8 +672,6 @@ void createBaseCrew()
 			badInput = false;
 			birthDate = new Date(read);
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 
@@ -645,6 +680,11 @@ void createBaseCrew()
 	do
 	{
 		cin >> category;
+		cin.ignore(100, '\n');
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
@@ -657,9 +697,6 @@ void createBaseCrew()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
-
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -669,8 +706,11 @@ void createBaseCrew()
 		do
 		{
 			cout << "Starting time (hh:mm):\n";
-			cin.ignore();
 			getline(cin, read);
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || (read.find_first_of(':') == string::npos))
 			{
 				cin.clear();
@@ -693,16 +733,16 @@ void createBaseCrew()
 					cout << "Invalid time! Please insert again\n";
 				}
 			}
-
-			if (cin.eof())
-				return;
 		} while (badInput);
 
 		do
 		{
 			cout << "Ending time (hh:mm):\n";
-			cin.ignore();
 			getline(cin, read);
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || (read.find_first_of(':') == string::npos))
 			{
 				cin.clear();
@@ -726,8 +766,6 @@ void createBaseCrew()
 				}
 			}
 
-			if (cin.eof())
-				return;
 		} while (badInput);
 
 		if (!badInput)
@@ -775,10 +813,11 @@ void createFlight()
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Destination: \n";
 	do {
-		cin.ignore();
 		getline(cin, destination);
-		if (cin.eof())
+		if (cin.eof()) {
+			cin.clear();
 			return;
+		}
 		if (cin.fail() || (destination.find_first_of("0123456789") != std::string::npos) || destination == "")
 		{
 			cin.clear();
@@ -801,8 +840,10 @@ void createFlight()
 		do
 		{
 			getline(cin, read);
-			if (cin.eof())
+			if (cin.eof()) {
+				cin.clear();
 				return;
+			}
 			if (cin.fail() || !existingDate(read))
 			{
 				cin.clear();
@@ -858,6 +899,8 @@ void createFlight()
 		do
 		{
 			getline(cin, read);
+			if (cin.eof())
+				return;
 			if ((cin.fail() || !existingDate(read)) && !cin.eof())
 			{
 				cin.clear();
@@ -884,9 +927,6 @@ void createFlight()
 					cout << "The arrival date cannot be earlier than the departure date. \n";
 				}
 			}
-			if (cin.eof())
-				return;
-
 		} while (badInput);
 
 		do
@@ -947,6 +987,8 @@ void createFlight()
 			cout << "Do you want to create this flight with an empty crew for now?" << endl;
 			do {
 				cin >> confirm;
+				if (cin.eof())
+					return;
 				if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 				{
 					cin.clear();
@@ -956,12 +998,7 @@ void createFlight()
 				}
 				else
 				{
-					if (cin.eof())
-						return;
-					else
-					{
 						badInput = false;
-					}
 				}
 			} while (badInput);
 			if (confirm == "y" || confirm == "Y")
@@ -986,7 +1023,6 @@ void createFlight()
 			cin >> planeSel;
 			if (cin.eof())
 				return;
-			cin.ignore(100, '\n');
 			if (cin.fail() || planeSel < 0 || planeSel > currentAirport->planes.size() + 1)
 			{
 				cin.clear();
@@ -1059,6 +1095,9 @@ void createFlight()
 				cout << "Do you want to create this flight with an empty crew for now?" << endl;
 				do {
 					cin >> confirm;
+					cin.ignore(100, '\n');
+					if (cin.eof())
+						return;
 					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 					{
 						cin.clear();
@@ -1067,12 +1106,7 @@ void createFlight()
 					}
 					else
 					{
-						if (cin.eof())
-							return;
-						else
-						{
 							badInput = false;
-						}
 					}
 				} while (badInput);
 				if (confirm == "y" || confirm == "Y")
@@ -1161,6 +1195,8 @@ void createFlight()
 				cout << "Do you want to create this flight with an empty crew for now?" << endl;
 				do {
 					cin >> confirm;
+					if (cin.eof())
+						return;
 					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 					{
 						cin.clear();
@@ -1170,13 +1206,9 @@ void createFlight()
 					}
 					else
 					{
-						if (cin.eof())
-							return;
-						else
-						{
 							cin.ignore(100, '\n');
 							badInput = false;
-						}
+				
 					}
 				} while (badInput);
 				if (confirm == "y" || confirm == "Y")
@@ -1268,6 +1300,8 @@ void createPlane()
 	do
 	{
 		cin >> type;
+		if (cin.eof())
+			return;
 		if (cin.fail() || ((type != "A") && (type != "B") && (type != "C")))
 		{
 			cin.clear();
@@ -1280,8 +1314,6 @@ void createPlane()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 
@@ -1290,6 +1322,8 @@ void createPlane()
 	do
 	{
 		cin >> capacity;
+		if (cin.eof())
+			return;
 		if (cin.fail() || capacity < 0 || capacity > 550)
 		{
 			cin.clear();
@@ -1302,9 +1336,6 @@ void createPlane()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
-
 	} while (badInput);
 
 	vector<Flight*> flights = {};
@@ -1329,6 +1360,8 @@ void createAirport() {
 		do
 		{
 			getline(cin, country);
+			if (cin.eof())
+				return;
 			if (!noAccent(country) || cin.fail() || (country.find_first_of("0123456789") != std::string::npos) || country == "" || islower(country.at(0)))
 			{
 				cin.clear();
@@ -1341,8 +1374,6 @@ void createAirport() {
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
 		} while (badInput);
 
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -1350,6 +1381,8 @@ void createAirport() {
 		do
 		{
 			getline(cin, city);
+			if (cin.eof())
+				return;
 			if (!noAccent(city) || cin.fail() || (city.find_first_of("0123456789") != std::string::npos) || city == "" || islower(city.at(0)))
 			{
 				cin.clear();
@@ -1363,9 +1396,6 @@ void createAirport() {
 				badInput = false;
 			}
 
-			if (cin.eof())
-				return;
-
 		} while (badInput);
 
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -1374,7 +1404,9 @@ void createAirport() {
 		{
 
 			getline(cin, lat);
-			if (cin.fail() || (lat.find_first_of("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXWYZ") != std::string::npos) || lat == "")
+			if (cin.eof())
+				return;
+			if (cin.fail() || (lat.find_first_of("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXWYZ") != std::string::npos) || lat == ""||stoi(lat)>90 || stoi(lat)<(-90))
 			{
 				cin.clear();
 				//cin.ignore(100, '\n');
@@ -1386,8 +1418,6 @@ void createAirport() {
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
 		} while (badInput);
 
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -1396,7 +1426,9 @@ void createAirport() {
 		{
 
 			getline(cin, lon);
-			if (cin.fail() || (lon.find_first_of("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXWYZ") != std::string::npos) || lon == "")
+			if (cin.eof())
+				return;
+			if (cin.fail() || (lon.find_first_of("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXWYZ") != std::string::npos) || lon == "" || stoi(lon)>180 || stoi(lon)<(-180))
 			{
 				cin.clear();
 				//cin.ignore(100, '\n');
@@ -1408,8 +1440,6 @@ void createAirport() {
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
 		} while (badInput);
 
 		if (!badInput) {

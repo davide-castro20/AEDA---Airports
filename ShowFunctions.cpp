@@ -21,7 +21,7 @@ void showPlanesExpenses()
 			c += currentAirport->planes.at(i)->calcExp();
 	}
 	cout << '.' << string(98, '-') << '.' << endl;
-	cout << '|' << setfill('-') << right << setw(49) << currentAirport->local.getCity() << left << " currentAirport" << right << setw(42) << '|' << endl;
+	cout << '|' << setfill('-') << right << setw(49) << currentAirport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
 	cout << '|' << setfill('-') << setw(99) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Total Plane Expenses :" << '|' << left << setw(48) << ' ' + to_string(a+b+c) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "From which :" << '|' << left << setw(48) << " " + to_string(a) + " are from planes of type \"A\"" << '|' << endl;
@@ -90,6 +90,12 @@ void showPersonMenu()
 	bool badInput = false;
 	int showSelect;
 	string type;
+	int counter;
+	if (currentAirport->employees.size() == 0)
+	{
+		cout << "There are no persons on this aiport yet!\n";
+		return;
+	}
 
 	do
 	{
@@ -113,34 +119,59 @@ void showPersonMenu()
 
 		switch (showSelect)
 		{
+
 		case 0:
 			return;
 		case 1:
+			counter = 0;
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
-				if (currentAirport->employees.at(i)->getType() == "Pilot")
+				if (currentAirport->employees.at(i)->getType() == "Pilot") {
+					counter++;
 					showPerson(currentAirport->employees.at(i));
+				}
+			}
+			if (counter == 0) {
+				cout << "No pilots on this airport"<<endl;
 			}
 			break;
 		case 2:
+			counter = 0;
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
-				if (currentAirport->employees.at(i)->getType() == "Flight Crew")
+				if (currentAirport->employees.at(i)->getType() == "Flight Crew") {
+					counter++;
 					showPerson(currentAirport->employees.at(i));
+				}
+			}
+			if (counter == 0) {
+				cout << "No flight crew members on this airport" << endl;
 			}
 			break;
 		case 3:
+			counter = 0;
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
-				if (currentAirport->employees.at(i)->getType() == "Admin")
+				if (currentAirport->employees.at(i)->getType() == "Admin") {
+					counter++;
 					showPerson(currentAirport->employees.at(i));
+				}
+			}
+			if (counter == 0) {
+				cout << "No administrators on this airport" << endl;
 			}
 			break;
 		case 4:
+			counter = 0;
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
-				if (currentAirport->employees.at(i)->getType() == "Base Crew")
+				if (currentAirport->employees.at(i)->getType() == "Base Crew") {
+					counter++;
 					showPerson(currentAirport->employees.at(i));
+				}
+			}
+			if (counter == 0) {
+				cout << "No base crew members on this airport" << endl;
 			}
 			break;
 		case 5:
@@ -257,10 +288,14 @@ void showByName()
 	vector<Employee*> emps;
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Name: \n";
+	cin.ignore(100, '\n');
 	do
 	{
-		cin.ignore(100, '\n');
 		getline(cin, name);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
 		{
 			cin.clear();
@@ -273,8 +308,6 @@ void showByName()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 	} while (badInput);
 
 	if (currentAirport->employees.size() > 0)
@@ -426,6 +459,10 @@ void showFlightsDates()
 	{
 		cin.ignore(100, '\n');
 		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if ((cin.fail() || !existingDate(read)) && !cin.eof())
 		{
 			cin.clear();
@@ -439,9 +476,6 @@ void showFlightsDates()
 			badInput = false;
 			date1 = new Date(read);
 		}
-		if (cin.eof())
-			return;
-
 	} while (badInput);
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -449,8 +483,10 @@ void showFlightsDates()
 	do
 	{
 		getline(cin, read);
-		if (cin.eof())
+		if (cin.eof()) {
+			cin.clear();
 			return;
+		}
 		if (cin.fail() || !existingDate(read))
 		{
 			cin.clear();
@@ -493,7 +529,10 @@ void showPlaneMenu()
 	bool badInput = false;
 	int showSelect;
 	string type;
-
+	if (currentAirport->planes.size() == 0) {
+		cout << "No planes in this airport!\n";
+		return;
+	}
 	do
 	{
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -562,12 +601,15 @@ void showPlaneByCat()
 {
 	string category;
 	bool badInput = false;
-
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Category: \n";
 	do
 	{
 		cin >> category;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
 		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 		{
 			cin.clear();
@@ -580,8 +622,6 @@ void showPlaneByCat()
 		{
 			badInput = false;
 		}
-		if (cin.eof())
-			return;
 
 	} while (badInput);
 	

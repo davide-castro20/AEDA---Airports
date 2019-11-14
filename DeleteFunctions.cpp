@@ -12,30 +12,35 @@ void deletePersonData()
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel=false;
-	
+	if (currentAirport->employees.size() == 0) {
+		cout << "No employees on this airport!\n";
+		return;
+	}
 	do {
 		
 		do
 		{
 			completedDel = false;
 			badInput = true;
+			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "Whose data do you want to delete?(0 to cancel)\n" << endl;
 			for (size_t i = 1; i < currentAirport->employees.size() + 1; i++)
 				cout << i << ") " << currentAirport->employees.at(i - 1)-> getType() << ":" << currentAirport->employees.at(i - 1)->getName() << "." << endl;
 			cin >> delSelection;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->employees.size() + 1)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
 		} while (badInput);
 
 		cin.clear();
@@ -51,21 +56,20 @@ void deletePersonData()
 			cout << "---------------------------------------------------------------------------------------------------\n";
 			cout << "Are you sure you want to delete the following employee?(y/n)\n";
 			cin >> confirm;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N" || confirm == "0"))
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
 			{
-				if (cin.eof())
-					return;
-				else
-				{
 					badInput = false;
-				}
+				
 			}
 			if (confirm == "y" || confirm == "Y")
 			{
@@ -160,27 +164,35 @@ void deletePlaneData()
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel = false;
-	cout << "Which plane data do you want to delete?(0 to cancel)\n" << endl;
+	if (currentAirport->planes.size() == 0) {
+		cout << "No planes on this airport!\n";
+		return;
+	}
+
 	do {
 		do
 		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which plane data do you want to delete?(0 to cancel)\n" << endl;
 			for (size_t i = 1; i < currentAirport->planes.size() + 1; i++)
 				cout << i << ") Type: " << currentAirport->planes.at(i - 1)->getType() << ", Capacity: "
 				<< currentAirport->planes.at(i-1)->getCapacity() << endl;
 			cin >> delSelection;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->planes.size() + 1)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
+		
 		} while (badInput);
 		cin.clear();
 		cin.ignore(100, '\n');
@@ -189,24 +201,23 @@ void deletePlaneData()
 		delSelection--;
 		do
 		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "Are you sure you want to delete the following plane?(y/n)\n";
 			//showPlane(currentAirport->planes.at(delSelection));
 			cin >> confirm;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
 			}
 			else
 			{
-				if (cin.eof())
-					return;
-				else
-				{
 					badInput = false;
-				}
 			}
 			if (confirm == "y" || confirm == "Y")
 			{
@@ -261,27 +272,35 @@ void deleteFlightData()
 	unsigned int delSelection;
 	string confirm;
 	bool completedDel = false;
-	cout << "Which flight data do you want to delete?(0 to cancel)\n" << endl;
+	if (currentAirport->flights.size() == 0) {
+		cout << "No flights scheduled on this airport!\n";
+		return;
+	}
 	do {
 		do
 		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which flight data do you want to delete?(0 to cancel)\n" << endl;
 			for (size_t i = 1; i < currentAirport->flights.size() + 1; i++)
 				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << " which departs at: " << currentAirport->flights.at(i-1)->getPredictedSchedule().getDepartureDate() << endl;
 			cout << "0) Back\n";
 			cin >> delSelection;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || delSelection < 0 || delSelection > currentAirport->flights.size() + 1)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
+				
 				badInput = true;
 			}
 			else
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
+			
 		} while (badInput);
 		cin.clear();
 		cin.ignore(100, '\n');
@@ -294,6 +313,10 @@ void deleteFlightData()
 			cout << "---------------------------------------------------------------------------------------------------\n";
 			cout << "Are you sure you want to delete the following flight?(y/n)\n";
 			cin >> confirm;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 			{
 				cin.clear();
@@ -302,12 +325,8 @@ void deleteFlightData()
 			}
 			else
 			{
-				if (cin.eof())
-					return;
-				else
-				{
 					badInput = false;
-				}
+				
 			}
 			if (confirm == "y" || confirm == "Y")
 			{
@@ -361,7 +380,11 @@ void deleteAirportData() {
 				cout << i << ") " << comp->getAirports().at(i - 1)->getLocal().getCity() << ", " << comp->getAirports().at(i - 1)->getLocal().getCountry() << endl;
 			cout << "0) Back\n";
 			cin >> delSelection;
-			if (cin.fail() || delSelection < 0 || comp->getAirports().size() - 1)
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || delSelection < 0 || delSelection > comp->getAirports().size())
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
@@ -371,8 +394,6 @@ void deleteAirportData() {
 			{
 				badInput = false;
 			}
-			if (cin.eof())
-				return;
 		} while (badInput);
 		cin.clear();
 		cin.ignore(100, '\n');
@@ -384,6 +405,10 @@ void deleteAirportData() {
 			cout << "Are you sure you want to delete the following airport?(y/n)\n";
 			//showPlane(currentAirport->planes.at(delSelection));
 			cin >> confirm;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 			{
 				cin.clear();
@@ -393,12 +418,7 @@ void deleteAirportData() {
 			}
 			else
 			{
-				if (cin.eof())
-					return;
-				else
-				{
 					badInput = false;
-				}
 			}
 
 			if (confirm == "y" || confirm == "Y")

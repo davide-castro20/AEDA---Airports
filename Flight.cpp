@@ -27,15 +27,6 @@ Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &c
 	employees = crew;
 }
 
-bool Flight::isCanceled() const
-{
-	return canceled;
-}
-
-bool Flight::isCompleted() const
-{
-	return completed;
-}
 
 vector<Employee*> Flight::getEmployees() const
 {
@@ -109,15 +100,6 @@ void Flight::setRealSchedue(FlightSched * real)
 	realSchedule = real;
 }
 
-void Flight::setCanceled(bool cancel)
-{
-	canceled = cancel;
-}
-
-void Flight::setCompleted(bool complete)
-{
-	completed = complete;
-}
 
 void Flight::setDestination(string destination)
 {
