@@ -1,5 +1,53 @@
 #include "Utils.h"
 
+double inBetween(Employee* obj, int month1, int month2, int year1, int year2)
+{
+	double total = 0;
+	int nMonths = month2 - month1 + (year2 - year1) * 12;
+	if (nMonths < 0)
+		return 0;
+	vector<Flight*> flights = {}, copyFlights = obj->getFlights();
+	Date date1(1, month1, year1);
+	Date date2(days(year2, month2), month2, year2);
+	for (size_t i = 0; i < obj->getFlights().size(); i++)
+		if (checkBetweenDates(date1, date2, obj->getFlights().at(i)->getPredictedSchedule().getDepartureDate()))
+			flights.push_back(obj->getFlights().at(i));
+	obj->setFlights(flights);
+	total = obj->calcSalary();
+	obj->setFlights(copyFlights);
+
+	if (nMonths > 0) {
+		if (obj->getType() == "Flight Crew")
+			total += 800 * (nMonths - 1);
+		else if (obj->getType() == "Pilot")
+			total += 1000 * (nMonths - 1);
+	}
+	return total;
+}
+
+double inBetween(Plane* obj, int month1, int month2,int year1,int year2)
+{
+	double total = 0;
+	int nMonths = month2 - month1 + (year2 - year1) * 12;
+	vector<Flight*> flights = {}, copyFlights=obj->getFlights();
+	Date date1(1, month1, year1);
+	Date date2(days(year2, month2), month2, year2);
+	for (size_t i = 0; i < obj->getFlights().size(); i++)
+		if (checkBetweenDates(date1,date2,obj->getFlights().at(i)->getPredictedSchedule().getDepartureDate()))
+			flights.push_back(obj->getFlights().at(i));
+	obj->setFlights(flights);
+	total = obj->calcExp();
+	obj->setFlights(copyFlights);
+	if (nMonths > 0) {
+		if (obj->getType() == "A")
+			total += 500.0 * (nMonths - 1);
+		else if (obj->getType() == "B")
+			total += 750.0 * (nMonths - 1);
+		else if (obj->getType() == "C")
+			total += 1000.0 * (nMonths - 1);
+	}
+	return total;
+}
 
 bool leapYear(int year)
 {

@@ -6,6 +6,8 @@
 #include <sstream>
 #include <iomanip>
 #include "Flight.h"
+#include "Plane.h"
+#include "Employee.h"
 
 
 using namespace std;
@@ -94,3 +96,11 @@ bool notInFlight(Employee *employee, Flight* flight);
 @brief Checks if a string has no accented characters
 */
 bool noAccent(string name);
+/**
+@brief Calculates plane's expences between two dates
+*/
+double inBetween(Plane* obj, int month1, int month2, int year1, int year2);
+/**
+@brief Calculates employee's expences between two dates
+*/
+double inBetween(Employee* obj, int month1, int month2, int year1, int year2);

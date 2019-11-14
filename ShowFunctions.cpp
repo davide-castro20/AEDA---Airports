@@ -8,6 +8,135 @@ using namespace std;
 
 extern Airport* currentAirport;
 
+void datesExpenses()
+{
+	unsigned int month1, month2, year1, year2;
+	bool badInput=true;
+	double pilotExp = 0, baseCrewExp = 0, flightCrewExp = 0, adminExp = 0, planesExp = 0;
+	do {
+		do
+		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which month do you want to start the verification for the total expenses?\n";
+			cin >> month1;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || month1 <= 0 || month1 > 12)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		cin.ignore(100, '\n');
+		do
+		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which year do you want to start the verification for the total expenses?\n";
+			cin >> year1;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || year1 <= 0)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		cin.ignore(100, '\n');
+		do
+		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which month do you want to end the verification for the total expenses?\n";
+			cin >> month2;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || month2 <= 0 || month2 > 12)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		cin.ignore(100, '\n');
+		do
+		{
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Which year do you want to end the verification for the total expenses?\n";
+			cin >> year2;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || year2 <= 0)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		cin.ignore(100, '\n');
+		int nMonths = month2 - month1 + (year2 - year1) * 12 + 1;
+		if (nMonths > 0) {
+			badInput = false;
+			for (size_t i = 0; i < currentAirport->planes.size(); i++)
+			{
+				planesExp += inBetween(currentAirport->planes.at(i), month1, month2, year1, year2);
+			}
+			string type;
+			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			{
+				type = currentAirport->employees.at(i)->getType();
+				if (type == "Pilot")
+					pilotExp += inBetween(currentAirport->employees.at(i), month1, month2, year1, year2);
+				else if (type == "Flight Crew")
+					flightCrewExp += inBetween(currentAirport->employees.at(i), month1, month2, year1, year2);
+				else if (type == "Base Crew")
+					baseCrewExp += currentAirport->employees.at(i)->calcSalary()*nMonths;
+				else if (type == "Admin")
+					adminExp += currentAirport->employees.at(i)->calcSalary()*nMonths;
+			}
+
+			cout << '.' << string(98, '-') << '.' << endl;
+			cout << '|' << setfill('-') << right << setw(49) << currentAirport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
+			cout << '|' << setfill('-') << setw(99) << '|' << endl;
+			cout << '|' << right << setfill(' ') << setw(49) << "Total Expenses Between The Selected Dates " << '|' << left << setw(48) << ' ' + to_string(pilotExp + flightCrewExp + baseCrewExp + adminExp + planesExp) << '|' << endl;
+			cout << '|' << right << setfill(' ') << setw(49) << "From which " << '|' << left << setw(48) << " " + to_string(pilotExp) + " are from pilots" << '|' << endl;
+			cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(flightCrewExp) + " are from flight crew members" << '|' << endl;
+			cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(baseCrewExp) + " are from base crew members" << '|' << endl;
+			cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(adminExp) + " are from admins" << '|' << endl;
+			cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(planesExp) + " are from planes" << '|' << endl;
+		}
+		else
+		{
+			cout << "Invalid dates, please try again.\n";
+			badInput = true;
+		}
+	}while (badInput);
+}
+
 void showPlanesExpenses()
 {
 	double a = 0, b = 0, c = 0;
@@ -44,18 +173,13 @@ void showEmployeeExpenses()
 			admin += currentAirport->employees.at(i)->calcSalary();
 	}
 	cout << '.' << string(98, '-') << '.' << endl;
-	cout << '|' << setfill('-') << right << setw(49) << currentAirport->local.getCity() << left << " currentAirport" << right << setw(42) << '|' << endl;
+	cout << '|' << setfill('-') << right << setw(49) << currentAirport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
 	cout << '|' << setfill('-') << setw(99) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Total Employee Expenses " << '|' << left << setw(48) << ' ' + to_string(pilots+flight+base+admin) << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "From which " << '|' << left << setw(48) << " " + to_string(pilots) + " are from pilots" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(flight) + " are from flight crew members" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(base) + " are from base crew members" << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(50) << '|' << left << setw(48) << " " + to_string(admin) + " are from admins" << '|' << endl;
-}
-
-void showExpDates()
-{
-	//Faz isto Diogo
 }
 
 void showAirportData(Airport * airport)

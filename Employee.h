@@ -28,6 +28,7 @@ public:
 	virtual Schedule* getSchedule() const { Schedule *schedule = NULL; return schedule; };
 
 	virtual bool setCategory(string category) { return true; };
+	virtual bool setFlights(vector<Flight*> &flights) { return true; };
 	virtual bool setSchedule(Schedule *schedule) { return true; };
 	virtual bool setDepartment(string department) { return true; };
 	virtual bool setFunction(string function) { return true; };

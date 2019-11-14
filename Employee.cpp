@@ -135,11 +135,11 @@ bool Pilot::setPlanes(vector<Plane*>& planes)
 double Pilot::calcSalary() {
 	double total=1000;
 	if (category == "A")
-		total = 100.0 * flights.size();
+		total += 100.0 * flights.size();
 	if (category == "B")
-		total = 150.0 * flights.size();
+		total += 150.0 * flights.size();
 	if (category == "C")
-		total = 200.0 * flights.size();
+		total += 200.0 * flights.size();
 	for (size_t i = 0; i < flights.size(); i++)
 		total += (5/60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
 	return total;
@@ -177,11 +177,11 @@ bool FlightCrew::setFlights(vector<Flight*>& flights)
 double FlightCrew::calcSalary() {
 	double total=800;
 	if (category == "A")
-		total = 50.0 * flights.size();
+		total += 50.0 * flights.size();
 	if (category == "B")
-		total = 75.0 * flights.size();
+		total += 75.0 * flights.size();
 	if (category == "C")
-		total = 100.0 * flights.size();
+		total += 100.0 * flights.size();
 	for (size_t i = 0; i < flights.size(); i++)
 		total += (3 / 60) * flights.at(i)->getFlightDuration().getTotalMinutes(); //random formula
 	return total;

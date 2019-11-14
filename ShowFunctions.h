@@ -4,7 +4,7 @@
 
 void showEmployeeExpenses();
 
-void showExpDates();
+void datesExpenses();
 
 void showPlanesExpenses();
 
