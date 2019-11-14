@@ -16,8 +16,6 @@ private:
 	int id;
 	FlightSched *realSchedule;
 	FlightSched *predictedSchedule;
-	bool canceled = false;
-	bool completed = false;
 	string destination;
 	vector<Employee*> employees;
 	Plane* plane;
@@ -25,10 +23,6 @@ private:
 public:
 	Flight();
 	Flight(FlightSched *predictedSched, string destino, vector<Employee*> &crew, Plane* plane, int id);
-	bool isCanceled() const;
-	bool isCompleted() const;
-	/*Airport* getDeparture() const;
-	Airport* getDestination() const;*/
 	vector<Employee*> getEmployees() const;
 	vector<Employee*> getPilots() const;
 	vector<Employee*> getCrew() const;
@@ -43,9 +37,6 @@ public:
 	void setCanceled(bool cancel);
 	void setCompleted(bool complete);
 	void setDestination(string destination);
-	/*
-	void setDeparture(Airport *depart);
-	void setDestination(Airport *destin);*/
 	bool setCrew(vector<Employee*> crew);
 	bool setCrewMemb(Employee* memb);
 	bool setPlane(Plane * plane);

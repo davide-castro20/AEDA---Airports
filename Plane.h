@@ -33,6 +33,9 @@ public:
 	bool setCapacity(int cap);
 	bool setType(string type);
 	bool setFlights(vector<Flight*> fly);
+	/**
+@brief Checks if plane is free at some flight schedule
+*/
 	bool isFree(FlightSched *check);
 	void addFlight(Flight* flight);
 	void deleteFlight(int id);

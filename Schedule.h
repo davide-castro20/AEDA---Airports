@@ -40,6 +40,9 @@ public:
 	virtual Time getDuration() const;
 	void setStartHour(Time *start);
 	void setEndHour(Time *end);
+	/**
+@brief Checks if schedule is valid
+*/
 	virtual bool isValid() const;
 	virtual string getSched() const;
 	
@@ -61,6 +64,9 @@ public:
 	void setDepartureDate(Date *date);
 	void setArrivalDate(Date *date);
 
+	/**
+@brief Checks if flight schedule is valid
+*/
 	bool isValid() const;
 	string getSched() const;
 };

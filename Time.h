@@ -17,6 +17,9 @@ public:
 	unsigned int getTotalMinutes() const;
 	void setHours(unsigned int hours);
 	void setMinutes(unsigned int hours);
+	/**
+@brief Checks if time is valid
+*/
 	bool isValid() const;
 	bool operator<(const Time &time) const;
 	bool operator==(const Time &time) const;

@@ -35,6 +35,9 @@ public:
 	bool operator<(const Date &date);
 	bool operator<=(const Date &date);
 	bool operator==(const Date &date);
+	/**
+@brief Checks if the date is valid
+*/
 	bool isValid();
 
 };

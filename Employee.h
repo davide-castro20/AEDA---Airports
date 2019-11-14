@@ -31,6 +31,9 @@ public:
 	virtual bool setSchedule(Schedule *schedule) { return true; };
 	virtual bool setDepartment(string department) { return true; };
 	virtual bool setFunction(string function) { return true; };
+	/**
+@brief Creates if employee is free on a certain flight schedule
+*/
 	virtual bool isFree(FlightSched *check) { return false; };
 	virtual void addFlight(Flight* flight) { return; };
 	virtual void deleteFlight(int id) { return; };
