@@ -226,7 +226,7 @@ void mainMenu() {
 	{
 		badInput = false;
 		cout << "---------------------------------------------------------------------------------------------------\n";
-		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "5)This company expenses." << endl << "0)Return to company Menu\n";
+		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "5)This airport's expenses." << endl << "0)Return to company Menu\n";
 		cin >> select;
 		if (cin.fail() || select > 5 || select < 0)
 		{

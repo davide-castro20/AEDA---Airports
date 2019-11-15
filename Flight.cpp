@@ -18,8 +18,8 @@ Flight::Flight(FlightSched *predictedSched, string destino, vector<Employee*> &c
 	}
 	else
 	{
-		this->id = flightIds;
 		flightIds++;
+		this->id = flightIds;
 	}
 	this->plane = plane;
 	predictedSchedule = predictedSched;

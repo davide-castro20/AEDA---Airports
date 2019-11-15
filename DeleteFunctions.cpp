@@ -363,7 +363,7 @@ void deleteFlightData()
 }
 
 void deleteAirportData() {
-	int delSelection;
+	unsigned int delSelection;
 	string confirm;
 	bool completedChange = false;
 	bool badInput = true;
@@ -402,7 +402,7 @@ void deleteAirportData() {
 		delSelection--;
 		do
 		{
-			cout << "Are you sure you want to delete the following airport?(y/n)\n";
+			cout << "Are you sure you want to delete the following airport? This will forever delete this airports files(y/n)\n";
 			//showPlane(currentAirport->planes.at(delSelection));
 			cin >> confirm;
 			if (cin.eof()) {
