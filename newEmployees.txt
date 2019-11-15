@@ -21,7 +21,7 @@ B
 Admin
 Wii
 30/8/1972
-Pilot
+Coco
 Cleaning Lady
 ::::::::::
 Base Crew
@@ -38,10 +38,3 @@ Low
 1/12/1969
 C
 1
-::::::::::
-Pilot
-Uganda Knuckles
-29/2/2000
-A
-A
-

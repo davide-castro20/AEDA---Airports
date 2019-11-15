@@ -34,8 +34,6 @@ public:
 	Plane* getPlane() const;
 	bool setPredictedSchedule(FlightSched *predicted);
 	void setRealSchedue(FlightSched *real);
-	void setCanceled(bool cancel);
-	void setCompleted(bool complete);
 	void setDestination(string destination);
 	bool setCrew(vector<Employee*> crew);
 	bool setCrewMemb(Employee* memb);

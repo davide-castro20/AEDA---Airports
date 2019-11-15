@@ -40,6 +40,6 @@ public:
 	Local getLocal() const;
 	Airport() { planes = {}; flights = {}; };
 	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local, string planestxt, string employeetxt, string flightstxt);
-	bool setManager(Manager manager) { this->manager; return true; };
+	bool setManager(Manager manager) { this->manager=manager; return true; };
 };
 

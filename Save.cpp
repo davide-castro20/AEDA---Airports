@@ -17,6 +17,9 @@ void saveAirports() {
 		newAirportsFile << comp->getAirports().at(i)->flightTxt << endl;
 		newAirportsFile << comp->getAirports().at(i)->planesTxt << endl;
 		newAirportsFile << comp->getAirports().at(i)->employeeTxt << endl;
+		newAirportsFile << comp->getAirports().at(i)->manager.name << endl;
+		newAirportsFile << comp->getAirports().at(i)->manager.birthDate.getDate() << endl;
+		newAirportsFile << comp->getAirports().at(i)->manager.salary << endl;
 		newAirportsFile << "::::::::::\n";
 	}
 		size_t size = comp->getAirports().size()- 1;
@@ -27,6 +30,9 @@ void saveAirports() {
 		newAirportsFile << comp->getAirports().at(size)->flightTxt << endl;
 		newAirportsFile << comp->getAirports().at(size)->planesTxt << endl;
 		newAirportsFile << comp->getAirports().at(size)->employeeTxt << endl;
+		newAirportsFile << comp->getAirports().at(size)->manager.name << endl;
+		newAirportsFile << comp->getAirports().at(size)->manager.birthDate.getDate() << endl;
+		newAirportsFile << comp->getAirports().at(size)->manager.salary << endl;
 	}
 	const char* fileName = s.c_str();
 	newAirportsFile.close();
