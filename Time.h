@@ -7,7 +7,14 @@ using namespace std;
 class Time
 {
 private:
-	unsigned int hours, minutes;
+	/**
+@brief Time's hours
+*/
+	unsigned int hours;
+	/**
+@brief Time's minutes
+*/
+	unsigned int minutes;
 
 public:
 	Time();

@@ -6,8 +6,17 @@ using namespace std;
 
 class Date {
 private:
+	/**
+@brief Date's day
+*/
 	unsigned short day;
+	/**
+@brief Date's month
+*/
 	unsigned short month;
+	/**
+@brief Date's year
+*/
 	unsigned year;
 
 public:

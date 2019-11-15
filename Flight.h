@@ -13,11 +13,28 @@ class Time;
 class Flight
 {
 private:
-	int id;
+	/**
+@brief Flight's ID
+*/
+	int id;/**
+@brief Flight's real schedule (with the delays caused)
+*/
 	FlightSched *realSchedule;
+	/**
+@brief Flight's predicted schedule(the one from the .txt)
+*/
 	FlightSched *predictedSchedule;
+	/**
+@brief Flight's destination
+*/
 	string destination;
+	/**
+@brief Flight's employees (2 pilots and 2 flight crew members)
+*/
 	vector<Employee*> employees;
+	/**
+@brief Flight's plane
+*/
 	Plane* plane;
 
 public:

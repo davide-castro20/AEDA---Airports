@@ -7,6 +7,9 @@
 
 class Company
 {
+	/**
+@brief Company airports
+*/
 	vector<Airport*> airports;
 public:
 	Company();
