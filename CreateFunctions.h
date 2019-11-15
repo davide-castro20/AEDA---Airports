@@ -39,4 +39,7 @@ void createPlane();
 */
 void createAirport();
 //ADD THIS TO UML
+/**
+@brief Creates a new manager
+*/
 void createManager();

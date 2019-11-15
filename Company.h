@@ -15,6 +15,9 @@ public:
 @brief Adds an airport to the company
 */
 	void addAirport(Airport* newAirport);
+	/**
+@brief Return the company's airports
+*/
 	vector<Airport*> getAirports() const;
 	/**
 @brief Removes an airport from the company
