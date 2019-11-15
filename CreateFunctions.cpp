@@ -1564,7 +1564,7 @@ void createManager() {
 	Manager manager;
 	if (!badInput) {
 		manager.name = name;
-		manager.birthDate = *birthDate;
+		manager.birthDate = birthDate;
 		manager.salary = stod(salary);
 		if (currentAirport->manager.name != "") {
 			cout << "Manager already exists, please delete him first to add a new one!\n";

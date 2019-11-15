@@ -60,7 +60,7 @@ Company::Company(string airports_file)
 				manager.name = linha;
 				break;
 			case 8:
-				manager.birthDate = Date(linha);
+				manager.birthDate = new Date(linha);
 				break;
 			case 9:
 

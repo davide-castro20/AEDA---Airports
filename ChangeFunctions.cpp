@@ -718,7 +718,7 @@ void changeManagerSalary() {
 	string salary;
 	bool badInput = true;
 	string name = currentAirport->manager.name;
-	Date birthDate = currentAirport->manager.birthDate;
+	Date birthDate = *currentAirport->manager.birthDate;
 	Manager manager;
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -743,7 +743,7 @@ void changeManagerSalary() {
 		{
 			badInput = false;
 			manager.name = name;
-			manager.birthDate = birthDate;
+			manager.birthDate = &birthDate;
 			manager.salary = stod(salary);
 			currentAirport->setManager(manager);
 		}

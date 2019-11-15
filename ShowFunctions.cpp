@@ -209,7 +209,7 @@ void showAirportData(Airport * airport)
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Manager's Name " << '|' << left << setw(48) << " " + airport->manager.name << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
-	cout << '|' << right << setfill(' ') << setw(49) << "Manager's Birth Date " << '|' << left << setw(48) << " " + airport->manager.birthDate.getDate() << '|' << endl;
+	cout << '|' << right << setfill(' ') << setw(49) << "Manager's Birth Date " << '|' << left << setw(48) << " " + airport->manager.birthDate->getDate() << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Manager's Salary " << '|' << left << setw(48) << " " + to_string(airport->manager.salary) << '|' << endl;
 

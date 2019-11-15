@@ -448,7 +448,7 @@ void deleteManager() {
 	bool badInput = true;
 	Manager manager;
 	string name = "";
-	Date birthDate = Date(0, 0, 0);
+	Date *birthDate = new Date(0, 0, 0);
 	double salary = 0;
 	do
 	{

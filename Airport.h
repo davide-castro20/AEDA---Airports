@@ -10,7 +10,7 @@ class Date;
 
 struct Manager {
 	string name;
-	Date birthDate;
+	Date* birthDate;
 	double salary;
 };
 
