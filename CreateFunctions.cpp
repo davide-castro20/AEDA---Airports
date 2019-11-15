@@ -102,13 +102,13 @@ void createPilot()
 	cout << "Name: \n";
 	do
 	{
+		badInput = false;
 		try {
 			name = readName();
-			badInput = false;
 		}
 		catch (Exit ex)
 		{
-			ex.getMsg();
+			cout << ex.getMsg() << endl;
 			return;
 		}
 		catch (InvalidName na)
@@ -122,23 +122,21 @@ void createPilot()
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
-		getline(cin, read);
-		if (cin.eof()) {
-			cin.clear();
+		badInput = false;
+		try
+		{
+			birthDate = readDate();
+			
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		catch (InvalidBirthDate da)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Date " << da.getBirthDate() << " is invalid! Please insert birth date again\n";
 			badInput = true;
-			cout << "Invalid date! Please insert birth date again \n";
-		}
-		else
-		{
-			badInput = false;
-			birthDate = new Date(read);
 		}
 
 	} while (badInput);
@@ -148,24 +146,21 @@ void createPilot()
 	cout << "Category(A,B,C): \n";
 	do
 	{
-		cin >> category;
-		if (cin.eof()) {
-			cin.clear();
-			return;
-		}
-		cin.ignore(100, '\n');
-		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
+		badInput = false;
+		try
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			category = readCategory();
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
+		}
+		catch (InvalidCategory cat)
+		{
+			cout << "Invalid category " << cat.getCategory() << "! Please insert pilot's category again (A, B or C)\n";
 			badInput = true;
-			cout << "Invalid category! Please insert pilot's category again (A, B or C)\n";
 		}
-		else
-		{
-			badInput = false;
-		}
+
 	} while (badInput);
 
 
@@ -344,121 +339,126 @@ void createFlightCrew()
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
-		getline(cin, read);
-		if (cin.eof()) {
-			cin.clear();
+		badInput = false;
+		try
+		{
+			birthDate = readDate();
+
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		catch (InvalidBirthDate da)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Date " << da.getBirthDate() << " is invalid! Please insert birth date again\n";
 			badInput = true;
-			cout << "Invalid date! Please insert birth date again \n";
-		}
-		else
-		{
-			badInput = false;
-			birthDate = new Date(read);
 		}
 
 	} while (badInput);
+
 
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Category: \n";
 	do
 	{
-		cin >> category;
-		if (cin.eof()) {
-			cin.clear();
-			return;
-		}
-		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
+		badInput = false;
+		try
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			category = readCategory();
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
+		}
+		catch (InvalidCategory cat)
+		{
+			cout << "Invalid category " << cat.getCategory() << "! Please insert pilot's category again (A, B or C)\n";
 			badInput = true;
-			cout << "Invalid category! Please insert pilot's category again (A, B or C)\n";
-		}
-		else
-		{
-			badInput = false;
 		}
 
 	} while (badInput);
-
 	
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Flights: \n";
-	do {
-		getline(cin, read);
-		if (cin.eof()) {
-			cin.clear();
-			return;
-		}
-		if (cin.fail() || read.empty())
+	bool badInput2 = false;
+	do
+	{
+		badInput2 = false;
+		badInput = false;
+		do {
+			badInput2 = false;
+			try
+			{
+				flightIds = readFlights();
+			}
+			catch (InvalidFlights fl)
+			{
+				badInput2 = true;
+				cout << "Invalid flights! Please insert again.\n";
+			}
+		} while (badInput2);
+
+
+		bool full = false;
+		int count = 0;
+		for (size_t i = 0; i < flightIds.size(); i++)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+
+			for (size_t j = 0; j < currentAirport->flights.size(); j++)
+			{
+				if (flightIds.at(i) == currentAirport->flights.at(j)->getId())
+				{
+					count++;
+					int crewCount = 0;
+					for (size_t k = 0; k < currentAirport->flights.at(j)->getEmployees().size(); k++)
+					{
+						if (currentAirport->flights.at(j)->getEmployees().at(k)->getType() == "Flight Crew")
+							crewCount++;
+					}
+					if (crewCount == 2)
+						full = true;
+				}
+			}
+
+		}
+		if (count != flightIds.size())
+		{
+			cout << "One of more of those flights ID's don't exist!" << endl;
 			badInput = true;
 		}
-		else
+		if (full)
 		{
-			badInput = false;
-			if (cin.eof()) {
-				cin.clear();
-				return;
-			}
-			if (!(read.find_first_of(",") == string::npos)) {
-				decompose(read, flightIdsString, ',');
-				for (size_t i = 0; i < flightIdsString.size(); i++)
-					flightIds.push_back(stoi(flightIdsString.at(i)));
-			}
-			else {
-				trim(read);
-				flightIds.push_back(stoi(read));
-			}
-			bool full = false;
-			for (size_t i = 0; i < flightIds.size(); i++)
-			{
-				int count = 0;
+			cout << "One of more of those flights have a full Flight crew!" << endl;
+			badInput = true;
+		}
+		if (badInput)
+		{
+			bool badInput2 = false;
+			string confirm;
+			cout << "Do you want to create this flight with an empty crew for now?" << endl;
+			do {
+				badInput2 = false;
+				cin >> confirm;
+				if (cin.eof())
+					return;
+				cin.ignore(100, '\n');
+				if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+				{
+					cin.clear();
+					//cout << "-----------------------------------------------------------------------------------------------------\n";
+					badInput2 = true;
+				}
+				else
+				{
+					badInput2 = false;
 
-				for (size_t j = 0; j < currentAirport->flights.size(); j++)
-				{
-					if (flightIds.at(i) == currentAirport->flights.at(j)->getId())
-					{
-						count++;
-						int crewCount = 0;
-						for (size_t k = 0; k < currentAirport->flights.at(j)->getEmployees().size(); k++)
-						{
-							if (currentAirport->flights.at(j)->getEmployees().at(k)->getType() == "Flight Crew")
-								crewCount++;
-						}
-						if (crewCount == 2)
-							full = true;
-					}
 				}
-				if (count != flightIds.size())
-				{
-					cout << "One of more of those flights ID's don't exist!" << endl;
-					badInput = true;
-					break;
-				}
-				if (full)
-				{
-					cout << "One of more of those flights have a full Flight crew!" << endl;
-					badInput = true;
-					break;
-				}
-			}
-
-			if (!badInput)
+			} while (badInput2);
+			if (confirm == "y" || confirm == "Y")
 			{
-				flights = convertIdToFlight(flightIds, currentAirport->flights);
 				Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights);
 				for (size_t i = 0; i < currentAirport->employees.size(); i++)
 				{
@@ -468,18 +468,75 @@ void createFlightCrew()
 						return;
 					}
 				}
-				for (size_t j = 0; j < flights.size(); j++)
-				{
-					vector<Employee*> crew = flights.at(j)->getEmployees();
-					crew.push_back(newFlightCrew);
-					flights.at(j)->setCrew(crew);
-				}
-
 				currentAirport->employees.push_back(newFlightCrew);
 				cout << string(100, '-') << endl << "New Flight Crew member successfuly created!" << endl;
+				return;
+			}
+			else if (confirm == "n" || confirm == "N")
+			{
+				badInput2 = false;
 			}
 		}
 
+
+		if (!badInput)
+		{
+
+			flights = convertIdToFlight(flightIds, currentAirport->flights);
+			Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights);
+			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			{
+				if (currentAirport->employees.at(i) == newFlightCrew)
+				{
+					cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+					return;
+				}
+			}
+			for (size_t j = 0; j < flights.size(); j++)
+			{
+				vector<Employee*> crew = flights.at(j)->getEmployees();
+				crew.push_back(newFlightCrew);
+				flights.at(j)->setCrew(crew);
+			}
+
+			currentAirport->employees.push_back(newFlightCrew);
+			cout << string(100, '-') << endl << "New Flight Crew member successfuly created!" << endl;
+		}
+		//getline(cin, read);
+		//if (cin.eof()) {
+		//	cin.clear();
+		//	return;
+		//}
+		//if (cin.fail() || read.empty() || (read.find_first_not_of("0123456789, ") != string::npos))
+		//{
+		//	cin.clear();
+		//	//cin.ignore(100, '\n');
+		//	//cout << "-----------------------------------------------------------------------------------------------------\n";
+		//	cout << "Invalid Flights! Please insert again.\n";
+		//	badInput = true;
+		//}
+		//else
+		//{
+		//	badInput = false;
+		//	bool badInput2 = false;
+		//	do
+		//	{
+		//		badInput2 = false;
+		//		if (cin.eof()) {
+		//			cin.clear();
+		//			return;
+		//		}
+		//		if (!(read.find_first_of(",") == string::npos)) {
+		//			decompose(read, flightIdsString, ',');
+		//			for (size_t i = 0; i < flightIdsString.size(); i++)
+		//				flightIds.push_back(stoi(flightIdsString.at(i)));
+		//		}
+		//		else {
+		//			trim(read);
+		//			flightIds.push_back(stoi(read));
+		//		}
+		//		bool full = false;
+		//		int count = 0;
 	} while (badInput);
 }
 
@@ -517,23 +574,21 @@ void createAdmin()
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
-		getline(cin, read);
-		if (cin.eof()) {
-			cin.clear();
+		badInput = false;
+		try
+		{
+			birthDate = readDate();
+
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		catch (InvalidBirthDate da)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Date " << da.getBirthDate() << " is invalid! Please insert birth date again\n";
 			badInput = true;
-			cout << "Invalid date! Please insert birth date again \n";
-		}
-		else
-		{
-			badInput = false;
-			birthDate = new Date(read);
 		}
 
 	} while (badInput);
@@ -543,23 +598,20 @@ void createAdmin()
 	cout << "Department: \n";
 	do
 	{
-
-		getline(cin, department);
-		if (cin.eof()) {
-			cin.clear();
+		badInput = false;
+		try
+		{
+			department = readDepFunc();
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if (cin.fail() || (department.find_first_of("0123456789") != std::string::npos) || department == "")
+		catch (InvalidName fu)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Invalid department " << fu.getName() << "!. Please insert again\n";
 			badInput = true;
-			cout << "Invalid department! Please insert again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -567,40 +619,35 @@ void createAdmin()
 	cout << "Function: \n";
 	do
 	{
-
-		getline(cin, function);
-		if (cin.eof())
-			return;
-		if (cin.fail() || (function.find_first_of("0123456789") != std::string::npos) || function == "")
+		badInput = false;
+		try
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
-			badInput = true;
-			cout << "Invalid function! Please insert again \n";
+			function = readDepFunc();
 		}
-		else
+		catch (Exit ex)
 		{
-			badInput = false;
+			cout << ex.getMsg() << endl;
+			return;
+		}
+		catch (InvalidName fu)
+		{
+			cout << "Invalid function " << fu.getName() << "!. Please insert again\n";
+			badInput = true;
 		}
 	} while (badInput);
 	
-
-	
-
-	if(!badInput) {
-		Employee* newAdmin = new Admin(name, birthDate, department, function);
-		for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	Employee* newAdmin = new Admin(name, birthDate, department, function);
+	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	{
+		if (currentAirport->employees.at(i) == newAdmin)
 		{
-			if (currentAirport->employees.at(i) == newAdmin)
-			{
-				cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
-				return;
-			}
+			cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+			return;
 		}
-		currentAirport->employees.push_back(newAdmin);
-		cout << string(100, '-') << endl << "New Administration member successfuly created!" << endl;
 	}
+	currentAirport->employees.push_back(newAdmin);
+	cout << string(100, '-') << endl << "New Administration member successfuly created!" << endl;
+	
 }
 
 void createBaseCrew()
@@ -640,23 +687,21 @@ void createBaseCrew()
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
-		getline(cin, read);
-		if (cin.eof()) {
-			cin.clear();
+		badInput = false;
+		try
+		{
+			birthDate = readDate();
+
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		catch (InvalidBirthDate da)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Date " << da.getBirthDate() << " is invalid! Please insert birth date again\n";
 			badInput = true;
-			cout << "Invalid date! Please insert birth date again \n";
-		}
-		else
-		{
-			badInput = false;
-			birthDate = new Date(read);
 		}
 
 	} while (badInput);
@@ -665,23 +710,19 @@ void createBaseCrew()
 	cout << "Category: \n";
 	do
 	{
-		cin >> category;
-		cin.ignore(100, '\n');
-		if (cin.eof()) {
-			cin.clear();
-			return;
-		}
-		if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
+		badInput = false;
+		try
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			category = readCategory();
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
+		}
+		catch (InvalidCategory cat)
+		{
+			cout << "Invalid category " << cat.getCategory() << "! Please insert pilot's category again (A, B or C)\n";
 			badInput = true;
-			cout << "Invalid category! Please insert pilot's category again (A, B or C)\n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 

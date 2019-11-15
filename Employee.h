@@ -148,10 +148,10 @@ public:
 
 class InvalidBirthDate
 {
-	Date* birthDate;
+	string birthDate;
 public:
-	InvalidBirthDate(Date* date) { this->birthDate = date; };
-	Date* getBirthDate() const { return birthDate; };
+	InvalidBirthDate(string date) { this->birthDate = date; };
+	string getBirthDate() const { return birthDate; };
 };
 
 class InvalidPlaneTypes
@@ -160,4 +160,28 @@ class InvalidPlaneTypes
 public:
 	InvalidPlaneTypes(string planeTypes) { this->planeTypes = planeTypes; };
 	string getPlaneTypes() const { return planeTypes; };
+};
+
+class FullCrew
+{
+	string msg;
+public:
+	FullCrew() { msg = "One of more of those flights have a full Flight crew!"; };
+	string getMsg() const { return msg; };
+};
+
+class NonExistantFlight
+{
+	string msg;
+public:
+	NonExistantFlight() { msg = "One of more of those flight ID's don't exist!"; };
+	string getMsg() const { return msg; };
+};
+
+class InvalidFlights
+{
+	string flights;
+public:
+	InvalidFlights(string flights) { this->flights = flights; };
+	string getFlights() const { return flights; };
 };

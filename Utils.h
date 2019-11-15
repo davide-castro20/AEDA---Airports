@@ -8,6 +8,7 @@
 #include "Flight.h"
 #include "Plane.h"
 #include "Employee.h"
+#include "Airport.h"
 
 
 using namespace std;
@@ -121,3 +122,20 @@ public:
 @brief Reads a name
 */
 string readName();
+
+/**
+@brief Reads a date
+*/
+Date* readDate();
+
+/**
+@brief Reads a category
+*/
+string readCategory();
+
+/**
+@brief Reads department or function
+*/
+string readDepFunc();
+
+vector<int> readFlights();

@@ -1,5 +1,7 @@
 #include "Utils.h"
 
+extern Airport* currentAirport;
+
 double inBetween(Employee* obj, int month1, int month2, int year1, int year2)
 {
 	double total = 0;
@@ -42,6 +44,100 @@ string readName()
 		//cout << "Invalid name! Please insert name again \n";
 	}
 	return name;
+}
+
+Date* readDate()
+{
+	Date* date = NULL;
+	string read;
+	getline(cin, read);
+	if (cin.eof()) {
+		cin.clear();
+		throw Exit();
+	}
+	if ((cin.fail() || !existingDate(read)) && !cin.eof())
+	{
+		cin.clear();
+		//cin.ignore(100, '\n');
+		//cout << "-----------------------------------------------------------------------------------------------------\n";
+		throw InvalidBirthDate(read);
+	}
+	else
+	{
+		date = new Date(read);
+	}
+	return date;
+}
+
+string readCategory()
+{
+	string category;
+	cin >> category;
+	if (cin.eof()) {
+		cin.clear();
+		throw Exit();
+	}
+	cin.ignore(100, '\n');
+	if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
+	{
+		cin.clear();
+		//cin.ignore(100, '\n');
+		//cout << "-----------------------------------------------------------------------------------------------------\n";
+		throw InvalidCategory(category);
+	}
+	return category;
+}
+
+string readDepFunc()
+{
+	string function;
+	cin >> function;
+	if (cin.eof()) {
+		cin.clear();
+		throw Exit();
+	}
+	cin.ignore(100, '\n');
+	if (cin.fail() || (function.find_first_of("0123456789") != std::string::npos) || function == "")
+	{
+		cin.clear();
+		//cin.ignore(100, '\n');
+		//cout << "-----------------------------------------------------------------------------------------------------\n";
+		throw InvalidName(function);
+	}
+	return function;
+}
+
+vector<int> readFlights()
+{
+	vector<int> flightIds = {};
+	vector<string> flightIdsString;
+	string read;
+	getline(cin, read);
+	if (cin.eof()) {
+		cin.clear();
+		throw Exit();
+	}
+	if (cin.fail() || read.empty() || (read.find_first_not_of("0123456789, ") != string::npos))
+	{
+		cin.clear();
+		//cin.ignore(100, '\n');
+		//cout << "-----------------------------------------------------------------------------------------------------\n";
+		//cout << "Invalid Flights! Please insert again.\n";
+		throw InvalidFlights(read);
+	}
+	else
+	{
+		if (!(read.find_first_of(",") == string::npos)) {
+			decompose(read, flightIdsString, ',');
+			for (size_t i = 0; i < flightIdsString.size(); i++)
+				flightIds.push_back(stoi(flightIdsString.at(i)));
+		}
+		else {
+			trim(read);
+			flightIds.push_back(stoi(read));
+		}
+	}
+	return flightIds;
 }
 
 double inBetween(Plane* obj, int month1, int month2,int year1,int year2)

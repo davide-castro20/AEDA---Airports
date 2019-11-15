@@ -1,11 +1,12 @@
 #pragma once
 #include "Flight.h"
 #include "Employee.h"
-
+#include "Date.h"
 
 class Flight;
 class Plane;
 class Employee;
+class Date;
 
 struct Manager {
 	string name;
