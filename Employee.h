@@ -130,5 +130,34 @@ public:
 };
 
 
+class InvalidName
+{
+	string name;
+public:
+	InvalidName(string name) { this->name = name; };
+	string getName() const { return name; };
+};
 
+class InvalidCategory
+{
+	string category;
+public:
+	InvalidCategory(string category) { this->category = category; };
+	string getCategory() const { return category; };
+};
 
+class InvalidBirthDate
+{
+	Date* birthDate;
+public:
+	InvalidBirthDate(Date* date) { this->birthDate = date; };
+	Date* getBirthDate() const { return birthDate; };
+};
+
+class InvalidPlaneTypes
+{
+	string planeTypes;
+public:
+	InvalidPlaneTypes(string planeTypes) { this->planeTypes = planeTypes; };
+	string getPlaneTypes() const { return planeTypes; };
+};

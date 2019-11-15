@@ -104,3 +104,20 @@ double inBetween(Plane* obj, int month1, int month2, int year1, int year2);
 @brief Calculates employee's expences between two dates
 */
 double inBetween(Employee* obj, int month1, int month2, int year1, int year2);
+
+
+/**
+@brief Exception for when the user types CTRL+Z to exit
+*/
+class Exit
+{
+	string msg;
+public:
+	Exit() { msg = "Exiting and returning to last menu...";};
+	string getMsg() const { return msg; };
+};
+
+/**
+@brief Reads a name
+*/
+string readName();

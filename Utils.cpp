@@ -25,6 +25,25 @@ double inBetween(Employee* obj, int month1, int month2, int year1, int year2)
 	return total;
 }
 
+string readName()
+{
+	string name;
+	getline(cin, name);
+	if (cin.eof()) {
+		cin.clear();
+		throw Exit();
+	}
+	if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name == "")
+	{
+		cin.clear();
+		//cin.ignore(100, '\n');
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		throw InvalidName(name);
+		//cout << "Invalid name! Please insert name again \n";
+	}
+	return name;
+}
+
 double inBetween(Plane* obj, int month1, int month2,int year1,int year2)
 {
 	double total = 0;

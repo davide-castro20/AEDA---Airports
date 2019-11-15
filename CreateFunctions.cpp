@@ -101,23 +101,19 @@ void createPilot()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
 			return;
 		}
-		if ( !noAccent(name) ||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name=="")
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
 			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -326,25 +322,22 @@ void createFlightCrew()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
-			return;
-		}
-		if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
-		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
-			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
+		try {
+			name = readName();
 			badInput = false;
 		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
+			return;
+		}
+		catch (InvalidName na)
+		{
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
+			badInput = true;
+		}
 	} while (badInput);
+
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "BirthDate (dd/mm/yyyy): \n";
@@ -503,23 +496,19 @@ void createAdmin()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
 			return;
 		}
-		if ( !noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
 			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -630,23 +619,19 @@ void createBaseCrew()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if (!noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
 			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
