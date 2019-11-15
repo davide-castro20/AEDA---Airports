@@ -7,6 +7,12 @@ class Flight;
 class Plane;
 class Employee;
 
+struct Manager {
+	string name;
+	Date birthDate;
+	double salary;
+};
+
 class Local
 {
 private:
@@ -26,6 +32,7 @@ class Airport
 {
 public:
 	string flightTxt, employeeTxt, planesTxt;
+	Manager manager;
 	vector<Plane*> planes; //não esquecer de usar new
 	vector<Flight*> flights; //não esquecer de usar new
 	vector <Employee*> employees;
@@ -33,5 +40,6 @@ public:
 	Local getLocal() const;
 	Airport() { planes = {}; flights = {}; };
 	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local, string planestxt, string employeetxt, string flightstxt);
+	bool setManager(Manager manager) { this->manager; return true; };
 };
 

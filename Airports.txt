@@ -5,3 +5,6 @@ Paris
 Paris_Flights.txt
 Paris_Planes.txt
 Paris_Employees.txt
+Arnaldo
+6/9/1996
+5000.0

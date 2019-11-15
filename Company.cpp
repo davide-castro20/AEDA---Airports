@@ -21,6 +21,7 @@ Company::Company(string airports_file)
 	vector<Flight*> flights;
 	vector<Flight*> auxFlight;
 	vector<Employee*> employees;
+	Manager manager;
 
 	ifstream airport_data;
 	airport_data.open(airports_file);
@@ -54,9 +55,20 @@ Company::Company(string airports_file)
 			case 6:
 				employees = readEmployees(linha,flights,planes);
 				employeetxt = linha;
+				break;
+			case 7:
+				manager.name = linha;
+				break;
+			case 8:
+				manager.birthDate = Date(linha);
+				break;
+			case 9:
+
+				manager.salary = stod(linha);
 				Local local(country, city, longit, latit);
 				auxFlight = addEmployeeToFlight(flights, employees);
 				airport = new Airport(planes, auxFlight, employees, local, planestxt, employeetxt, flightstxt);
+				airport->setManager(manager);
 				airports.push_back(airport);
 				counter = -1;
 				break;
