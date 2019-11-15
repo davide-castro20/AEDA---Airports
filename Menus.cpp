@@ -67,9 +67,9 @@ void createDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n0)Return to main menu.\n";
+			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n4)A new manager0)Return to main menu.\n";
 			cin >> Selection;
-			if (cin.fail() || Selection < 0 || Selection > 3)
+			if (cin.fail() || Selection < 0 || Selection > 4)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
@@ -93,6 +93,9 @@ void createDataMenu()
 		case 3:
 			createPlane();
 			break;
+		case 4:
+			createManager();
+			break;
 		}
 	} while (Selection != 0);
 }
@@ -106,9 +109,9 @@ void changeDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What do you want to change?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)Add an employee or plane to a flight.\n0)Return to main menu.\n";
+			cout << "What do you want to update?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)Add an employee or plane to a flight.\n5) Manager's salary0)Return to main menu.\n";
 			cin >> selection;
-			if (cin.fail() || selection < 0 || selection > 4)
+			if (cin.fail() || selection < 0 || selection > 5)
 			{
 				cin.clear();
 				cin.ignore(100, '\n');
@@ -132,6 +135,10 @@ void changeDataMenu()
 			break;
 		case 4:
 			addToFlight();
+			break;
+		case 5:
+			changeManagerSalary();
+			break;
 		case 0:
 			break;
 		}
@@ -147,9 +154,9 @@ void deleteDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What do you want to delete?\n1)A Person.\n2)A Flight.\n3)A Plane\n0)Return to main menu.\n";
+			cout << "What do you want to delete?\n1)A Person.\n2)A Flight.\n3)A Plane\n4)Delete manager\n0)Return to main menu.\n";
 			cin >> toDelSelection;
-			if (cin.fail() || toDelSelection < 0 || toDelSelection>3)
+			if (cin.fail() || toDelSelection < 0 || toDelSelection>4)
 			{
 				toDelSelection = true;
 				cin.clear();
@@ -170,6 +177,9 @@ void deleteDataMenu()
 			break;
 		case 3:
 			deletePlaneData();
+			break;
+		case 4: 
+			deleteManager();
 			break;
 		case 0:
 			break;
