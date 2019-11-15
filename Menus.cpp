@@ -67,7 +67,7 @@ void createDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n4)A new manager0)Return to main menu.\n";
+			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n4)A new manager\n0)Return to main menu.\n";
 			cin >> Selection;
 			if (cin.fail() || Selection < 0 || Selection > 4)
 			{
