@@ -42,6 +42,10 @@ float Local::getLatit() const
 
 Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, vector <Employee*> employees, Local local, string planestxt, string employeetxt, string flightstxt)
 {
+	Manager man;
+	man.name = "";
+	man.birthDate = new Date(0, 0, 0);
+	man.salary = 0;
 	this->planes = planes;
 	this->flights = flights;
 	this->employees = employees;
@@ -49,6 +53,7 @@ Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, vector <Emplo
 	this->planesTxt = planestxt;
 	this->employeeTxt = employeetxt;
 	this->flightTxt = flightstxt;
+	this->manager = man;
 }
 
 Local Airport::getLocal() const
