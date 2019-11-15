@@ -442,3 +442,46 @@ void deleteAirportData() {
 		} while (badInput);
 	} while (!completedChange);
 }
+
+void deleteManager() {
+	string confirm;
+	bool badInput = true;
+	Manager manager;
+	string name = "";
+	Date birthDate = Date(0, 0, 0);
+	double salary = 0;
+	do
+	{
+		cout << "Are you sure you want to delete manager? This will forever delete this airports files(y/n)\n";
+		cin >> confirm;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+		}
+
+		if (confirm == "y" || confirm == "Y")
+		{
+			manager.name = name;
+			manager.birthDate = birthDate;
+			manager.salary = salary;
+			currentAirport->setManager(manager);
+		}
+		if (confirm == "n" || confirm == "N")
+		{
+			badInput = false;
+			return;
+		}
+
+	} while (badInput);
+}

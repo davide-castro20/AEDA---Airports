@@ -24,3 +24,6 @@ void deleteFlightData();
 @brief Deletes an airport
 */
 void deleteAirportData();
+
+//ADD TO UML
+void deleteManager();

@@ -39,3 +39,5 @@ void addFlightCrew(Flight * flight);
 @brief Updates data of a flight by adding a plane to it
 */
 void addPlane(Flight * flight);
+//ADD TO UML
+void changeManagerSalary();

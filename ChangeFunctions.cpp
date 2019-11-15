@@ -711,3 +711,41 @@ void addPlane(Flight* flight)
 
 	} while (badInput);
 }
+
+
+
+void changeManagerSalary() {
+	string salary;
+	bool badInput = true;
+	string name = currentAirport->manager.name;
+	Date birthDate = currentAirport->manager.birthDate;
+	Manager manager;
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Salary: \n";
+	do
+	{
+
+		getline(cin, salary);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (noAccent(salary) || cin.fail() || salary == "" || stod(salary) < 0)
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid salary! Please insert again \n";
+		}
+		else
+		{
+			badInput = false;
+			manager.name = name;
+			manager.birthDate = birthDate;
+			manager.salary = stod(salary);
+			currentAirport->setManager(manager);
+		}
+	} while (badInput);
+}

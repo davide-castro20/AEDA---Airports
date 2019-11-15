@@ -2,6 +2,7 @@
 #include "Utils.h"
 #include "Company.h"
 #include "Menus.h"
+#include "Airport.h"
 
 extern Airport *currentAirport;
 extern Company *comp;
@@ -101,23 +102,19 @@ void createPilot()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
 			return;
 		}
-		if ( !noAccent(name) ||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name=="")
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
 			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -326,25 +323,22 @@ void createFlightCrew()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
-			return;
-		}
-		if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
-		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
-			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
+		try {
+			name = readName();
 			badInput = false;
 		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
+			return;
+		}
+		catch (InvalidName na)
+		{
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
+			badInput = true;
+		}
 	} while (badInput);
+
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "BirthDate (dd/mm/yyyy): \n";
@@ -503,23 +497,19 @@ void createAdmin()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
 			return;
 		}
-		if ( !noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
 			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -630,23 +620,19 @@ void createBaseCrew()
 	cout << "Name: \n";
 	do
 	{
-
-		getline(cin, name);
-		if (cin.eof()) {
-			cin.clear();
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if (!noAccent(name)||cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || name == "" || islower(name.at(0)))
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
 			badInput = true;
-			cout << "Invalid name! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -1454,4 +1440,96 @@ void createAirport() {
 		}
 		comp->addAirport(airport);
 		cout << string(100, '-') << endl << "New Airport successfuly created!" << endl;
+}
+
+
+void createManager() {
+	bool badInput = false;
+	string name;
+	Date *birthDate = NULL;
+	string read;
+	string salary;
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Name: \n";
+	do
+	{
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
+			return;
+		}
+		catch (InvalidName na)
+		{
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
+			badInput = true;
+		}
+	} while (badInput);
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "BirthDate (dd/mm/yyyy): \n";
+	do
+	{
+		getline(cin, read);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid date! Please insert birth date again \n";
+		}
+		else
+		{
+			badInput = false;
+			birthDate = new Date(read);
+		}
+
+	} while (badInput);
+
+
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Salary: \n";
+	do
+	{
+
+		getline(cin, salary);
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (noAccent(salary) || cin.fail() || salary == "" || stod(salary)<0)
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			cout << "-----------------------------------------------------------------------------------------------------\n";
+			badInput = true;
+			cout << "Invalid salary! Please insert again \n";
+		}
+		else
+		{
+			badInput = false;
+		}
+	} while (badInput);
+
+	Manager manager;
+	if (!badInput) {
+		manager.name = name;
+		manager.birthDate = *birthDate;
+		manager.salary = stod(salary);
+		if (currentAirport->manager.name != "") {
+			cout << "Manager already exists, please delete him first to add a new one!\n";
+			return;
+		}
+		currentAirport->setManager(manager);
+		cout << string(100, '-') << endl << "New manager successfuly created!" << endl;
+	}
 }
