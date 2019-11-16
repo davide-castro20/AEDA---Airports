@@ -21,7 +21,7 @@ B
 Admin
 Wii
 30/8/1972
-Coco
+
 Cleaning Lady
 ::::::::::
 Base Crew
@@ -35,6 +35,6 @@ A
 ::::::::::
 Flight Crew
 Low
-01/12/1969
+1/12/1969
 C
 1

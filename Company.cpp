@@ -71,6 +71,7 @@ Company::Company(string airports_file)
 				airport->setManager(manager);
 				airports.push_back(airport);
 				counter = -1;
+				getline(airport_data, linha);
 				break;
 			}
 			counter++;

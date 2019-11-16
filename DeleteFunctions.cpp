@@ -426,11 +426,11 @@ void deleteAirportData() {
 				badInput = false;
 				completedChange = true;
 				fileName = comp->getAirports().at(delSelection)->employeeTxt.c_str();
-				//remove(fileName);
+				remove(fileName);
 				fileName = comp->getAirports().at(delSelection)->flightTxt.c_str();
-				//remove(fileName);
+				remove(fileName);
 				fileName = comp->getAirports().at(delSelection)->planesTxt.c_str();
-				//remove(filename);
+				remove(fileName);
 				comp->deleteAirport(delSelection);
 			}
 			if (confirm == "n" || confirm == "N")

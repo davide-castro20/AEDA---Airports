@@ -110,12 +110,12 @@ void changeDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What do you want to update?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)Add an employee or plane to a flight.\n5) Manager's salary0)Return to main menu.\n";
+			cout << "What do you want to update?\n1)A Person.\n2)A Flight.\n3)A Plane.\n4)Add an employee or plane to a flight.\n5)Manager's salary.\n0)Return to main menu.\n";
 			cin >> selection;
+			cin.ignore(100, '\n');
 			if (cin.fail() || selection < 0 || selection > 5)
 			{
 				cin.clear();
-				cin.ignore(100, '\n');
 				badInput = true;
 			}
 			else

@@ -101,6 +101,11 @@ void changePersonData()
 							cin.clear();
 							cin.ignore(100, '\n');
 							getline(cin, category);
+							if (cin.eof())
+							{
+								cin.clear();
+								return;
+							}
 						} while (!currentAirport->employees.at(changeSelection)->setCategory(category));
 					}
 				}
@@ -160,6 +165,11 @@ void changePersonData()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 				cout << "|What do you want to change?\n1) Name\n2) Department\n3) Function\n0) Back\n";
 				cin >> selectionToChange;
+				if (cin.eof())
+				{
+					cin.clear();
+					return;
+				}
 				if (cin.fail() || selectionToChange < 0 || selectionToChange > 3)
 				{
 					cin.clear();
@@ -219,6 +229,11 @@ void changePersonData()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 				cout << "|What do you want to change?\n1) Name\n2) Category\n3) Schedule\n0) Back\n";
 				cin >> selectionToChange;
+				if (cin.eof())
+				{
+					cin.clear();
+					return;
+				}
 				if (cin.fail() || selectionToChange < 0 || selectionToChange > 3)
 				{
 					cin.clear();
@@ -260,6 +275,11 @@ void changePersonData()
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the category you want to change to?\n";
 							getline(cin, category);
+							if (cin.eof())
+							{
+								cin.clear();
+								return;
+							}
 						} while (!currentAirport->employees.at(changeSelection)->setCategory(category));
 					}
 					if (selectionToChange == 3) {
@@ -268,8 +288,18 @@ void changePersonData()
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the schedule you want to change to?(Ex: 10:30 (enter) 18:30)\n";
 							getline(cin, aux);
+							if (cin.eof())
+							{
+								cin.clear();
+								return;
+							}
 							decomposeInt(aux, startTime, ':');
 							getline(cin, aux);
+							if (cin.eof())
+							{
+								cin.clear();
+								return;
+							}
 							decomposeInt(aux, endTime, ':');
 							startSchedule = new Time(startTime[0], startTime[1]);
 							endSchedule = new Time(endTime[0], endTime[1]);
@@ -306,6 +336,11 @@ void changePlaneData()
 			for (size_t i = 1; i < currentAirport->planes.size() + 1; i++)
 				cout << i << ") " << currentAirport->planes.at(i - 1)->getType() << " with a capacity of "<< currentAirport->planes.at(i - 1)->getCapacity() <<" spots."<< endl;
 			cin >> changeSelection;
+			if (cin.eof())
+			{
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || changeSelection < 0 || changeSelection > currentAirport->planes.size())
 			{
 				cin.clear();
@@ -327,37 +362,52 @@ void changePlaneData()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "|What do you want to change?\n1) Type\n2) Capacity\n0) Back\n";
 			cin >> selectionToChange;
-				if (cin.fail() || selectionToChange < 0 || selectionToChange > 2)
-				{
-					cin.clear();
-					cin.ignore(100, '\n');
-					cout << "|There was a problem with your selection, please try again.\n" ;
-					badInput = true;
-				}
-				else
-				{
-					badInput = false;
-					cin.ignore(100, '\n');
-					if (selectionToChange == 1) {
-						do
+			if (cin.eof())
+			{
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || selectionToChange < 0 || selectionToChange > 2)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "|There was a problem with your selection, please try again.\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+				cin.ignore(100, '\n');
+				if (selectionToChange == 1) {
+					do
+					{
+						cout << "-----------------------------------------------------------------------------------------------------\n";
+						cout << "|What is the type you want to change to?\n";
+						getline(cin, type);
+						if (cin.eof())
 						{
-							cout << "-----------------------------------------------------------------------------------------------------\n";
-							cout << "|What is the type you want to change to?\n";
-							getline(cin, type);
-						} while (!currentAirport->planes.at(changeSelection)->setType(type));
-					}
-					if (selectionToChange == 2) {
-						do
-						{
-							cout << "-----------------------------------------------------------------------------------------------------\n";
-							cout << "|What is the capacity you want to change to?\n";
-							getline(cin, capacity);
-							capac = stoi(capacity);
-						} while (!currentAirport->planes.at(changeSelection)->setCapacity(capac));
-					}
+							cin.clear();
+							return;
+						}
+					} while (!currentAirport->planes.at(changeSelection)->setType(type));
 				}
-			}while (badInput);
-			completedChange = true;
+				if (selectionToChange == 2) {
+					do
+					{
+						cout << "-----------------------------------------------------------------------------------------------------\n";
+						cout << "|What is the capacity you want to change to?\n";
+						getline(cin, capacity);
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
+						capac = stoi(capacity);
+					} while (!currentAirport->planes.at(changeSelection)->setCapacity(capac));
+				}
+			}
+		} while (badInput);
+		completedChange = true;
 	} while (!completedChange);
 }
 
@@ -392,6 +442,11 @@ void changeFlightData()
 			for (size_t i = 1; i < currentAirport->flights.size() + 1; i++)
 				cout << i << ") " << currentAirport->flights.at(i - 1)->getDestination() << " which departs at: " << currentAirport->flights.at(i - 1)->getPredictedSchedule().getDepartureDate() << endl;
 			cin >> changeSelection;
+			if (cin.eof())
+			{
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || changeSelection < 0 || changeSelection > currentAirport->flights.size())
 			{
 				cin.clear();
@@ -413,6 +468,11 @@ void changeFlightData()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "|What do you want to change?\n1) Schedule\n2) Crew\n0) Back\n";
 			cin >> selectionToChange;
+			if (cin.eof())
+			{
+				cin.clear();
+				return;
+			}
 			if (cin.fail() || selectionToChange < 0 || selectionToChange > 2)
 			{
 				cin.clear();
@@ -431,14 +491,34 @@ void changeFlightData()
 						cout << "-----------------------------------------------------------------------------------------------------\n";
 						cout << "|What is the date you want to change to?(Ex: 10/8/2000 (enter) 11/8/2000)\n";
 						getline(cin, aux);
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
 						startDate = new Date(aux);
 						getline(cin, aux);
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
 						endDate = new Date(aux);
 						cout << "-----------------------------------------------------------------------------------------------------\n";
 						cout << "|What is the time schedule you want to change to?(Ex: 10:30 (enter) 8:30)\n";
 						getline(cin, aux);
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
 						decomposeInt(aux, startTime, ':');
 						getline(cin, aux);
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
 						decomposeInt(aux, endTime, ':');
 						startSchedule = new Time(startTime[0], startTime[1]);
 						endSchedule = new Time(endTime[0], endTime[1]);
@@ -457,6 +537,11 @@ void changeFlightData()
 						for (unsigned int i = 1; i <= currentAirport->flights.at(changeSelection)->getEmployees().size(); i++)
 							cout << i << ") " << currentAirport->flights.at(changeSelection)->getEmployees().at(i - 1)->getType() << ":" << currentAirport->flights.at(changeSelection)->getEmployees().at(i - 1)->getName() << "." << endl;
 						cin >> employeeSelection;
+						if (cin.eof())
+						{
+							cin.clear();
+							return;
+						}
 						employeeSelection--;
 						auxil.erase(auxil.begin() + employeeSelection);
 						if (cin.fail() || employeeSelection < 0 || employeeSelection > currentAirport->flights.at(changeSelection)->getEmployees().size() + 1)
@@ -485,6 +570,11 @@ void changeFlightData()
 									for(size_t i = 0;i<freeEmp.size();i++)
 										cout << i << ") " << freeEmp.at(i - 1)->getType() << ":" << freeEmp.at(i - 1)->getName() << "." << endl;
 									cin >> newEmployeeSelection;
+									if (cin.eof())
+									{
+										cin.clear();
+										return;
+									}
 									newEmployeeSelection--;
 									if (cin.fail() || newEmployeeSelection < 0 || newEmployeeSelection > 2)
 									{
@@ -517,6 +607,11 @@ void changeFlightData()
 									for (size_t i = 0; i < freeEmp.size(); i++)
 										cout << i << ") " << freeEmp.at(i - 1)->getType() << ":" << freeEmp.at(i - 1)->getName() << "." << endl;
 									cin >> newEmployeeSelection;
+									if (cin.eof())
+									{
+										cin.clear();
+										return;
+									}
 									newEmployeeSelection--;
 									if (cin.fail() || newEmployeeSelection < 0 || newEmployeeSelection > 2)
 									{

@@ -81,8 +81,6 @@ string readCategory()
 	if (cin.fail() || ((category != "A") && (category != "B") && (category != "C")))
 	{
 		cin.clear();
-		//cin.ignore(100, '\n');
-		//cout << "-----------------------------------------------------------------------------------------------------\n";
 		throw InvalidCategory(category);
 	}
 	return category;
@@ -120,9 +118,6 @@ vector<int> readFlights()
 	if (cin.fail() || read.empty() || (read.find_first_not_of("0123456789, ") != string::npos))
 	{
 		cin.clear();
-		//cin.ignore(100, '\n');
-		//cout << "-----------------------------------------------------------------------------------------------------\n";
-		//cout << "Invalid Flights! Please insert again.\n";
 		throw InvalidFlights(read);
 	}
 	else

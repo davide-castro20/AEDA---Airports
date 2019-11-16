@@ -36,8 +36,8 @@ void saveAirports() {
 	}
 	const char* fileName = s.c_str();
 	newAirportsFile.close();
-	//remove(fileName);
-	//rename("newAirports.txt", fileName);
+	remove(fileName);
+	rename("newAirports.txt", fileName);
 
 }
 
@@ -71,8 +71,8 @@ void SaveFlights() {
 		}
 		const char* fileName = comp->getAirports().at(i)->flightTxt.c_str();
 		newFlightsFile.close();
-		//remove(fileName);
-		//rename("newFlights.txt", fileName);
+		remove(fileName);
+		rename("newFlights.txt", fileName);
 	}
 }
 
@@ -205,8 +205,8 @@ void SaveEmployees() {
 		}
 		const char* fileName = comp->getAirports().at(i)->employeeTxt.c_str();
 		newEmployeesFile.close();
-		//remove(fileName);
-		//rename("newEmployees.txt", fileName);
+		remove(fileName);
+		rename("newEmployees.txt", fileName);
 	}
 }
 
@@ -252,7 +252,7 @@ void SavePlanes() {
 		}
 		const char* fileName = comp->getAirports().at(i)->planesTxt.c_str();
 		newPlanesFile.close();
-		//remove(fileName);
-		//rename("newPlanes.txt", fileName);
+		remove(fileName);
+		rename("newPlanes.txt", fileName);
 	}
 }

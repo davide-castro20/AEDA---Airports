@@ -438,7 +438,7 @@ void createFlightCrew()
 		{
 			bool badInput2 = false;
 			string confirm;
-			cout << "Do you want to create this flight with an empty crew for now?" << endl;
+			cout << "Do you want to create this employee with no flights?" << endl;
 			do {
 				badInput2 = false;
 				cin >> confirm;

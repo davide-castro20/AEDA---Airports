@@ -70,9 +70,10 @@ vector<Flight*> readFlights(string flights_file)
 	}
 	else
 	{
+		cout << flights_file << endl;
 		cout << "Error opening flight file.\n";
 	}
-	;
+	
 	flights_data.close();
 	return flights;
 }
