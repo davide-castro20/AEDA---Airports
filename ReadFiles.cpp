@@ -193,6 +193,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				employees.push_back(employee);
 
 				getline(employees_data, linha);
+				planeTypes.clear();
 				flightIds.clear();
 				flightIdsString.clear();
 			}

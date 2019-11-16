@@ -2,8 +2,8 @@ Pilot
 Joao Valente
 12/6/1990
 A
-
-
+C
+3
 ::::::::::
 Flight Crew
 Lara Portas
@@ -25,3 +25,10 @@ B
 0
 15
 0
+::::::::::
+Pilot
+Nando Silva
+4/12/1981
+B
+A, B
+

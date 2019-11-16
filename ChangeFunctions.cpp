@@ -736,22 +736,109 @@ void addToFlight()
 
 void addPilot(Flight* flight)
 {
+	bool badInput = false;
+	unsigned int addSel;
+	vector<Employee*> oldCrew;
+	vector<Employee*> freePilots;
 	if (flight->getPilots().size() == 2)
 	{
 		cout << "There are already two pilots on this flight!\n\n";
 		return;
 	}
+	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	{
+		if (currentAirport->employees.at(i)->isFree(&flight->getPredictedSchedule()) && currentAirport->employees.at(i)->getType() == "Pilot")
+			freePilots.push_back(currentAirport->employees.at(i));
+	}
+	if (freePilots.size() == 0)
+	{
+		cout << "There are no available pilots for this flight.\n\n";
+		return;
+	}
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Which pilot to add?\n\n";
+		for (size_t k = 1; k < freePilots.size() + 1; k++)
+			cout << k << ") Name: " << freePilots.at(k - 1)->getName() << "; Birth Date: " << freePilots.at(k - 1)->getDate() << endl;
+		cout << endl << "0)Return to last menu.\n\n";
+		cin >> addSel;
+		cin.ignore(100, '\n');
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || addSel < 0 || addSel > freePilots.size())
+		{
+			cin.clear();
+			cout << "Invalid pilot, please insert again.\n\n";
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+			oldCrew = flight->getEmployees();
+			freePilots.at(addSel - 1)->addFlight(flight);
+			oldCrew.push_back(freePilots.at(addSel - 1));
+			flight->setCrew(oldCrew);
+			cout << "Pilot successfuly added to the flight!\n\n";
+		}
 
+	} while (badInput);
 
 }
 
 void addFlightCrew(Flight* flight)
 {
+	unsigned int addSel;
+	bool badInput = false;
+	vector<Employee*> freeFlightCrew;
+	vector<Employee*> oldCrew;
 	if (flight->getCrew().size() == 2)
 	{
 		cout << "There are already two flight crew members on this flight!\n\n";
 		return;
 	}
+	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	{
+		if (currentAirport->employees.at(i)->isFree(&flight->getPredictedSchedule()) && currentAirport->employees.at(i)->getType() == "Flight Crew")
+			freeFlightCrew.push_back(currentAirport->employees.at(i));
+	}
+	if (freeFlightCrew.size() == 0)
+	{
+		cout << "There are no available flight crew members for this flight.\n\n";
+		return;
+	}
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Which flight crew member to add?\n\n";
+		for (size_t k = 1; k < freeFlightCrew.size() + 1; k++)
+			cout << k << ") Name: " << freeFlightCrew.at(k - 1)->getName() << "; Birth Date: " << freeFlightCrew.at(k - 1)->getDate() << endl;
+		cout << endl << "0)Return to last menu.\n\n";
+		cin >> addSel;
+		cin.ignore(100, '\n');
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || addSel < 0 || addSel > freeFlightCrew.size())
+		{
+			cin.clear();
+			cout << "Invalid flight crew member, please insert again.\n\n";
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+			oldCrew = flight->getEmployees();
+			freeFlightCrew.at(addSel - 1)->addFlight(flight);
+			oldCrew.push_back(freeFlightCrew.at(addSel - 1));
+			flight->setCrew(oldCrew);
+			cout << "Flight crew member successfuly added to the flight!\n\n";
+		}
+
+	} while (badInput);
 }
 
 void addPlane(Flight* flight)
@@ -801,6 +888,7 @@ void addPlane(Flight* flight)
 		{
 			badInput = false;
 			flight->setPlane(freePlanes.at(addSel - 1));
+			freePlanes.at(addSel - 1)->addFlight(flight);
 			cout << "Plane successfuly added to the flight!\n\n";
 		}
 
