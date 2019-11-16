@@ -4,6 +4,11 @@
 
 using namespace std;
 
+
+
+/**
+@brief A time with hours and minutes
+*/
 class Time
 {
 private:
@@ -48,7 +53,7 @@ public:
 */
 	bool operator<(const Time &time) const;
 	/**
-@brief Compares if the ´time is equal to the one recived in the parameter
+@brief Compares if the time is equal to the one recived in the parameter
 */
 	bool operator==(const Time &time) const;
 	/**

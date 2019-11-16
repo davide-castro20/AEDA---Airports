@@ -8,6 +8,10 @@ class Time;
 
 using namespace std;
 
+
+/**
+@brief An invalid schedule
+*/
 class InvalidSchedule
 {
 	/**
@@ -22,6 +26,10 @@ public:
 	InvalidSchedule(Time *start, Time *end);
 };
 
+
+/**
+@brief An Invalid flight schedule
+*/
 class InvalidFlightSched
 {
 	/**
@@ -44,6 +52,11 @@ public:
 	InvalidFlightSched(Date * departureD, Time * startH, Date * arrivalD, Time * endH);
 };
 
+
+
+/**
+@brief A schedule with 2 times (hour,minute)
+*/
 class Schedule
 {
 protected:
@@ -92,6 +105,11 @@ public:
 
 ostream& operator<<(ostream &out, const Schedule &sched);
 
+
+
+/**
+@brief A flight schedule, a schedule with a date also
+*/
 class FlightSched : public Schedule
 {
 private:

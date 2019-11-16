@@ -10,6 +10,9 @@ class Time;
 
 
 
+/**
+@brief A flight with schedule and destination. Also a tripulation of 4, 2 pilots, 2 flight crew and a plane
+*/
 class Flight
 {
 private:

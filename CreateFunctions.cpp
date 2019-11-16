@@ -1418,6 +1418,11 @@ void createAirport() {
 			try
 			{
 				city = readName();
+				if (alreadyExists(city)) {
+					cout << "City already exists! Insert city again please!\n";
+					badInput = true;
+				}
+
 			}
 			catch (Exit ex)
 			{
@@ -1426,7 +1431,7 @@ void createAirport() {
 			}
 			catch (InvalidName na)
 			{
-				cout << "City " << na.getName() << " is invalid! Please insert country again.\n";
+				cout << "City " << na.getName() << " is invalid! Please insert city again.\n";
 				badInput = true;
 			}
 		} while (badInput);

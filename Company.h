@@ -3,8 +3,12 @@
 
 #include "Airport.h"
 
+class Airport;
 
 
+/**
+@brief O'connor company with several airports
+*/
 class Company
 {
 	/**

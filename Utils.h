@@ -9,6 +9,7 @@
 #include "Plane.h"
 #include "Employee.h"
 #include "Airport.h"
+#include "Company.h"
 
 
 using namespace std;
@@ -82,7 +83,9 @@ bool checkBetweenDates(Date date1, Date date2, Date date); // returns "true" if 
 */
 bool checkInt2(std::string s); // returns "true" if a string "sentence" can be converted to an integer
 
-
+/**
+@brief Keeps asking for int input until it is valid
+* */
 int checkInt(string sentence); // asks for an integer input until the user gives a valid integer and then returns it
 
 /**
@@ -138,6 +141,18 @@ string readCategory();
 */
 string readDepFunc();
 
+/**
+@brief Checks input of flights
+ */
 vector<int> readFlights();
 
+/**
+@brief Checks input of capacity
+ */
 int readCapacity();
+
+
+/**
+@brief Checks if city already exists
+ */
+bool alreadyExists(string city);

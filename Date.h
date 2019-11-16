@@ -4,6 +4,10 @@
 
 using namespace std;
 
+
+/**
+@brief A date (day,month,year)
+*/
 class Date {
 private:
 	/**

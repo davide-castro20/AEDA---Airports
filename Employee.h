@@ -10,7 +10,9 @@ class Flight;
 class Plane;
 class Date;
 
-
+/**
+@brief An employee, name, birthdate and salary
+*/
 class Employee {
 public:
 	Employee(string name, Date *birthDate,string type);
@@ -130,6 +132,10 @@ protected:
 	Date *birthDate;
 };
 
+
+/**
+@brief Pilot, also an employee. Has planes, flights and category
+*/
 class Pilot : public Employee {
 private:
 	/**
@@ -192,6 +198,10 @@ public:
 	double calcSalary();
 };
 
+
+/**
+@brief Flight crew, also an employee. Has flights and category 
+*/
 class FlightCrew : public Employee {
 private:
 	/**
@@ -238,6 +248,11 @@ public:
 	double calcSalary();
 };
 
+
+
+/**
+@brief Administrator, also an employee. Has department and function
+*/
 class Admin : public Employee {
 private:
 	/**
@@ -272,6 +287,10 @@ public:
 	double calcSalary();
 };
 
+
+/**
+@brief Base crew, also an employee. Has category and a working hour schedule
+*/
 class BaseCrew : public Employee {
 private:
 	/**

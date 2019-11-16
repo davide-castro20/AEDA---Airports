@@ -109,8 +109,12 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 				break;
 			case 2:
 				decompose(linha, flightIdsString, ',');
-				for (size_t i = 0; i < flightIdsString.size(); i++)
-					flightIds.push_back(stoi(flightIdsString.at(i)));
+				for (size_t i = 0; i < flightIdsString.size(); i++) {
+					if (flightIdsString.at(i) == "")
+						continue;
+					else
+						flightIds.push_back(stoi(flightIdsString.at(i)));
+				}
 				flightsAux = convertIdToFlight(flightIds, flights);
 				plane = new Plane(type, capacity, flightsAux);
 				for (size_t i = 0; i < flightsAux.size(); i++)
@@ -166,6 +170,7 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 			type = linha;
 			if (type == "Pilot")
 			{
+
 				getline(employees_data, linha);
 				name = linha;
 				getline(employees_data, linha);
@@ -178,7 +183,10 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				getline(employees_data, linha);
 				decompose(linha, flightIdsString, ',');
 				for (size_t i = 0; i < flightIdsString.size(); i++)
-					flightIds.push_back(stoi(flightIdsString.at(i)));
+					if (flightIdsString.at(i) == "")
+						continue;
+					else
+						flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
 				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
@@ -199,13 +207,14 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				getline(employees_data, linha);
 				decompose(linha, flightIdsString, ',');
 				for (size_t i = 0; i < flightIdsString.size(); i++)
-					flightIds.push_back(stoi(flightIdsString.at(i)));
+					if (flightIdsString.at(i) == "")
+						continue;
+					else
+						flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
-
 				birthDate = new Date(date);
 				employee = new FlightCrew(name, birthDate, category, flightsAux);
 				employees.push_back(employee);
-
 				getline(employees_data, linha);
 				flightIds.clear();
 				flightIdsString.clear();

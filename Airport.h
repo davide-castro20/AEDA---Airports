@@ -8,6 +8,10 @@ class Plane;
 class Employee;
 class Date;
 
+
+/**
+@brief Manager of an airport
+*/
 struct Manager {
 	/**
 @brief Manager's name
@@ -23,6 +27,10 @@ struct Manager {
 	double salary;
 };
 
+
+/**
+@brief Place of an airport with country,city and coordinates
+*/
 class Local
 {
 private:
@@ -63,6 +71,10 @@ public:
 	float getLatit() const;
 };
 
+
+/**
+@brief Airport class with employees, planes, location, flights and a manager
+*/
 class Airport
 {
 public:

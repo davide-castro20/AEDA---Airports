@@ -1,6 +1,7 @@
 #include "Utils.h"
 
 extern Airport* currentAirport;
+extern Company* comp;
 
 double inBetween(Employee* obj, int month1, int month2, int year1, int year2)
 {
@@ -432,4 +433,12 @@ bool noAccent(string name) {
 		if (int(name.at(i)) < -1 || int(name.at(i)) > 255)
 			return false;
 	return true;
+}
+
+
+bool alreadyExists(string city) {
+	for (size_t i = 0; i < comp->getAirports().size();i++)
+		if (comp->getAirports().at(i)->getLocal().getCity() == city)
+			return true;
+	return false;
 }

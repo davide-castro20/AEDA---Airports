@@ -8,6 +8,10 @@ using namespace std;
 class Flight;
 class FlightSched;
 
+
+/**
+@brief Capacity error class
+*/
 class capacityError
 {
 	/**
@@ -22,6 +26,10 @@ public:
 	friend ostream & operator <<(ostream &out, const capacityError &error);
 };
 
+
+/**
+@brief A plane, with type, capacity and flights it will do
+*/
 class Plane
 {
 private:
