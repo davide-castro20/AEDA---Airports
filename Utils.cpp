@@ -140,6 +140,24 @@ vector<int> readFlights()
 	return flightIds;
 }
 
+int readCapacity()
+{
+	int capacity;
+	cin >> capacity;
+	cin.ignore(100, '\n');
+	if (cin.eof())
+	{
+		cin.clear();
+		throw Exit();
+	}
+	if (cin.fail() || capacity < 0 || capacity > 550)
+	{
+		cin.clear();
+		throw capacityError(capacity);
+	}
+	return capacity;
+}
+
 double inBetween(Plane* obj, int month1, int month2,int year1,int year2)
 {
 	double total = 0;

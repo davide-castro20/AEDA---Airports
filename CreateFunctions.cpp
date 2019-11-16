@@ -1346,21 +1346,22 @@ void createPlane()
 	cout << "Capacity: " << endl;
 	do
 	{
-		cin >> capacity;
-		if (cin.eof())
+		badInput = false;
+		try
+		{
+			capacity = readCapacity();
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
-		if (cin.fail() || capacity < 0 || capacity > 550)
+		}
+		catch (capacityError ca)
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << ca << endl;
 			badInput = true;
-			cout << "Invalid capacity! Please insert the plane's capacity again (must be less tha 550)\n";
 		}
-		else
-		{
-			badInput = false;
-		}
+
 	} while (badInput);
 
 	vector<Flight*> flights = {};
@@ -1384,20 +1385,19 @@ void createAirport() {
 		cin.ignore(100, '\n');
 		do
 		{
-			getline(cin, country);
-			if (cin.eof())
-				return;
-			if (!noAccent(country) || cin.fail() || (country.find_first_of("0123456789") != std::string::npos) || country == "" || islower(country.at(0)))
+			badInput = false;
+			try
 			{
-				cin.clear();
-				//cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
-				badInput = true;
-				cout << "Invalid Country! Please insert country again \n";
+				country = readName();
 			}
-			else
+			catch (Exit ex)
 			{
-				badInput = false;
+				cout << ex.getMsg() << endl;
+			}
+			catch (InvalidName na)
+			{
+				cout << "Country " << na.getName() << " is invalid! Please insert country again.\n";
+				badInput = true;
 			}
 		} while (badInput);
 
@@ -1405,22 +1405,20 @@ void createAirport() {
 		cout << "City: \n";
 		do
 		{
-			getline(cin, city);
-			if (cin.eof())
-				return;
-			if (!noAccent(city) || cin.fail() || (city.find_first_of("0123456789") != std::string::npos) || city == "" || islower(city.at(0)))
+			badInput = false;
+			try
 			{
-				cin.clear();
-				//cin.ignore(100, '\n');
-				cout << "-----------------------------------------------------------------------------------------------------\n";
+				city = readName();
+			}
+			catch (Exit ex)
+			{
+				cout << ex.getMsg() << endl;
+			}
+			catch (InvalidName na)
+			{
+				cout << "City " << na.getName() << " is invalid! Please insert country again.\n";
 				badInput = true;
-				cout << "Invalid City! Please insert City again \n";
 			}
-			else
-			{
-				badInput = false;
-			}
-
 		} while (badInput);
 
 		cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -1513,23 +1511,21 @@ void createManager() {
 	cout << "BirthDate (dd/mm/yyyy): \n";
 	do
 	{
-		getline(cin, read);
-		if (cin.eof()) {
-			cin.clear();
+		badInput = false;
+		try
+		{
+			birthDate = readDate();
+
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if ((cin.fail() || !existingDate(read)) && !cin.eof())
+		catch (InvalidBirthDate da)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			//cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Date " << da.getBirthDate() << " is invalid! Please insert birth date again\n";
 			badInput = true;
-			cout << "Invalid date! Please insert birth date again \n";
-		}
-		else
-		{
-			badInput = false;
-			birthDate = new Date(read);
 		}
 
 	} while (badInput);

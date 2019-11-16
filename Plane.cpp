@@ -41,7 +41,7 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 
 ostream & operator <<(ostream &out, const capacityError &error)
 {
-	out << "Exeption was thrown trying to set the plane's capacity. Capacity received :" << error.inputCapacity; return out;
+	out << "Capacity " << error.inputCapacity << " is invalid. Must be less or equal to 550. Please insert again."; return out;
 }
 
 bool Plane::setCapacity(int cap)

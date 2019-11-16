@@ -139,3 +139,5 @@ string readCategory();
 string readDepFunc();
 
 vector<int> readFlights();
+
+int readCapacity();
