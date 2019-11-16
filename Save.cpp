@@ -122,7 +122,7 @@ void SaveEmployees() {
 				newEmployeesFile << comp->getAirports().at(i)->employees.at(j)->getName() << endl;
 				newEmployeesFile << comp->getAirports().at(i)->employees.at(j)->getDate() << endl;
 				newEmployeesFile << comp->getAirports().at(i)->employees.at(j)->getCategory() << endl;
-				newEmployeesFile << flights<< endl;
+				newEmployeesFile << flights << endl;
 				newEmployeesFile << "::::::::::\n";
 			}
 			else if (comp->getAirports().at(i)->employees.at(j)->getType() == "Admin") {
@@ -151,12 +151,12 @@ void SaveEmployees() {
 				size_t size = comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().size();
 				if (size > 0)
 				{
-					for (size_t i = 0; i < size; i++)
+					for (size_t k = 0; k < size; k++)
 					{
-						if (i < (size - 1))
-							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId()) + ", ";
+						if (k < (size - 1))
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(k)->getId()) + ", ";
 						else
-							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId());
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(k)->getId());
 					}
 				}
 				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;
@@ -171,12 +171,12 @@ void SaveEmployees() {
 				size_t size = comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().size();
 				if (size > 0)
 				{
-					for (size_t i = 0; i < size; i++)
+					for (size_t k = 0; k < size; k++)
 					{
-						if (i < (size - 1))
-							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId()) + ", ";
+						if (k < (size - 1))
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(k)->getId()) + ", ";
 						else
-							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(i)->getId());
+							flights += to_string(comp->getAirports().at(i)->employees.at(EmpSize)->getFlights().at(k)->getId());
 					}
 				}
 				newEmployeesFile << comp->getAirports().at(i)->employees.at(EmpSize)->getType() << endl;

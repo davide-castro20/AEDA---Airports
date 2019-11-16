@@ -839,23 +839,21 @@ void createFlight()
 
 	cout << "-----------------------------------------------------------------------------------------------------\n";
 	cout << "Destination: \n";
-	do {
-		getline(cin, destination);
-		if (cin.eof()) {
-			cin.clear();
+	do
+	{
+		badInput = false;
+		try {
+			destination = readName();
+		}
+		catch (Exit ex)
+		{
+			cout << ex.getMsg() << endl;
 			return;
 		}
-		if (cin.fail() || (destination.find_first_of("0123456789") != std::string::npos) || destination == "")
+		catch (InvalidName na)
 		{
-			cin.clear();
-			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			cout << "Destination " << na.getName() << " is invalid!. Please the destination name again \n";
 			badInput = true;
-			cout << "Invalid destination! Please insert name again \n";
-		}
-		else
-		{
-			badInput = false;
 		}
 	} while (badInput);
 
@@ -877,7 +875,7 @@ void createFlight()
 				//cin.ignore(100, '\n');
 				//cout << "-----------------------------------------------------------------------------------------------------\n";
 				badInput = true;
-				cout << "Invalid date! Please insert birth date again \n";
+				cout << "Invalid date! Please insert date again \n";
 			}
 			else
 			{
@@ -1014,12 +1012,12 @@ void createFlight()
 			cout << "Do you want to create this flight with an empty crew for now?" << endl;
 			do {
 				cin >> confirm;
+				cin.ignore(100, '\n');
 				if (cin.eof())
 					return;
 				if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 				{
-					cin.clear();
-					cin.ignore(100, '\n');
+					cin.clear();	
 					cout << "-----------------------------------------------------------------------------------------------------\n";
 					badInput = true;
 				}
@@ -1048,6 +1046,7 @@ void createFlight()
 
 			cout << endl << "Choose one of the free planes above.\n0)Create flight with empty plane." << endl;
 			cin >> planeSel;
+			cin.ignore(100, '\n');
 			if (cin.eof())
 				return;
 			if (cin.fail() || planeSel < 0 || planeSel > currentAirport->planes.size() + 1)
@@ -1067,12 +1066,12 @@ void createFlight()
 				string confirm;
 				do {
 					cin >> confirm;
+					cin.ignore(100, '\n');
 					if (cin.eof())
 							return;
 					if (cin.fail() || !(confirm == "y" || confirm == "Y" || confirm == "n" || confirm == "N"))
 					{
 						cin.clear();
-						cin.ignore(100, '\n');
 						cout << "-----------------------------------------------------------------------------------------------------\n";
 						badInput = true;
 					}
@@ -1142,7 +1141,6 @@ void createFlight()
 					Flight* newFlight = new Flight(predictedSchedule, destination, crew, plane, -2);
 					if(plane != NULL)
 						plane->addFlight(newFlight);
-					cout << "Merdou" << endl;
 					currentAirport->flights.push_back(newFlight);
 					return;
 				}

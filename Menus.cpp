@@ -69,10 +69,11 @@ void createDataMenu()
 			cout << "-----------------------------------------------------------------------------------------------------\n";
 			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n4)A new manager\n0)Return to main menu.\n";
 			cin >> Selection;
+			cin.ignore(100, '\n');
 			if (cin.fail() || Selection < 0 || Selection > 4)
 			{
 				cin.clear();
-				cin.ignore(100, '\n');
+				//cin.ignore(100, '\n');
 				badInput = true;
 			}
 			else
