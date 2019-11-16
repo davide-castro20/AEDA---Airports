@@ -220,7 +220,7 @@ void changePersonData()
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the function you want to change to?\n";
 							getline(cin, function);
-						} while (!currentAirport->employees.at(changeSelection)->setDepartment(function));
+						} while (!currentAirport->employees.at(changeSelection)->setFunction(function));
 					}
 
 				}

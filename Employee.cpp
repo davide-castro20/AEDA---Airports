@@ -87,7 +87,7 @@ string Pilot::getPlaneTypes() const
 	string typesS;
 	bool in = false;
 	if (planes.size() == 0)
-		return "None";
+		return "";
 	for (size_t i = 0; i < planes.size(); i++)
 	{
 		for (size_t j = 0; j < types.size(); j++)

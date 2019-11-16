@@ -154,6 +154,7 @@ void createPilot()
 		catch (Exit ex)
 		{
 			cout << ex.getMsg() << endl;
+			return;
 		}
 		catch (InvalidCategory cat)
 		{
@@ -372,6 +373,7 @@ void createFlightCrew()
 		catch (Exit ex)
 		{
 			cout << ex.getMsg() << endl;
+			return;
 		}
 		catch (InvalidCategory cat)
 		{
@@ -393,6 +395,11 @@ void createFlightCrew()
 			try
 			{
 				flightIds = readFlights();
+			}
+			catch (Exit ex)
+			{
+				cout << ex.getMsg() << endl;
+				return;
 			}
 			catch (InvalidFlights fl)
 			{
@@ -718,6 +725,7 @@ void createBaseCrew()
 		catch (Exit ex)
 		{
 			cout << ex.getMsg() << endl;
+			return;
 		}
 		catch (InvalidCategory cat)
 		{
@@ -1009,7 +1017,7 @@ void createFlight()
 		{
 			string confirm;
 			cout << "Not enough free planes at the moment!" << endl;
-			cout << "Do you want to create this flight with an empty crew for now?" << endl;
+			cout << "Do you want to create this flight with an empty crew and plane for now?" << endl;
 			do {
 				cin >> confirm;
 				cin.ignore(100, '\n');
@@ -1393,6 +1401,7 @@ void createAirport() {
 			catch (Exit ex)
 			{
 				cout << ex.getMsg() << endl;
+				return;
 			}
 			catch (InvalidName na)
 			{
@@ -1413,6 +1422,7 @@ void createAirport() {
 			catch (Exit ex)
 			{
 				cout << ex.getMsg() << endl;
+				return;
 			}
 			catch (InvalidName na)
 			{
@@ -1466,9 +1476,9 @@ void createAirport() {
 		} while (badInput);
 
 		if (!badInput) {
-			string plane = country + "_Planes.txt";
-			string flight = country + "_Flights.txt";
-			string employee = country + "_Employees.txt";
+			string plane = city + "_Planes.txt";
+			string flight = city + "_Flights.txt";
+			string employee = city + "_Employees.txt";
 			vector <Flight*> flights = {};
 			vector <Employee*> employees = {};
 			vector <Plane*> planes = {};
@@ -1541,11 +1551,11 @@ void createManager() {
 			cin.clear();
 			return;
 		}
-		if (noAccent(salary) || cin.fail() || salary == "" || stod(salary)<0)
+		if (!noAccent(salary) || cin.fail() || salary == "" || stod(salary) < 0)
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');
-			cout << "-----------------------------------------------------------------------------------------------------\n";
+			
 			badInput = true;
 			cout << "Invalid salary! Please insert again \n";
 		}

@@ -1,0 +1,27 @@
+Pilot
+Joao Valente
+12/6/1990
+A
+
+
+::::::::::
+Flight Crew
+Lara Portas
+21/12/1995
+B
+
+::::::::::
+Admin
+Cristiano Pontos
+31/5/1976
+Accountability
+Accounter
+::::::::::
+Base Crew
+Esmeralda Martins
+15/2/1981
+B
+9
+0
+15
+0
