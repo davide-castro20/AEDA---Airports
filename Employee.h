@@ -327,7 +327,9 @@ public:
 	double calcSalary();
 };
 
-
+/**
+@brief Invalid name exception
+*/
 class InvalidName
 {/**
 @brief Name which caused the exeption
@@ -340,7 +342,9 @@ public:
 */
 	string getName() const { return name; };
 };
-
+/**
+@brief Invalid category exception
+*/
 class InvalidCategory
 {/**
 @brief Category which caused the exeption
@@ -353,7 +357,9 @@ public:
 */
 	string getCategory() const { return category; };
 };
-
+/**
+@brief Invalid Birth date exception
+*/
 class InvalidBirthDate
 {/**
 @brief Birth date which caused the exeption
@@ -366,7 +372,9 @@ public:
 */
 	string getBirthDate() const { return birthDate; };
 };
-
+/**
+@brief Invalid Plane Types exception
+*/
 class InvalidPlaneTypes
 {
 	/**
@@ -381,6 +389,10 @@ public:
 	string getPlaneTypes() const { return planeTypes; };
 };
 
+
+/**
+@brief Full crew exception
+*/
 class FullCrew
 {
 	/**
@@ -395,6 +407,9 @@ public:
 	string getMsg() const { return msg; };
 };
 
+/**
+@brief NonExistantFlight exception
+*/
 class NonExistantFlight
 {
 	/**
@@ -409,6 +424,9 @@ public:
 	string getMsg() const { return msg; };
 };
 
+/**
+@brief Invalid Flights exception
+*/
 class InvalidFlights
 {/**
 @brief Flights type which caused the exeption
