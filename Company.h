@@ -1,9 +1,11 @@
 #pragma once
 
-
+#include "Maintenance.h"
 #include "Airport.h"
+#include <queue>
 
 class Airport;
+class Maintenance;
 
 
 /**
@@ -15,6 +17,10 @@ class Company
 @brief Company airports
 */
 	vector<Airport*> airports;
+	/**
+@brief Maintenance companies
+	*/
+	priority_queue<Maintenance> maintenanceCompanies;
 public:
 	Company();
 	Company(string airports_file);
@@ -30,4 +36,14 @@ public:
 @brief Removes an airport from the company
 */
 	void deleteAirport(int index);
+	/**
+@brief Adds a maintenace company to the maintenance priority queue
+*/
+	void addMaintenanceCompany(Maintenance maintenaceCompany);
+
+	/**
+@brief Returns all maintenace companies
+*/
+	priority_queue<Maintenance> getMaintenaceCompanies();
 };
+

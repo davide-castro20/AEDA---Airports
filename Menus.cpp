@@ -7,6 +7,7 @@
 #include "Company.h"
 #include "Save.h"
 #include "ShowFunctions.h"
+#include "Maintenance.h"
 
 Airport *currentAirport;
 
@@ -274,6 +275,7 @@ void mainMenu() {
 		}
 	} while (badInput || (select != 0));
 	
+	
 }
 
 void selectAirportMenu()
@@ -331,10 +333,12 @@ void companyMenu()
 		} while (badInput);
 		switch (sel) {
 		case 0:
+			/*
 			SaveFlights();
 			SaveEmployees();
 			SavePlanes();
 			saveAirports();
+			*/
 			return;
 		case 1:
 			selectAirportMenu();
@@ -350,5 +354,6 @@ void companyMenu()
 			deleteAirportData();
 		}
 	} while (sel != 0);
+	
 }
 

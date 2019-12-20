@@ -95,3 +95,11 @@ vector<Airport*> Company::getAirports() const
 void Company::deleteAirport(int index) {
 	airports.erase(airports.begin()+index);
 }
+
+void Company::addMaintenanceCompany(Maintenance maintenaceCompany) {
+	this->maintenanceCompanies.push(maintenaceCompany);
+}
+
+priority_queue<Maintenance> Company::getMaintenaceCompanies() {
+	return this->maintenanceCompanies;
+}
