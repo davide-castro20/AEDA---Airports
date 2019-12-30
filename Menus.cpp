@@ -63,6 +63,8 @@ void showDataMenu()
 
 
 void doMaintenance() {
+	if (comp->getMaintenaceCompanies().empty())
+		return;
 	priority_queue<Maintenance> aux;
 	priority_queue<Maintenance> second = comp->getMaintenaceCompanies();
 	comp->clearMaintenance();
