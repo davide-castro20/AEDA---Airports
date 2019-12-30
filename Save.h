@@ -23,3 +23,8 @@ void SaveEmployees();
 @brief Saves planes information to a file
 */
 void SavePlanes();
+
+/**
+@brief Saves maintenance information to a file
+*/
+void saveMaintenance();

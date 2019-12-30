@@ -256,3 +256,33 @@ void SavePlanes() {
 		rename("newPlanes.txt", fileName);
 	}
 }
+
+void saveMaintenance() {
+	ofstream newMaintenanceFile;
+	string s = "Maintenance.txt";
+	newMaintenanceFile.open("newMaintenance.txt");
+	priority_queue<Maintenance> aux = comp->getMaintenaceCompanies();
+
+	if (!comp->getMaintenaceCompanies().empty())
+	{
+		newMaintenanceFile << aux.top().getName() << endl;
+		newMaintenanceFile << aux.top().getHours() << endl;
+		newMaintenanceFile << aux.top().getMaintenances() << endl;
+		aux.pop();
+
+		while (!aux.empty())
+		{
+			newMaintenanceFile << "::::::::::\n";
+			newMaintenanceFile << aux.top().getName() << endl;
+			newMaintenanceFile << aux.top().getHours() << endl;
+			newMaintenanceFile << aux.top().getMaintenances() << endl;
+			aux.pop();
+
+		}
+	}
+	const char* fileName = s.c_str();
+	newMaintenanceFile.close();
+	remove(fileName);
+	rename("newMaintenance.txt", fileName);
+
+}

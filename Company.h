@@ -23,7 +23,7 @@ class Company
 	priority_queue<Maintenance> maintenanceCompanies;
 public:
 	Company();
-	Company(string airports_file);
+	Company(string airports_file, string maintenance_file);
 	/**
 @brief Adds an airport to the company
 */

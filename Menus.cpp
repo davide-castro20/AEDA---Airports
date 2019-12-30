@@ -380,6 +380,7 @@ void companyMenu()
 			SaveEmployees();
 			SavePlanes();
 			saveAirports();
+			saveMaintenance();
 			*/
 			return;
 		case 1:

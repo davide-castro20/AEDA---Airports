@@ -9,8 +9,9 @@ Company::Company()
 	airports = {};
 }
 
-Company::Company(string airports_file)
+Company::Company(string airports_file, string maintenance_file)
 {
+	
 	Airport *airport;
 	int counter = 0;
 	vector<string> aux;
@@ -23,9 +24,43 @@ Company::Company(string airports_file)
 	vector<Employee*> employees;
 	Manager manager;
 
+	string name;
+	int hours;
+	int nMaints;
+	
+	ifstream maintenance_data;
+	maintenance_data.open(maintenance_file);
+
+	if (maintenance_data.is_open())
+	{
+		while (getline(maintenance_data, linha))
+		{
+			switch (counter)
+			{
+			case 0:
+				name = linha;
+				break;
+			case 1:
+				hours = stoi(linha);
+				break;
+			case 2:
+				nMaints = stoi(linha);
+				counter = -1;
+				Maintenance m(hours, nMaints, name);
+				this->maintenanceCompanies.push(m);
+				getline(maintenance_data, linha);
+				break;
+			}
+			counter++;
+		}
+	}
+	else
+		cout << "Error opening maintenace file.\n";
+	maintenance_data.close();
+
 	ifstream airport_data;
 	airport_data.open(airports_file);
-
+	counter = 0;
 	if (airport_data.is_open())
 	{
 		while (getline(airport_data, linha))
