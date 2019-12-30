@@ -103,3 +103,9 @@ void Company::addMaintenanceCompany(Maintenance maintenaceCompany) {
 priority_queue<Maintenance> Company::getMaintenaceCompanies() {
 	return this->maintenanceCompanies;
 }
+
+void Company::clearMaintenance() {
+	while (!this->maintenanceCompanies.empty()) {
+		this->maintenanceCompanies.pop();
+	}
+}

@@ -43,3 +43,8 @@ void createAirport();
 @brief Creates a new manager
 */
 void createManager();
+
+/**
+@brief Creates a new maintenance
+*/
+void createMaintence();

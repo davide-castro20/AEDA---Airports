@@ -2,6 +2,7 @@
 #include "Utils.h"
 #include "Company.h"
 #include "Menus.h"
+#include "Maintenance.h"
 #include "Airport.h"
 
 extern Airport *currentAirport;
@@ -1582,4 +1583,32 @@ void createManager() {
 		currentAirport->setManager(manager);
 		cout << string(100, '-') << endl << "New manager successfuly created!" << endl;
 	}
+}
+
+void createMaintence() {
+	string name;
+	bool badInput = false;
+	cin.ignore(100,'\n');
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Name: \n";
+	do
+	{
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
+			return;
+		}
+		catch (InvalidName na)
+		{
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
+			badInput = true;
+		}
+	} while (badInput);
+	int hours = rand() % 15;
+	Maintenance maint(hours, 0, name);
+	comp->addMaintenanceCompany(maint);
 }

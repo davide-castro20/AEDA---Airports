@@ -45,5 +45,10 @@ public:
 @brief Returns all maintenace companies
 */
 	priority_queue<Maintenance> getMaintenaceCompanies();
+
+/**
+@brief Removes all maintenace companies
+*/
+	void clearMaintenance();
 };
 

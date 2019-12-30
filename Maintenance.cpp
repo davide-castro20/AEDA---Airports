@@ -1,16 +1,22 @@
 #include "Maintenance.h"
 
+
 Maintenance::Maintenance() {
 
 }
 
-Maintenance::Maintenance(int nHours, int nMaintenances) {
+Maintenance::Maintenance(int nHours, int nMaintenances,string name) {
 	this->nHours = nHours;
 	this->nMaintenances = nMaintenances;
+	this->name = name;
 }
 
 int Maintenance::getHours() const{
 	return nHours;
+}
+
+string Maintenance::getName() const {
+	return name;
 }
 
 int Maintenance::getMaintenances() const{

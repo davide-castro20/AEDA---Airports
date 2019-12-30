@@ -7,6 +7,7 @@
 #include "Company.h"
 #include "Save.h"
 #include "ShowFunctions.h"
+#include <cmath>
 #include "Maintenance.h"
 
 Airport *currentAirport;
@@ -59,6 +60,36 @@ void showDataMenu()
 		}
 	} while (ShowSelect != 0);
 }
+
+
+void doMaintenance() {
+	priority_queue<Maintenance> aux;
+	priority_queue<Maintenance> second = comp->getMaintenaceCompanies();
+	comp->clearMaintenance();
+	Maintenance auxM;
+	auxM = second.top();
+	second.pop();
+	Maintenance toPush(rand() % 9 + 15, auxM.getMaintenances() + 1, auxM.getName());
+	aux.push(toPush);
+	while (!second.empty()) {
+		auxM = second.top();
+		second.pop();
+		int hours = auxM.getHours();
+		if (hours - 3 < 0) {
+			hours = 0;
+		}
+		else {
+			hours -= 3;
+		}
+		Maintenance toPush(hours, auxM.getMaintenances(), auxM.getName());
+		aux.push(toPush);
+	}
+	while (!aux.empty()) {
+		comp->addMaintenanceCompany(aux.top());
+		aux.pop();
+	}
+}
+
 
 void createDataMenu()
 {
@@ -238,9 +269,9 @@ void mainMenu() {
 	{
 		badInput = false;
 		cout << "---------------------------------------------------------------------------------------------------\n";
-		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "5)This airport's expenses." << endl << "0)Return to company Menu\n";
+		cout << "What do you want to do: " << endl << "1)Read Data." << endl << "2)Create data." << endl << "3)Change Data" << endl << "4)Delete data." << endl << "5)This airport's expenses." << endl << "6)Do maintenance" << endl<< "0)Return to company Menu\n";
 		cin >> select;
-		if (cin.fail() || select > 5 || select < 0)
+		if (cin.fail() || select > 6 || select < 0)
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
@@ -270,6 +301,9 @@ void mainMenu() {
 				break;
 			case 5:
 				expensesMenu();
+				break;
+			case 6:
+				doMaintenance();
 				break;
 			}
 		}
@@ -321,9 +355,9 @@ void companyMenu()
 		{
 			cout << string(100, '-') << endl;
 			cout << "What would you like to do? \n";
-			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n4)Delete Airport Data.\n0)Close Program." << endl;
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n4)Delete Airport Data.\n5)Create Maintenance company. \n0)Close Program." << endl;
 			cin >> sel;
-			if (cin.fail() || sel < 0 || sel>4)
+			if (cin.fail() || sel < 0 || sel>5)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
@@ -352,8 +386,11 @@ void companyMenu()
 			break;
 		case 4: 
 			deleteAirportData();
+			break;
+		case 5:
+			createMaintence();
+			break;
 		}
 	} while (sel != 0);
 	
 }
-
