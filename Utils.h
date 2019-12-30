@@ -5,6 +5,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+#include <unordered_set>
 #include "Flight.h"
 #include "Plane.h"
 #include "Employee.h"

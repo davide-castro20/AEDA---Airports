@@ -138,7 +138,7 @@ vector<Plane*> readPlanes(string planes_file, const vector<Flight*> &flights)
 }
 
 
-vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &flights, const vector<Plane*> &planes)
+vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT, const vector<Flight*> &flights, const vector<Plane*> &planes, string city)
 {
 	ifstream employees_data;
 	vector<string> aux;
@@ -189,8 +189,9 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 						flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
-				employee = new Pilot(name, birthDate, category, planesAux, flightsAux);
+				employee = new Pilot(name, birthDate, category, planesAux, flightsAux, city, true);
 				employees.push_back(employee);
+				employeesT.insert(employee);
 
 				getline(employees_data, linha);
 				planeTypes.clear();
@@ -214,8 +215,9 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 						flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
-				employee = new FlightCrew(name, birthDate, category, flightsAux);
+				employee = new FlightCrew(name, birthDate, category, flightsAux, city, true);
 				employees.push_back(employee);
+				employeesT.insert(employee);
 				getline(employees_data, linha);
 				flightIds.clear();
 				flightIdsString.clear();
@@ -232,8 +234,9 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				function = linha;
 
 				birthDate = new Date(date);
-				employee = new Admin(name, birthDate, department, function);
+				employee = new Admin(name, birthDate, department, function, city, true);
 				employees.push_back(employee);
+				employeesT.insert(employee);
 
 				getline(employees_data, linha);
 
@@ -259,15 +262,133 @@ vector<Employee*> readEmployees(string employees_file, const vector<Flight*> &fl
 				startTime = new Time(startHour, startMinute);
 				endTime = new Time(endHour, endMinute);
 				schedule = new Schedule(startTime, endTime);
-				employee = new BaseCrew(name, birthDate, category, schedule);
+				employee = new BaseCrew(name, birthDate, category, schedule, city, true);
 				employees.push_back(employee);
+				employeesT.insert(employee);
 
 				getline(employees_data, linha);
 			}
 		}
 	}
 	else
-		cout << "Error opening employees file.\n";
+		cout << "Error opening old employees file.\n";
 	employees_data.close();
+
 	return employees;
+}
+
+void readOldEmployees(string old_employees_file, tabHEmployees &employees, string city)
+{
+	ifstream employees_data;
+	vector<string> aux;
+	string linha;
+	string type;
+	string name;
+	string date;
+	string category;
+	string department;
+	string function;
+	Time *startTime;
+	Time *endTime;
+	Schedule *schedule;
+	Employee *employee;
+	unsigned int startHour, startMinute, endHour, endMinute;
+	vector<string> planeTypes;
+	vector<Plane*> planesAux = {};
+	vector<int> flightIds;
+	vector<string> flightIdsString;
+	Date *birthDate;
+	vector<Flight*> flightsAux = {};
+	int counter = 0;
+	employees_data.open(old_employees_file);
+	if (employees_data.is_open())
+	{
+		while (getline(employees_data, linha))
+		{
+			type = linha;
+			if (type == "Pilot")
+			{
+
+				getline(employees_data, linha);
+				name = linha;
+				getline(employees_data, linha);
+				date = linha;
+				getline(employees_data, linha);
+				category = linha;
+				getline(employees_data, linha);
+				getline(employees_data, linha);
+				birthDate = new Date(date);
+				employee = new Pilot(name, birthDate, category, planesAux, flightsAux, city, false);
+				employees.insert(employee);
+
+				getline(employees_data, linha);
+				planeTypes.clear();
+				flightIds.clear();
+				flightIdsString.clear();
+			}
+			else if (type == "Flight Crew")
+			{
+				getline(employees_data, linha);
+				name = linha;
+				getline(employees_data, linha);
+				date = linha;
+				getline(employees_data, linha);
+				category = linha;
+				getline(employees_data, linha);
+				birthDate = new Date(date);
+				employee = new FlightCrew(name, birthDate, category, flightsAux, city, false);
+				employees.insert(employee);
+				getline(employees_data, linha);
+				flightIds.clear();
+				flightIdsString.clear();
+			}
+			else if (type == "Admin")
+			{
+				getline(employees_data, linha);
+				name = linha;
+				getline(employees_data, linha);
+				date = linha;
+				getline(employees_data, linha);
+				department = linha;
+				getline(employees_data, linha);
+				function = linha;
+
+				birthDate = new Date(date);
+				employee = new Admin(name, birthDate, department, function, city, false);
+				employees.insert(employee);
+
+				getline(employees_data, linha);
+
+			}
+			else if (type == "Base Crew")
+			{
+				getline(employees_data, linha);
+				name = linha;
+				getline(employees_data, linha);
+				date = linha;
+				getline(employees_data, linha);
+				category = linha;
+				getline(employees_data, linha);
+				startHour = stoi(linha);
+				getline(employees_data, linha);
+				startMinute = stoi(linha);
+				getline(employees_data, linha);
+				endHour = stoi(linha);
+				getline(employees_data, linha);
+				endMinute = stoi(linha);
+
+				birthDate = new Date(date);
+				startTime = new Time(startHour, startMinute);
+				endTime = new Time(endHour, endMinute);
+				schedule = new Schedule(startTime, endTime);
+				employee = new BaseCrew(name, birthDate, category, schedule, city, false);
+				employees.insert(employee);
+
+				getline(employees_data, linha);
+			}
+		}
+	}
+	else
+		cout << "Error opening old employees file.\n";
+	employees_data.close();
 }

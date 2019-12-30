@@ -372,9 +372,9 @@ void companyMenu()
 		{
 			cout << string(100, '-') << endl;
 			cout << "What would you like to do? \n";
-			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n4)Delete Airport Data.\n5)Create Maintenance company.\n6)Delete Maintenance company. \n0)Close Program." << endl;
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Show Employees.\n4)Create a new airport.\n5)Delete Airport Data.\n6)Create Maintenance company.\n7)Delete Maintenance company. \n0)Close Program." << endl;
 			cin >> sel;
-			if (cin.fail() || sel < 0 || sel>6)
+			if (cin.fail() || sel < 0 || sel > 7)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
@@ -387,6 +387,7 @@ void companyMenu()
 			/*
 			SaveFlights();
 			SaveEmployees();
+			SaveOldEmployees();
 			SavePlanes();
 			saveAirports();
 			saveMaintenance();
@@ -400,15 +401,18 @@ void companyMenu()
 				showAirportData(i);
 			break;
 		case 3:
+			showPersonMenuCompany();
+			break;
+		case 4:
 			createAirport();
 			break;
-		case 4: 
+		case 5: 
 			deleteAirportData();
 			break;
-		case 5:
+		case 6:
 			createMaintence();
 			break;
-		case 6:
+		case 7:
 			deleteMaintenence();
 			break;
 		}

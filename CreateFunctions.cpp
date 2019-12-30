@@ -287,7 +287,7 @@ void createPilot()
 	//					break;
 	//				}
 	//			}
-	Employee *newPilot = new Pilot(name, birthDate, category, planes, flights);
+	Employee *newPilot = new Pilot(name, birthDate, category, planes, flights, currentAirport->getLocal().getCity(), true);
 	for (size_t i = 0; i < currentAirport->employees.size(); i++)
 	{
 		if (*currentAirport->employees.at(i) == *newPilot)
@@ -467,7 +467,7 @@ void createFlightCrew()
 			} while (badInput2);
 			if (confirm == "y" || confirm == "Y")
 			{
-				Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights);
+				Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights, currentAirport->getLocal().getCity(), true);
 				for (size_t i = 0; i < currentAirport->employees.size(); i++)
 				{
 					if (currentAirport->employees.at(i) == newFlightCrew)
@@ -491,7 +491,7 @@ void createFlightCrew()
 		{
 
 			flights = convertIdToFlight(flightIds, currentAirport->flights);
-			Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights);
+			Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights, currentAirport->getLocal().getCity(), true);
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i) == newFlightCrew)
@@ -644,7 +644,7 @@ void createAdmin()
 		}
 	} while (badInput);
 	
-	Employee* newAdmin = new Admin(name, birthDate, department, function);
+	Employee* newAdmin = new Admin(name, birthDate, department, function, currentAirport->getLocal().getCity(), true);
 	for (size_t i = 0; i < currentAirport->employees.size(); i++)
 	{
 		if (currentAirport->employees.at(i) == newAdmin)
@@ -807,7 +807,7 @@ void createBaseCrew()
 		if (!badInput)
 		{
 			sched = new Schedule(start, end);
-			Employee* newBaseCrew = new BaseCrew(name, birthDate, category, sched);
+			Employee* newBaseCrew = new BaseCrew(name, birthDate, category, sched, currentAirport->getLocal().getCity(), true);
 			for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i) == newBaseCrew)

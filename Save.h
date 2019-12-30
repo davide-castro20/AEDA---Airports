@@ -20,6 +20,11 @@ void SaveFlights();
 void SaveEmployees();
 
 /**
+@brief Saves old employees information to a file
+*/
+void SaveOldEmployees();
+
+/**
 @brief Saves planes information to a file
 */
 void SavePlanes();

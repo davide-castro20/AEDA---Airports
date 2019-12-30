@@ -2,10 +2,12 @@
 
 using namespace std;
 
-Employee::Employee(string name, Date *birthDate,string type) {
+Employee::Employee(string name, Date *birthDate,string type, string airport, bool employed) {
 	this->name = name;
 	this->birthDate = birthDate;
 	this->type = type;
+	this->employed = employed;
+	this->airport = airport;
 }
 
 string Employee::getName() const{
@@ -23,6 +25,16 @@ double Employee::getSalary() const{
 
 string Employee::getType() const {
 	return this->type;
+}
+
+bool Employee::getEmployed() const
+{
+	return this->employed;
+}
+
+string Employee::getAirport() const
+{
+	return airport;
 }
 
 bool Employee::setName(string name) {
@@ -67,7 +79,7 @@ bool Employee::operator==(Employee &emp2)
 	return ((this->name == emp2.name) && (this->birthDate == emp2.birthDate));
 }
 	
-Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights) : Employee(name, birthDate, "Pilot") {
+Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights, string airport, bool employed) : Employee(name, birthDate, "Pilot", airport, employed) {
 	this->category = category;
 	this->planes = planes;
 	this->flights = flights;
@@ -145,7 +157,7 @@ double Pilot::calcSalary() {
 	return total;
 }
 
-FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights):Employee(name, birthDate,"Flight Crew") {
+FlightCrew::FlightCrew(string name, Date *birthDate, string category, vector <Flight*> flights, string airport, bool employed):Employee(name, birthDate,"Flight Crew", airport, employed) {
 	this->category = category;
 	this->flights = flights;
 }
@@ -187,7 +199,7 @@ double FlightCrew::calcSalary() {
 	return total;
 }
 
-Admin::Admin(string name, Date *birthDate, string department, string function) :Employee(name, birthDate,"Admin") {
+Admin::Admin(string name, Date *birthDate, string department, string function, string airport, bool employed) :Employee(name, birthDate,"Admin", airport, employed) {
 	this->department = department;
 	this->function = function;
 }
@@ -223,7 +235,7 @@ double Admin::calcSalary() {
 	return 3000;
 }
 
-BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule) :Employee(name, birthDate,"Base Crew"){
+BaseCrew::BaseCrew(string name, Date *birthDate, string category, Schedule *schedule, string airport, bool employed) :Employee(name, birthDate,"Base Crew", airport, employed) {
 	this->category = category;
 	this->schedule = schedule;
 }

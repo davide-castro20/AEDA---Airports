@@ -54,3 +54,7 @@ void showPlane(Plane* plane);
 */
 void showPlaneByCat();
 
+void showByNameCompany();
+
+void showPersonMenuCompany();
+

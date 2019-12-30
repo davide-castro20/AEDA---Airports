@@ -16,7 +16,7 @@ Company::Company(string airports_file, string maintenance_file)
 	Airport *airport;
 	int counter = 0;
 	vector<string> aux;
-	string linha, planestxt, employeetxt, flightstxt;
+	string linha, planestxt, employeetxt, flightstxt, old_employees = "OldEmployees.txt";
 	string country, city;
 	float longit, latit;
 	vector<Plane*> planes;
@@ -89,8 +89,9 @@ Company::Company(string airports_file, string maintenance_file)
 				planestxt = linha;
 				break;
 			case 6:
-				employees = readEmployees(linha,flights,planes);
+				employees = readEmployees(linha, this->employees, flights, planes, city);
 				employeetxt = linha;
+				readOldEmployees(old_employees, this->employees, city);
 				break;
 			case 7:
 				manager.name = linha;
@@ -133,6 +134,11 @@ bool AirportPtrCmp::operator()(const Airport* lhs, const Airport* rhs) const
 	return lhs->operator<(*rhs); 
 }
 
+tabHEmployees Company::getEmployees() const
+{
+	return employees;
+}
+
 void Company::deleteAirport(int index) {
 	for (auto i : this->airports)
 	{
@@ -157,4 +163,20 @@ void Company::clearMaintenance() {
 	while (!this->maintenanceCompanies.empty()) {
 		this->maintenanceCompanies.pop();
 	}
+}
+
+int employeeHash::operator()(const Employee * emp) const
+{
+	int v = 0;
+	for(char j : emp->getName())
+	{
+		v += j;
+	}
+	v += emp->getDate().getYear() + emp->getDate().getMonth() + emp->getDate().getDay();
+	return v;
+}
+
+bool employeeHash::operator()(const Employee * emp1, const Employee * emp2) const
+{
+	return emp1->getName() == emp2->getName() && emp1->getDate() == emp2->getDate();
 }

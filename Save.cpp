@@ -200,6 +200,103 @@ void SaveEmployees() {
 	}
 }
 
+void SaveOldEmployees() {
+	ofstream newEmployeesFile;
+	if (comp->getEmployees().size() == 0)
+		return;
+	for (auto x = comp->getEmployees().begin(); x != comp->getEmployees().end(); x++) {
+		newEmployeesFile.open("newEmployees.txt");
+		
+		if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == false) {
+			string flights = "";
+			newEmployeesFile << (*x)->getType() << endl;
+			newEmployeesFile << (*x)->getName() << endl;
+			newEmployeesFile << (*x)->getDate() << endl;
+			newEmployeesFile << (*x)->getCategory() << endl;
+			newEmployeesFile << (*x)->getPlaneTypes() << endl;
+			newEmployeesFile << flights << endl;
+			newEmployeesFile << "::::::::::\n";
+		}
+		else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == false) {
+			string flights = "";
+
+			newEmployeesFile << (*x)->getType() << endl;
+			newEmployeesFile << (*x)->getName() << endl;
+			newEmployeesFile << (*x)->getDate() << endl;
+			newEmployeesFile << (*x)->getCategory() << endl;
+			newEmployeesFile << flights << endl;
+			newEmployeesFile << "::::::::::\n";
+		}
+		else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == false) {
+			newEmployeesFile << (*x)->getType() << endl;
+			newEmployeesFile << (*x)->getName() << endl;
+			newEmployeesFile << (*x)->getDate() << endl;
+			newEmployeesFile << (*x)->getDepartment() << endl;
+			newEmployeesFile << (*x)->getFunction() << endl;
+			newEmployeesFile << "::::::::::\n";
+		}
+		else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == false) {
+			newEmployeesFile << (*x)->getType() << endl;
+			newEmployeesFile << (*x)->getName() << endl;
+			newEmployeesFile << (*x)->getDate() << endl;
+			newEmployeesFile << (*x)->getCategory() << endl;
+			newEmployeesFile << (*x)->getSchedule()->getStartHour().getHours() << endl;
+			newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
+			newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
+			newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
+		}
+		if (++x == comp->getEmployees().end())
+		{
+			if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == false) {
+				string flights = "";
+				newEmployeesFile << (*x)->getType() << endl;
+				newEmployeesFile << (*x)->getName() << endl;
+				newEmployeesFile << (*x)->getDate() << endl;
+				newEmployeesFile << (*x)->getCategory() << endl;
+				newEmployeesFile << (*x)->getPlaneTypes() << endl;
+				newEmployeesFile << flights << endl;
+			}
+			else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == false) {
+				string flights = "";
+
+				newEmployeesFile << (*x)->getType() << endl;
+				newEmployeesFile << (*x)->getName() << endl;
+				newEmployeesFile << (*x)->getDate() << endl;
+				newEmployeesFile << (*x)->getCategory() << endl;
+				newEmployeesFile << flights << endl;
+			}
+			else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == false) {
+				newEmployeesFile << (*x)->getType() << endl;
+				newEmployeesFile << (*x)->getName() << endl;
+				newEmployeesFile << (*x)->getDate() << endl;
+				newEmployeesFile << (*x)->getDepartment() << endl;
+				newEmployeesFile << (*x)->getFunction() << endl;
+			}
+			else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == false) {
+				newEmployeesFile << (*x)->getType() << endl;
+				newEmployeesFile << (*x)->getName() << endl;
+				newEmployeesFile << (*x)->getDate() << endl;
+				newEmployeesFile << (*x)->getCategory() << endl;
+				newEmployeesFile << (*x)->getSchedule()->getStartHour().getHours() << endl;
+				newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
+				newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
+				newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
+			}
+			x--;
+		}
+	}
+		
+	string old_employees = "OldEmployees.txt";
+	const char* fileName = old_employees.c_str();
+	newEmployeesFile.close();
+	remove(fileName);
+	rename("newEmployees.txt", fileName);
+	
+}
+
+
+
+
 void SavePlanes() {
 	ofstream newPlanesFile;
 	for (auto i : comp->getAirports()) {

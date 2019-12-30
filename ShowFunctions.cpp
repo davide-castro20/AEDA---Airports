@@ -8,6 +8,8 @@ using namespace std;
 
 extern Airport* currentAirport;
 
+extern Company* comp;
+
 void datesExpenses()
 {
 	unsigned int month1, month2, year1, year2;
@@ -343,6 +345,8 @@ void showPerson(Employee* emp)
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << emp->getCategory() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
+		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Plane types " << "| " << left << setw(76) << emp->getPlaneTypes() << '|' << endl;
@@ -375,6 +379,8 @@ void showPerson(Employee* emp)
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << emp->getCategory() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
+		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Flights " << "| " << left << setw(76) << flights << '|' << endl;
@@ -387,6 +393,8 @@ void showPerson(Employee* emp)
 		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + emp->getName() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << emp->getDate().getDate() << '|' << endl;
+		cout << '|' << string(98, '-') << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
@@ -404,6 +412,8 @@ void showPerson(Employee* emp)
 		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << emp->getDate().getDate() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << emp->getCategory() << '|' << endl;
+		cout << '|' << string(98, '-') << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
@@ -763,4 +773,176 @@ void showPlaneByCat()
 	}
 	else
 		cout << "There are no planes of this category in this airport!\n";
+}
+
+void showByNameCompany()
+{
+	bool badInput = false;
+	string name;
+	Date* birthDate = NULL;
+	vector<Employee*> emps;
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Name: \n";
+	cin.ignore(100, '\n');
+	do
+	{
+		try {
+			name = readName();
+			badInput = false;
+		}
+		catch (Exit ex)
+		{
+			ex.getMsg();
+			return;
+		}
+		catch (InvalidName na)
+		{
+			cout << "Name " << na.getName() << " is invalid!. Please insert name again \n";
+			badInput = true;
+		}
+	} while (badInput);
+
+	if (comp->getEmployees().size() > 0)
+	{
+		for (auto x = comp->getEmployees().begin(); x != comp->getEmployees().end(); x++)
+		{
+			if ((*x)->getName() == name)
+				emps.push_back(*x);
+		}
+		if (emps.size() == 1)
+			showPerson(emps.at(0));
+		else if (emps.size() == 0)
+			cout << "There are no employees named " << name << " on this airport!\n";
+		else
+		{
+			cout << "There are " << emps.size() << " employees named " << name << '!' << endl;
+			for (size_t j = 0; j < emps.size(); j++)
+				showPerson(emps.at(j));
+		}
+
+	}
+	else
+		cout << "There are currently no employees on this airport!\n";
+
+}
+
+void showPersonMenuCompany()
+{
+	bool badInput = false;
+	int showSelect, showSelect1;
+	string type;
+	int counter;
+	if (comp->getEmployees().size() == 0)
+	{
+		cout << "There are no persons on the company yet!\n";
+		return;
+	}
+
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		do
+		{
+			cout << "Which persons to show?\n" << "1)Pilots.\n" << "2)Flight Crew members.\n" << "3)Administration members.\n" << "4)Base Crew members\n" << "5)Show by name\n" << "0)Return to the last menu.\n";
+			cin >> showSelect;
+			if (cin.fail() || showSelect <= -1 || showSelect > 5)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		do
+		{
+			cout << "1)Not employed.\n" << "2)Employed.\n" << "0)Return to the last menu.\n";
+			cin >> showSelect1;
+			if (cin.fail() || showSelect1 <= -1 || showSelect1 > 2)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+		} while (badInput);
+		if (showSelect1 == 0)
+			return;
+
+		switch (showSelect)
+		{
+
+		case 0:
+			return;
+		case 1:
+			counter = 0;
+			for (auto x : comp->getEmployees())
+			{
+				if (x->getType() == "Pilot" && x->getEmployed() == showSelect1 - 1) {
+					counter++;
+					showPerson(x);
+				}
+			}
+			if (counter == 0) {
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				cout << "No results!" << endl;
+			}
+			break;
+		case 2:
+			counter = 0;
+			for (auto x : comp->getEmployees())
+			{
+				if (x->getType() == "Flight Crew" && x->getEmployed() == showSelect1 - 1) {
+					counter++;
+					showPerson(x);
+				}
+			}
+			if (counter == 0) {
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				cout << "No results!" << endl;
+			}
+			break;
+		case 3:
+			counter = 0;
+			for (auto x : comp->getEmployees())
+			{
+				if (x->getType() == "Admin" && x->getEmployed() == showSelect1 - 1) {
+					counter++;
+					showPerson(x);
+				}
+			}
+			if (counter == 0) {
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				cout << "No results!" << endl;
+			}
+			break;
+		case 4:
+			counter = 0;
+			for (auto x : comp->getEmployees())
+			{
+				if (x->getType() == "Base Crew" && x->getEmployed() == showSelect1 - 1) {
+					counter++;
+					showPerson(x);
+				}
+			}
+			if (counter == 0) {
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				cout << "No results!" << endl;
+			}
+			break;
+		case 5:
+			showByNameCompany();
+			break;
+		}
+
+	} while (showSelect != 0);
 }

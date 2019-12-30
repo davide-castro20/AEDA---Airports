@@ -16,6 +16,21 @@ struct AirportPtrCmp
 #define AIRPORT_SET set<Airport*, AirportPtrCmp>
 
 /**
+@brief Employee's hash function
+*/
+struct employeeHash
+{
+	int operator() (const Employee* emp) const;
+
+	bool operator() (const Employee* emp1, const Employee* emp2) const;
+};
+
+/**
+@brief Employee's hash table definition
+*/
+typedef unordered_set<Employee*, employeeHash, employeeHash> tabHEmployees;
+
+/**
 @brief O'connor company with several airports
 */
 class Company
@@ -24,6 +39,10 @@ class Company
 @brief Company airports
 */
 	AIRPORT_SET airports;
+	/**
+@brief Employees hash table
+*/
+	tabHEmployees employees;
 	/**
 @brief Maintenance companies
 	*/
@@ -39,6 +58,10 @@ public:
 @brief Return the company's airports
 */
 	AIRPORT_SET getAirports() const;
+	/**
+@brief Return the company's airports
+*/
+	tabHEmployees getEmployees() const;
 	/**
 @brief Removes an airport from the company
 */

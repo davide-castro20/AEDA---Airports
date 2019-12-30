@@ -15,7 +15,7 @@ class Date;
 */
 class Employee {
 public:
-	Employee(string name, Date *birthDate,string type);
+	Employee(string name, Date *birthDate,string type, string airport, bool employed);
 	/**
 @brief Return the employee's name
 */
@@ -33,6 +33,14 @@ public:
 @brief Return the employee's type (Pilot, Base Crew, Admin or Flight Crew)
 */
 	string getType() const;
+	/**
+@brief Return the employee's status (employed or not employed)
+*/
+	bool getEmployed() const;
+	/**
+@brief Return the employee's airport's name
+*/
+	string getAirport() const;
 	/**
 @brief Return the employee's category
 */
@@ -90,7 +98,7 @@ public:
 */
 	virtual void deleteFlight(int id) { return; };
 	/**
-@brief Returns teh plane types the employee can board(emplty string if the employee isn't a pilot or flight crew)
+@brief Returns the plane types the employee can board(emplty string if the employee isn't a pilot or flight crew)
 */
 	virtual string getPlaneTypes() const { return ""; };
 	/**
@@ -130,6 +138,16 @@ protected:
 @brief Employee's birth date
 */
 	Date *birthDate;
+	/**
+@brief Employee's status (employed or not employed)
+*/
+	bool employed;
+
+	/**
+@brief Employee's airport's name
+*/
+	string airport;
+
 };
 
 
@@ -151,7 +169,7 @@ private:
 */
 	vector <Flight*> flights;
 public: 
-	Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights);
+	Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights, string airport, bool employed);
 	/**
 @brief Returns the pilot's category
 */
@@ -213,7 +231,7 @@ private:
 */
 	vector <Flight*> flights;
 public:
-	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights);
+	FlightCrew(string name, Date *birthDate, string category,vector <Flight*> flights, string airport, bool employed);
 	/**
 @brief Returns the flight crew's category
 */
@@ -264,7 +282,7 @@ private:
 */
 	string function;
 public:
-	Admin(string name, Date *birthDate, string department, string function);
+	Admin(string name, Date *birthDate, string department, string function, string airport, bool employed);
 	/**
 @brief Returns the admin's department
 */
@@ -302,7 +320,7 @@ private:
 */
 	Schedule *schedule;
 public:
-	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule);
+	BaseCrew(string name, Date *birthDate, string category, Schedule *schedule, string airport, bool employed);
 	/**
 @brief Returns the base crew's category
 */
