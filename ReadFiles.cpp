@@ -190,7 +190,7 @@ vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
 				employee = new Pilot(name, birthDate, category, planesAux, flightsAux, city, true);
-				employees.push_back(employee);
+				//employees.push_back(employee);
 				employeesT.insert(employee);
 
 				getline(employees_data, linha);
@@ -216,7 +216,7 @@ vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
 				employee = new FlightCrew(name, birthDate, category, flightsAux, city, true);
-				employees.push_back(employee);
+				//employees.push_back(employee);
 				employeesT.insert(employee);
 				getline(employees_data, linha);
 				flightIds.clear();
@@ -235,7 +235,7 @@ vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT
 
 				birthDate = new Date(date);
 				employee = new Admin(name, birthDate, department, function, city, true);
-				employees.push_back(employee);
+				//employees.push_back(employee);
 				employeesT.insert(employee);
 
 				getline(employees_data, linha);
@@ -263,7 +263,7 @@ vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT
 				endTime = new Time(endHour, endMinute);
 				schedule = new Schedule(startTime, endTime);
 				employee = new BaseCrew(name, birthDate, category, schedule, city, true);
-				employees.push_back(employee);
+				//employees.push_back(employee);
 				employeesT.insert(employee);
 
 				getline(employees_data, linha);

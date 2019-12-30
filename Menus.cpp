@@ -291,6 +291,10 @@ void mainMenu() {
 			switch (select)
 			{
 			case 0:
+				for (size_t i = 0; i < currentAirport->employees.size(); i++)
+				{
+					comp->getEmployees().insert(currentAirport->employees.at(i));
+				}
 				return;
 				break;
 			case 1:
@@ -350,8 +354,20 @@ void selectAirportMenu()
 		return;
 	select--;
 	for (auto i : comp->getAirports()) {
-		if(select==0)
+		if (select == 0)
+		{
 			currentAirport = i;
+			vector<Employee*> aux;
+			for (auto j : comp->getEmployees())
+			{
+				if (j->getAirport() == i->getLocal().getCity())
+				{
+					aux.push_back(j);
+					comp->getEmployees().erase(j);
+				}
+			}
+			i->setEmployees(aux);
+		}
 		select--;
 	}
 	mainMenu();

@@ -125,6 +125,11 @@ public:
 */
 	bool setManager(Manager manager) { this->manager = manager; return true; };
 
+	/**
+@brief Sets the airport's employee auxiliar vector
+*/
+	bool setEmployees(vector<Employee*> &employees) { this->employees = employees; return true; };
+
 	int totalWaitingTime() const;
 
 	double meanWaitingTime() const;
