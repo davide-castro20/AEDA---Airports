@@ -64,7 +64,11 @@ void showDataMenu()
 
 void doMaintenance() {
 	if (comp->getMaintenaceCompanies().empty())
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "No companies available to perform maintenance.\n";
 		return;
+	}
 	priority_queue<Maintenance> aux;
 	priority_queue<Maintenance> second = comp->getMaintenaceCompanies();
 	comp->clearMaintenance();
@@ -72,6 +76,8 @@ void doMaintenance() {
 	auxM = second.top();
 	second.pop();
 	Maintenance toPush(rand() % 9 + 15, auxM.getMaintenances() + 1, auxM.getName());
+	cout << "-----------------------------------------------------------------------------------------------------\n";
+	cout << "Company " << toPush.getName() << " did maintenance on your planes and will be available in " << toPush.getHours() << " hours\n";
 	aux.push(toPush);
 	while (!second.empty()) {
 		auxM = second.top();
@@ -357,9 +363,9 @@ void companyMenu()
 		{
 			cout << string(100, '-') << endl;
 			cout << "What would you like to do? \n";
-			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n4)Delete Airport Data.\n5)Create Maintenance company. \n0)Close Program." << endl;
+			cout << "1)Select a airport to inspect.\n2)See airports specification.\n3)Create a new airport.\n4)Delete Airport Data.\n5)Create Maintenance company.\n6)Delete Maintenance company. \n0)Close Program." << endl;
 			cin >> sel;
-			if (cin.fail() || sel < 0 || sel>5)
+			if (cin.fail() || sel < 0 || sel>6)
 			{
 				cin.clear();
 				cin.ignore(1000, '\n');
@@ -391,6 +397,9 @@ void companyMenu()
 			break;
 		case 5:
 			createMaintence();
+			break;
+		case 6:
+			deleteMaintenence();
 			break;
 		}
 	} while (sel != 0);

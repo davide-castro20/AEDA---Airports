@@ -36,7 +36,7 @@ string readName()
 		cin.clear();
 		throw Exit();
 	}
-	if (!noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) || name == "")
+	if ( name == "" || !noAccent(name) || cin.fail() || (name.find_first_of("0123456789") != std::string::npos) || islower(name.at(0)) )
 	{
 		cin.clear();
 		//cin.ignore(100, '\n');

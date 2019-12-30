@@ -485,3 +485,49 @@ void deleteManager() {
 
 	} while (badInput);
 }
+
+void deleteMaintenence()
+{
+	if (comp->getMaintenaceCompanies().empty())
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "No companies available to delete.\n";
+		return;
+	}
+	int counter = 0, selection;
+	bool badInput = false;
+
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Which maintenance company do you want to delete?\n";
+		priority_queue<Maintenance> aux = comp->getMaintenaceCompanies();
+		while (!aux.empty())
+		{
+			counter++;
+			cout << counter << ") " << aux.top().getName() << " available in " << aux.top().getHours() << " hours." << endl;
+			aux.pop();
+		}
+		cin >> selection;
+		counter = 0;
+		if (cin.fail() || selection < 1 || selection > comp->getMaintenaceCompanies().size())
+		{
+			cin.clear();
+			//cin.ignore(100, '\n');
+			badInput = true;
+		}
+		else
+			badInput = false;
+	} while (badInput);
+	priority_queue<Maintenance> aux = comp->getMaintenaceCompanies();
+	comp->clearMaintenance();
+	while (!aux.empty())
+	{
+		counter++;
+		if (counter != selection)
+			comp->addMaintenanceCompany(aux.top());
+		aux.pop();
+
+	}
+
+}
