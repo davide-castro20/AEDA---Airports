@@ -2,11 +2,18 @@
 
 #include "Maintenance.h"
 #include "Airport.h"
+#include <set>
 #include <queue>
 
 class Airport;
 class Maintenance;
 
+struct AirportPtrCmp
+{
+	bool operator()(const Airport* lhs, const Airport* rhs) const;
+};
+
+#define AIRPORT_SET set<Airport*, AirportPtrCmp>
 
 /**
 @brief O'connor company with several airports
@@ -16,7 +23,7 @@ class Company
 	/**
 @brief Company airports
 */
-	vector<Airport*> airports;
+	AIRPORT_SET airports;
 	/**
 @brief Maintenance companies
 	*/
@@ -31,7 +38,7 @@ public:
 	/**
 @brief Return the company's airports
 */
-	vector<Airport*> getAirports() const;
+	AIRPORT_SET getAirports() const;
 	/**
 @brief Removes an airport from the company
 */

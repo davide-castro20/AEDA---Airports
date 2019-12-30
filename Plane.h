@@ -49,6 +49,8 @@ private:
 @brief Planes' expenses
 */
 	double expenses;
+
+	int meanTime;
 public:
 	Plane(string type, int capacity, vector<Flight*> &flights);
 	/**
@@ -91,4 +93,8 @@ public:
 @brief Deletes a flight from a plane
 */
 	void deleteFlight(int id);
+	/**
+@brief Returns the mean time the plane waits in the runway
+*/
+	int getMeanTime() const { return this->meanTime; };
 };

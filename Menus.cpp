@@ -323,13 +323,17 @@ void mainMenu() {
 void selectAirportMenu()
 {
 	bool badInput = true;
+	int counter = 0;
 	unsigned int select;
 	do
 	{
 		cout << "-----------------------------------------------------------------------------------------------------\n";
 		cout << "Which airport do you want to see the data of: \n";
-		for (size_t i = 0; i < comp->getAirports().size(); i++)
-			cout << i + 1 << ")" << comp->getAirports().at(i)->getLocal().getCity() << ", " << comp->getAirports().at(i)->getLocal().getCountry() << endl;
+		for (auto i : comp->getAirports())
+		{
+			++counter;
+			cout << counter << ")" << i->getLocal().getCity() << ", " << i->getLocal().getCountry() << endl;
+		}
 		cout << endl;
 		cout << "0)Back\n";
 		cin >> select;
@@ -344,7 +348,12 @@ void selectAirportMenu()
 	} while (badInput);
 	if (select == 0)
 		return;
-	currentAirport = comp->getAirports().at(select - 1);
+	select--;
+	for (auto i : comp->getAirports()) {
+		if(select==0)
+			currentAirport = i;
+		select--;
+	}
 	mainMenu();
 }
 
@@ -387,8 +396,8 @@ void companyMenu()
 			selectAirportMenu();
 			break;
 		case 2:
-			for (size_t i = 0; i < comp->getAirports().size(); i++)
-				showAirportData(comp->getAirports().at(i));
+			for (auto i : comp->getAirports())
+				showAirportData(i);
 			break;
 		case 3:
 			createAirport();

@@ -437,8 +437,8 @@ bool noAccent(string name) {
 
 
 bool alreadyExists(string city) {
-	for (size_t i = 0; i < comp->getAirports().size();i++)
-		if (comp->getAirports().at(i)->getLocal().getCity() == city)
+	for (auto i : comp->getAirports())
+		if (i->getLocal().getCity() == city)
 			return true;
 	return false;
 }

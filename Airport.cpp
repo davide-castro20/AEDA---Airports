@@ -56,6 +56,30 @@ Airport::Airport(vector<Plane*>& planes, vector<Flight*>& flights, vector <Emplo
 	this->manager = man;
 }
 
+int Airport::totalWaitingTime() const
+{
+	int total = 0;
+	for (size_t i = 0; i < planes.size(); i++)
+	{
+		total += planes.at(i)->getMeanTime();
+	}
+	return total;
+}
+
+double Airport::meanWaitingTime() const
+{
+	return this->totalWaitingTime()/planes.size();
+}
+
+bool Airport::operator<(const Airport &rhs) const
+{
+	if (this->flights.size() == rhs.flights.size())
+	{
+		return this->meanWaitingTime() < rhs.meanWaitingTime();
+	}
+	return this->flights.size() < rhs.flights.size();
+}
+
 Local Airport::getLocal() const
 {
 	return local;

@@ -363,7 +363,7 @@ void deleteFlightData()
 }
 
 void deleteAirportData() {
-	unsigned int delSelection;
+	unsigned int delSelection, counter=0;
 	string confirm;
 	bool completedChange = false;
 	bool badInput = true;
@@ -376,8 +376,10 @@ void deleteAirportData() {
 				cout << "No airports.\n";
 				return;
 			}
-			for (size_t i = 1; i <= comp->getAirports().size(); i++)
-				cout << i << ") " << comp->getAirports().at(i - 1)->getLocal().getCity() << ", " << comp->getAirports().at(i - 1)->getLocal().getCountry() << endl;
+			for (auto i : comp->getAirports()) {
+				counter++;
+				cout << counter << ") " << i->getLocal().getCity() << ", " << i->getLocal().getCountry() << endl;
+			}
 			cout << "0) Back\n";
 			cin >> delSelection;
 			if (cin.eof()) {
@@ -423,15 +425,23 @@ void deleteAirportData() {
 
 			if (confirm == "y" || confirm == "Y")
 			{
-				badInput = false;
-				completedChange = true;
-				fileName = comp->getAirports().at(delSelection)->employeeTxt.c_str();
-				remove(fileName);
-				fileName = comp->getAirports().at(delSelection)->flightTxt.c_str();
-				remove(fileName);
-				fileName = comp->getAirports().at(delSelection)->planesTxt.c_str();
-				remove(fileName);
-				comp->deleteAirport(delSelection);
+				int copyDel = delSelection;
+				for (auto iter : comp->getAirports())
+				{
+					if (delSelection == 0) {
+						badInput = false;
+						completedChange = true;
+						/*fileName = iter->employeeTxt.c_str();
+						remove(fileName);
+						fileName = iter->flightTxt.c_str();
+						remove(fileName);
+						fileName = iter->planesTxt.c_str();
+						remove(fileName);*/
+						comp->deleteAirport(copyDel);
+						break;
+					}
+					delSelection--;
+				}
 			}
 			if (confirm == "n" || confirm == "N")
 			{

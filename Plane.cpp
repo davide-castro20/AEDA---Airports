@@ -37,6 +37,7 @@ Plane::Plane(string type, int capacity, vector<Flight*> &flights)
 	this->capacity = capacity;
 	this->flights = flights;
 	this->expenses = calcExp();
+	meanTime = rand() % 20 + 10;
 }
 
 ostream & operator <<(ostream &out, const capacityError &error)

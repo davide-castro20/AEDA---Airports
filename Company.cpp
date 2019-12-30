@@ -1,5 +1,6 @@
 #include "Company.h"
 #include "ReadFiles.h"
+#include <set>
 
 using namespace std;
 
@@ -104,7 +105,7 @@ Company::Company(string airports_file, string maintenance_file)
 				auxFlight = addEmployeeToFlight(flights, employees);
 				airport = new Airport(planes, auxFlight, employees, local, planestxt, employeetxt, flightstxt);
 				airport->setManager(manager);
-				airports.push_back(airport);
+				airports.insert(airport);
 				counter = -1;
 				getline(airport_data, linha);
 				break;
@@ -119,16 +120,29 @@ Company::Company(string airports_file, string maintenance_file)
 
 void Company::addAirport(Airport * newAirport)
 {
-	airports.push_back(newAirport);
+	airports.insert(newAirport);
 }
 
-vector<Airport*> Company::getAirports() const
+AIRPORT_SET Company::getAirports() const
 {
 	return airports;
 }
 
+bool AirportPtrCmp::operator()(const Airport* lhs, const Airport* rhs) const 
+{ 
+	return lhs->operator<(*rhs); 
+}
+
 void Company::deleteAirport(int index) {
-	airports.erase(airports.begin()+index);
+	for (auto i : this->airports)
+	{
+		if (index == 0)
+		{
+			this->airports.erase(i);
+			return;
+		}
+		index--;
+	}
 }
 
 void Company::addMaintenanceCompany(Maintenance maintenaceCompany) {

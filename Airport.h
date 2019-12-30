@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Flight.h"
 #include "Employee.h"
 #include "Date.h"
@@ -7,6 +8,7 @@ class Flight;
 class Plane;
 class Employee;
 class Date;
+
 
 
 /**
@@ -122,5 +124,12 @@ public:
 @brief Sets the airport's manager
 */
 	bool setManager(Manager manager) { this->manager = manager; return true; };
+
+	int totalWaitingTime() const;
+
+	double meanWaitingTime() const;
+	
+	bool operator<(const Airport &rhs) const;
+
 };
 
