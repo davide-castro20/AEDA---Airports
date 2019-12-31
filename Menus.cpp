@@ -326,6 +326,7 @@ void mainMenu() {
 
 void selectAirportMenu()
 {
+	comp->sortAirports();
 	bool badInput = true;
 	int counter = 0;
 	unsigned int select;
@@ -372,7 +373,6 @@ void selectAirportMenu()
 		select--;
 	}
 	mainMenu();
-	comp->sortAirports();
 }
 
 void companyMenu()
@@ -415,6 +415,7 @@ void companyMenu()
 			selectAirportMenu();
 			break;
 		case 2:
+			comp->sortAirports();
 			for (auto i : comp->getAirports())
 				showAirportData(i);
 			break;

@@ -121,8 +121,6 @@ public:
 @brief Compares two employees and checks if they are the same person
 */
 	bool operator==(Employee &emp2);
-
-	
 protected:
 	/**
 @brief Employee's name

@@ -171,6 +171,23 @@ void Company::sortAirports()
 	for (auto i : this->airports) {
 		aux.insert(i);
 	}
+	for (auto i : aux)
+	{
+		i->numStops = 0;
+		for (auto j : aux)
+		{
+			if (i->getLocal().getCity() != j->getLocal().getCity())
+			{
+				for (auto k : j->flights)
+				{
+					
+					if (k->getDestination() == i->getLocal().getCity()) 
+						i->numStops++;
+						
+				}
+			}
+		}
+	}
 	this->airports = aux;
 }
 

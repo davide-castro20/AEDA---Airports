@@ -207,6 +207,8 @@ void showAirportData(Airport * airport)
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << airport->flights.size() << left << setw(49) << " possible flights" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
+	cout << '|' << setfill(' ') << right << setw(49) << airport->numStops << left << setw(49) << " flights stop in the airport" << '|' << endl;
+	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << total << left << setw(49) << " euros in total expenses" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << right << setfill(' ') << setw(49) << "Manager's Name " << '|' << left << setw(48) << " " + airport->manager.name << '|' << endl;

@@ -81,6 +81,10 @@ class Airport
 {
 public:
 	/**
+@brief Variable which saves the number of flights that stop in the airport
+*/
+	int numStops;
+	/**
 @brief Variable which saves the .txt of the airport's flights
 */
 	string flightTxt;
