@@ -1554,7 +1554,7 @@ void createAirport() {
 			vector <Employee*> employees = {};
 			vector <Plane*> planes = {};
 			local = new Local(country, city, stof(lon), stof(lat));
-			airport = new Airport(planes, flights, employees, *local, plane, employee, flight);
+			airport = new Airport(planes, flights, *local, plane, employee, flight);
 		}
 		comp->addAirport(airport);
 		cout << string(100, '-') << endl << "New Airport successfuly created!" << endl;

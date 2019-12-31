@@ -111,7 +111,7 @@ public:
 	/**
 @brief Vector with airport'semployees
 */
-	vector <Employee*> employees;
+	//vector <Employee*> employees;
 	/**
 @brief Airport's local
 */
@@ -123,7 +123,7 @@ public:
 
 	Airport() { planes = {}; flights = {}; };
 
-	Airport(vector<Plane*> &planes, vector<Flight*> &flights, vector <Employee*> employees, Local local, string planestxt, string employeetxt, string flightstxt);
+	Airport(vector<Plane*> &planes, vector<Flight*> &flights, Local local, string planestxt, string employeetxt, string flightstxt);
 	/**
 @brief Sets the airport's manager
 */
@@ -132,7 +132,7 @@ public:
 	/**
 @brief Sets the airport's employee auxiliar vector
 */
-	bool setEmployees(vector<Employee*> &employees) { this->employees = employees; return true; };
+	//bool setEmployees(vector<Employee*> &employees) { this->employees = employees; return true; };
 
 	int totalWaitingTime() const;
 

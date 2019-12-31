@@ -216,10 +216,14 @@ void showEmployeeExpenses()
 void showAirportData(Airport * airport)
 {
 	double total = 0;
+	double n_employees = 0;
 	for (auto i : comp->getEmployees())
 	{
-		if(i->getAirport() == airport->getLocal().getCity())
+		if (i->getAirport() == airport->getLocal().getCity())
+		{
 			total += (i)->calcSalary();
+			n_employees++;
+		}
 	}
 	//for (size_t i = 0; i < airport->employees.size(); i++)
 	//	total += airport->employees.at(i)->calcSalary();
@@ -237,7 +241,7 @@ void showAirportData(Airport * airport)
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << airport->planes.size() << left << setw(49) << " Planes" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
-	cout << '|' << setfill(' ') << right << setw(49) << airport->employees.size() << left << setw(49) << " Employees" << '|' << endl;
+	cout << '|' << setfill(' ') << right << setw(49) << n_employees << left << setw(49) << " Employees" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;
 	cout << '|' << setfill(' ') << right << setw(49) << airport->flights.size() << left << setw(49) << " possible flights" << '|' << endl;
 	cout << '|' << string(98, '-') << '|' << endl;

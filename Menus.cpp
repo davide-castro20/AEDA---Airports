@@ -320,10 +320,10 @@ void mainMenu() {
 			switch (select)
 			{
 			case 0:
-				for (size_t i = 0; i < currentAirport->employees.size(); i++)
-				{
-					comp->getEmployees().insert(currentAirport->employees.at(i));
-				}
+				//for (size_t i = 0; i < currentAirport->employees.size(); i++)
+				//{
+				//	comp->getEmployees().insert(currentAirport->employees.at(i));
+				//}
 				return;
 				break;
 			case 1:

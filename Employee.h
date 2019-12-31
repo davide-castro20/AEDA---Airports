@@ -114,6 +114,10 @@ public:
 */
 	bool setSalary(float salary);
 	/**
+@brief Sets the employee's status (employed or not employed)
+*/
+	bool setEmployed(bool employed) { this->employed = employed; return true; }
+	/**
 @brief Calculates the employee's departement
 */
 	virtual double calcSalary() {return 0;}; //returns 0 but has no effect since all derivated classes will have this method

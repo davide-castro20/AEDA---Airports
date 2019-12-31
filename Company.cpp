@@ -104,7 +104,7 @@ Company::Company(string airports_file, string maintenance_file)
 				manager.salary = stod(linha);
 				Local local(country, city, longit, latit);
 				auxFlight = addEmployeeToFlight(flights, employees);
-				airport = new Airport(planes, auxFlight, employees, local, planestxt, employeetxt, flightstxt);
+				airport = new Airport(planes, auxFlight, local, planestxt, employeetxt, flightstxt);
 				airport->setManager(manager);
 				airports.insert(airport);
 				counter = -1;
