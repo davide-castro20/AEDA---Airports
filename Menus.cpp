@@ -90,7 +90,6 @@ void doMaintenance() {
 	priority_queue<Maintenance> second = comp->getMaintenaceCompanies();
 	priority_queue<Maintenance> aux;
 	Maintenance auxM;
-	Maintenance toPush;
 	int hours;
 	bool done = false;
 	while (!second.empty()) {
@@ -99,6 +98,7 @@ void doMaintenance() {
 			hours = rand() % 9 + 15;
 			cout << "Company " << auxM.getName() << " did maintenance on your planes and will be available in " << hours << " hours.\n";
 			Maintenance toPush(hours, auxM.getMaintenances() + 1, auxM.getName());
+			aux.push(toPush);
 			done = true;
 
 		}
@@ -109,8 +109,9 @@ void doMaintenance() {
 			else
 				hours = 0;
 			Maintenance toPush(hours, auxM.getMaintenances(), auxM.getName());
+			aux.push(toPush);
 		}
-		aux.push(toPush);
+		
 		second.pop();
 	}
 	if (!done) {
@@ -118,8 +119,6 @@ void doMaintenance() {
 		cout << "No companies with minimum required maintenances\n";
 		return;
 	}
-
-	cout << aux.size() << endl ;
 
 	comp->clearMaintenance();
 	while (!aux.empty()) {
