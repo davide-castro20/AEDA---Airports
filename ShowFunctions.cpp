@@ -260,11 +260,13 @@ void showPersonMenu()
 	int showSelect;
 	string type;
 	int counter;
-	if (currentAirport->employees.size() == 0)
+	vector<Employee*> employees;
+
+	/*if (currentAirport->employees.size() == 0)
 	{
 		cout << "There are no persons on this aiport yet!\n";
 		return;
-	}
+	}*/
 
 	do
 	{
@@ -293,55 +295,124 @@ void showPersonMenu()
 			return;
 		case 1:
 			counter = 0;
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Pilot") {
 					counter++;
 					showPerson(currentAirport->employees.at(i));
 				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getAirport() == currentAirport->getLocal().getCity() && i->getType() == "Pilot")
+				{
+					counter++;
+					employees.push_back(i);
+				}
 			}
 			if (counter == 0) {
 				cout << "No pilots on this airport"<<endl;
 			}
+			else
+			{
+				sort(employees.begin(), employees.end(), rule);
+				for (size_t i = 0; i < employees.size(); i++)
+				{
+					showPerson(employees.at(i));
+				}
+			}
+			employees.clear();
 			break;
 		case 2:
 			counter = 0;
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Flight Crew") {
 					counter++;
 					showPerson(currentAirport->employees.at(i));
 				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getAirport() == currentAirport->getLocal().getCity() && i->getType() == "Flight Crew")
+				{
+					counter++;
+					employees.push_back(i);
+				}
 			}
 			if (counter == 0) {
 				cout << "No flight crew members on this airport" << endl;
 			}
+			else
+			{
+				sort(employees.begin(), employees.end(), rule);
+				for (size_t i = 0; i < employees.size(); i++)
+				{
+					showPerson(employees.at(i));
+				}
+			}
+			employees.clear();
 			break;
 		case 3:
 			counter = 0;
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Admin") {
 					counter++;
 					showPerson(currentAirport->employees.at(i));
 				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getAirport() == currentAirport->getLocal().getCity() && i->getType() == "Admin")
+				{
+					counter++;
+					employees.push_back(i);
+				}
 			}
 			if (counter == 0) {
 				cout << "No administrators on this airport" << endl;
 			}
+			else
+			{
+				sort(employees.begin(), employees.end(), rule);
+				for (size_t i = 0; i < employees.size(); i++)
+				{
+					showPerson(employees.at(i));
+				}
+			}
+			employees.clear();
 			break;
 		case 4:
 			counter = 0;
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Base Crew") {
 					counter++;
 					showPerson(currentAirport->employees.at(i));
 				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getAirport() == currentAirport->getLocal().getCity() && i->getType() == "Base Crew")
+				{
+					counter++;
+					employees.push_back(i);
+				}
 			}
 			if (counter == 0) {
 				cout << "No base crew members on this airport" << endl;
 			}
+			else
+			{
+				sort(employees.begin(), employees.end(), rule);
+				for (size_t i = 0; i < employees.size(); i++)
+				{
+					showPerson(employees.at(i));
+				}
+			}
+			employees.clear();
 			break;
 		case 5:
 			showByName();
@@ -484,7 +555,7 @@ void showByName()
 		}
 	} while (badInput);
 
-	if (currentAirport->employees.size() > 0)
+	/*if (currentAirport->employees.size() > 0)
 	{
 		for (size_t i = 0; i < currentAirport->employees.size(); i++)
 		{
@@ -504,7 +575,22 @@ void showByName()
 			
 	}
 	else
-		cout << "There are currently no employees on this airport!\n";
+		cout << "There are currently no employees on this airport!\n";*/
+	for (auto i : comp->getEmployees())
+	{
+		if ((i)->getName() == name && (i)->getAirport() == currentAirport->getLocal().getCity())
+			emps.push_back(i);
+	}
+	if (emps.size() == 1)
+		showPerson(emps.at(0));
+	else if (emps.size() == 0)
+		cout << "There are no employees named " << name << " on this airport!\n";
+	else
+	{
+		cout << "There are " << emps.size() << " employees named " << name << '!' << endl;
+		for (size_t j = 0; j < emps.size(); j++)
+			showPerson(emps.at(j));
+	}
 
 }
 

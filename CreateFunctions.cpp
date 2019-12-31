@@ -288,15 +288,24 @@ void createPilot()
 	//				}
 	//			}
 	Employee *newPilot = new Pilot(name, birthDate, category, planes, flights, currentAirport->getLocal().getCity(), true);
-	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 	{
 		if (*currentAirport->employees.at(i) == *newPilot)
 		{
 			cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
 			return;
 		}
+	}*/
+	for (auto i : comp->getEmployees())
+	{
+		if (*i == *newPilot)
+		{
+			cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+			return;
+		}
 	}
-	currentAirport->employees.push_back(newPilot);
+	comp->getEmployees().insert(newPilot);
+	//currentAirport->employees.push_back(newPilot);
 	cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
 		//		cout << string(100, '-') << endl << "New Pilot successfuly created!" << endl;
 		//	}
@@ -468,15 +477,24 @@ void createFlightCrew()
 			if (confirm == "y" || confirm == "Y")
 			{
 				Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights, currentAirport->getLocal().getCity(), true);
-				for (size_t i = 0; i < currentAirport->employees.size(); i++)
+				/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 				{
 					if (currentAirport->employees.at(i) == newFlightCrew)
 					{
 						cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
 						return;
 					}
+				}*/
+				for (auto i : comp->getEmployees())
+				{
+					if (*i == *newFlightCrew)
+					{
+						cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+						return;
+					}
 				}
-				currentAirport->employees.push_back(newFlightCrew);
+				comp->getEmployees().insert(newFlightCrew);
+				//currentAirport->employees.push_back(newFlightCrew);
 				cout << string(100, '-') << endl << "New Flight Crew member successfuly created!" << endl;
 				return;
 			}
@@ -485,29 +503,36 @@ void createFlightCrew()
 				badInput2 = false;
 			}
 		}
-
-
-		if (!badInput)
+		else
 		{
 
 			flights = convertIdToFlight(flightIds, currentAirport->flights);
 			Employee *newFlightCrew = new FlightCrew(name, birthDate, category, flights, currentAirport->getLocal().getCity(), true);
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i) == newFlightCrew)
 				{
 					cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
 					return;
 				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (*i == *newFlightCrew)
+				{
+					cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+					return;
+				}
 			}
+
 			for (size_t j = 0; j < flights.size(); j++)
 			{
 				vector<Employee*> crew = flights.at(j)->getEmployees();
 				crew.push_back(newFlightCrew);
 				flights.at(j)->setCrew(crew);
 			}
-
-			currentAirport->employees.push_back(newFlightCrew);
+			comp->getEmployees().insert(newFlightCrew);
+			//currentAirport->employees.push_back(newFlightCrew);
 			cout << string(100, '-') << endl << "New Flight Crew member successfuly created!" << endl;
 		}
 		//getline(cin, read);
@@ -645,15 +670,24 @@ void createAdmin()
 	} while (badInput);
 	
 	Employee* newAdmin = new Admin(name, birthDate, department, function, currentAirport->getLocal().getCity(), true);
-	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 	{
 		if (currentAirport->employees.at(i) == newAdmin)
 		{
 			cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
 			return;
 		}
+	}*/
+	for (auto i : comp->getEmployees())
+	{
+		if (*i == *newAdmin)
+		{
+			cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+			return;
+		}
 	}
-	currentAirport->employees.push_back(newAdmin);
+	comp->getEmployees().insert(newAdmin);
+	//currentAirport->employees.push_back(newAdmin);
 	cout << string(100, '-') << endl << "New Administration member successfuly created!" << endl;
 	
 }
@@ -808,15 +842,24 @@ void createBaseCrew()
 		{
 			sched = new Schedule(start, end);
 			Employee* newBaseCrew = new BaseCrew(name, birthDate, category, sched, currentAirport->getLocal().getCity(), true);
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i) == newBaseCrew)
 				{
 					cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
 					return;
 				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (*i == *newBaseCrew)
+				{
+					cout << "The employee " << name << ", with birth date " << birthDate << ", is already in the system" << endl;
+					return;
+				}
 			}
-			currentAirport->employees.push_back(newBaseCrew);
+			comp->getEmployees().insert(newBaseCrew);
+			//currentAirport->employees.push_back(newBaseCrew);
 			cout << string(100, '-') << endl << "New Base Crew member successfuly created!" << endl;
 		}
 
@@ -1107,7 +1150,7 @@ void createFlight()
 		do {
 			
 			cout << "| Pilots:\n";
-			for(size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for(size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Pilot" && currentAirport->employees.at(i)->isFree(predictedSchedule))
 				{
@@ -1119,6 +1162,20 @@ void createFlight()
 							break;
 						}
 					}				
+				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getType() == "Pilot" && i->getAirport() == currentAirport->getLocal().getCity() && i->isFree(predictedSchedule))
+				{
+					for (size_t k = 0; k < (i)->getPlanes().size(); k++)
+					{
+						if ((i)->getPlanes().at(k) == plane)
+						{
+							freeEmp.push_back(i);
+							break;
+						}
+					}
 				}
 			}
 			
@@ -1215,11 +1272,19 @@ void createFlight()
 		do {
 			freeEmp.clear();
 			cout << "| Flight Crew:\n";
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				if (currentAirport->employees.at(i)->getType() == "Flight Crew" && currentAirport->employees.at(i)->isFree(predictedSchedule))
 				{
 					freeEmp.push_back(currentAirport->employees.at(i));
+				}
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getType() == "Flight Crew" && i->getAirport() == currentAirport->getLocal().getCity() && i->isFree(predictedSchedule))
+				{
+					freeEmp.push_back(i);
+					break;
 				}
 			}
 			if (freeEmp.size() < 2)

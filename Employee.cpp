@@ -76,7 +76,7 @@ bool Employee::setSalary(float salary) {
 
 bool Employee::operator==(Employee &emp2)
 {
-	return ((this->name == emp2.name) && (this->birthDate == emp2.birthDate));
+	return ((this->name == emp2.name) && (this->birthDate == emp2.birthDate) && (this->airport == emp2.airport));
 }
 	
 Pilot::Pilot(string name, Date *birthDate, string category, vector <Plane*> &planes, vector <Flight*> &flights, string airport, bool employed) : Employee(name, birthDate, "Pilot", airport, employed) {
