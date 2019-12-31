@@ -520,7 +520,7 @@ void deleteMaintenence()
 		}
 		cin >> selection;
 		counter = 0;
-		if (cin.fail() || selection < 1 || selection > comp->getMaintenaceCompanies().size())
+		if (cin.fail() || selection < 1 || (size_t)selection > comp->getMaintenaceCompanies().size())
 		{
 			cin.clear();
 			//cin.ignore(100, '\n');

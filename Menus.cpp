@@ -353,6 +353,7 @@ void selectAirportMenu()
 	if (select == 0)
 		return;
 	select--;
+	int copySelect = select;
 	for (auto i : comp->getAirports()) {
 		if (select == 0)
 		{
@@ -371,6 +372,7 @@ void selectAirportMenu()
 		select--;
 	}
 	mainMenu();
+	comp->sortAirports();
 }
 
 void companyMenu()

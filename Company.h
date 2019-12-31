@@ -80,5 +80,7 @@ public:
 @brief Removes all maintenace companies
 */
 	void clearMaintenance();
+
+	void sortAirports();
 };
 

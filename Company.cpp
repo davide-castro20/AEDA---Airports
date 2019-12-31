@@ -165,6 +165,15 @@ void Company::clearMaintenance() {
 	}
 }
 
+void Company::sortAirports()
+{
+	AIRPORT_SET aux;
+	for (auto i : this->airports) {
+		aux.insert(i);
+	}
+	this->airports = aux;
+}
+
 int employeeHash::operator()(const Employee * emp) const
 {
 	int v = 0;
