@@ -13,7 +13,7 @@ extern Company* comp;
 void datesExpenses()
 {
 	unsigned int month1, month2, year1, year2;
-	bool badInput=true;
+	bool badInput = true;
 	double pilotExp = 0, baseCrewExp = 0, flightCrewExp = 0, adminExp = 0, planesExp = 0;
 	do {
 		do
@@ -108,7 +108,7 @@ void datesExpenses()
 				planesExp += inBetween(currentAirport->planes.at(i), month1, month2, year1, year2);
 			}
 			string type;
-			for (size_t i = 0; i < currentAirport->employees.size(); i++)
+			/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 			{
 				type = currentAirport->employees.at(i)->getType();
 				if (type == "Pilot")
@@ -119,6 +119,21 @@ void datesExpenses()
 					baseCrewExp += currentAirport->employees.at(i)->calcSalary()*nMonths;
 				else if (type == "Admin")
 					adminExp += currentAirport->employees.at(i)->calcSalary()*nMonths;
+			}*/
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getAirport() == currentAirport->getLocal().getCity())
+				{
+					type = (i)->getType();
+					if (type == "Pilot")
+						pilotExp += inBetween((i), month1, month2, year1, year2);
+					else if (type == "Flight Crew")
+						flightCrewExp += inBetween((i), month1, month2, year1, year2);
+					else if (type == "Base Crew")
+						baseCrewExp += (i)->calcSalary()*nMonths;
+					else if (type == "Admin")
+						adminExp += (i)->calcSalary()*nMonths;
+				}
 			}
 
 			cout << '.' << string(98, '-') << '.' << endl;
@@ -163,7 +178,7 @@ void showPlanesExpenses()
 void showEmployeeExpenses()
 {
 	double  pilots=0, base=0, flight=0, admin=0;
-	for (size_t i = 0; i < currentAirport->employees.size(); i++)
+	/*for (size_t i = 0; i < currentAirport->employees.size(); i++)
 	{
 		if (currentAirport->employees.at(i)->getType() == "Pilot")
 			pilots += currentAirport->employees.at(i)->calcSalary();
@@ -173,6 +188,20 @@ void showEmployeeExpenses()
 			base += currentAirport->employees.at(i)->calcSalary();
 		else if (currentAirport->employees.at(i)->getType() == "Admin")
 			admin += currentAirport->employees.at(i)->calcSalary();
+	}*/
+	for (auto i : comp->getEmployees())
+	{
+		if (i->getAirport() == currentAirport->getLocal().getCity())
+		{
+			if (i->getType() == "Pilot")
+				pilots += (i)->calcSalary();
+			else if (i->getType() == "Flight Crew")
+				flight += i->calcSalary();
+			else if ((i)->getType() == "Base Crew")
+				base += (i)->calcSalary();
+			else if ((i)->getType() == "Admin")
+				admin += (i)->calcSalary();
+		}
 	}
 	cout << '.' << string(98, '-') << '.' << endl;
 	cout << '|' << setfill('-') << right << setw(49) << currentAirport->local.getCity() << left << " Airport" << right << setw(42) << '|' << endl;
@@ -187,8 +216,13 @@ void showEmployeeExpenses()
 void showAirportData(Airport * airport)
 {
 	double total = 0;
-	for (size_t i = 0; i < airport->employees.size(); i++)
-		total += airport->employees.at(i)->calcSalary();
+	for (auto i : comp->getEmployees())
+	{
+		if(i->getAirport() == airport->getLocal().getCity())
+			total += (i)->calcSalary();
+	}
+	//for (size_t i = 0; i < airport->employees.size(); i++)
+	//	total += airport->employees.at(i)->calcSalary();
 	for (size_t i = 0; i < airport->planes.size(); i++)
 		total += airport->planes.at(i)->calcExp();
 

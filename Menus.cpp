@@ -359,7 +359,7 @@ void selectAirportMenu()
 		if (select == 0)
 		{
 			currentAirport = i;
-			vector<Employee*> aux;
+			/*vector<Employee*> aux;
 			for (auto j : comp->getEmployees())
 			{
 				if (j->getAirport() == i->getLocal().getCity())
@@ -368,7 +368,7 @@ void selectAirportMenu()
 					comp->getEmployees().erase(j);
 				}
 			}
-			i->setEmployees(aux);
+			i->setEmployees(aux);*/
 		}
 		select--;
 	}

@@ -68,11 +68,10 @@ void SaveFlights() {
 
 void SaveEmployees() {
 	ofstream newEmployeesFile;
-	if (comp->getAirports().size() == 0)
+	if (comp->getEmployees().size() == 0)
 		return;
-	for (auto i : comp->getAirports()) {
-		newEmployeesFile.open("newEmployees.txt");
-		if(i->employees.size() != 0) {
+	
+		/*if(i->employees.size() != 0) {
 		for (size_t j = 0; j < i->employees.size() - 1; j++) {
 			if (i->employees.at(j)->getType() == "Pilot") {
 				string flights = "";
@@ -192,6 +191,55 @@ void SaveEmployees() {
 				newEmployeesFile << i->employees.at(EmpSize)->getSchedule()->getEndHour().getHours() << endl;
 				newEmployeesFile << i->employees.at(EmpSize)->getSchedule()->getEndHour().getMinutes() << endl;
 			}
+		}*/
+	for (auto i : comp->getAirports()) {
+
+		newEmployeesFile.open("newEmployees.txt");
+
+		for (auto x = comp->getEmployees().begin(); x != comp->getEmployees().end(); x++) {
+			newEmployeesFile.open("newEmployees.txt");
+			if ((*x)->getAirport() == i->getLocal().getCity())
+			{
+				if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == true) {
+					string flights = "";
+					newEmployeesFile << (*x)->getType() << endl;
+					newEmployeesFile << (*x)->getName() << endl;
+					newEmployeesFile << (*x)->getDate() << endl;
+					newEmployeesFile << (*x)->getCategory() << endl;
+					newEmployeesFile << (*x)->getPlaneTypes() << endl;
+					newEmployeesFile << flights << endl;
+					newEmployeesFile << "::::::::::\n";
+				}
+				else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == true) {
+					string flights = "";
+
+					newEmployeesFile << (*x)->getType() << endl;
+					newEmployeesFile << (*x)->getName() << endl;
+					newEmployeesFile << (*x)->getDate() << endl;
+					newEmployeesFile << (*x)->getCategory() << endl;
+					newEmployeesFile << flights << endl;
+					newEmployeesFile << "::::::::::\n";
+				}
+				else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == true) {
+					newEmployeesFile << (*x)->getType() << endl;
+					newEmployeesFile << (*x)->getName() << endl;
+					newEmployeesFile << (*x)->getDate() << endl;
+					newEmployeesFile << (*x)->getDepartment() << endl;
+					newEmployeesFile << (*x)->getFunction() << endl;
+					newEmployeesFile << "::::::::::\n";
+				}
+				else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == true) {
+					newEmployeesFile << (*x)->getType() << endl;
+					newEmployeesFile << (*x)->getName() << endl;
+					newEmployeesFile << (*x)->getDate() << endl;
+					newEmployeesFile << (*x)->getCategory() << endl;
+					newEmployeesFile << (*x)->getSchedule()->getStartHour().getHours() << endl;
+					newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
+					newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
+					newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
+					newEmployeesFile << "::::::::::\n";
+				}
+			}
 		}
 		const char* fileName = i->employeeTxt.c_str();
 		newEmployeesFile.close();
@@ -244,45 +292,7 @@ void SaveOldEmployees() {
 			newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
 			newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
 			newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
-		}
-		if (++x == comp->getEmployees().end())
-		{
-			if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == false) {
-				string flights = "";
-				newEmployeesFile << (*x)->getType() << endl;
-				newEmployeesFile << (*x)->getName() << endl;
-				newEmployeesFile << (*x)->getDate() << endl;
-				newEmployeesFile << (*x)->getCategory() << endl;
-				newEmployeesFile << (*x)->getPlaneTypes() << endl;
-				newEmployeesFile << flights << endl;
-			}
-			else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == false) {
-				string flights = "";
-
-				newEmployeesFile << (*x)->getType() << endl;
-				newEmployeesFile << (*x)->getName() << endl;
-				newEmployeesFile << (*x)->getDate() << endl;
-				newEmployeesFile << (*x)->getCategory() << endl;
-				newEmployeesFile << flights << endl;
-			}
-			else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == false) {
-				newEmployeesFile << (*x)->getType() << endl;
-				newEmployeesFile << (*x)->getName() << endl;
-				newEmployeesFile << (*x)->getDate() << endl;
-				newEmployeesFile << (*x)->getDepartment() << endl;
-				newEmployeesFile << (*x)->getFunction() << endl;
-			}
-			else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == false) {
-				newEmployeesFile << (*x)->getType() << endl;
-				newEmployeesFile << (*x)->getName() << endl;
-				newEmployeesFile << (*x)->getDate() << endl;
-				newEmployeesFile << (*x)->getCategory() << endl;
-				newEmployeesFile << (*x)->getSchedule()->getStartHour().getHours() << endl;
-				newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
-				newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
-				newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
-			}
-			x--;
+			newEmployeesFile << "::::::::::\n";
 		}
 	}
 		
