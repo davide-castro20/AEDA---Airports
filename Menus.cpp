@@ -69,29 +69,59 @@ void doMaintenance() {
 		cout << "No companies available to perform maintenance.\n";
 		return;
 	}
-	priority_queue<Maintenance> aux;
+	bool badInput = true;
+	int min;
+	do
+	{
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "Minimum number of maintenances.\n";
+		cin >> min;
+		if (cin.fail() || min < 0)
+		{
+			badInput = true;
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+		else
+		{
+			badInput = false;
+		}
+	} while (badInput);
 	priority_queue<Maintenance> second = comp->getMaintenaceCompanies();
-	comp->clearMaintenance();
+	priority_queue<Maintenance> aux;
 	Maintenance auxM;
-	auxM = second.top();
-	second.pop();
-	Maintenance toPush(rand() % 9 + 15, auxM.getMaintenances() + 1, auxM.getName());
-	cout << "-----------------------------------------------------------------------------------------------------\n";
-	cout << "Company " << toPush.getName() << " did maintenance on your planes and will be available in " << toPush.getHours() << " hours\n";
-	aux.push(toPush);
+	Maintenance toPush;
+	int hours;
+	bool done = false;
 	while (!second.empty()) {
 		auxM = second.top();
-		second.pop();
-		int hours = auxM.getHours();
-		if (hours - 3 < 0) {
-			hours = 0;
+		if (second.top().getMaintenances() >= min && !done) {
+			hours = rand() % 9 + 15;
+			cout << "Company " << auxM.getName() << " did maintenance on your planes and will be available in " << hours << " hours.\n";
+			Maintenance toPush(hours, auxM.getMaintenances() + 1, auxM.getName());
+			done = true;
+
 		}
-		else {
-			hours -= 3;
+		else{
+			hours = auxM.getHours();
+			if (hours > 3)
+				hours -= 3;
+			else
+				hours = 0;
+			Maintenance toPush(hours, auxM.getMaintenances(), auxM.getName());
 		}
-		Maintenance toPush(hours, auxM.getMaintenances(), auxM.getName());
 		aux.push(toPush);
+		second.pop();
 	}
+	if (!done) {
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		cout << "No companies with minimum required maintenances\n";
+		return;
+	}
+
+	cout << aux.size() << endl ;
+
+	comp->clearMaintenance();
 	while (!aux.empty()) {
 		comp->addMaintenanceCompany(aux.top());
 		aux.pop();
@@ -199,7 +229,7 @@ void deleteDataMenu()
 			cin >> toDelSelection;
 			if (cin.fail() || toDelSelection < 0 || toDelSelection>4)
 			{
-				toDelSelection = true;
+				badInput = true;
 				cin.clear();
 				cin.ignore(1000, '\n');
 			}
