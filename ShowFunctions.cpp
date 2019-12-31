@@ -832,6 +832,7 @@ void showPersonMenuCompany()
 	int showSelect, showSelect1;
 	string type;
 	int counter;
+	vector <Employee*> emps;
 	if (comp->getEmployees().size() == 0)
 	{
 		cout << "There are no persons on the company yet!\n";
@@ -889,8 +890,12 @@ void showPersonMenuCompany()
 			{
 				if (x->getType() == "Pilot" && x->getEmployed() == showSelect1 - 1) {
 					counter++;
-					showPerson(x);
+					emps.push_back(x);
 				}
+			}
+			sort(emps.begin(), emps.end(), rule);
+			for (auto x : emps) {
+				showPerson(x);
 			}
 			if (counter == 0) {
 				cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -903,8 +908,12 @@ void showPersonMenuCompany()
 			{
 				if (x->getType() == "Flight Crew" && x->getEmployed() == showSelect1 - 1) {
 					counter++;
-					showPerson(x);
+					emps.push_back(x);
 				}
+			}
+			sort(emps.begin(), emps.end(), rule);
+			for (auto x : emps) {
+				showPerson(x);
 			}
 			if (counter == 0) {
 				cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -917,8 +926,12 @@ void showPersonMenuCompany()
 			{
 				if (x->getType() == "Admin" && x->getEmployed() == showSelect1 - 1) {
 					counter++;
-					showPerson(x);
+					emps.push_back(x);
 				}
+			}
+			sort(emps.begin(), emps.end(), rule);
+			for (auto x : emps) {
+				showPerson(x);
 			}
 			if (counter == 0) {
 				cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -931,8 +944,12 @@ void showPersonMenuCompany()
 			{
 				if (x->getType() == "Base Crew" && x->getEmployed() == showSelect1 - 1) {
 					counter++;
-					showPerson(x);
+					emps.push_back(x);
 				}
+			}
+			sort(emps.begin(), emps.end(), rule);
+			for (auto x : emps) {
+				showPerson(x);
 			}
 			if (counter == 0) {
 				cout << "-----------------------------------------------------------------------------------------------------\n";

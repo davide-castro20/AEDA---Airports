@@ -442,3 +442,7 @@ bool alreadyExists(string city) {
 			return true;
 	return false;
 }
+
+bool rule(const Employee* emp1, const Employee* emp2){
+	return emp1->getName() < emp2->getName();
+}

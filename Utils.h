@@ -157,3 +157,8 @@ int readCapacity();
 @brief Checks if city already exists
  */
 bool alreadyExists(string city);
+
+/**
+@brief sorts employees by name
+ */
+bool rule(const Employee* emp1, const Employee* emp2);
