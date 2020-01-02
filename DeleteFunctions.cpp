@@ -13,23 +13,24 @@ void deletePersonData()
 	string confirm;
 	bool completedDel=false;
 	vector<Employee*> employees;
-	for (auto i : comp->getEmployees())
-	{
-		if (i->getAirport() == currentAirport->getLocal().getCity())
-			employees.push_back(i);
-	}
-	if (employees.size() == 0) {
-		cout << "No employees on this airport!\n";
-		return;
-	}
+	
+	//if (employees.size() == 0) {
+	//	cout << "No employees on this airport!\n";
+	//	return;
+	//}
 	do {
-		for (auto i : comp->getEmployees())
-		{
-			if (i->getAirport() == currentAirport->getLocal().getCity())
-				employees.push_back(i);
-		}
 		do
 		{
+			employees.clear();
+			for (auto i : comp->getEmployees())
+			{
+				if (i->getAirport() == currentAirport->getLocal().getCity())
+					employees.push_back(i);
+			}
+			if (employees.size() == 0) {
+				cout << "No employees on this airport!\n";
+				return;
+			}
 			completedDel = false;
 			badInput = true;
 			cout << "-----------------------------------------------------------------------------------------------------\n";
