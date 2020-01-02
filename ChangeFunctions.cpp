@@ -109,6 +109,7 @@ void changePersonData()
 						employees.at(changeSelection)->setName(name);
 					}
 					if (selectionToChange == 2) {
+						Pilot* pilot = dynamic_cast<Pilot*>(employees.at(changeSelection));
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -121,7 +122,7 @@ void changePersonData()
 								cin.clear();
 								return;
 							}
-						} while (!employees.at(changeSelection)->setCategory(category));
+						} while (!pilot->setCategory(category));
 					}
 				}
 			}
@@ -167,12 +168,13 @@ void changePersonData()
 						employees.at(changeSelection)->setName(name);
 					}
 					if (selectionToChange == 2) {
+						FlightCrew* crew = dynamic_cast<FlightCrew*>(employees.at(changeSelection));
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the category you want to change to?\n";
 							getline(cin, category);
-						} while (!employees.at(changeSelection)->setCategory(category));
+						} while (!crew->setCategory(category));
 					}
 				}
 			}
@@ -222,20 +224,22 @@ void changePersonData()
 						employees.at(changeSelection)->setName(name);
 					}
 					if (selectionToChange == 2) {
+						Admin* admin = dynamic_cast<Admin*>(employees.at(changeSelection));
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the department you want to change to?\n";
 							getline(cin, department);
-						} while (!employees.at(changeSelection)->setDepartment(department));
+						} while (!admin->setDepartment(department));
 					}
 					if (selectionToChange == 3) {
+						Admin* admin = dynamic_cast<Admin*>(employees.at(changeSelection));
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
 							cout << "|What is the function you want to change to?\n";
 							getline(cin, function);
-						} while (!employees.at(changeSelection)->setFunction(function));
+						} while (!admin->setFunction(function));
 					}
 
 				}
@@ -285,6 +289,7 @@ void changePersonData()
 						employees.at(changeSelection)->setName(name);
 					}
 					if (selectionToChange == 2) {
+						BaseCrew* crew = dynamic_cast<BaseCrew*>(employees.at(changeSelection));
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -295,9 +300,10 @@ void changePersonData()
 								cin.clear();
 								return;
 							}
-						} while (!employees.at(changeSelection)->setCategory(category));
+						} while (!crew->setCategory(category));
 					}
 					if (selectionToChange == 3) {
+						BaseCrew* crew = dynamic_cast<BaseCrew*>(employees.at(changeSelection));
 						do
 						{
 							cout << "-----------------------------------------------------------------------------------------------------\n";
@@ -320,7 +326,7 @@ void changePersonData()
 							endSchedule = new Time(endTime[0], endTime[1]);
 							schedule = new Schedule(startSchedule, endSchedule);
 							
-						} while (!employees.at(changeSelection)->setSchedule(schedule));
+						} while (!crew->setSchedule(schedule));
 					}
 				}
 			}
@@ -584,16 +590,20 @@ void changeFlightData()
 
 									for (unsigned int j = 1; j <= employees.size(); j++) {
 
-										if (employees.at(j - 1)->getType() == "Pilot" && employees.at(j - 1)->isFree(&currentAirport->flights.at(changeSelection)->getPredictedSchedule())
-											&& employees.at(j - 1) != currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)
-											&& notInFlight(employees.at(j - 1), currentAirport->flights.at(changeSelection)))
-										{
-											for (size_t l = 0; l < employees.at(j - 1)->getPlanes().size(); l++)
+										if (employees.at(j - 1)->getType() == "Pilot") {
+											Pilot* pilot = dynamic_cast<Pilot*>(employees.at(j - 1));
+											if (pilot->isFree(&currentAirport->flights.at(changeSelection)->getPredictedSchedule())
+												&& employees.at(j - 1) != currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)
+												&& notInFlight(employees.at(j - 1), currentAirport->flights.at(changeSelection)))
 											{
-												if (employees.at(j - 1)->getPlanes().at(l) == currentAirport->flights.at(changeSelection)->getPlane())
+												Pilot* pilot = dynamic_cast<Pilot*>(employees.at(j - 1));
+												for (size_t l = 0; l < pilot->getPlanes().size(); l++)
 												{
-													freeEmp.push_back(employees.at(j - 1));
-													break;
+													if (pilot->getPlanes().at(l) == currentAirport->flights.at(changeSelection)->getPlane())
+													{
+														freeEmp.push_back(employees.at(j - 1));
+														break;
+													}
 												}
 											}
 										}
@@ -621,11 +631,13 @@ void changeFlightData()
 									{
 										wrongInput = false;
 										badInput = false;
-										freeEmp.at(newEmployeeSelection)->addFlight(currentAirport->flights.at(changeSelection));
+										Pilot* pilot2 = dynamic_cast<Pilot*>(freeEmp.at(newEmployeeSelection));
+										pilot2->addFlight(currentAirport->flights.at(changeSelection));
 										auxil.push_back(freeEmp.at(newEmployeeSelection));
-										for (size_t i = 0; i < currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().size(); i++)
-											if (currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().at(i)->getId() == currentAirport->flights.at(changeSelection)->getId())
-												currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->deleteFlight(currentAirport->flights.at(changeSelection)->getId());
+										Pilot * pilot = dynamic_cast<Pilot*>(currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection));
+										for (size_t i = 0; i < pilot->getFlights().size(); i++)
+											if (pilot->getFlights().at(i)->getId() == currentAirport->flights.at(changeSelection)->getId())
+												pilot->deleteFlight(currentAirport->flights.at(changeSelection)->getId());
 	
 									}
 								}
@@ -633,8 +645,11 @@ void changeFlightData()
 									cout << "-----------------------------------------------------------------------------------------------------\n";
 									cout << "|Select new Flight Crew \n";
 									for (unsigned int j = 1; j <= employees.size(); j++) {
-										if (employees.at(j - 1)->getType() == "Flight Crew" && employees.at(j - 1)->isFree(&currentAirport->flights.at(changeSelection)->getPredictedSchedule()) && employees.at(j - 1) != currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection) && notInFlight(employees.at(j - 1), currentAirport->flights.at(changeSelection)))
-											freeEmp.push_back(employees.at(j - 1));
+										if (employees.at(j - 1)->getType() == "Flight Crew") {
+											FlightCrew* crew = dynamic_cast<FlightCrew*>(employees.at(j - 1));
+											if (crew->isFree(&currentAirport->flights.at(changeSelection)->getPredictedSchedule()) && employees.at(j - 1) != currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection) && notInFlight(employees.at(j - 1), currentAirport->flights.at(changeSelection)))
+												freeEmp.push_back(employees.at(j - 1));
+										}
 									}
 									if (freeEmp.size() < 1) {
 										cout << "|Not enough free employees at the moment!" << endl;
@@ -659,11 +674,13 @@ void changeFlightData()
 									{
 										wrongInput = false;
 										badInput = false;
-										freeEmp.at(newEmployeeSelection)->addFlight(currentAirport->flights.at(changeSelection));
+										FlightCrew* crew2 = dynamic_cast<FlightCrew*>(freeEmp.at(newEmployeeSelection));
+										crew2->addFlight(currentAirport->flights.at(changeSelection));
 										auxil.push_back(freeEmp.at(newEmployeeSelection));
-										for (size_t i = 0; i < currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().size(); i++)
-											if (currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->getFlights().at(i)->getId() == currentAirport->flights.at(changeSelection)->getId())
-												currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection)->deleteFlight(currentAirport->flights.at(changeSelection)->getId());
+										FlightCrew* crew = dynamic_cast<FlightCrew*>(currentAirport->flights.at(changeSelection)->getEmployees().at(employeeSelection));
+										for (size_t i = 0; i < crew->getFlights().size(); i++)
+											if (crew->getFlights().at(i)->getId() == currentAirport->flights.at(changeSelection)->getId())
+												crew->deleteFlight(currentAirport->flights.at(changeSelection)->getId());
 
 									}
 								}
@@ -798,13 +815,17 @@ void addPilot(Flight* flight)
 	}*/
 	for (auto i : comp->getEmployees())
 	{
-		if ((i)->isFree(&flight->getPredictedSchedule()) && (i)->getType() == "Pilot")
+		if ((i)->getType() == "Pilot")
 		{
-			for (size_t l = 0; l < (i)->getPlanes().size(); l++)
+			Pilot* pilot = dynamic_cast<Pilot*>(i);
+			if (pilot->isFree(&flight->getPredictedSchedule()))
 			{
-				if ((i)->getPlanes().at(l) == flight->getPlane()) {
-					freePilots.push_back(i);
-					break;
+				for (size_t l = 0; l < pilot->getPlanes().size(); l++)
+				{
+					if (pilot->getPlanes().at(l) == flight->getPlane()) {
+						freePilots.push_back(i);
+							break;
+					}
 				}
 			}
 		}
@@ -837,7 +858,8 @@ void addPilot(Flight* flight)
 		{
 			badInput = false;
 			oldCrew = flight->getEmployees();
-			freePilots.at(addSel - 1)->addFlight(flight);
+			Pilot* pilot = dynamic_cast<Pilot*>(freePilots.at(addSel - 1));
+			pilot->addFlight(flight);
 			oldCrew.push_back(freePilots.at(addSel - 1));
 			flight->setCrew(oldCrew);
 			cout << "Pilot successfuly added to the flight!\n\n";
@@ -865,8 +887,11 @@ void addFlightCrew(Flight* flight)
 	}*/
 	for (auto i : comp->getEmployees())
 	{
-		if(i->isFree(&flight->getPredictedSchedule()) && i->getType() == "Flight Crew" && i->getAirport() == currentAirport->getLocal().getCity())
-			freeFlightCrew.push_back(i);
+		if (i->getType() == "Flight Crew" && i->getAirport() == currentAirport->getLocal().getCity()) {
+			FlightCrew* crew = dynamic_cast<FlightCrew*>(i);
+			if(crew->isFree(&flight->getPredictedSchedule()))
+				freeFlightCrew.push_back(i);
+		}
 	}
 	if (freeFlightCrew.size() == 0)
 	{
@@ -896,7 +921,8 @@ void addFlightCrew(Flight* flight)
 		{
 			badInput = false;
 			oldCrew = flight->getEmployees();
-			freeFlightCrew.at(addSel - 1)->addFlight(flight);
+			FlightCrew* crew = dynamic_cast<FlightCrew*>(freeFlightCrew.at(addSel - 1));
+			crew->addFlight(flight);
 			oldCrew.push_back(freeFlightCrew.at(addSel - 1));
 			flight->setCrew(oldCrew);
 			cout << "Flight crew member successfuly added to the flight!\n\n";
