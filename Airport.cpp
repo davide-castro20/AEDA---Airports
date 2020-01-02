@@ -68,6 +68,8 @@ int Airport::totalWaitingTime() const
 
 double Airport::meanWaitingTime() const
 {
+	if (planes.size() == 0)
+		return 0;
 	return this->totalWaitingTime()/planes.size();
 }
 
@@ -75,9 +77,9 @@ bool Airport::operator<(const Airport &rhs) const
 {
 	if (this->flights.size() == rhs.flights.size())
 	{
-		return this->meanWaitingTime() < rhs.meanWaitingTime();
+		return this->meanWaitingTime() > rhs.meanWaitingTime();
 	}
-	return this->flights.size() < rhs.flights.size();
+	return this->flights.size() > rhs.flights.size();
 }
 
 Local Airport::getLocal() const
