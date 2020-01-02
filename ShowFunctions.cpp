@@ -654,8 +654,11 @@ void showFlight(Flight* flight)
 	string plane;
 	string pilots;
 	string crew;
+	cout << flight->getEmployees().size() << endl;
 	size_t size1 = flight->getPilots().size();
+	cout << size1 << endl;
 	size_t size2 = flight->getCrew().size();
+	cout << size2 << endl;
 	string ready = "This flight is ready";
 	
 	if (flight->getPlane() == NULL)
