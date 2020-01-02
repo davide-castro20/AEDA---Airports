@@ -128,16 +128,17 @@ public:
 @brief Sets the airport's manager
 */
 	bool setManager(Manager manager) { this->manager = manager; return true; };
-
 	/**
-@brief Sets the airport's employee auxiliar vector
+@brief Returns the sum of all the planes waiting time
 */
-	//bool setEmployees(vector<Employee*> &employees) { this->employees = employees; return true; };
-
 	int totalWaitingTime() const;
-
+	/**
+@brief Returns the mean waiting time of the planes
+*/
 	double meanWaitingTime() const;
-	
+	/**
+@brief Overloaded Airport operator <. Compares two airports by the number of flights, and, if equal, by mean waiting time
+*/
 	bool operator<(const Airport &rhs) const;
 
 };

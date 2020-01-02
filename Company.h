@@ -8,6 +8,9 @@
 class Airport;
 class Maintenance;
 
+/**
+@brief Airports' set function
+*/
 struct AirportPtrCmp
 {
 	bool operator()(const Airport* lhs, const Airport* rhs) const;
@@ -20,8 +23,13 @@ struct AirportPtrCmp
 */
 struct employeeHash
 {
+	/**
+@brief Returns table insertion index
+*/
 	int operator() (const Employee* emp) const;
-
+	/**
+@brief Compares two employees by equality
+*/
 	bool operator() (const Employee* emp1, const Employee* emp2) const;
 };
 
@@ -80,7 +88,9 @@ public:
 @brief Removes all maintenace companies
 */
 	void clearMaintenance();
-
+	/**
+@brief Rearranges the airports in the binary tree
+*/
 	void sortAirports();
 };
 

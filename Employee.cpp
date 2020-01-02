@@ -273,6 +273,7 @@ double BaseCrew::calcSalary() {
 
 bool Pilot::isFree(FlightSched *check)
 {
+	if (flights.size() == 0)
 	for (size_t i = 0; i < flights.size(); i++)
 	{
 		if (check->getDepartureDate() < flights.at(i)->getPredictedSchedule().getDepartureDate() && flights.at(i)->getPredictedSchedule().getDepartureDate() < check->getArrivalDate())

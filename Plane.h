@@ -18,6 +18,9 @@ class capacityError
 @brief Saves the capacity which caused the error
 */
 public:
+	/**
+@brief Planes capacity
+*/
 	int inputCapacity;
 	capacityError(int inputCapacity) { this->inputCapacity = inputCapacity;}
 	/**
@@ -49,7 +52,9 @@ private:
 @brief Planes' expenses
 */
 	double expenses;
-
+	/**
+@brief Plane's mean waiting time
+*/
 	int meanTime;
 public:
 	Plane(string type, int capacity, vector<Flight*> &flights);

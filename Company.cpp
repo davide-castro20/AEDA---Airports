@@ -62,6 +62,7 @@ Company::Company(string airports_file, string maintenance_file)
 	ifstream airport_data;
 	airport_data.open(airports_file);
 	counter = 0;
+	readOldEmployees(old_employees, this->employees, "");
 	if (airport_data.is_open())
 	{
 		while (getline(airport_data, linha))
@@ -91,7 +92,7 @@ Company::Company(string airports_file, string maintenance_file)
 			case 6:
 				employees = readEmployees(linha, this->employees, flights, planes, city);
 				employeetxt = linha;
-				readOldEmployees(old_employees, this->employees, city);
+
 				break;
 			case 7:
 				manager.name = linha;

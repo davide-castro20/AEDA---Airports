@@ -25,7 +25,12 @@ void deleteFlightData();
 */
 void deleteAirportData();
 
-//ADD TO UML
+/**
+@brief Deletes a manager
+*/
 void deleteManager();
 
+/**
+@brief Deletes a maintenence company
+*/
 void deleteMaintenence();

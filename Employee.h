@@ -41,66 +41,7 @@ public:
 @brief Return the employee's airport's name
 */
 	string getAirport() const;
-	/**
-@brief Return the employee's category
-*/
-	// virtual string getCategory() const { return "Non existant for this employee"; }; //returns none if category is non existant
-	/**
-@brief Return the planes that the employee will board (empty if the employee isn't a flight crew or pilot)
-*/
-	//virtual vector <Plane*> getPlanes() const { return {}; }; //returns empty vector if non existant
-	/**
-@brief Return the flights that the employee will make (empty if the employee isn't a flight crew or pilot)
-*/
-	//virtual vector <Flight*> getFlights() const { return {}; }; //returns empty vector if non existant
-	/**
-@brief Return the departement of the employee
-*/
-	//virtual string getDepartment() const { return "Non existant for this employee"; }; //returns none if department is non existant
-	/**
-@brief Return the function that the employee realises
-*/
-	//virtual string getFunction() const { return "Non existant for this employee"; }; //returns none if function is non existant
-	/**
-@brief Returns the employee's work schedule
-*/
-	//virtual Schedule* getSchedule() const { Schedule *schedule = NULL; return schedule; };
-	/**
-@brief Sets the employee's category
-*/
-	//virtual bool setCategory(string category) { return true; };
-	/**
-@brief Sets the employee's flights
-*/
-	// virtual bool setFlights(vector<Flight*> &flights) { return true; };
-	/**
-@brief Sets the employee's schedule
-*/
-	// virtual bool setSchedule(Schedule *schedule) { return true; };
-	/**
-@brief Sets the employee's departement
-*/
-	//virtual bool setDepartment(string department) { return true; };
-	/**
-@brief Sets the employee's function
-*/
-	//virtual bool setFunction(string function) { return true; };
-	/**
-@brief Creates if employee is free on a certain flight schedule
-*/
-	//virtual bool isFree(FlightSched *check) { return false; };
-	/**
-@brief Adds a fligth to the employee (doesn't do anything if the employee isn't a pilot or flight crew)
-*/
-	//virtual void addFlight(Flight* flight) { return; };
-	/**
-@brief Deletes a fligth from the employee (doesn't do anything if the employee isn't a pilot or flight crew)
-*/
-	//virtual void deleteFlight(int id) { return; };
-	/**
-@brief Returns the plane types the employee can board(emplty string if the employee isn't a pilot or flight crew)
-*/
-	//virtual string getPlaneTypes() const { return ""; };
+	
 	/**
 @brief Sets the employee's name
 */
@@ -117,6 +58,10 @@ public:
 @brief Sets the employee's status (employed or not employed)
 */
 	bool setEmployed(bool employed) { this->employed = employed; return true; }
+	/**
+@brief Sets the employee's airport name
+*/
+	bool setAirport(string airport) { this->airport = airport; return true; }
 	/**
 @brief Calculates the employee's departement
 */

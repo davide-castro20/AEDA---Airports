@@ -53,8 +53,12 @@ void showPlane(Plane* plane);
 @brief Shows planes after filtering by category
 */
 void showPlaneByCat();
-
+/**
+@brief Shows a person in the company by name chosen by user
+*/
 void showByNameCompany();
-
+/**
+@brief Menu to select people in the company to show
+*/
 void showPersonMenuCompany();
 

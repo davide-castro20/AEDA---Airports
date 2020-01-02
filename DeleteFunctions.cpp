@@ -93,11 +93,14 @@ void deletePersonData()
 						freeEmp.clear();
 						for (size_t j = 0; j < employees.size(); j++)
 						{
+							
 							Pilot* pilot2 = dynamic_cast<Pilot*>(employees.at(j));
-							if (pilot2->isFree(&pilot->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && employees.at(j)->getType() == "Pilot") {
+							if (employees.at(j)->getType() == "Pilot" && pilot2->isFree(&pilot->getFlights().at(i)->getPredictedSchedule()) && j != delSelection) {
 								freeEmp.push_back(employees.at(j));
 							}
+							
 						}
+						
 						if (freeEmp.size() > 0) {
 							do {
 								cout << "Please select another pilot to do the flight: " << pilot->getFlights().at(i)->getDestination() << " which departs at " << pilot->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
@@ -132,7 +135,7 @@ void deletePersonData()
 						for (size_t j = 0; j < employees.size(); j++)
 						{
 							FlightCrew* crew2 = dynamic_cast<FlightCrew*>(employees.at(j));
-							if (crew2->isFree(&crew->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && employees.at(j)->getType() == "Flight Crew") {
+							if (employees.at(j)->getType() == "Flight Crew" && crew2->isFree(&crew->getFlights().at(i)->getPredictedSchedule()) && j != delSelection ) {
 								freeEmp.push_back(employees.at(j));
 							}
 						}
@@ -162,6 +165,7 @@ void deletePersonData()
 					}
 				}
 				employees.at(delSelection)->setEmployed(false);
+				employees.at(delSelection)->setAirport("");
 				badInput = false;
 				completedDel = true;
 
