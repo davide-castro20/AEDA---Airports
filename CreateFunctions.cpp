@@ -1166,14 +1166,17 @@ void createFlight()
 			}*/
 			for (auto i : comp->getEmployees())
 			{
-				if (i->getType() == "Pilot" && i->getAirport() == currentAirport->getLocal().getCity() && i->isFree(predictedSchedule))
+				if (i->getType() == "Pilot" && i->getAirport() == currentAirport->getLocal().getCity())
 				{
-					for (size_t k = 0; k < (i)->getPlanes().size(); k++)
-					{
-						if ((i)->getPlanes().at(k) == plane)
+					Pilot* pilot = dynamic_cast<Pilot*>(i);
+					if (pilot->isFree(predictedSchedule)) {
+						for (size_t k = 0; k < pilot->getPlanes().size(); k++)
 						{
-							freeEmp.push_back(i);
-							break;
+							if (pilot->getPlanes().at(k) == plane)
+							{
+								freeEmp.push_back(i);
+								break;
+							}
 						}
 					}
 				}
@@ -1215,8 +1218,10 @@ void createFlight()
 					return;
 				}
 			}
-			for (size_t j = 1; j < freeEmp.size() + 1; j++)
-				cout << j << ") Name: " << freeEmp.at(j - 1)->getName() << "; Category: " << freeEmp.at(j - 1)->getCategory() << endl;
+			for (size_t j = 1; j < freeEmp.size() + 1; j++) {
+				Pilot* pilot = dynamic_cast<Pilot*>(freeEmp.at(j - 1));
+				cout << j << ") Name: " << pilot->getName() << "; Category: " << pilot->getCategory() << endl;
+			}
 			do
 			{
 				cout << endl << "Choose 2 of the free pilots above (first, second)" << endl;
@@ -1281,10 +1286,13 @@ void createFlight()
 			}*/
 			for (auto i : comp->getEmployees())
 			{
-				if (i->getType() == "Flight Crew" && i->getAirport() == currentAirport->getLocal().getCity() && i->isFree(predictedSchedule))
+				if (i->getType() == "Flight Crew" && i->getAirport() == currentAirport->getLocal().getCity())
 				{
-					freeEmp.push_back(i);
-					break;
+					FlightCrew* crew = dynamic_cast<FlightCrew*>(i);
+					if (crew->isFree(predictedSchedule)) {
+						freeEmp.push_back(i);
+						break;
+					}
 				}
 			}
 			if (freeEmp.size() < 2)
@@ -1325,8 +1333,10 @@ void createFlight()
 				}
 				
 			}
-			for (size_t j = 1; j < freeEmp.size() + 1; j++)
-				cout << j << ") Name: " << freeEmp.at(j-1)->getName() << "; Category: " << freeEmp.at(j - 1)->getCategory() << endl;
+			for (size_t j = 1; j < freeEmp.size() + 1; j++) {
+				FlightCrew* crew = dynamic_cast<FlightCrew*>(freeEmp.at(j - 1));
+				cout << j << ") Name: " << crew->getName() << "; Category: " << crew->getCategory() << endl;
+			}
 
 			cout << endl << "Choose 2 of the free employees above (first, second)" << endl;
 			getline(cin, read);
@@ -1382,7 +1392,14 @@ void createFlight()
 		currentAirport->flights.push_back(newFlight);
 		for (size_t i = 0; i < crew.size(); i++)
 		{
-			crew.at(i)->addFlight(newFlight);
+			if (crew.at(i)->getType() == "Pilot") {
+				Pilot* pilot = dynamic_cast<Pilot*>(crew.at(i));
+				pilot->addFlight(newFlight);
+			}
+			else if (crew.at(i)->getType() == "Flight Crew") {
+				FlightCrew* crew2 = dynamic_cast<FlightCrew*>(crew.at(i));
+				crew2->addFlight(newFlight);
+			}
 		}
 		cout << endl << "Flight successfuly created!" << endl;
 		

@@ -190,9 +190,15 @@ vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT
 				flightsAux = convertIdToFlight(flightIds, flights);
 				birthDate = new Date(date);
 				employee = new Pilot(name, birthDate, category, planesAux, flightsAux, city, true);
-				//employees.push_back(employee);
+				employees.push_back(employee);
 				employeesT.insert(employee);
-
+				
+				/*for (auto i : flightsAux)
+				{
+					i->setCrewMemb(employee);
+					cout << "Size: " << i->getEmployees().size() << endl;
+				}
+*/
 				getline(employees_data, linha);
 				planeTypes.clear();
 				flightIds.clear();
@@ -214,10 +220,18 @@ vector<Employee*> readEmployees(string employees_file, tabHEmployees &employeesT
 					else
 						flightIds.push_back(stoi(flightIdsString.at(i)));
 				flightsAux = convertIdToFlight(flightIds, flights);
+				
 				birthDate = new Date(date);
 				employee = new FlightCrew(name, birthDate, category, flightsAux, city, true);
-				//employees.push_back(employee);
+				employees.push_back(employee);
 				employeesT.insert(employee);
+
+			/*	for (auto i : flightsAux)
+				{
+					i->setCrewMemb(employee);
+					cout << "Size: " << i->getEmployees().size() << endl;
+				}
+				*/
 				getline(employees_data, linha);
 				flightIds.clear();
 				flightIdsString.clear();

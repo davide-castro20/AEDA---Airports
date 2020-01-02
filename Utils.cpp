@@ -9,21 +9,37 @@ double inBetween(Employee* obj, int month1, int month2, int year1, int year2)
 	int nMonths = month2 - month1 + (year2 - year1) * 12;
 	if (nMonths < 0)
 		return 0;
-	vector<Flight*> flights = {}, copyFlights = obj->getFlights();
-	Date date1(1, month1, year1);
-	Date date2(days(year2, month2), month2, year2);
-	for (size_t i = 0; i < obj->getFlights().size(); i++)
-		if (checkBetweenDates(date1, date2, obj->getFlights().at(i)->getPredictedSchedule().getDepartureDate()))
-			flights.push_back(obj->getFlights().at(i));
-	obj->setFlights(flights);
-	total = obj->calcSalary();
-	obj->setFlights(copyFlights);
+	if (obj->getType() == "Pilot") {
+		Pilot* pilot = dynamic_cast<Pilot*>(obj);
+		vector<Flight*> flights = {}, copyFlights = pilot->getFlights();
+		Date date1(1, month1, year1);
+		Date date2(days(year2, month2), month2, year2);
+		for (size_t i = 0; i < pilot->getFlights().size(); i++)
+			if (checkBetweenDates(date1, date2, pilot->getFlights().at(i)->getPredictedSchedule().getDepartureDate()))
+				flights.push_back(pilot->getFlights().at(i));
+		pilot->setFlights(flights);
+		total = pilot->calcSalary();
+		pilot->setFlights(copyFlights);
 
-	if (nMonths > 0) {
-		if (obj->getType() == "Flight Crew")
-			total += 800 * (nMonths - 1);
-		else if (obj->getType() == "Pilot")
+		if (nMonths > 0) {
 			total += 1000 * (nMonths - 1);
+		}
+	}
+	else if (obj->getType() == "Flight Crew") {
+		FlightCrew* crew = dynamic_cast<FlightCrew*>(obj);
+		vector<Flight*> flights = {}, copyFlights = crew->getFlights();
+		Date date1(1, month1, year1);
+		Date date2(days(year2, month2), month2, year2);
+		for (size_t i = 0; i < crew->getFlights().size(); i++)
+			if (checkBetweenDates(date1, date2, crew->getFlights().at(i)->getPredictedSchedule().getDepartureDate()))
+				flights.push_back(crew->getFlights().at(i));
+		crew->setFlights(flights);
+		total = crew->calcSalary();
+		crew->setFlights(copyFlights);
+
+		if (nMonths > 0) {
+			total += 800 * (nMonths - 1);
+		}
 	}
 	return total;
 }
@@ -405,10 +421,22 @@ vector <Flight*> addEmployeeToFlight(vector<Flight*>flights,vector<Employee*> em
 	vector<Employee*> aux;
 	for (size_t i = 0; i < flights.size(); i++) {
 		for (size_t j = 0; j < employees.size(); j++) {
-			for (size_t k = 0; k < employees.at(j)->getFlights().size(); k++) {
-				if (flights.at(i)->getId() == employees.at(j)->getFlights().at(k)->getId()) {
-					aux.push_back(employees.at(j));
+			if (employees.at(j)->getType() == "Pilot") {
+				Pilot* pilot = dynamic_cast<Pilot*>(employees.at(j));
+			for (size_t k = 0; k < pilot->getFlights().size(); k++) {
+				if (flights.at(i)->getId() == pilot->getFlights().at(k)->getId()) {
+					aux.push_back(pilot);
 					break;
+				}
+			}
+		}
+			else if (employees.at(j)->getType() == "Flight Crew") {
+				FlightCrew* crew = dynamic_cast<FlightCrew*>(employees.at(j));
+				for (size_t k = 0; k < crew->getFlights().size(); k++) {
+					if (flights.at(i)->getId() == crew->getFlights().at(k)->getId()) {
+						aux.push_back(crew);
+						break;
+					}
 				}
 			}
 		}

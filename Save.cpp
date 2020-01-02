@@ -202,41 +202,44 @@ void SaveEmployees() {
 			{
 				if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == true) {
 					string flights = "";
-					newEmployeesFile << (*x)->getType() << endl;
-					newEmployeesFile << (*x)->getName() << endl;
-					newEmployeesFile << (*x)->getDate() << endl;
-					newEmployeesFile << (*x)->getCategory() << endl;
-					newEmployeesFile << (*x)->getPlaneTypes() << endl;
+					Pilot* pilot = dynamic_cast<Pilot*>(*x);
+					newEmployeesFile << pilot->getType() << endl;
+					newEmployeesFile << pilot->getName() << endl;
+					newEmployeesFile << pilot->getDate() << endl;
+					newEmployeesFile << pilot->getCategory() << endl;
+					newEmployeesFile << pilot->getPlaneTypes() << endl;
 					newEmployeesFile << flights << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
 				else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == true) {
 					string flights = "";
-
-					newEmployeesFile << (*x)->getType() << endl;
-					newEmployeesFile << (*x)->getName() << endl;
-					newEmployeesFile << (*x)->getDate() << endl;
-					newEmployeesFile << (*x)->getCategory() << endl;
+					FlightCrew* crew = dynamic_cast<FlightCrew*>(*x);
+					newEmployeesFile << crew->getType() << endl;
+					newEmployeesFile << crew->getName() << endl;
+					newEmployeesFile << crew->getDate() << endl;
+					newEmployeesFile << crew->getCategory() << endl;
 					newEmployeesFile << flights << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
 				else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == true) {
-					newEmployeesFile << (*x)->getType() << endl;
-					newEmployeesFile << (*x)->getName() << endl;
-					newEmployeesFile << (*x)->getDate() << endl;
-					newEmployeesFile << (*x)->getDepartment() << endl;
-					newEmployeesFile << (*x)->getFunction() << endl;
+					Admin* admin = dynamic_cast<Admin*>(*x);
+					newEmployeesFile << admin->getType() << endl;
+					newEmployeesFile << admin->getName() << endl;
+					newEmployeesFile << admin->getDate() << endl;
+					newEmployeesFile << admin->getDepartment() << endl;
+					newEmployeesFile << admin->getFunction() << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
 				else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == true) {
-					newEmployeesFile << (*x)->getType() << endl;
-					newEmployeesFile << (*x)->getName() << endl;
-					newEmployeesFile << (*x)->getDate() << endl;
-					newEmployeesFile << (*x)->getCategory() << endl;
-					newEmployeesFile << (*x)->getSchedule()->getStartHour().getHours() << endl;
-					newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
-					newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
-					newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
+					BaseCrew* crew = dynamic_cast<BaseCrew*>(*x);
+					newEmployeesFile << crew->getType() << endl;
+					newEmployeesFile << crew->getName() << endl;
+					newEmployeesFile << crew->getDate() << endl;
+					newEmployeesFile << crew->getCategory() << endl;
+					newEmployeesFile << crew->getSchedule()->getStartHour().getHours() << endl;
+					newEmployeesFile << crew->getSchedule()->getStartHour().getMinutes() << endl;
+					newEmployeesFile << crew->getSchedule()->getEndHour().getHours() << endl;
+					newEmployeesFile << crew->getSchedule()->getEndHour().getMinutes() << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
 			}
@@ -256,42 +259,45 @@ void SaveOldEmployees() {
 		newEmployeesFile.open("newEmployees.txt");
 		
 		if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == false) {
-			string flights = "";
-			newEmployeesFile << (*x)->getType() << endl;
-			newEmployeesFile << (*x)->getName() << endl;
-			newEmployeesFile << (*x)->getDate() << endl;
-			newEmployeesFile << (*x)->getCategory() << endl;
-			newEmployeesFile << (*x)->getPlaneTypes() << endl;
+			string flights = ""; 
+			Pilot* pilot = dynamic_cast<Pilot*>(*x);
+			newEmployeesFile << pilot->getType() << endl;
+			newEmployeesFile << pilot->getName() << endl;
+			newEmployeesFile << pilot->getDate() << endl;
+			newEmployeesFile << pilot->getCategory() << endl;
+			newEmployeesFile << pilot->getPlaneTypes() << endl;
 			newEmployeesFile << flights << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
 		else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == false) {
 			string flights = "";
-
-			newEmployeesFile << (*x)->getType() << endl;
-			newEmployeesFile << (*x)->getName() << endl;
-			newEmployeesFile << (*x)->getDate() << endl;
-			newEmployeesFile << (*x)->getCategory() << endl;
+			FlightCrew* crew = dynamic_cast<FlightCrew*>(*x);
+			newEmployeesFile << crew->getType() << endl;
+			newEmployeesFile << crew->getName() << endl;
+			newEmployeesFile << crew->getDate() << endl;
+			newEmployeesFile << crew->getCategory() << endl;
 			newEmployeesFile << flights << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
 		else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == false) {
-			newEmployeesFile << (*x)->getType() << endl;
-			newEmployeesFile << (*x)->getName() << endl;
-			newEmployeesFile << (*x)->getDate() << endl;
-			newEmployeesFile << (*x)->getDepartment() << endl;
-			newEmployeesFile << (*x)->getFunction() << endl;
+			Admin* admin = dynamic_cast<Admin*>(*x);
+			newEmployeesFile << admin->getType() << endl;
+			newEmployeesFile << admin->getName() << endl;
+			newEmployeesFile << admin->getDate() << endl;
+			newEmployeesFile << admin->getDepartment() << endl;
+			newEmployeesFile << admin->getFunction() << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
 		else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == false) {
-			newEmployeesFile << (*x)->getType() << endl;
-			newEmployeesFile << (*x)->getName() << endl;
-			newEmployeesFile << (*x)->getDate() << endl;
-			newEmployeesFile << (*x)->getCategory() << endl;
-			newEmployeesFile << (*x)->getSchedule()->getStartHour().getHours() << endl;
-			newEmployeesFile << (*x)->getSchedule()->getStartHour().getMinutes() << endl;
-			newEmployeesFile << (*x)->getSchedule()->getEndHour().getHours() << endl;
-			newEmployeesFile << (*x)->getSchedule()->getEndHour().getMinutes() << endl;
+			BaseCrew* crew = dynamic_cast<BaseCrew*>(*x);
+			newEmployeesFile << crew->getType() << endl;
+			newEmployeesFile << crew->getName() << endl;
+			newEmployeesFile << crew->getDate() << endl;
+			newEmployeesFile << crew->getCategory() << endl;
+			newEmployeesFile << crew->getSchedule()->getStartHour().getHours() << endl;
+			newEmployeesFile << crew->getSchedule()->getStartHour().getMinutes() << endl;
+			newEmployeesFile << crew->getSchedule()->getEndHour().getHours() << endl;
+			newEmployeesFile << crew->getSchedule()->getEndHour().getMinutes() << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
 	}

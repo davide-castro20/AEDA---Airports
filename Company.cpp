@@ -91,7 +91,7 @@ Company::Company(string airports_file, string maintenance_file)
 			case 6:
 				employees = readEmployees(linha, this->employees, flights, planes, city);
 				employeetxt = linha;
-				readOldEmployees(old_employees, this->employees, city);
+				//readOldEmployees(old_employees, this->employees, city);
 				break;
 			case 7:
 				manager.name = linha;

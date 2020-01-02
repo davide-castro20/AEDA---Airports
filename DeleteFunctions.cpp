@@ -87,17 +87,19 @@ void deletePersonData()
 				if (employees.at(delSelection)->getType() == "Pilot")
 				{
 					vector<Employee*> freeEmp;
-					for (size_t i = 0; i < employees.at(delSelection)->getFlights().size(); i++) {
+					Pilot* pilot = dynamic_cast<Pilot*>(employees.at(delSelection));
+					for (size_t i = 0; i < pilot->getFlights().size(); i++) {
 						freeEmp.clear();
 						for (size_t j = 0; j < employees.size(); j++)
 						{
-							if (employees.at(j)->isFree(&employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && employees.at(j)->getType() == "Pilot") {
+							Pilot* pilot2 = dynamic_cast<Pilot*>(employees.at(j));
+							if (pilot2->isFree(&pilot->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && employees.at(j)->getType() == "Pilot") {
 								freeEmp.push_back(employees.at(j));
 							}
 						}
 						if (freeEmp.size() > 0) {
 							do {
-								cout << "Please select another pilot to do the flight: " << employees.at(delSelection)->getFlights().at(i)->getDestination() << " which departs at " << employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
+								cout << "Please select another pilot to do the flight: " << pilot->getFlights().at(i)->getDestination() << " which departs at " << pilot->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
 								for (size_t k = 1; k < freeEmp.size() + 1; k++)
 									cout << k << ") " << freeEmp.at(k-1)->getName() <<  endl;
 								cin >> pilotToSwap;
@@ -110,29 +112,32 @@ void deletePersonData()
 								else
 									badInput = false;
 							} while (badInput);
-							freeEmp.at(pilotToSwap-1)->addFlight(employees.at(delSelection)->getFlights().at(i));
-							employees.at(delSelection)->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap-1));
+							Pilot* pilot3 = dynamic_cast<Pilot*>(freeEmp.at(pilotToSwap - 1));
+							pilot3->addFlight(pilot->getFlights().at(i));
+							pilot->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap-1));
 						}
 						else {
 							cout << "There are no free pilots for this flight.\n";
 						}
-						employees.at(delSelection)->getFlights().at(i)->deleteCrew(employees.at(delSelection));
+						pilot->getFlights().at(i)->deleteCrew(employees.at(delSelection));
 					}
 				}
 				else if (employees.at(delSelection)->getType() == "Flight Crew")
 				{
 					vector<Employee*> freeEmp;
-					for (size_t i = 0; i < employees.at(delSelection)->getFlights().size(); i++) {
+					FlightCrew* crew = dynamic_cast<FlightCrew*>(employees.at(delSelection));
+					for (size_t i = 0; i <crew->getFlights().size(); i++) {
 						freeEmp.clear();
 						for (size_t j = 0; j < employees.size(); j++)
 						{
-							if (employees.at(j)->isFree(&employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && employees.at(j)->getType() == "Flight Crew") {
+							FlightCrew* crew2 = dynamic_cast<FlightCrew*>(employees.at(j));
+							if (crew2->isFree(&crew->getFlights().at(i)->getPredictedSchedule()) && j != delSelection && employees.at(j)->getType() == "Flight Crew") {
 								freeEmp.push_back(employees.at(j));
 							}
 						}
 						if (freeEmp.size() > 0) {
 							do {
-								cout << "Please select another flight crew to do the flight: " << employees.at(delSelection)->getFlights().at(i)->getDestination() << " which departs at " << employees.at(delSelection)->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
+								cout << "Please select another flight crew to do the flight: " <<crew->getFlights().at(i)->getDestination() << " which departs at " <<crew->getFlights().at(i)->getPredictedSchedule().getDepartureDate() << endl;
 								for (size_t k = 1; k < freeEmp.size() + 1; k++)
 									cout << k << ") " << freeEmp.at(k - 1)->getName() << endl;
 								cin >> pilotToSwap;
@@ -145,9 +150,10 @@ void deletePersonData()
 								else
 									badInput = false;
 							} while (badInput);
-							freeEmp.at(pilotToSwap - 1)->addFlight(employees.at(delSelection)->getFlights().at(i));
-							employees.at(delSelection)->getFlights().at(i)->deleteCrew(employees.at(delSelection));
-							employees.at(delSelection)->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap - 1));
+							FlightCrew* crew3 = dynamic_cast<FlightCrew*>(freeEmp.at(pilotToSwap - 1));
+							crew3->addFlight(crew->getFlights().at(i));
+							crew->getFlights().at(i)->deleteCrew(employees.at(delSelection));
+							crew->getFlights().at(i)->setCrewMemb(freeEmp.at(pilotToSwap - 1));
 						}
 						else {
 							cout << "There are no free flight crew members for this flight.\n";
@@ -360,12 +366,23 @@ void deleteFlightData()
 				}*/
 				for (auto i : comp->getEmployees())
 				{
-					if (i->getAirport() == currentAirport->getLocal().getCity())
+					if (i->getAirport() == currentAirport->getLocal().getCity() && i->getType() == "Pilot")
 					{
-						for (size_t j = 0; j < (i)->getFlights().size(); j++)
-							if ((i)->getFlights().at(j)->getId() == currentAirport->flights.at(delSelection)->getId())
+						Pilot* pilot = dynamic_cast<Pilot*>(i);
+						for (size_t j = 0; j < pilot->getFlights().size(); j++)
+							if (pilot->getFlights().at(j)->getId() == currentAirport->flights.at(delSelection)->getId())
 							{
-								(i)->deleteFlight(currentAirport->flights.at(delSelection)->getId());
+								pilot->deleteFlight(currentAirport->flights.at(delSelection)->getId());
+								break;
+							}
+					}
+					else if (i->getAirport() == currentAirport->getLocal().getCity() && i->getType() == "Flight Crew")
+					{
+						FlightCrew* crew = dynamic_cast<FlightCrew*>(i);
+						for (size_t j = 0; j < crew->getFlights().size(); j++)
+							if (crew->getFlights().at(j)->getId() == currentAirport->flights.at(delSelection)->getId())
+							{
+								crew->deleteFlight(currentAirport->flights.at(delSelection)->getId());
 								break;
 							}
 					}

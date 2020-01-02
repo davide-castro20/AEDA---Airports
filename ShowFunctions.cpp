@@ -433,64 +433,65 @@ void showPerson(Employee* emp)
 	cout << '|' << string(98, '-') << '|' << endl;
 	if (type == "Pilot")
 	{
-	
+		emp->calcSalary();
+		Pilot* pilot = dynamic_cast<Pilot*>(emp);
 		string flights;
-		size_t size = emp->getFlights().size();
+		size_t size = pilot->getFlights().size();
 		if (size > 0)
 		{
 			for (size_t i = 0; i < size; i++)
 			{
 				if (i < (size - 1))
-					flights += to_string(emp->getFlights().at(i)->getId()) + ", ";
+					flights += to_string(pilot->getFlights().at(i)->getId()) + ", ";
 				else
-					flights += to_string(emp->getFlights().at(i)->getId());
+					flights += to_string(pilot->getFlights().at(i)->getId());
 			}
 		}
 		else
 			flights = "None";
 		
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + emp->getName() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + pilot->getName() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << emp->getDate().getDate() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << pilot->getDate().getDate() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << emp->getCategory() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << pilot->getCategory() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + pilot->getAirport() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Plane types " << "| " << left << setw(76) << emp->getPlaneTypes() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Plane types " << "| " << left << setw(76) << pilot->getPlaneTypes() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Flights " << "| " << left << setw(76) << flights << '|' << endl;
 	}
 	else if (type == "Flight Crew")
 	{
 		emp->calcSalary();
-
+		FlightCrew* crew = dynamic_cast<FlightCrew*>(emp);
 		string flights;
-		size_t size = emp->getFlights().size();
+		size_t size = crew->getFlights().size();
 		if (size > 0)
 		{
 			for (size_t i = 0; i < size; i++)
 			{
 				if (i < (size - 1))
-					flights += to_string(emp->getFlights().at(i)->getId()) + ", ";
+					flights += to_string(crew->getFlights().at(i)->getId()) + ", ";
 				else
-					flights += to_string(emp->getFlights().at(i)->getId());
+					flights += to_string(crew->getFlights().at(i)->getId());
 			}
 		}
 		else
 			flights = "None";
 	
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + emp->getName() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + crew->getName() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << emp->getDate().getDate() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << crew->getDate().getDate() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << emp->getCategory() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << crew->getCategory() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + crew->getAirport() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
@@ -499,36 +500,36 @@ void showPerson(Employee* emp)
 	else if (type == "Admin")
 	{
 		emp->calcSalary();
-
+		Admin* admin = dynamic_cast<Admin*>(emp);
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + emp->getName() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + admin->getName() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << emp->getDate().getDate() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << admin->getDate().getDate() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + admin->getAirport() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Department " << "| " << left << setw(76) << emp->getDepartment() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Department " << "| " << left << setw(76) << admin->getDepartment() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Function " << "| " << left << setw(76) << emp->getFunction() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Function " << "| " << left << setw(76) << admin->getFunction() << '|' << endl;
 	}
 	else if (type == "Base Crew")
 	{
 		emp->calcSalary();
-
+		BaseCrew* crew = dynamic_cast<BaseCrew*>(emp);
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + emp->getName() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Name " << '|' << left << setw(77) << ' ' + crew->getName() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << emp->getDate().getDate() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Birth Date " << "| " << left << setw(76) << crew->getDate().getDate() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << emp->getCategory() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Category " << "| " << left << setw(76) << crew->getCategory() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + emp->getAirport() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Airport " << '|' << left << setw(77) << ' ' + crew->getAirport() << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
 		cout << '|' << right << setfill(' ') << setw(20) << "Salary " << "| " << left << setw(76) << salary << '|' << endl;
 		cout << '|' << string(98, '-') << '|' << endl;
-		cout << '|' << right << setfill(' ') << setw(20) << "Schedule " << "| " << left << setw(76) << emp->getSchedule()->getSched() << '|' << endl;
+		cout << '|' << right << setfill(' ') << setw(20) << "Schedule " << "| " << left << setw(76) << crew->getSchedule()->getSched() << '|' << endl;
 	}
 }
 
@@ -654,8 +655,11 @@ void showFlight(Flight* flight)
 	string plane;
 	string pilots;
 	string crew;
+	cout << flight->getEmployees().size() << endl;
 	size_t size1 = flight->getPilots().size();
+	cout << size1 << endl;
 	size_t size2 = flight->getCrew().size();
+	cout << size2 << endl;
 	string ready = "This flight is ready";
 	
 	if (flight->getPlane() == NULL)
@@ -1014,7 +1018,7 @@ void showPersonMenuCompany()
 			counter = 0;
 			for (auto x : comp->getEmployees())
 			{
-				if (x->getType() == "Pilot" && x->getEmployed() == showSelect1 - 1) {
+				if (x->getType() == "Pilot" && (int)x->getEmployed() == showSelect1 - 1) {
 					counter++;
 					emps.push_back(x);
 				}
@@ -1032,7 +1036,7 @@ void showPersonMenuCompany()
 			counter = 0;
 			for (auto x : comp->getEmployees())
 			{
-				if (x->getType() == "Flight Crew" && x->getEmployed() == showSelect1 - 1) {
+				if (x->getType() == "Flight Crew" && (int)x->getEmployed() == showSelect1 - 1) {
 					counter++;
 					emps.push_back(x);
 				}
@@ -1050,7 +1054,7 @@ void showPersonMenuCompany()
 			counter = 0;
 			for (auto x : comp->getEmployees())
 			{
-				if (x->getType() == "Admin" && x->getEmployed() == showSelect1 - 1) {
+				if (x->getType() == "Admin" && (int)x->getEmployed() == showSelect1 - 1) {
 					counter++;
 					emps.push_back(x);
 				}
@@ -1068,7 +1072,7 @@ void showPersonMenuCompany()
 			counter = 0;
 			for (auto x : comp->getEmployees())
 			{
-				if (x->getType() == "Base Crew" && x->getEmployed() == showSelect1 - 1) {
+				if (x->getType() == "Base Crew" && (int)x->getEmployed() == showSelect1 - 1) {
 					counter++;
 					emps.push_back(x);
 				}
