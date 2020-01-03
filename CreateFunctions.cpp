@@ -1694,3 +1694,287 @@ void createMaintence() {
 	Maintenance maint(hours, 0, name);
 	comp->addMaintenanceCompany(maint);
 }
+
+void hireOldEmp()
+{
+	int createSel;
+	bool badInput;
+	do {
+		cout << "-----------------------------------------------------------------------------------------------------\n";
+		do
+		{
+			cout << "Which type of employee do you want to hire again?\n" << "1)A Pilot.\n" << "2)A Flight Crew member.\n" << "3)An Administration member.\n" << "4)A Base Crew member\n" << "0)Return to the last menu.\n";
+			cin >> createSel;
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+			if (cin.fail() || createSel < 0 || createSel > 4)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+
+
+		} while (badInput);
+		cin.ignore(1000, '\n');
+		if (createSel == 0)
+			return;
+		switch (createSel)
+		{
+		case 1:
+			hireOldPilot();
+			break;
+		case 2:
+			hireOldFlightCrew();
+			break;
+		case 3:
+			hireOldAdmin();
+			break;
+		case 4:
+			hireOldBase();
+			break;
+		case 0:
+			break;
+		}
+		do
+		{
+			cout << string(100, '-') << endl;
+			cout << "1)Hire another person.\n" << "0)Return to the last menu.\n";
+			cin >> createSel;
+			if (cin.fail() || createSel < 0 || createSel > 1)
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+				cout << "-----------------------------------------------------------------------------------------------------\n";
+				badInput = true;
+			}
+			else
+			{
+				badInput = false;
+			}
+			if (cin.eof()) {
+				cin.clear();
+				return;
+			}
+
+		} while (badInput);
+	} while (createSel != 0);
+}
+
+void hireOldPilot()
+{
+	bool badInput = true;
+	unsigned int delSelection;
+	vector<Employee*> pilots;
+
+	do
+	{
+		pilots.clear();
+		for (auto i : comp->getEmployees())
+		{
+			if (i->getType() == "Pilot" && i->getEmployed() == false)
+			{
+				pilots.push_back(i);
+			}
+		}
+		if (pilots.size() == 0) {
+			cout << "No former pilots in the system\n";
+			return;
+		}
+		cout << "Which former pilot do you want to hire?(0 to cancel)\n" << endl;
+		for (size_t i = 1; i < pilots.size() + 1; i++)
+			cout << i << ") " << pilots.at(i - 1)->getName() << "(" << pilots.at(i - 1)->getDate() << ")." << endl;
+		cin >> delSelection;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || delSelection < 0 || delSelection > pilots.size() + 1)
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+		}
+	} while (badInput);
+	cin.clear();
+	cin.ignore(100, '\n');
+
+	if (delSelection == 0)
+		return;
+	delSelection--;
+
+	pilots.at(delSelection)->setAirport(currentAirport->getLocal().getCity());
+	pilots.at(delSelection)->setEmployed(true);
+	
+	cout << string(100, '-') << endl << "Former pilot successfuly hired!" << endl;
+}
+
+void hireOldFlightCrew()
+{
+	bool badInput = true;
+	vector<Employee*> employees;
+
+	unsigned int delSelection;
+
+	do
+	{
+		employees.clear();
+		for (auto i : comp->getEmployees())
+		{
+			if (i->getType() == "Flight Crew" && i->getEmployed() == false)
+			{
+				employees.push_back(i);
+			}
+		}
+		if (employees.size() == 0) {
+			cout << "No former flight crew members in the system\n";
+			return;
+		}
+		cout << "Which former flight crew member do you want to hire?(0 to cancel)\n" << endl;
+		for (size_t i = 1; i < employees.size() + 1; i++)
+			cout << i << ") " << employees.at(i - 1)->getName() << "(" << employees.at(i - 1)->getDate() << ")." << endl;
+		cin >> delSelection;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || delSelection < 0 || delSelection > employees.size() + 1)
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+		}
+	} while (badInput);
+	cin.clear();
+	cin.ignore(100, '\n');
+
+	if (delSelection == 0)
+		return;
+	delSelection--;
+
+	employees.at(delSelection)->setAirport(currentAirport->getLocal().getCity());
+	employees.at(delSelection)->setEmployed(true);
+
+	cout << string(100, '-') << endl << "Former flight crew member successfuly hired!" << endl;
+}
+
+void hireOldAdmin()
+{
+	bool badInput = true;
+	vector<Employee*> employees;
+
+	unsigned int delSelection;
+
+	do
+	{
+		employees.clear();
+		for (auto i : comp->getEmployees())
+		{
+			if (i->getType() == "Admin" && i->getEmployed() == false)
+			{
+				employees.push_back(i);
+			}
+		}
+		if (employees.size() == 0) {
+			cout << "No former administration members in the system\n";
+			return;
+		}
+		cout << "Which former administration member do you want to hire?(0 to cancel)\n" << endl;
+		for (size_t i = 1; i < employees.size() + 1; i++)
+			cout << i << ") " << employees.at(i - 1)->getName() << "(" << employees.at(i - 1)->getDate() << ")." << endl;
+		cin >> delSelection;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || delSelection < 0 || delSelection > employees.size() + 1)
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+		}
+	} while (badInput);
+	cin.clear();
+	cin.ignore(100, '\n');
+
+	if (delSelection == 0)
+		return;
+	delSelection--;
+
+	employees.at(delSelection)->setAirport(currentAirport->getLocal().getCity());
+	employees.at(delSelection)->setEmployed(true);
+
+	cout << string(100, '-') << endl << "Former administration member successfuly hired!" << endl;
+}
+
+void hireOldBase()
+{
+	bool badInput = true;
+	vector<Employee*> employees;
+
+	unsigned int delSelection;
+
+	do
+	{
+		employees.clear();
+		for (auto i : comp->getEmployees())
+		{
+			if (i->getType() == "Base Crew" && i->getEmployed() == false)
+			{
+				employees.push_back(i);
+			}
+		}
+		if (employees.size() == 0) {
+			cout << "No former base crew members in the system\n";
+			return;
+		}
+		cout << "Which former base crew member do you want to hire?(0 to cancel)\n" << endl;
+		for (size_t i = 1; i < employees.size() + 1; i++)
+			cout << i << ") " << employees.at(i - 1)->getName() << "(" << employees.at(i - 1)->getDate() << ")." << endl;
+		cin >> delSelection;
+		if (cin.eof()) {
+			cin.clear();
+			return;
+		}
+		if (cin.fail() || delSelection < 0 || delSelection > employees.size() + 1)
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			badInput = true;
+		}
+		else
+		{
+			badInput = false;
+		}
+	} while (badInput);
+	cin.clear();
+	cin.ignore(100, '\n');
+
+	if (delSelection == 0)
+		return;
+	delSelection--;
+
+	employees.at(delSelection)->setAirport(currentAirport->getLocal().getCity());
+	employees.at(delSelection)->setEmployed(true);
+
+	cout << string(100, '-') << endl << "Former base crew member successfuly hired!" << endl;
+}

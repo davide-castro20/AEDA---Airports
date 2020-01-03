@@ -1,22 +1,28 @@
+Flight Crew
+Wong
+31/12/1969
+B
+2
+::::::::::
 Pilot
 Sum
 12/4/1970
 A
 A, B
-1, 2
+1,2
 ::::::::::
 Pilot
 Ting
 25/3/1978
 A
 A, B
-1
+1,1,2
 ::::::::::
 Flight Crew
-Wong
-31/12/1969
-B
-2
+Low
+1/12/1969
+C
+1
 ::::::::::
 Admin
 Wii
@@ -33,8 +39,3 @@ A
 16
 0
 ::::::::::
-Flight Crew
-Low
-1/12/1969
-C
-1

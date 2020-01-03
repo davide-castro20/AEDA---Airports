@@ -136,10 +136,10 @@ void createDataMenu()
 		do
 		{
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n4)A new manager\n0)Return to main menu.\n";
+			cout << "What data do you want to create: \n1)A New Person.\n2)A New Flight.\n3)A New Plane.\n4)A new manager\n5)Hire old employee\n0)Return to main menu.\n";
 			cin >> Selection;
 			cin.ignore(100, '\n');
-			if (cin.fail() || Selection < 0 || Selection > 4)
+			if (cin.fail() || Selection < 0 || Selection > 5)
 			{
 				cin.clear();
 				//cin.ignore(100, '\n');
@@ -165,6 +165,9 @@ void createDataMenu()
 			break;
 		case 4:
 			createManager();
+			break;
+		case 5:
+			hireOldEmp();
 			break;
 		}
 	} while (Selection != 0);

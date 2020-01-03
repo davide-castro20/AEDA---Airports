@@ -48,3 +48,28 @@ void createManager();
 @brief Creates a new maintenance
 */
 void createMaintence();
+
+/**
+@brief Menu to hire a old employee
+*/
+void hireOldEmp();
+
+/**
+@brief Hires a old pilot
+*/
+void hireOldPilot();
+
+/**
+@brief Hires a old flight crew member
+*/
+void hireOldFlightCrew();
+
+/**
+@brief Hires a old administration member
+*/
+void hireOldAdmin();
+
+/**
+@brief Hires a old base crew member
+*/
+void hireOldBase();

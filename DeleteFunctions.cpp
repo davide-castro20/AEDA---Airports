@@ -34,7 +34,7 @@ void deletePersonData()
 			completedDel = false;
 			badInput = true;
 			cout << "-----------------------------------------------------------------------------------------------------\n";
-			cout << "Whose data do you want to delete?(0 to cancel)\n" << endl;
+			cout << "Which employee do you want to dismiss?(0 to cancel)\n" << endl;
 			for (size_t i = 1; i < employees.size() + 1; i++)
 				cout << i << ") " << employees.at(i - 1)-> getType() << ":" << employees.at(i - 1)->getName() << "." << endl;
 			cin >> delSelection;
@@ -65,7 +65,7 @@ void deletePersonData()
 		{
 			showPerson(employees.at(delSelection));
 			cout << "---------------------------------------------------------------------------------------------------\n";
-			cout << "Are you sure you want to delete the following employee?(y/n)\n";
+			cout << "Are you sure you want to dismiss the following employee?(y/n)\n";
 			cin >> confirm;
 			if (cin.eof()) {
 				cin.clear();
