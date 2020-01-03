@@ -33,22 +33,23 @@ void saveAirports() {
 
 void SaveFlights() {
 	ofstream newFlightsFile;
+	
 	if (comp->getAirports().size() == 0)
 		return;
 	for (auto i : comp->getAirports()) {
 		newFlightsFile.open("newFlights.txt");
-		if (i->flights.size() != 0){
-		for (size_t j = 0; j < i->flights.size()-1; j++) {
-			newFlightsFile << i->flights.at(j)->getId() << endl;
-			newFlightsFile << i->flights.at(j)->getPredictedSchedule().getDepartureDate() << endl;
-			newFlightsFile << i->flights.at(j)->getPredictedSchedule().getArrivalDate() << endl;
-			newFlightsFile << i->flights.at(j)->getPredictedSchedule().getStartHour().getHours() << endl;
-			newFlightsFile << i->flights.at(j)->getPredictedSchedule().getStartHour().getMinutes() << endl;
-			newFlightsFile << i->flights.at(j)->getPredictedSchedule().getEndHour().getHours() << endl;
-			newFlightsFile << i->flights.at(j)->getPredictedSchedule().getEndHour().getMinutes() << endl;
-			newFlightsFile << i->flights.at(j)->getDestination() << endl;
-			newFlightsFile << ":::::::::::\n";
-		}
+		if (i->flights.size() != 0) {
+			for (size_t j = 0; j < i->flights.size() - 1; j++) {
+				newFlightsFile << i->flights.at(j)->getId() << endl;
+				newFlightsFile << i->flights.at(j)->getPredictedSchedule().getDepartureDate() << endl;
+				newFlightsFile << i->flights.at(j)->getPredictedSchedule().getArrivalDate() << endl;
+				newFlightsFile << i->flights.at(j)->getPredictedSchedule().getStartHour().getHours() << endl;
+				newFlightsFile << i->flights.at(j)->getPredictedSchedule().getStartHour().getMinutes() << endl;
+				newFlightsFile << i->flights.at(j)->getPredictedSchedule().getEndHour().getHours() << endl;
+				newFlightsFile << i->flights.at(j)->getPredictedSchedule().getEndHour().getMinutes() << endl;
+				newFlightsFile << i->flights.at(j)->getDestination() << endl;
+				newFlightsFile << ":::::::::::\n";
+			}
 			size_t size = i->flights.size() - 1;
 			newFlightsFile << i->flights.at(size)->getId() << endl;
 			newFlightsFile << i->flights.at(size)->getPredictedSchedule().getDepartureDate() << endl;
@@ -64,145 +65,33 @@ void SaveFlights() {
 		remove(fileName);
 		rename("newFlights.txt", fileName);
 	}
+	
 }
 
 void SaveEmployees() {
 	ofstream newEmployeesFile;
 	if (comp->getEmployees().size() == 0)
 		return;
-	
-		/*if(i->employees.size() != 0) {
-		for (size_t j = 0; j < i->employees.size() - 1; j++) {
-			if (i->employees.at(j)->getType() == "Pilot") {
-				string flights = "";
-				size_t size = i->employees.at(j)->getFlights().size();
-				if (size > 0)
-				{
-					for (size_t k = 0; k < size; k++)
-					{
-						if (k < (size - 1))
-							flights += to_string(i->employees.at(j)->getFlights().at(k)->getId()) + ", ";
-						else
-							flights += to_string(i->employees.at(j)->getFlights().at(k)->getId());
-					}
-				}
-				newEmployeesFile << i->employees.at(j)->getType() << endl;
-				newEmployeesFile << i->employees.at(j)->getName() << endl;
-				newEmployeesFile << i->employees.at(j)->getDate() << endl;
-				newEmployeesFile << i->employees.at(j)->getCategory() << endl;
-				newEmployeesFile << i->employees.at(j)->getPlaneTypes() << endl;
-				newEmployeesFile << flights << endl;
-				newEmployeesFile << "::::::::::\n";
-			}
-			else if (i->employees.at(j)->getType() == "Flight Crew") {
-				string flights = "";
-				size_t size = i->employees.at(j)->getFlights().size();
-				if (size > 0)
-				{
-					for (size_t k = 0; k < size; k++)
-					{
-						if (k < (size - 1))
-							flights += to_string(i->employees.at(j)->getFlights().at(k)->getId()) + ", ";
-						else
-							flights += to_string(i->employees.at(j)->getFlights().at(k)->getId());
-					}
-				}
-				newEmployeesFile << i->employees.at(j)->getType() << endl;
-				newEmployeesFile << i->employees.at(j)->getName() << endl;
-				newEmployeesFile << i->employees.at(j)->getDate() << endl;
-				newEmployeesFile << i->employees.at(j)->getCategory() << endl;
-				newEmployeesFile << flights << endl;
-				newEmployeesFile << "::::::::::\n";
-			}
-			else if (i->employees.at(j)->getType() == "Admin") {
-				newEmployeesFile << i->employees.at(j)->getType() << endl;
-				newEmployeesFile << i->employees.at(j)->getName() << endl;
-				newEmployeesFile << i->employees.at(j)->getDate() << endl;
-				newEmployeesFile << i->employees.at(j)->getDepartment() << endl;
-				newEmployeesFile << i->employees.at(j)->getFunction() << endl;
-				newEmployeesFile << "::::::::::\n";
-			}
-			else if (i->employees.at(j)->getType() == "Base Crew") {
-				newEmployeesFile << i->employees.at(j)->getType() << endl;
-				newEmployeesFile << i->employees.at(j)->getName() << endl;
-				newEmployeesFile << i->employees.at(j)->getDate() << endl;
-				newEmployeesFile << i->employees.at(j)->getCategory() << endl;
-				newEmployeesFile << i->employees.at(j)->getSchedule()->getStartHour().getHours() << endl;
-				newEmployeesFile << i->employees.at(j)->getSchedule()->getStartHour().getMinutes() << endl;
-				newEmployeesFile << i->employees.at(j)->getSchedule()->getEndHour().getHours() << endl;
-				newEmployeesFile << i->employees.at(j)->getSchedule()->getEndHour().getMinutes() << endl;
-				newEmployeesFile << "::::::::::\n";
-			}
-		}
-			size_t EmpSize = i->employees.size() - 1;
-			if (i->employees.at(EmpSize)->getType() == "Pilot") {
-				string flights = "";
-				size_t size = i->employees.at(EmpSize)->getFlights().size();
-				if (size > 0)
-				{
-					for (size_t k = 0; k < size; k++)
-					{
-						if (k < (size - 1))
-							flights += to_string(i->employees.at(EmpSize)->getFlights().at(k)->getId()) + ", ";
-						else
-							flights += to_string(i->employees.at(EmpSize)->getFlights().at(k)->getId());
-					}
-				}
-				newEmployeesFile << i->employees.at(EmpSize)->getType() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getName() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getDate() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getCategory() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getPlaneTypes() << endl;
-				newEmployeesFile << flights << endl;
-			}
-			else if (i->employees.at(EmpSize)->getType() == "Flight Crew") {
-				string flights = "";
-				size_t size = i->employees.at(EmpSize)->getFlights().size();
-				if (size > 0)
-				{
-					for (size_t k = 0; k < size; k++)
-					{
-						if (k < (size - 1))
-							flights += to_string(i->employees.at(EmpSize)->getFlights().at(k)->getId()) + ", ";
-						else
-							flights += to_string(i->employees.at(EmpSize)->getFlights().at(k)->getId());
-					}
-				}
-				newEmployeesFile << i->employees.at(EmpSize)->getType() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getName() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getDate() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getCategory() << endl;
-				newEmployeesFile << flights << endl;
-			}
-			else if (i->employees.at(EmpSize)->getType() == "Admin") {
-				newEmployeesFile << i->employees.at(EmpSize)->getType() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getName() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getDate() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getDepartment() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getFunction() << endl;
-			}
-			else if (i->employees.at(EmpSize)->getType() == "Base Crew") {
-				newEmployeesFile << i->employees.at(EmpSize)->getType() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getName() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getDate() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getCategory() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getSchedule()->getStartHour().getHours() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getSchedule()->getStartHour().getMinutes() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getSchedule()->getEndHour().getHours() << endl;
-				newEmployeesFile << i->employees.at(EmpSize)->getSchedule()->getEndHour().getMinutes() << endl;
-			}
-		}*/
 	for (auto i : comp->getAirports()) {
 
 		newEmployeesFile.open("newEmployees.txt");
 
-		for (auto x = comp->getEmployees().begin(); x != comp->getEmployees().end(); x++) {
-			newEmployeesFile.open("newEmployees.txt");
-			if ((*x)->getAirport() == i->getLocal().getCity())
+		for (auto x: comp->getEmployees()) {
+			if ((x)->getAirport() == i->getLocal().getCity())
 			{
-				if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == true) {
+				if ((x)->getType() == "Pilot" && (x)->getEmployed() == true) {
 					string flights = "";
-					Pilot* pilot = dynamic_cast<Pilot*>(*x);
+					Pilot* pilot = dynamic_cast<Pilot*>(x);
+				
+					
+					if (pilot->getFlights().size()!=0) {
+						for (auto f : pilot->getFlights()) {
+							flights += to_string(f->getId());
+							flights += ",";
+						}
+						flights.pop_back();
+					}
+
 					newEmployeesFile << pilot->getType() << endl;
 					newEmployeesFile << pilot->getName() << endl;
 					newEmployeesFile << pilot->getDate() << endl;
@@ -211,9 +100,14 @@ void SaveEmployees() {
 					newEmployeesFile << flights << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
-				else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == true) {
+				else if ((x)->getType() == "Flight Crew" && (x)->getEmployed() == true) {
 					string flights = "";
-					FlightCrew* crew = dynamic_cast<FlightCrew*>(*x);
+					FlightCrew* crew = dynamic_cast<FlightCrew*>(x);
+					if (crew->getFlights().size() != 0) {
+						for (auto f : crew->getFlights())
+							flights += to_string(f->getId()) + ",";
+						flights.pop_back();
+					}
 					newEmployeesFile << crew->getType() << endl;
 					newEmployeesFile << crew->getName() << endl;
 					newEmployeesFile << crew->getDate() << endl;
@@ -221,8 +115,8 @@ void SaveEmployees() {
 					newEmployeesFile << flights << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
-				else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == true) {
-					Admin* admin = dynamic_cast<Admin*>(*x);
+				else if ((x)->getType() == "Admin" && (x)->getEmployed() == true) {
+					Admin* admin = dynamic_cast<Admin*>(x);
 					newEmployeesFile << admin->getType() << endl;
 					newEmployeesFile << admin->getName() << endl;
 					newEmployeesFile << admin->getDate() << endl;
@@ -230,8 +124,8 @@ void SaveEmployees() {
 					newEmployeesFile << admin->getFunction() << endl;
 					newEmployeesFile << "::::::::::\n";
 				}
-				else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == true) {
-					BaseCrew* crew = dynamic_cast<BaseCrew*>(*x);
+				else if ((x)->getType() == "Base Crew" && (x)->getEmployed() == true) {
+					BaseCrew* crew = dynamic_cast<BaseCrew*>(x);
 					newEmployeesFile << crew->getType() << endl;
 					newEmployeesFile << crew->getName() << endl;
 					newEmployeesFile << crew->getDate() << endl;
@@ -255,12 +149,13 @@ void SaveOldEmployees() {
 	ofstream newEmployeesFile;
 	if (comp->getEmployees().size() == 0)
 		return;
-	for (auto x = comp->getEmployees().begin(); x != comp->getEmployees().end(); x++) {
-		newEmployeesFile.open("newEmployees.txt");
+	newEmployeesFile.open("newEmployees.txt");
+	for (auto x : comp->getEmployees()) {
 		
-		if ((*x)->getType() == "Pilot" && (*x)->getEmployed() == false) {
+		
+		if ((x)->getType() == "Pilot" && (x)->getEmployed() == false) {
 			string flights = ""; 
-			Pilot* pilot = dynamic_cast<Pilot*>(*x);
+			Pilot* pilot = dynamic_cast<Pilot*>(x);
 			newEmployeesFile << pilot->getType() << endl;
 			newEmployeesFile << pilot->getName() << endl;
 			newEmployeesFile << pilot->getDate() << endl;
@@ -269,9 +164,9 @@ void SaveOldEmployees() {
 			newEmployeesFile << flights << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
-		else if ((*x)->getType() == "Flight Crew" && (*x)->getEmployed() == false) {
+		else if (x->getType() == "Flight Crew" && (x)->getEmployed() == false) {
 			string flights = "";
-			FlightCrew* crew = dynamic_cast<FlightCrew*>(*x);
+			FlightCrew* crew = dynamic_cast<FlightCrew*>(x);
 			newEmployeesFile << crew->getType() << endl;
 			newEmployeesFile << crew->getName() << endl;
 			newEmployeesFile << crew->getDate() << endl;
@@ -279,8 +174,8 @@ void SaveOldEmployees() {
 			newEmployeesFile << flights << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
-		else if ((*x)->getType() == "Admin" && (*x)->getEmployed() == false) {
-			Admin* admin = dynamic_cast<Admin*>(*x);
+		else if ((x)->getType() == "Admin" && (x)->getEmployed() == false) {
+			Admin* admin = dynamic_cast<Admin*>(x);
 			newEmployeesFile << admin->getType() << endl;
 			newEmployeesFile << admin->getName() << endl;
 			newEmployeesFile << admin->getDate() << endl;
@@ -288,8 +183,8 @@ void SaveOldEmployees() {
 			newEmployeesFile << admin->getFunction() << endl;
 			newEmployeesFile << "::::::::::\n";
 		}
-		else if ((*x)->getType() == "Base Crew" && (*x)->getEmployed() == false) {
-			BaseCrew* crew = dynamic_cast<BaseCrew*>(*x);
+		else if ((x)->getType() == "Base Crew" && (x)->getEmployed() == false) {
+			BaseCrew* crew = dynamic_cast<BaseCrew*>(x);
 			newEmployeesFile << crew->getType() << endl;
 			newEmployeesFile << crew->getName() << endl;
 			newEmployeesFile << crew->getDate() << endl;

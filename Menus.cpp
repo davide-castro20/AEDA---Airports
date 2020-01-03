@@ -431,14 +431,14 @@ void companyMenu()
 		} while (badInput);
 		switch (sel) {
 		case 0:
-			/*
+			
 			SaveFlights();
 			SaveEmployees();
 			SaveOldEmployees();
 			SavePlanes();
 			saveAirports();
 			saveMaintenance();
-			*/
+			
 			return;
 		case 1:
 			selectAirportMenu();

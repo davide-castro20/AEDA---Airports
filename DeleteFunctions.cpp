@@ -475,12 +475,12 @@ void deleteAirportData() {
 					if (delSelection == 0) {
 						badInput = false;
 						completedChange = true;
-						/*fileName = iter->employeeTxt.c_str();
+						fileName = iter->employeeTxt.c_str();
 						remove(fileName);
 						fileName = iter->flightTxt.c_str();
 						remove(fileName);
 						fileName = iter->planesTxt.c_str();
-						remove(fileName);*/
+						remove(fileName);
 						comp->deleteAirport(copyDel);
 						break;
 					}
